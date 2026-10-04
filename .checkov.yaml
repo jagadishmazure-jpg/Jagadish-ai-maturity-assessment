@@ -1,0 +1,26 @@
+# Checkov config for infra/terraform. Every skip has a reason; anything not listed fails CI.
+# The evidence store and Key Vault hold sample assessments and an optional LLM key for a demo.
+compact: true
+quiet: true
+framework:
+  - terraform
+skip-check:
+  # Storage public network access stays on so the GitHub runner and the Container Apps job (consumption
+  # plan, no VNet) can reach it; shared keys are disabled, TLS 1.2 is enforced and access is Entra-only.
+  - CKV_AZURE_59
+  # LRS is the smallest setting on purpose; a production evidence store would use GZRS.
+  - CKV_AZURE_206
+  # Queue logging: the account has no queues.
+  - CKV_AZURE_33
+  # Private endpoints cost about $7.30 a month each and need a VNet; out of scope for the smallest footprint.
+  - CKV2_AZURE_33
+  - CKV2_AZURE_32
+  # Customer-managed keys need a second Key Vault key and rotation; platform keys suffice for sample evidence.
+  - CKV2_AZURE_1
+  # Blob read, write and delete logging goes to Log Analytics through azurerm_monitor_diagnostic_setting.evidence_blob;
+  # this check only recognises classic analytics logging.
+  - CKV2_AZURE_21
+  # Key Vault firewall: a consumption Container Apps job has no fixed egress IP and is not a trusted service,
+  # so a deny-by-default firewall would block its identity. Access is RBAC-only and audited (AuditEvent).
+  - CKV_AZURE_109
+  - CKV_AZURE_189
