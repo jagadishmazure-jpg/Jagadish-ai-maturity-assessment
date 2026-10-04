@@ -3,47 +3,47 @@
 #   self-reported   - answered by the organisation (weight 0.6 in confidence)
 #   sample-answers  - illustrative answers used in a demo (weight 0.35; always flagged for review)
 questions:
-  - {id: q_vision_published, category: "1.1", text: Is the AI purpose published to all staff and tied to measurable targets?}
-  - {id: q_vision_in_budget, category: "1.1", text: Does the AI purpose steer budget and prioritisation decisions?}
-  - {id: q_goal_field, category: "1.2", text: Does every AI proposal state which organisational goal it serves?}
-  - {id: q_business_case_mandatory, category: "1.2", text: Is a business case with goal linkage required before an AI build is funded?}
-  - {id: q_strategy_session, category: "1.2", text: Can AI capability proposals change organisational goals in strategy sessions?}
-  - {id: q_roadmap_refresh, category: "1.3", text: Is the AI roadmap refreshed from delivery data and horizon scanning?}
-  - {id: q_intangible_value, category: "1.4", text: Are strategic or intangible benefits tracked and used to rebalance the AI portfolio?}
-  - {id: q_pilot_scaling, category: "1.5", text: Is there a fast, funded route from a successful pilot to a product?}
-  - {id: q_ai_roles_defined, category: "2.1", text: Are the AI roles the organisation needs named, with a skills matrix?}
-  - {id: q_training_paths, category: "2.1", text: Do AI roles have funded training paths and appear in workforce planning?}
-  - {id: q_hr_integration, category: "2.1", text: Are AI skills part of performance, mobility and cross-skilling processes?}
-  - {id: q_coordinator, category: "2.2", text: Is there a named AI coordinator or working group?}
-  - {id: q_coe, category: "2.2", text: Is there a chartered AI team or centre of excellence with a mandate and reporting line?}
-  - {id: q_operating_model_review, category: "2.2", text: Is the AI operating model reviewed and adjusted on a cadence?}
-  - {id: q_project_sponsors, category: "2.3", text: Does every live AI project have a named senior sponsor?}
-  - {id: q_exec_owner, category: "2.3", text: Does an executive own the AI agenda and report on it regularly?}
-  - {id: q_leadership_objectives, category: "2.3", text: Are AI outcomes part of leadership objectives and resourcing reviews?}
-  - {id: q_rollout_comms, category: "2.4", text: Do AI rollouts come with communication and training for users?}
-  - {id: q_change_method, category: "2.4", text: Is a change method with stakeholder analysis and adoption metrics applied?}
-  - {id: q_feedback_loop, category: "2.4", text: Is user feedback collected continuously and fed into the backlog?}
-  - {id: q_awareness_material, category: "2.5", text: Is introductory AI material available to all staff?}
-  - {id: q_role_literacy, category: "2.5", text: Do role-based AI literacy tracks (including ethics) run with completion tracking?}
-  - {id: q_continuous_learning, category: "2.5", text: Is AI learning continuous and part of team routines?}
-  - {id: q_cost_optimisation_cadence, category: "3.2", text: Is cloud cost and performance for AI reviewed and optimised on a cadence?}
-  - {id: q_self_service_env, category: "3.4", text: Can AI teams create governed environments on their own within minutes?}
-  - {id: q_auto_retrain, category: "4.1", text: Are retraining or re-evaluation triggered automatically, with staged rollout?}
-  - {id: q_auto_improve, category: "4.2", text: Do monitoring results trigger improvement work automatically?}
-  - {id: q_partnership_informal, category: "4.4", text: Does the organisation take part in AI communities or peer networks?}
-  - {id: q_partnership_formal, category: "4.4", text: Are there formal AI partnerships with goals (academia, peers, vendors)?}
-  - {id: q_ecosystem_lead, category: "4.4", text: Does the organisation help lead its AI ecosystem or contribute shared assets?}
-  - {id: q_reuse_measured, category: "4.5", text: Is reuse of shared AI components funded and measured?}
-  - {id: q_review_board, category: "5.1", text: Is there an AI review body with decision rights?}
-  - {id: q_ethics_principles, category: "5.2", text: Has the organisation adopted written AI ethics principles?}
-  - {id: q_affected_people, category: "5.2", text: Are people affected by AI involved in design and in tracking ethical outcomes?}
-  - {id: q_erm_integration, category: "5.3", text: Is AI risk reported through enterprise risk management with quantitative measures?}
-  - {id: q_reg_watch, category: "5.4", text: Is regulatory change tracked proactively with owners for each obligation?}
-  - {id: q_audience_explanations, category: "5.5", text: Are explanations tailored for users, auditors and the public, with transparency notes?}
-  - {id: q_data_sharing_agreements, category: "6.1", text: Are strategic data assets and sharing agreements planned ahead of need?}
-  - {id: q_dq_monitoring, category: "6.2", text: Is data quality monitored continuously in production?}
-  - {id: q_access_process, category: "6.3", text: Is there a published data access request process?}
-  - {id: q_self_service_data, category: "6.3", text: Can AI teams get policy-compliant data access through self-service?}
-  - {id: q_synthetic_strategy, category: "6.4", text: Is synthetic data a standard option in the data strategy with fidelity and privacy checks?}
-  - {id: q_domain_experts, category: "6.5", text: Are domain experts part of each AI project?}
-  - {id: q_embedded_smes, category: "6.5", text: Are domain experts embedded in AI teams with a shared knowledge base?}
+  - {id: q_vision_published, category: "1.1", text: "Is the AI purpose published to all staff and tied to measurable targets?"}
+  - {id: q_vision_in_budget, category: "1.1", text: "Does the AI purpose steer budget and prioritisation decisions?"}
+  - {id: q_goal_field, category: "1.2", text: "Does every AI proposal state which organisational goal it serves?"}
+  - {id: q_business_case_mandatory, category: "1.2", text: "Is a business case with goal linkage required before an AI build is funded?"}
+  - {id: q_strategy_session, category: "1.2", text: "Can AI capability proposals change organisational goals in strategy sessions?"}
+  - {id: q_roadmap_refresh, category: "1.3", text: "Is the AI roadmap refreshed from delivery data and horizon scanning?"}
+  - {id: q_intangible_value, category: "1.4", text: "Are strategic or intangible benefits tracked and used to rebalance the AI portfolio?"}
+  - {id: q_pilot_scaling, category: "1.5", text: "Is there a fast, funded route from a successful pilot to a product?"}
+  - {id: q_ai_roles_defined, category: "2.1", text: "Are the AI roles the organisation needs named, with a skills matrix?"}
+  - {id: q_training_paths, category: "2.1", text: "Do AI roles have funded training paths and appear in workforce planning?"}
+  - {id: q_hr_integration, category: "2.1", text: "Are AI skills part of performance, mobility and cross-skilling processes?"}
+  - {id: q_coordinator, category: "2.2", text: "Is there a named AI coordinator or working group?"}
+  - {id: q_coe, category: "2.2", text: "Is there a chartered AI team or centre of excellence with a mandate and reporting line?"}
+  - {id: q_operating_model_review, category: "2.2", text: "Is the AI operating model reviewed and adjusted on a cadence?"}
+  - {id: q_project_sponsors, category: "2.3", text: "Does every live AI project have a named senior sponsor?"}
+  - {id: q_exec_owner, category: "2.3", text: "Does an executive own the AI agenda and report on it regularly?"}
+  - {id: q_leadership_objectives, category: "2.3", text: "Are AI outcomes part of leadership objectives and resourcing reviews?"}
+  - {id: q_rollout_comms, category: "2.4", text: "Do AI rollouts come with communication and training for users?"}
+  - {id: q_change_method, category: "2.4", text: "Is a change method with stakeholder analysis and adoption metrics applied?"}
+  - {id: q_feedback_loop, category: "2.4", text: "Is user feedback collected continuously and fed into the backlog?"}
+  - {id: q_awareness_material, category: "2.5", text: "Is introductory AI material available to all staff?"}
+  - {id: q_role_literacy, category: "2.5", text: "Do role-based AI literacy tracks (including ethics) run with completion tracking?"}
+  - {id: q_continuous_learning, category: "2.5", text: "Is AI learning continuous and part of team routines?"}
+  - {id: q_cost_optimisation_cadence, category: "3.2", text: "Is cloud cost and performance for AI reviewed and optimised on a cadence?"}
+  - {id: q_self_service_env, category: "3.4", text: "Can AI teams create governed environments on their own within minutes?"}
+  - {id: q_auto_retrain, category: "4.1", text: "Are retraining or re-evaluation triggered automatically, with staged rollout?"}
+  - {id: q_auto_improve, category: "4.2", text: "Do monitoring results trigger improvement work automatically?"}
+  - {id: q_partnership_informal, category: "4.4", text: "Does the organisation take part in AI communities or peer networks?"}
+  - {id: q_partnership_formal, category: "4.4", text: "Are there formal AI partnerships with goals (academia, peers, vendors)?"}
+  - {id: q_ecosystem_lead, category: "4.4", text: "Does the organisation help lead its AI ecosystem or contribute shared assets?"}
+  - {id: q_reuse_measured, category: "4.5", text: "Is reuse of shared AI components funded and measured?"}
+  - {id: q_review_board, category: "5.1", text: "Is there an AI review body with decision rights?"}
+  - {id: q_ethics_principles, category: "5.2", text: "Has the organisation adopted written AI ethics principles?"}
+  - {id: q_affected_people, category: "5.2", text: "Are people affected by AI involved in design and in tracking ethical outcomes?"}
+  - {id: q_erm_integration, category: "5.3", text: "Is AI risk reported through enterprise risk management with quantitative measures?"}
+  - {id: q_reg_watch, category: "5.4", text: "Is regulatory change tracked proactively with owners for each obligation?"}
+  - {id: q_audience_explanations, category: "5.5", text: "Are explanations tailored for users, auditors and the public, with transparency notes?"}
+  - {id: q_data_sharing_agreements, category: "6.1", text: "Are strategic data assets and sharing agreements planned ahead of need?"}
+  - {id: q_dq_monitoring, category: "6.2", text: "Is data quality monitored continuously in production?"}
+  - {id: q_access_process, category: "6.3", text: "Is there a published data access request process?"}
+  - {id: q_self_service_data, category: "6.3", text: "Can AI teams get policy-compliant data access through self-service?"}
+  - {id: q_synthetic_strategy, category: "6.4", text: "Is synthetic data a standard option in the data strategy with fidelity and privacy checks?"}
+  - {id: q_domain_experts, category: "6.5", text: "Are domain experts part of each AI project?"}
+  - {id: q_embedded_smes, category: "6.5", text: "Are domain experts embedded in AI teams with a shared knowledge base?"}
