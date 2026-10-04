@@ -33,7 +33,8 @@ def folders():
     return sorted({(ROOT / f).parent for f in tracked if not SKIP_PARTS & set(Path(f).parts)})
 
 
-@pytest.mark.parametrize("folder", folders(), ids=lambda p: str(p.relative_to(ROOT)) or ".")
+# .github has no README on purpose: GitHub would show .github/README.md instead of the root README.
+@pytest.mark.parametrize("folder", [f for f in folders() if f != ROOT / ".github"], ids=lambda p: str(p.relative_to(ROOT)) or ".")
 def test_every_folder_has_a_readme_with_a_file_table(folder):
     readme = folder / "README.md"
     assert readme.exists(), f"{folder} has no README.md"

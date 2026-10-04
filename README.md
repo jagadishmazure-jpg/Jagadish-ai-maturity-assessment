@@ -15,7 +15,7 @@ into a gap list, a twelve-month roadmap and an executive report with a radar cha
   model, an agent that scores against it from real artifacts, and the governance around that agent
   (confidence, human sign-off, audit trail, eval gates).
 - **Scale:** 6 pillars, 29 categories, 5 levels, 76 evidence signals, 44 questionnaire items,
-  **683 automated tests**, 3 eval gates, 9 read-only MCP tools, an A2A agent card.
+  **681 automated tests**, 3 eval gates, 9 read-only MCP tools, an A2A agent card.
 - **Honest sample:** my own eight public repositories are assessed as the sample organisation
   (overall level 3, provisional, with 12 categories waiting for a reviewer). People and culture
   items for the portfolio come from **sample answers**, labelled as such, never inferred.
