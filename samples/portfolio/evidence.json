@@ -2174,13 +2174,6 @@
    "detail": "matched 'drift'"
   },
   {
-   "signal": "risk_scoring",
-   "collector": "governance",
-   "source": "azure-agent-labs",
-   "path": "labs/wind-turbine-continual-learning/src/turbine_cl/features.py",
-   "detail": "matched 'def residual'"
-  },
-  {
    "signal": "audit_log",
    "collector": "governance",
    "source": "azure-agent-labs",

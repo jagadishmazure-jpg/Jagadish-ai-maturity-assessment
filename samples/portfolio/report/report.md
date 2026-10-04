@@ -8,7 +8,7 @@ Overall maturity: **Level 3 (Dynamic)**, category mean 2.59 of 4. Assessment sta
 
 Strongest pillar: P3 Technology & Infrastructure (mean 3.75). Weakest: P2 People & Culture (mean 1.8).
 
-Evidence: 711 items from 8 repositories and the questionnaire. Roadmap: 23 steps, 6 quick wins in Months 1-3, 4 beyond Month 12.
+Evidence: 710 items from 8 repositories and the questionnaire. Roadmap: 23 steps, 6 quick wins in Months 1-3, 4 beyond Month 12.
 
 Top priorities: 5.2->2 Ethical Principles & Guidelines (priority 34.07); 5.2->3 Ethical Principles & Guidelines (priority 34.07); 5.2->4 Ethical Principles & Guidelines (priority 32.07).
 
@@ -52,7 +52,7 @@ People, culture and partnership answers are SAMPLE ANSWERS (illustrative inputs,
 | 4.5 Reusability & Shared Components | 2 | 3 | 0.66 | auto | 6 |
 | 5.1 AI Governance Framework (critical) | 4 | 4 | 0.95 | auto | 76 |
 | 5.2 Ethical Principles & Guidelines | 1 | 4 | 0.31 | pending-review | 0 |
-| 5.3 Risk Assessment & Mitigation | 3 | 4 | 0.62 | auto | 23 |
+| 5.3 Risk Assessment & Mitigation | 3 | 4 | 0.62 | auto | 22 |
 | 5.4 Compliance & Legal | 3 | 4 | 0.90 | auto | 30 |
 | 5.5 Transparency & Explainability | 3 | 4 | 0.87 | auto | 27 |
 | 6.1 AI Use Case Data Identification | 3 | 3 | 0.87 | auto | 13 |
@@ -165,7 +165,7 @@ Backlog beyond Month 12: 2.2->3, 3.4->4, 5.4->4, 5.5->4.
 | ci | 120 |
 | data | 82 |
 | docs | 69 |
-| governance | 151 |
+| governance | 150 |
 | iac | 136 |
 | ops | 95 |
 | people | 14 |
@@ -176,7 +176,7 @@ Backlog beyond Month 12: 2.2->3, 3.4->4, 5.4->4, 5.5->4.
 | agentic-ai-model-risk | 96 |
 | agentic-ai-portfolio | 107 |
 | ai-learning-lab | 25 |
-| azure-agent-labs | 89 |
+| azure-agent-labs | 88 |
 | azure-agent-platform | 88 |
 | azure-ai-integration-platform | 90 |
 | azure-finops | 82 |

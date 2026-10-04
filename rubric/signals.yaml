@@ -332,8 +332,8 @@ signals:
     collector: governance
     description: Risks are scored (likelihood × impact, residual) in code
     paths: ["**/*.py"]
-    contains: '(likelihood[\s\S]{0,200}impact|residual risk|def residual)'
-    example: {path: src/risk/score.py, content: "def residual(likelihood, impact, eff):\n    return likelihood * impact * (1 - eff)\n"}
+    contains: '(likelihood[\s\S]{0,200}impact|residual[ _]risk)'
+    example: {path: src/risk/score.py, content: "def residual_risk(likelihood, impact, eff):\n    return likelihood * impact * (1 - eff)\n"}
   - id: scenario_tests
     collector: governance
     description: Adversarial or what-if scenarios are tested (injection, red teaming, what-if)
