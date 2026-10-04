@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Questionnaire answers (samples/<org>/questionnaire.yaml)",
+  "type": "object",
+  "required": ["label", "answers"],
+  "properties": {
+    "label": {"enum": ["self-reported", "sample-answers"]},
+    "answers": {
+      "type": "object",
+      "propertyNames": {"pattern": "^q_[a-z_]+$"},
+      "additionalProperties": {
+        "oneOf": [
+          {"enum": ["yes", "partial", "no", true, false]},
+          {"type": "object", "required": ["answer"], "properties": {"answer": {"enum": ["yes", "partial", "no", true, false]}, "note": {"type": "string"}}, "additionalProperties": false}
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Evidence snapshot of a read-only repository scan",
+  "type": "object",
+  "required": ["repos", "evidence"],
+  "properties": {
+    "repos": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["signal", "collector", "source", "path", "detail"],
+        "properties": {
+          "signal": {"type": "string"}, "collector": {"type": "string"}, "source": {"type": "string"},
+          "path": {"type": "string"}, "detail": {"type": "string", "maxLength": 80}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
