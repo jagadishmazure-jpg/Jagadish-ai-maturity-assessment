@@ -1,7 +1,7 @@
 # How evidence signals map to levels for each category (this repository's own rubric, MIT licensed).
 # A category reaches level N when it reached N-1 and at least `threshold` (share) of level N's signals
 # are present. Level 1 needs nothing. Effort per step: S (about a month), M (two), L (three).
-threshold: 0.67
+threshold: 0.66  # two thirds, with room for rounding (2 of 3 signals passes)
 critical: ["1.1", "2.3", "3.2", "4.1", "5.1", "6.2"]
 categories:
   "1.1": {levels: {2: [vision_statement], 3: [vision_targets, q_vision_published], 4: [q_vision_in_budget, strategy_review]}, effort: {2: S, 3: M, 4: M}, depends_on: []}

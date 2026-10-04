@@ -3,7 +3,7 @@
 Rules (see docs/components/scoring-confidence.md):
 
 * Level 1 (Basic) needs nothing. Level N is reached when level N-1 is reached and the present share of
-  level N's signals is at least the rubric threshold (0.67). A "partial" answer counts half.
+  level N's signals is at least the rubric threshold (0.66, two thirds). A "partial" answer counts half.
 * Confidence = 0.6 x mean source weight + 0.4 x decision margin, over the signals that decided the
   level (all levels up to the first one that failed).
 * A category goes to the human review queue when confidence is under 0.6 or when a level it reached
