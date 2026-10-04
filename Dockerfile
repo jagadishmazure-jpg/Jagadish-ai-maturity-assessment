@@ -1,7 +1,7 @@
 # Image for the scheduled assessment job (Container Apps job). Offline by default; uploads reports
 # to the evidence store only when EVIDENCE_STORAGE_ACCOUNT is set (managed identity, no keys).
 FROM python:3.13-slim
-ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 AIMATURITY_HOME=/app
 RUN useradd --create-home --uid 10001 assessor
 WORKDIR /app
 COPY pyproject.toml README.md LICENSE ./

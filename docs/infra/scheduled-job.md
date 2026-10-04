@@ -26,7 +26,7 @@ sequenceDiagram
 
 ## 3. How it works
 
-1. The image (Dockerfile) installs the package with the `azure` extra and runs as a non-root user.
+1. The image (Dockerfile) installs the package with the `azure` extra, sets `AIMATURITY_HOME=/app` so the installed package finds `framework/`, `rubric/` and `samples/`, and runs as a non-root user.
 2. `aimaturity-scheduled` writes `out/<org>/report.md|html`, `radar.svg` and `summary.json`.
 3. With `EVIDENCE_STORAGE_ACCOUNT` set, files are uploaded to `reports/<execution name>/...`; without it the run is local.
 4. CI builds the image and runs it offline; deploy pushes it to GHCR and the job pulls it.
