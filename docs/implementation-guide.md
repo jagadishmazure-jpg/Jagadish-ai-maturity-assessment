@@ -20,7 +20,7 @@ pytest -q && aimaturity evals
 org                      name                       evidence        repos  questionnaire
 -----------------------  -------------------------  --------------  -----  --------------
 kestrel-bay-bank         Kestrel Bay Bank           manifest        4      self-reported
-portfolio                Jagadish Meduri portfolio  repos+snapshot  8      sample-answers
+portfolio                Jagadish Meduri portfolio  repos+snapshot  9      sample-answers
 valemont-revenue-agency  Valemont Revenue Agency    manifest        3      self-reported
 ```
 <!-- /output -->

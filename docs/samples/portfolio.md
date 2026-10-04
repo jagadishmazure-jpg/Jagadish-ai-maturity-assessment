@@ -1,6 +1,6 @@
 # Sample 1: Jagadish Meduri's portfolio as the assessed organisation
 
-The first sample treats the author's eight public repositories as a small AI organisation and assesses
+The first sample treats the author's eight public project repositories, plus the profile repository with the written AI principles, roadmap and skills matrix, as a small AI organisation and assesses
 them read-only. Artifacts come from a checked-in snapshot of a scan of the sibling checkouts; people,
 culture and partnership items come from questionnaire inputs labelled **sample answers**, so every
 category that rests on them waits for a human reviewer and no review has been recorded.
@@ -15,9 +15,10 @@ Sections: [1. Purpose](#1-purpose) · [2. Architecture](#2-architecture) · [3. 
 
 ```mermaid
 flowchart LR
-  subgraph Checkouts [eight sibling checkouts, read-only]
+  subgraph Checkouts [nine sibling checkouts, read-only]
     A1[agentic-ai-portfolio] & A2[azure-agent-platform] & A3[azure-ai-integration-platform] & A4[azure-agent-labs]
     A5[ai-learning-lab] & A6[fabric-enterprise-bi] & A7[azure-finops] & A8[agentic-ai-model-risk]
+    A9[profile-readme]
   end
   Checkouts -->|collect --live --write| S[(evidence.json)]
   Q[questionnaire.yaml<br/>label: sample-answers] --> G[assess]
@@ -26,7 +27,7 @@ flowchart LR
 
 ## 3. How it works
 
-1. `samples/portfolio/org.yaml` lists the eight repositories, targets (default 3; P3 and P5 at 4), capacity 3 and cross-links.
+1. `samples/portfolio/org.yaml` lists the nine repositories (eight project repositories and the profile repository), targets (default 3; P3 and P5 at 4), capacity 3 and cross-links.
 2. `evidence.json` holds the read-only scan; refresh it with `aimaturity collect --org portfolio --live --write`.
 3. `questionnaire.yaml` is labelled `sample-answers` (weight 0.35, forced review).
 4. No reviews are seeded: the result stays provisional until a real reviewer signs off.
@@ -75,25 +76,25 @@ aimaturity collect --org portfolio --live --write   # needs the checkouts next t
 
 <!-- output: assess --org portfolio -->
 ```text
-Jagadish Meduri portfolio: overall Level 3 (Dynamic), mean 2.59
+Jagadish Meduri portfolio: overall Level 3 (Dynamic), mean 2.79
 pillar  name                          level            mean  capped by
 ------  ----------------------------  -----  --------  ----  ---------
-P1      Strategy & Value              3      Dynamic   2.4   -
+P1      Strategy & Value              3      Dynamic   3     -
 P2      People & Culture              2      Ready     1.8   -
 P3      Technology & Infrastructure   4      Advanced  3.75  -
-P4      AI Operations & Ecosystem     3      Dynamic   2.6   -
-P5      AI Governance, Ethics & Risk  3      Dynamic   2.8   -
+P4      AI Operations & Ecosystem     3      Dynamic   2.8   -
+P5      AI Governance, Ethics & Risk  3      Dynamic   3.2   -
 P6      Data (AI-Specific Focus)      3      Dynamic   2.2   -
 
 cat  level  computed  conf  status          target
 ---  -----  --------  ----  --------------  ------
 1.1  3      3         0.53  pending-review  3
 1.2  2      2         0.44  pending-review  3
-1.3  1      1         0.64  auto            3
+1.3  3      3         0.93  auto            3
 1.4  3      3         0.62  auto            3
-1.5  3      3         0.75  auto            3
+1.5  4      4         0.63  pending-review  3
 2.1  1      1         0.31  pending-review  3
-2.2  2      2         0.7   pending-review  3
+2.2  2      2         0.44  pending-review  3
 2.3  2      2         0.31  pending-review  3
 2.4  2      2         0.5   pending-review  3
 2.5  2      2         0.74  pending-review  3
@@ -105,9 +106,9 @@ cat  level  computed  conf  status          target
 4.2  3      3         0.62  auto            3
 4.3  4      4         1.0   auto            3
 4.4  1      1         0.31  pending-review  3
-4.5  2      2         0.66  auto            3
+4.5  3      3         0.9   auto            3
 5.1  4      4         0.95  auto            4
-5.2  1      1         0.31  pending-review  4
+5.2  3      3         0.81  pending-review  4
 5.3  3      3         0.62  auto            4
 5.4  3      3         0.9   auto            4
 5.5  3      3         0.87  auto            4
@@ -117,7 +118,7 @@ cat  level  computed  conf  status          target
 6.4  3      3         0.57  pending-review  3
 6.5  1      1         0.61  auto            3
 
-review queue: 1.1, 1.2, 2.1, 2.2, 2.3, 2.4, 2.5, 3.2, 4.4, 5.2, 6.3, 6.4; final: False
+review queue: 1.1, 1.2, 1.5, 2.1, 2.2, 2.3, 2.4, 2.5, 3.2, 4.4, 5.2, 6.3, 6.4; final: False
 ```
 <!-- /output -->
 
@@ -137,7 +138,7 @@ fabric-enterprise-bi   6.2       6      True
 
 ## 9. Tests and gates
 
-* `tests/test_samples.py`: labelled answers, people items never auto-accepted, no seeded reviews, eight repositories, cross-links, strongest pillar.
+* `tests/test_samples.py`: labelled answers, people items never auto-accepted, no seeded reviews, nine repositories, cross-links, strongest pillar.
 * `tests/test_report.py`: the checked-in report matches a fresh render.
 
 ## 10. Guardrails
@@ -150,7 +151,7 @@ Read-only and offline. Sample organisations other than the portfolio are fiction
 
 ## 12. Observability
 
-The report lists 12 categories waiting for review with reasons.
+The report lists 13 categories waiting for review with reasons.
 
 ## 13. Failure modes
 

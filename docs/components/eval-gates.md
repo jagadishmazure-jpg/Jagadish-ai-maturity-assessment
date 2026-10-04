@@ -131,8 +131,8 @@ aimaturity evals --json
 
 <!-- output: evals -->
 ```text
-PASS  stability    shuffle_identical=True, dropout_runs=250, nonlocal_moves=0, max_categories_moved=2, mean_categories_moved=0.396, max_level_change_info=3
-PASS  citations    completeness=1.0, valid_ids=1.0, verifier_catch=1.0, categories_checked=78, injected=166
+PASS  stability    shuffle_identical=True, dropout_runs=249, nonlocal_moves=0, max_categories_moved=2, mean_categories_moved=0.402, max_level_change_info=3
+PASS  citations    completeness=1.0, valid_ids=1.0, verifier_catch=1.0, categories_checked=80, injected=165
 PASS  calibration  items=406, exact=0.84, within_one=0.995, high_conf_accuracy=0.861, low_conf_accuracy=0.674, high_conf_items=360
 ```
 <!-- /output -->

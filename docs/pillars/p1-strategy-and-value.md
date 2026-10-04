@@ -223,14 +223,22 @@ Whether there is a stated purpose for AI that tells teams what it is for and wha
 
 <!-- output: explain --org portfolio --category 1.3 -->
 ```text
-1.3 Roadmap & Planning: level 1 (Basic), confidence 0.64, status auto
-rationale: Level 1 (Basic). No artifact or answer supports a level above Basic. Next level needs: roadmap_doc. Confidence 0.64.
-  [ ] roadmap_doc                  absent-scanned   
-  [x] changelog                    artifact         E106, E107, E108
-  [ ] roadmap_owned                absent-scanned   
-  [x] adr                          artifact         E002, E003, E004
-  [x] doc_drift_check              artifact         E250, E251
+1.3 Roadmap & Planning: level 3 (Dynamic), confidence 0.93, status auto
+rationale: Level 3 (Dynamic). Supported by [E642], [E126], [E127], [E128]. Next level needs: q_roadmap_refresh. Confidence 0.93.
+  [x] roadmap_doc                  artifact         E642
+  [x] changelog                    artifact         E126, E127, E128
+  [x] roadmap_owned                artifact         E643
+  [x] adr                          artifact         E017, E018, E019
+  [x] doc_drift_check              artifact         E287, E288, E289
   [ ] q_roadmap_refresh            sample-answers   
+  E642 profile-readme:docs/roadmap.md (file present)
+  E126 agentic-ai-model-risk:CHANGELOG.md (file present)
+  E127 agentic-ai-portfolio:CHANGELOG.md (file present)
+  E128 ai-learning-lab:CHANGELOG.md (file present)
+  E129 azure-agent-labs:CHANGELOG.md (file present)
+  E130 azure-agent-platform:CHANGELOG.md (file present)
+  E131 azure-ai-integration-platform:CHANGELOG.md (file present)
+  E132 azure-finops:CHANGELOG.md (file present)
 ```
 <!-- /output -->
 

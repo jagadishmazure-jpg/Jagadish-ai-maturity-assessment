@@ -216,20 +216,20 @@ The policies, decision rights, roles and accountability that apply specifically 
 <!-- output: explain --org portfolio --category 5.3 -->
 ```text
 5.3 Risk Assessment & Mitigation: level 3 (Dynamic), confidence 0.62, status auto
-rationale: Level 3 (Dynamic). Supported by [E584], [E585], [E586], [E587]. Next level needs: q_erm_integration. Confidence 0.62.
-  [x] risk_cards                   artifact         E584, E585, E586
-  [x] risk_scoring                 artifact         E587, E588, E589
-  [x] scenario_tests               artifact         E590, E591, E592
-  [x] drift_monitoring             artifact         E258, E259, E260
+rationale: Level 3 (Dynamic). Supported by [E636], [E637], [E638], [E639]. Next level needs: q_erm_integration. Confidence 0.62.
+  [x] risk_cards                   artifact         E636, E637, E638
+  [x] risk_scoring                 artifact         E639, E640, E641
+  [x] scenario_tests               artifact         E644, E645, E646
+  [x] drift_monitoring             artifact         E297, E298, E299
   [ ] q_erm_integration            sample-answers   
-  E584 agentic-ai-model-risk:registry/bramblewood-claims-triage/risk-cards.yaml (file present)
-  E585 agentic-ai-model-risk:registry/cedarhollow-underwriting-assistant/risk-cards.yaml (file present)
-  E586 agentic-ai-model-risk:registry/halcyon-fraud-triage/risk-cards.yaml (file present)
-  E587 agentic-ai-model-risk:src/modelrisk/cli.py (matched 'likelihood", "impact')
-  E588 agentic-ai-model-risk:src/modelrisk/combine.py (matched 'residual risk')
-  E589 agentic-ai-model-risk:src/modelrisk/gate.py (matched 'residual risk')
-  E590 agentic-ai-model-risk:registry/bramblewood-claims-triage/scenarios.yaml (matched 'prompt-injection')
-  E591 agentic-ai-model-risk:registry/cedarhollow-underwriting-assistant/scenarios.yaml (matched 'prompt-injection')
+  E636 agentic-ai-model-risk:registry/bramblewood-claims-triage/risk-cards.yaml (file present)
+  E637 agentic-ai-model-risk:registry/cedarhollow-underwriting-assistant/risk-cards.yaml (file present)
+  E638 agentic-ai-model-risk:registry/halcyon-fraud-triage/risk-cards.yaml (file present)
+  E639 agentic-ai-model-risk:src/modelrisk/cli.py (matched 'likelihood", "impact')
+  E640 agentic-ai-model-risk:src/modelrisk/combine.py (matched 'residual risk')
+  E641 agentic-ai-model-risk:src/modelrisk/gate.py (matched 'residual risk')
+  E644 agentic-ai-model-risk:registry/bramblewood-claims-triage/scenarios.yaml (matched 'prompt-injection')
+  E645 agentic-ai-model-risk:registry/cedarhollow-underwriting-assistant/scenarios.yaml (matched 'prompt-injection')
 ```
 <!-- /output -->
 

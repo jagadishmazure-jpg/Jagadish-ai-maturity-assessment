@@ -88,14 +88,15 @@ category  name                                   why
 --------  -------------------------------------  ----------------------------------------------------------------------------
 1.1       AI Vision & Ambition                   confidence 0.53 below 0.6; level rests on sample answers: q_vision_published
 1.2       Strategic Alignment                    confidence 0.44 below 0.6; level rests on sample answers: q_goal_field
+1.5       Innovation & Experimentation           level rests on sample answers: q_pilot_scaling
 2.1       Talent & Skills                        confidence 0.31 below 0.6
-2.2       Organizational Structure               level rests on sample answers: q_coordinator
+2.2       Organizational Structure               confidence 0.44 below 0.6; level rests on sample answers: q_coordinator
 2.3       Leadership & Sponsorship               confidence 0.31 below 0.6; level rests on sample answers: q_project_sponsors
 2.4       Change Management & Adoption           confidence 0.50 below 0.6; level rests on sample answers: q_rollout_comms
 2.5       AI Literacy & Awareness                level rests on sample answers: q_awareness_material
 3.2       Cloud & Compute Infrastructure         level rests on sample answers: q_cost_optimisation_cadence
 4.4       External Collaboration & Partnerships  confidence 0.31 below 0.6
-5.2       Ethical Principles & Guidelines        confidence 0.31 below 0.6
+5.2       Ethical Principles & Guidelines        level rests on sample answers: q_ethics_principles
 6.3       Data Access for AI Teams               confidence 0.31 below 0.6
 6.4       Synthetic Data Generation & Use        confidence 0.57 below 0.6
 ```

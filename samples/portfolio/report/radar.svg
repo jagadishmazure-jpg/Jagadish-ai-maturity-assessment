@@ -62,11 +62,11 @@ z
 " style="fill: #ffffff"/>
    </g>
    <g id="patch_3">
-    <path d="M 195.180305 126.301222 
+    <path d="M 195.180305 103.016422 
 L 255.67599 184.513222 
 L 321.212982 292.205422 
-L 195.180305 320.341222 
-L 101.075906 273.771622 
+L 195.180305 328.102822 
+L 87.63242 281.533222 
 L 121.241134 176.751622 
 z
 " clip-path="url(#pc4930828ae)" style="fill: #1f6feb; opacity: 0.12; stroke: #1f6feb; stroke-linejoin: miter"/>
@@ -253,13 +253,13 @@ L 195.180305 103.016422
 " clip-path="url(#pc4930828ae)" style="fill: none; stroke-dasharray: 4.44,1.92; stroke-dashoffset: 0; stroke: #9aa5b1; stroke-width: 1.2"/>
    </g>
    <g id="line2d_12">
-    <path d="M 195.180305 126.301222 
+    <path d="M 195.180305 103.016422 
 L 255.67599 184.513222 
 L 321.212982 292.205422 
-L 195.180305 320.341222 
-L 101.075906 273.771622 
+L 195.180305 328.102822 
+L 87.63242 281.533222 
 L 121.241134 176.751622 
-L 195.180305 126.301222 
+L 195.180305 103.016422 
 " clip-path="url(#pc4930828ae)" style="fill: none; stroke: #1f6feb; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="line2d_13">

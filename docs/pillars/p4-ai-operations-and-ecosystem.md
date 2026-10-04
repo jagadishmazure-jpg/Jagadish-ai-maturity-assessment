@@ -196,22 +196,22 @@ How reliably models and agents move into production, are versioned and are rolle
 <!-- output: explain --org portfolio --category 4.1 -->
 ```text
 4.1 Model Deployment & Management (MLOps): level 3 (Dynamic), confidence 0.64, status auto
-rationale: Level 3 (Dynamic). Supported by [E085], [E086], [E087], [E088]. Next level needs: q_auto_retrain. Confidence 0.64.
-  [x] cd_pipeline                  artifact         E085, E086, E087
-  [x] eval_gate_ci                 artifact         E278, E279, E280
-  [x] env_approval                 artifact         E271, E272, E273
-  [x] teardown                     artifact         E664, E665, E666
-  [x] oidc                         artifact         E491, E492, E493
+rationale: Level 3 (Dynamic). Supported by [E105], [E106], [E107], [E108]. Next level needs: q_auto_retrain. Confidence 0.64.
+  [x] cd_pipeline                  artifact         E105, E106, E107
+  [x] eval_gate_ci                 artifact         E321, E322, E323
+  [x] env_approval                 artifact         E314, E315, E316
+  [x] teardown                     artifact         E719, E720, E721
+  [x] oidc                         artifact         E535, E536, E537
   [ ] q_auto_retrain               sample-answers   
-  [x] lifecycle_gates              artifact         E440, E441, E442
-  E085 agentic-ai-model-risk:.github/workflows/deploy.yml (matched 'azure/login')
-  E086 agentic-ai-model-risk:.github/workflows/infra.yml (matched 'azure/login')
-  E087 agentic-ai-model-risk:.github/workflows/teardown.yml (matched 'azure/login')
-  E088 agentic-ai-portfolio:.github/workflows/deploy.yml (matched 'azure/login')
-  E089 agentic-ai-portfolio:.github/workflows/infra.yml (matched 'azure/login')
-  E090 agentic-ai-portfolio:.github/workflows/teardown.yml (matched 'azure/login')
-  E091 azure-agent-labs:.github/workflows/deploy.yml (matched 'azure/login')
-  E092 azure-agent-labs:.github/workflows/infra.yml (matched 'azure/login')
+  [x] lifecycle_gates              artifact         E484, E485, E486
+  E105 agentic-ai-model-risk:.github/workflows/deploy.yml (matched 'azure/login')
+  E106 agentic-ai-model-risk:.github/workflows/infra.yml (matched 'azure/login')
+  E107 agentic-ai-model-risk:.github/workflows/teardown.yml (matched 'azure/login')
+  E108 agentic-ai-portfolio:.github/workflows/deploy.yml (matched 'azure/login')
+  E109 agentic-ai-portfolio:.github/workflows/infra.yml (matched 'azure/login')
+  E110 agentic-ai-portfolio:.github/workflows/teardown.yml (matched 'azure/login')
+  E111 azure-agent-labs:.github/workflows/deploy.yml (matched 'azure/login')
+  E112 azure-agent-labs:.github/workflows/infra.yml (matched 'azure/login')
 ```
 <!-- /output -->
 

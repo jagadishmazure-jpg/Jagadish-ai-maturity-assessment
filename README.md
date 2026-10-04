@@ -16,8 +16,8 @@ into a gap list, a twelve-month roadmap and an executive report with a radar cha
   (confidence, human sign-off, audit trail, eval gates).
 - **Scale:** 6 pillars, 29 categories, 5 levels, 76 evidence signals, 44 questionnaire items,
   **681 automated tests**, 3 eval gates, 9 read-only MCP tools, an A2A agent card.
-- **Honest sample:** my own eight public repositories are assessed as the sample organisation
-  (overall level 3, provisional, with 12 categories waiting for a reviewer). People and culture
+- **Honest sample:** my own eight public project repositories, plus the profile repository that holds my written AI principles, roadmap and skills matrix, are assessed as the sample organisation
+  (overall level 3, provisional, with 13 categories waiting for a reviewer). People and culture
   items for the portfolio come from **sample answers**, labelled as such, never inferred.
 - **Two fictional organisations** ([Kestrel Bay Bank](docs/samples/kestrel-bay-bank.md) and
   [Valemont Revenue Agency](docs/samples/valemont-revenue-agency.md)) show the same engine on a
@@ -37,7 +37,7 @@ Every number below is printed by the CLI and re-checked in CI, so it cannot drif
 organisation               overall    P1  P2  P3  P4  P5  P6  review queue  status
 -------------------------  ---------  --  --  --  --  --  --  ------------  -----------
 Kestrel Bay Bank           3 Dynamic  3   2   3   3   3   3   1             provisional
-Jagadish Meduri portfolio  3 Dynamic  3   2   4   3   3   3   12            provisional
+Jagadish Meduri portfolio  3 Dynamic  3   2   4   3   3   3   13            provisional
 Valemont Revenue Agency    2 Ready    2   3   2   2   3   2   1             provisional
 ```
 <!-- /output -->
@@ -46,25 +46,25 @@ Portfolio by pillar (from `samples/portfolio`):
 
 <!-- output: assess --org portfolio -->
 ```text
-Jagadish Meduri portfolio: overall Level 3 (Dynamic), mean 2.59
+Jagadish Meduri portfolio: overall Level 3 (Dynamic), mean 2.79
 pillar  name                          level            mean  capped by
 ------  ----------------------------  -----  --------  ----  ---------
-P1      Strategy & Value              3      Dynamic   2.4   -
+P1      Strategy & Value              3      Dynamic   3     -
 P2      People & Culture              2      Ready     1.8   -
 P3      Technology & Infrastructure   4      Advanced  3.75  -
-P4      AI Operations & Ecosystem     3      Dynamic   2.6   -
-P5      AI Governance, Ethics & Risk  3      Dynamic   2.8   -
+P4      AI Operations & Ecosystem     3      Dynamic   2.8   -
+P5      AI Governance, Ethics & Risk  3      Dynamic   3.2   -
 P6      Data (AI-Specific Focus)      3      Dynamic   2.2   -
 
 cat  level  computed  conf  status          target
 ---  -----  --------  ----  --------------  ------
 1.1  3      3         0.53  pending-review  3
 1.2  2      2         0.44  pending-review  3
-1.3  1      1         0.64  auto            3
+1.3  3      3         0.93  auto            3
 1.4  3      3         0.62  auto            3
-1.5  3      3         0.75  auto            3
+1.5  4      4         0.63  pending-review  3
 2.1  1      1         0.31  pending-review  3
-2.2  2      2         0.7   pending-review  3
+2.2  2      2         0.44  pending-review  3
 2.3  2      2         0.31  pending-review  3
 2.4  2      2         0.5   pending-review  3
 2.5  2      2         0.74  pending-review  3
@@ -76,9 +76,9 @@ cat  level  computed  conf  status          target
 4.2  3      3         0.62  auto            3
 4.3  4      4         1.0   auto            3
 4.4  1      1         0.31  pending-review  3
-4.5  2      2         0.66  auto            3
+4.5  3      3         0.9   auto            3
 5.1  4      4         0.95  auto            4
-5.2  1      1         0.31  pending-review  4
+5.2  3      3         0.81  pending-review  4
 5.3  3      3         0.62  auto            4
 5.4  3      3         0.9   auto            4
 5.5  3      3         0.87  auto            4
@@ -88,7 +88,7 @@ cat  level  computed  conf  status          target
 6.4  3      3         0.57  pending-review  3
 6.5  1      1         0.61  auto            3
 
-review queue: 1.1, 1.2, 2.1, 2.2, 2.3, 2.4, 2.5, 3.2, 4.4, 5.2, 6.3, 6.4; final: False
+review queue: 1.1, 1.2, 1.5, 2.1, 2.2, 2.3, 2.4, 2.5, 3.2, 4.4, 5.2, 6.3, 6.4; final: False
 ```
 <!-- /output -->
 

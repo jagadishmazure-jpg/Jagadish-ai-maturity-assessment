@@ -25,8 +25,9 @@ def test_portfolio_has_no_seeded_reviews(portfolio):
     assert all(s["review"] is None for s in portfolio["statuses"].values())
 
 
-def test_portfolio_scans_eight_repositories(portfolio):
-    assert len(portfolio["org"].repo_names()) == 8
+def test_portfolio_scans_nine_repositories(portfolio):
+    assert len(portfolio["org"].repo_names()) == 9
+    assert "profile-readme" in portfolio["org"].repo_names()
     assert {e.source for e in portfolio["evidence"]} - {"questionnaire"} == set(portfolio["org"].repo_names())
 
 

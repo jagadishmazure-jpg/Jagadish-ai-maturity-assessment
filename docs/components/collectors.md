@@ -112,7 +112,7 @@ class RepoSource:
 
 ```bash
 aimaturity collect --org portfolio
-aimaturity collect --org portfolio --live           # scan the eight checkouts, print counts
+aimaturity collect --org portfolio --live           # scan the nine checkouts, print counts
 aimaturity collect --org portfolio --live --write   # refresh samples/portfolio/evidence.json
 ```
 
@@ -128,57 +128,62 @@ agentic-ai-model-risk          docs           6
 agentic-ai-model-risk          governance     38
 agentic-ai-model-risk          iac            12
 agentic-ai-model-risk          ops            9
-agentic-ai-model-risk          people         2
-agentic-ai-portfolio           ci             17
-agentic-ai-portfolio           data           12
+agentic-ai-model-risk          people         3
+agentic-ai-portfolio           ci             18
+agentic-ai-portfolio           data           13
 agentic-ai-portfolio           docs           11
 agentic-ai-portfolio           governance     21
 agentic-ai-portfolio           iac            23
-agentic-ai-portfolio           ops            22
-agentic-ai-portfolio           people         1
+agentic-ai-portfolio           ops            25
+agentic-ai-portfolio           people         3
 ai-learning-lab                ci             4
-ai-learning-lab                data           4
-ai-learning-lab                docs           9
-ai-learning-lab                governance     4
-ai-learning-lab                people         4
+ai-learning-lab                data           5
+ai-learning-lab                docs           13
+ai-learning-lab                governance     5
+ai-learning-lab                ops            4
+ai-learning-lab                people         6
 azure-agent-labs               ci             16
-azure-agent-labs               data           8
+azure-agent-labs               data           10
 azure-agent-labs               docs           11
 azure-agent-labs               governance     16
 azure-agent-labs               iac            23
-azure-agent-labs               ops            13
-azure-agent-labs               people         1
-azure-agent-platform           ci             20
+azure-agent-labs               ops            17
+azure-agent-labs               people         3
+azure-agent-platform           ci             21
 azure-agent-platform           data           6
 azure-agent-platform           docs           5
 azure-agent-platform           governance     19
 azure-agent-platform           iac            24
-azure-agent-platform           ops            13
-azure-agent-platform           people         1
+azure-agent-platform           ops            17
+azure-agent-platform           people         3
 azure-ai-integration-platform  ci             19
 azure-ai-integration-platform  data           5
 azure-ai-integration-platform  docs           5
 azure-ai-integration-platform  governance     22
 azure-ai-integration-platform  iac            21
-azure-ai-integration-platform  ops            17
-azure-ai-integration-platform  people         1
+azure-ai-integration-platform  ops            21
+azure-ai-integration-platform  people         3
 azure-finops                   ci             13
 azure-finops                   data           11
 azure-finops                   docs           15
 azure-finops                   governance     18
 azure-finops                   iac            15
 azure-finops                   ops            8
-azure-finops                   people         2
+azure-finops                   people         3
 fabric-enterprise-bi           ci             19
 fabric-enterprise-bi           data           19
 fabric-enterprise-bi           docs           7
 fabric-enterprise-bi           governance     12
 fabric-enterprise-bi           iac            18
 fabric-enterprise-bi           ops            13
-fabric-enterprise-bi           people         2
+fabric-enterprise-bi           people         3
+profile-readme                 data           5
+profile-readme                 docs           6
+profile-readme                 governance     3
+profile-readme                 people         1
 questionnaire                  questionnaire  44
 
-710 evidence items, 114 distinct signals
+768 evidence items, 119 distinct signals
 ```
 <!-- /output -->
 
@@ -244,7 +249,7 @@ Runs offline with no credentials. Reads repositories through `git ls-files` and 
 ## 16. Interview talking points
 
 * "Every number in the report traces to a file path a reviewer can open."
-* "The snapshot makes CI independent of eight other repositories while staying refreshable with one command."
+* "The snapshot makes CI independent of nine other repositories while staying refreshable with one command."
 
 ## 17. Adopt this
 

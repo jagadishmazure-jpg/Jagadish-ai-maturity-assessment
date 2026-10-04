@@ -102,7 +102,7 @@ def test_live_scan_matches_snapshot_when_checkouts_present():
     from aimaturity import ROOT
 
     if os.environ.get("AIMATURITY_LIVE") != "1" or not all((ROOT.parent / n).is_dir() for n in org.repo_names()):
-        pytest.skip("set AIMATURITY_LIVE=1 with the eight sibling checkouts present to compare the live scan")
+        pytest.skip("set AIMATURITY_LIVE=1 with the nine sibling checkouts present to compare the live scan")
     from aimaturity.orgs import live_sources
 
     live = {(e.signal, e.source, e.path) for e in scan(live_sources(org))}

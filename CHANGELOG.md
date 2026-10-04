@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Portfolio sample: the profile repository (written AI principles, roadmap, skills matrix) joins the
+  scan, the evidence snapshot is refreshed from live checkouts, and reports and docs are re-rendered.
+  Questionnaire answers stay labelled sample answers.
 - Machine-readable framework model: 6 pillars, 29 categories and 5 levels with descriptors in
   original wording (CC BY-SA 3.0 IGO in `framework/`).
 - Rubric of 76 evidence signals, per-level mapping and a 44-item questionnaire.

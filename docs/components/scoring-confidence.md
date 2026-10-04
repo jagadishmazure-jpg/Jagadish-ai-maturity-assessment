@@ -119,9 +119,9 @@ aimaturity explain --org valemont-revenue-agency --category 4.4
 ```text
 6.3 Data Access for AI Teams: level 1 (Basic), confidence 0.31, status pending-review
 rationale: Level 1 (Basic). No artifact or answer supports a level above Basic. Next level needs: q_access_process. Confidence 0.31.
-  [~] q_access_process             sample-answers   E521
-  [x] rbac_data                    artifact         E565, E566, E567
-  [x] data_access_platform         artifact         E194, E195, E196
+  [~] q_access_process             sample-answers   E570
+  [x] rbac_data                    artifact         E614, E615, E616
+  [x] data_access_platform         artifact         E222, E223, E224
   [ ] q_self_service_data          sample-answers   
 needs review: confidence 0.31 below 0.6
 ```

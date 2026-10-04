@@ -7,7 +7,8 @@
   "ai-learning-lab",
   "fabric-enterprise-bi",
   "azure-finops",
-  "agentic-ai-model-risk"
+  "agentic-ai-model-risk",
+  "profile-readme"
  ],
  "evidence": [
   {
@@ -15,6 +16,13 @@
    "collector": "iac",
    "source": "agentic-ai-model-risk",
    "path": ".checkov.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "codeowners",
+   "collector": "people",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/CODEOWNERS",
    "detail": "file present"
   },
   {
@@ -690,6 +698,13 @@
    "detail": "file present"
   },
   {
+   "signal": "codeowners",
+   "collector": "people",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/CODEOWNERS",
+   "detail": "file present"
+  },
+  {
    "signal": "ci_lint",
    "collector": "ci",
    "source": "agentic-ai-portfolio",
@@ -709,6 +724,13 @@
    "source": "agentic-ai-portfolio",
    "path": ".github/workflows/ci.yml",
    "detail": "matched 'gate'"
+  },
+  {
+   "signal": "doc_drift_check",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'render_docs'"
   },
   {
    "signal": "eval_gate_ci",
@@ -830,6 +852,13 @@
    "detail": "matched 'jailbreak'"
   },
   {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "docs/adopt-this.md",
+   "detail": "matched '# Adopt this'"
+  },
+  {
    "signal": "adr",
    "collector": "docs",
    "source": "agentic-ai-portfolio",
@@ -855,6 +884,62 @@
    "collector": "governance",
    "source": "agentic-ai-portfolio",
    "path": "docs/best-practices.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "docs/components/a2a.md",
+   "detail": "matched '## 17. Adopt this'"
+  },
+  {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "docs/components/context-builder.md",
+   "detail": "matched '## 17. Adopt this'"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "docs/components/context-builder.md",
+   "detail": "matched 'Purview'"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "docs/components/doctrine-gate.md",
+   "detail": "matched 'Purview'"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "docs/components/doctrine-gate.md",
+   "detail": "matched 'ROI'"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "docs/components/eval-harness.md",
+   "detail": "matched 'Cost per task'"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "docs/components/observability.md",
+   "detail": "matched 'cost per call'"
+  },
+  {
+   "signal": "onboarding_guide",
+   "collector": "people",
+   "source": "agentic-ai-portfolio",
+   "path": "docs/implementation-guide.md",
    "detail": "file present"
   },
   {
@@ -1082,11 +1167,18 @@
    "detail": "matched 'lakehouse'"
   },
   {
-   "signal": "value_metrics",
-   "collector": "docs",
+   "signal": "data_access_platform",
+   "collector": "data",
    "source": "agentic-ai-portfolio",
-   "path": "projects/01-policy-qa-rag/DOCTRINE.md",
-   "detail": "matched 'ROI'"
+   "path": "projects/01-policy-qa-rag/README.md",
+   "detail": "matched 'lakehouse'"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/01-policy-qa-rag/README.md",
+   "detail": "matched 'Purview'"
   },
   {
    "signal": "explainability",
@@ -1122,20 +1214,6 @@
    "source": "agentic-ai-portfolio",
    "path": "projects/01-policy-qa-rag/policy_qa/eval_suite.py",
    "detail": "matched 'JAILBREAK'"
-  },
-  {
-   "signal": "value_metrics",
-   "collector": "docs",
-   "source": "agentic-ai-portfolio",
-   "path": "projects/02-ticket-triage/DOCTRINE.md",
-   "detail": "matched 'ROI'"
-  },
-  {
-   "signal": "value_metrics",
-   "collector": "docs",
-   "source": "agentic-ai-portfolio",
-   "path": "projects/03-refund-agent/DOCTRINE.md",
-   "detail": "matched 'ROI'"
   },
   {
    "signal": "hitl_approval",
@@ -1199,13 +1277,6 @@
    "source": "agentic-ai-portfolio",
    "path": "projects/10-supply-chain-multi-agent/DOCTRINE.md",
    "detail": "matched 'lakehouse'"
-  },
-  {
-   "signal": "data_access_platform",
-   "collector": "data",
-   "source": "agentic-ai-portfolio",
-   "path": "projects/10-supply-chain-multi-agent/README.md",
-   "detail": "matched 'Databricks'"
   },
   {
    "signal": "synthetic_validation",
@@ -1292,20 +1363,6 @@
    "detail": "matched 'promotion gate'"
   },
   {
-   "signal": "data_catalog",
-   "collector": "data",
-   "source": "agentic-ai-portfolio",
-   "path": "projects/15-banking-credit-memo/DOCTRINE.md",
-   "detail": "matched 'lineage'"
-  },
-  {
-   "signal": "data_catalog",
-   "collector": "data",
-   "source": "agentic-ai-portfolio",
-   "path": "projects/15-banking-credit-memo/README.md",
-   "detail": "matched 'lineage'"
-  },
-  {
    "signal": "data_quality_tests",
    "collector": "data",
    "source": "agentic-ai-portfolio",
@@ -1383,6 +1440,13 @@
    "detail": "matched 'version = \"0'"
   },
   {
+   "signal": "business_metric_link",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "scripts/doc_tables.py",
+   "detail": "matched 'cost_per_task'"
+  },
+  {
    "signal": "shared_library",
    "collector": "ops",
    "source": "agentic-ai-portfolio",
@@ -1418,18 +1482,18 @@
    "detail": "matched 'cost_per_task'"
   },
   {
-   "signal": "business_metric_link",
-   "collector": "ops",
-   "source": "agentic-ai-portfolio",
-   "path": "shared/evals/harness.py",
-   "detail": "matched 'cost_per_task'"
-  },
-  {
    "signal": "mcp_server",
    "collector": "ops",
    "source": "agentic-ai-portfolio",
    "path": "shared/mcp_servers/__init__.py",
    "detail": "matched 'FastMCP'"
+  },
+  {
+   "signal": "codeowners",
+   "collector": "people",
+   "source": "ai-learning-lab",
+   "path": ".github/CODEOWNERS",
+   "detail": "file present"
   },
   {
    "signal": "ci_lint",
@@ -1474,6 +1538,13 @@
    "detail": "file present"
   },
   {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "ai-learning-lab",
+   "path": "TEMPLATE/README.md",
+   "detail": "matched '## 17. Adopt this'"
+  },
+  {
    "signal": "learning_material",
    "collector": "people",
    "source": "ai-learning-lab",
@@ -1509,6 +1580,62 @@
    "detail": "matched 'deterministic'"
   },
   {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "ai-learning-lab",
+   "path": "docs/adopt-this.md",
+   "detail": "matched '# Adopt this'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "ai-learning-lab",
+   "path": "docs/adr/0001-offline-deterministic-spikes.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "ai-learning-lab",
+   "path": "docs/adr/0002-tech-radar-rings.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "scouting",
+   "collector": "docs",
+   "source": "ai-learning-lab",
+   "path": "docs/adr/0002-tech-radar-rings.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "ai-learning-lab",
+   "path": "docs/adr/0003-numbered-topics.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "ai_policy_doc",
+   "collector": "governance",
+   "source": "ai-learning-lab",
+   "path": "docs/best-practices.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "ai-learning-lab",
+   "path": "docs/components/tooling.md",
+   "detail": "matched '## 17. Adopt this'"
+  },
+  {
+   "signal": "onboarding_guide",
+   "collector": "people",
+   "source": "ai-learning-lab",
+   "path": "docs/implementation-guide.md",
+   "detail": "file present"
+  },
+  {
    "signal": "dependency_pinning",
    "collector": "ci",
    "source": "ai-learning-lab",
@@ -1523,87 +1650,101 @@
    "detail": "matched '==0'"
   },
   {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "ai-learning-lab",
+   "path": "scripts/doc_drift.py",
+   "detail": "matched 'drift'"
+  },
+  {
    "signal": "experiment_writeups",
    "collector": "docs",
    "source": "ai-learning-lab",
-   "path": "topics/2026-09-five-agent-architectures/README.md",
+   "path": "topics/01-five-agent-architectures/README.md",
    "detail": "matched 'lesson'"
   },
   {
    "signal": "experiments",
    "collector": "docs",
    "source": "ai-learning-lab",
-   "path": "topics/2026-09-five-agent-architectures/README.md",
+   "path": "topics/01-five-agent-architectures/README.md",
    "detail": "file present"
   },
   {
    "signal": "experiments",
    "collector": "docs",
    "source": "ai-learning-lab",
-   "path": "topics/2026-09-five-agent-architectures/layers_snapshot.json",
+   "path": "topics/01-five-agent-architectures/layers_snapshot.json",
    "detail": "file present"
   },
   {
    "signal": "experiments",
    "collector": "docs",
    "source": "ai-learning-lab",
-   "path": "topics/2026-09-five-agent-architectures/spike.py",
+   "path": "topics/01-five-agent-architectures/spike.py",
    "detail": "file present"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "ai-learning-lab",
+   "path": "topics/02-graphrag-hybrid-retrieval/README.md",
+   "detail": "matched 'Microsoft Fabric'"
   },
   {
    "signal": "experiment_writeups",
    "collector": "docs",
    "source": "ai-learning-lab",
-   "path": "topics/2026-09-graphrag-hybrid-retrieval/README.md",
+   "path": "topics/02-graphrag-hybrid-retrieval/README.md",
    "detail": "matched 'Result'"
   },
   {
    "signal": "experiment_writeups",
    "collector": "docs",
    "source": "ai-learning-lab",
-   "path": "topics/2026-09-jev-system1-classifier/README.md",
+   "path": "topics/03-jev-system1-classifier/README.md",
    "detail": "matched 'Result'"
   },
   {
    "signal": "value_metrics",
    "collector": "docs",
    "source": "ai-learning-lab",
-   "path": "topics/2026-09-jev-system1-classifier/README.md",
+   "path": "topics/03-jev-system1-classifier/README.md",
    "detail": "matched 'savings'"
   },
   {
    "signal": "explainability",
    "collector": "governance",
    "source": "ai-learning-lab",
-   "path": "topics/2026-09-jev-system1-classifier/spike.py",
+   "path": "topics/03-jev-system1-classifier/spike.py",
    "detail": "matched 'shap'"
   },
   {
    "signal": "synthetic_generator",
    "collector": "data",
    "source": "ai-learning-lab",
-   "path": "topics/2026-09-jev-system1-classifier/spike.py",
+   "path": "topics/03-jev-system1-classifier/spike.py",
    "detail": "matched 'synthetic'"
   },
   {
    "signal": "synthetic_validation",
    "collector": "data",
    "source": "ai-learning-lab",
-   "path": "topics/2026-09-jev-system1-classifier/tests/test_spike.py",
+   "path": "topics/03-jev-system1-classifier/tests/test_spike.py",
    "detail": "matched 'deterministic'"
   },
   {
    "signal": "audit_log",
    "collector": "governance",
    "source": "ai-learning-lab",
-   "path": "topics/2026-09-nvidia-open-agent-safety/spike.py",
+   "path": "topics/04-nvidia-open-agent-safety/spike.py",
    "detail": "matched 'hash-chain'"
   },
   {
    "signal": "scenario_tests",
    "collector": "governance",
    "source": "ai-learning-lab",
-   "path": "topics/2026-09-nvidia-open-agent-safety/spike.py",
+   "path": "topics/04-nvidia-open-agent-safety/spike.py",
    "detail": "matched 'prompt_injection'"
   },
   {
@@ -1611,6 +1752,13 @@
    "collector": "iac",
    "source": "azure-agent-labs",
    "path": ".checkov.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "codeowners",
+   "collector": "people",
+   "source": "azure-agent-labs",
+   "path": ".github/CODEOWNERS",
    "detail": "file present"
   },
   {
@@ -1754,6 +1902,13 @@
    "detail": "file present"
   },
   {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "docs/adopt-this.md",
+   "detail": "matched '# Adopt this'"
+  },
+  {
    "signal": "adr",
    "collector": "docs",
    "source": "azure-agent-labs",
@@ -1779,6 +1934,41 @@
    "collector": "governance",
    "source": "azure-agent-labs",
    "path": "docs/best-practices.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "docs/components/evals-and-tracing.md",
+   "detail": "matched '## 17. Adopt this'"
+  },
+  {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "docs/components/foundry-access.md",
+   "detail": "matched '## 17. Adopt this'"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "azure-agent-labs",
+   "path": "docs/components/labcore.md",
+   "detail": "matched 'Data Lake'"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "azure-agent-labs",
+   "path": "docs/components/search-and-streams.md",
+   "detail": "matched 'Data Lake'"
+  },
+  {
+   "signal": "onboarding_guide",
+   "collector": "people",
+   "source": "azure-agent-labs",
+   "path": "docs/implementation-guide.md",
    "detail": "file present"
   },
   {
@@ -1939,8 +2129,22 @@
    "signal": "experiment_writeups",
    "collector": "docs",
    "source": "azure-agent-labs",
+   "path": "labs/README.md",
+   "detail": "matched 'lesson'"
+  },
+  {
+   "signal": "experiments",
+   "collector": "docs",
+   "source": "azure-agent-labs",
+   "path": "labs/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "experiment_writeups",
+   "collector": "docs",
+   "source": "azure-agent-labs",
    "path": "labs/disaster-signal-fusion/README.md",
-   "detail": "matched 'finding'"
+   "detail": "matched 'Finding'"
   },
   {
    "signal": "experiments",
@@ -1953,7 +2157,7 @@
    "signal": "experiments",
    "collector": "docs",
    "source": "azure-agent-labs",
-   "path": "labs/disaster-signal-fusion/data/gen_fixtures.py",
+   "path": "labs/disaster-signal-fusion/data/README.md",
    "detail": "file present"
   },
   {
@@ -1964,10 +2168,17 @@
    "detail": "matched 'synthetic'"
   },
   {
-   "signal": "experiments",
-   "collector": "docs",
+   "signal": "eval_suite",
+   "collector": "ci",
    "source": "azure-agent-labs",
-   "path": "labs/disaster-signal-fusion/data/history_archive.jsonl",
+   "path": "labs/disaster-signal-fusion/evals/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/evals/gold/README.md",
    "detail": "file present"
   },
   {
@@ -1975,20 +2186,6 @@
    "collector": "ci",
    "source": "azure-agent-labs",
    "path": "labs/disaster-signal-fusion/evals/gold/replay.jsonl",
-   "detail": "file present"
-  },
-  {
-   "signal": "eval_suite",
-   "collector": "ci",
-   "source": "azure-agent-labs",
-   "path": "labs/disaster-signal-fusion/evals/gold/signal_usage.jsonl",
-   "detail": "file present"
-  },
-  {
-   "signal": "eval_suite",
-   "collector": "ci",
-   "source": "azure-agent-labs",
-   "path": "labs/disaster-signal-fusion/evals/run_eval.py",
    "detail": "file present"
   },
   {
@@ -2027,6 +2224,13 @@
    "detail": "file present"
   },
   {
+   "signal": "experiment_writeups",
+   "collector": "docs",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/src/signal_fusion/README.md",
+   "detail": "matched 'finding'"
+  },
+  {
    "signal": "hitl_approval",
    "collector": "governance",
    "source": "azure-agent-labs",
@@ -2039,13 +2243,6 @@
    "source": "azure-agent-labs",
    "path": "labs/disaster-signal-fusion/src/signal_fusion/service.py",
    "detail": "matched 'hitl'"
-  },
-  {
-   "signal": "experiment_writeups",
-   "collector": "docs",
-   "source": "azure-agent-labs",
-   "path": "labs/legal-document-compliance/README.md",
-   "detail": "matched 'result'"
   },
   {
    "signal": "explainability",
@@ -2090,13 +2287,6 @@
    "detail": "matched 'shap'"
   },
   {
-   "signal": "experiment_writeups",
-   "collector": "docs",
-   "source": "azure-agent-labs",
-   "path": "labs/medical-eye-scan-multimodal/README.md",
-   "detail": "matched 'result'"
-  },
-  {
    "signal": "synthetic_generator",
    "collector": "data",
    "source": "azure-agent-labs",
@@ -2122,7 +2312,7 @@
    "collector": "data",
    "source": "azure-agent-labs",
    "path": "labs/road-network-maintenance-graph/README.md",
-   "detail": "matched '## Data sources'"
+   "detail": "matched '### Data sources'"
   },
   {
    "signal": "data_quality_tests",
@@ -2157,7 +2347,7 @@
    "collector": "data",
    "source": "azure-agent-labs",
    "path": "labs/wind-turbine-continual-learning/README.md",
-   "detail": "matched '## Data sources'"
+   "detail": "matched '### Data sources'"
   },
   {
    "signal": "lifecycle_gates",
@@ -2188,6 +2378,20 @@
    "detail": "matched 'version = \"0'"
   },
   {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "scripts/component_demos.py",
+   "detail": "matched 'mcp.server'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "scripts/doc_drift.py",
+   "detail": "matched 'drift'"
+  },
+  {
    "signal": "shared_library",
    "collector": "ops",
    "source": "azure-agent-labs",
@@ -2216,17 +2420,17 @@
    "detail": "matched 'McpServer'"
   },
   {
-   "signal": "mcp_server",
-   "collector": "ops",
-   "source": "azure-agent-labs",
-   "path": "shared/tests/test_labcore.py",
-   "detail": "matched 'mcp.server'"
-  },
-  {
    "signal": "iac_scan",
    "collector": "iac",
    "source": "azure-agent-platform",
    "path": ".checkov.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "codeowners",
+   "collector": "people",
+   "source": "azure-agent-platform",
+   "path": ".github/CODEOWNERS",
    "detail": "file present"
   },
   {
@@ -2249,6 +2453,13 @@
    "source": "azure-agent-platform",
    "path": ".github/workflows/ci.yml",
    "detail": "matched 'gate'"
+  },
+  {
+   "signal": "doc_drift_check",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'render_docs'"
   },
   {
    "signal": "eval_gate_ci",
@@ -2384,6 +2595,13 @@
    "detail": "file present"
   },
   {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "docs/adopt-this.md",
+   "detail": "matched '# Adopt this'"
+  },
+  {
    "signal": "adr",
    "collector": "docs",
    "source": "azure-agent-platform",
@@ -2409,6 +2627,27 @@
    "collector": "governance",
    "source": "azure-agent-platform",
    "path": "docs/best-practices.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "docs/components/a2a-control-plane.md",
+   "detail": "matched '## 17. Adopt this'"
+  },
+  {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "docs/components/bff-and-services.md",
+   "detail": "matched '## 17. Adopt this'"
+  },
+  {
+   "signal": "onboarding_guide",
+   "collector": "people",
+   "source": "azure-agent-platform",
+   "path": "docs/implementation-guide.md",
    "detail": "file present"
   },
   {
@@ -2643,6 +2882,20 @@
    "detail": "matched 'version = \"0'"
   },
   {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "scripts/component_demos.py",
+   "detail": "matched 'citations'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "scripts/component_demos.py",
+   "detail": "matched 'approver'"
+  },
+  {
    "signal": "hitl_approval",
    "collector": "governance",
    "source": "azure-agent-platform",
@@ -2657,6 +2910,13 @@
    "detail": "matched 'synthetic'"
   },
   {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "scripts/doc_drift.py",
+   "detail": "matched 'drift'"
+  },
+  {
    "signal": "lifecycle_gates",
    "collector": "governance",
    "source": "azure-agent-platform",
@@ -2669,13 +2929,6 @@
    "source": "azure-agent-platform",
    "path": "scripts/orchestrations_demo.py",
    "detail": "matched 'hitl'"
-  },
-  {
-   "signal": "hitl_approval",
-   "collector": "governance",
-   "source": "azure-agent-platform",
-   "path": "scripts/render_docs.py",
-   "detail": "matched 'HITL'"
   },
   {
    "signal": "scenario_tests",
@@ -2717,13 +2970,6 @@
    "collector": "governance",
    "source": "azure-agent-platform",
    "path": "src/agentplatform/a2a/client.py",
-   "detail": "matched 'shap'"
-  },
-  {
-   "signal": "explainability",
-   "collector": "governance",
-   "source": "azure-agent-platform",
-   "path": "src/agentplatform/a2a/registry.py",
    "detail": "matched 'shap'"
   },
   {
@@ -2843,6 +3089,13 @@
    "collector": "iac",
    "source": "azure-ai-integration-platform",
    "path": ".checkov.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "codeowners",
+   "collector": "people",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/CODEOWNERS",
    "detail": "file present"
   },
   {
@@ -2979,6 +3232,13 @@
    "detail": "file present"
   },
   {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "docs/adopt-this.md",
+   "detail": "matched '# Adopt this'"
+  },
+  {
    "signal": "adr",
    "collector": "docs",
    "source": "azure-ai-integration-platform",
@@ -3004,6 +3264,34 @@
    "collector": "governance",
    "source": "azure-ai-integration-platform",
    "path": "docs/best-practices.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "docs/components/a2a-gateway.md",
+   "detail": "matched '## 17. Adopt this'"
+  },
+  {
+   "signal": "adopt_guide",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "docs/components/agents.md",
+   "detail": "matched '## 17. Adopt this'"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "azure-ai-integration-platform",
+   "path": "docs/components/mcp-gateway.md",
+   "detail": "matched 'Databricks'"
+  },
+  {
+   "signal": "onboarding_guide",
+   "collector": "people",
+   "source": "azure-ai-integration-platform",
+   "path": "docs/implementation-guide.md",
    "detail": "file present"
   },
   {
@@ -3266,6 +3554,20 @@
    "detail": "matched 'version = \"0'"
   },
   {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "scripts/doc_drift.py",
+   "detail": "matched 'drift'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "scripts/doc_drift.py",
+   "detail": "matched 'needs_approval'"
+  },
+  {
    "signal": "hitl_approval",
    "collector": "governance",
    "source": "azure-ai-integration-platform",
@@ -3306,13 +3608,6 @@
    "source": "azure-ai-integration-platform",
    "path": "src/aiip/a2a/specs.py",
    "detail": "matched 'shap'"
-  },
-  {
-   "signal": "hitl_approval",
-   "collector": "governance",
-   "source": "azure-ai-integration-platform",
-   "path": "src/aiip/a2a/specs.py",
-   "detail": "matched 'hitl'"
   },
   {
    "signal": "api_contract",
@@ -3361,13 +3656,6 @@
    "collector": "data",
    "source": "azure-ai-integration-platform",
    "path": "src/aiip/fakesaas/README.md",
-   "detail": "matched 'Databricks'"
-  },
-  {
-   "signal": "data_access_platform",
-   "collector": "data",
-   "source": "azure-ai-integration-platform",
-   "path": "src/aiip/fakesaas/__init__.py",
    "detail": "matched 'Databricks'"
   },
   {
@@ -3473,6 +3761,13 @@
    "collector": "iac",
    "source": "azure-finops",
    "path": ".checkov.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "codeowners",
+   "collector": "people",
+   "source": "azure-finops",
+   "path": ".github/CODEOWNERS",
    "detail": "file present"
   },
   {
@@ -4047,6 +4342,13 @@
    "collector": "iac",
    "source": "fabric-enterprise-bi",
    "path": ".checkov.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "codeowners",
+   "collector": "people",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/CODEOWNERS",
    "detail": "file present"
   },
   {
@@ -4671,6 +4973,111 @@
    "source": "fabric-enterprise-bi",
    "path": "tests/test_10_repo.py",
    "detail": "matched 'secret'"
+  },
+  {
+   "signal": "business_case",
+   "collector": "docs",
+   "source": "profile-readme",
+   "path": "README.md",
+   "detail": "matched 'ROI per use case'"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "profile-readme",
+   "path": "README.md",
+   "detail": "matched 'Lakehouse'"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "profile-readme",
+   "path": "README.md",
+   "detail": "matched 'Purview'"
+  },
+  {
+   "signal": "reg_mapping",
+   "collector": "governance",
+   "source": "profile-readme",
+   "path": "README.md",
+   "detail": "matched 'NIST AI RMF'"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "profile-readme",
+   "path": "README.md",
+   "detail": "matched 'savings'"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "profile-readme",
+   "path": "docs/ai-principles.md",
+   "detail": "matched 'savings'"
+  },
+  {
+   "signal": "learning_material",
+   "collector": "people",
+   "source": "profile-readme",
+   "path": "docs/community-and-learning.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "reg_mapping",
+   "collector": "governance",
+   "source": "profile-readme",
+   "path": "docs/community-and-learning.md",
+   "detail": "matched 'NIST AI RMF'"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "profile-readme",
+   "path": "docs/data-access-process.md",
+   "detail": "matched 'lineage'"
+  },
+  {
+   "signal": "roadmap_doc",
+   "collector": "docs",
+   "source": "profile-readme",
+   "path": "docs/roadmap.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "roadmap_owned",
+   "collector": "docs",
+   "source": "profile-readme",
+   "path": "docs/roadmap.md",
+   "detail": "matched 'Month 1 to Month 12) This is the plan fo'"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "profile-readme",
+   "path": "docs/roadmap.md",
+   "detail": "matched 'cost per request'"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "profile-readme",
+   "path": "docs/skills-matrix.md",
+   "detail": "matched 'Microsoft Fabric'"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "profile-readme",
+   "path": "docs/skills-matrix.md",
+   "detail": "matched 'Purview'"
+  },
+  {
+   "signal": "reg_mapping",
+   "collector": "governance",
+   "source": "profile-readme",
+   "path": "docs/skills-matrix.md",
+   "detail": "matched 'NIST AI RMF'"
   }
  ]
 }

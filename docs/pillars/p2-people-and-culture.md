@@ -193,11 +193,11 @@ Whether AI roles are defined and people with the needed skills are hired, traine
 <!-- output: explain --org portfolio --category 2.3 -->
 ```text
 2.3 Leadership & Sponsorship: level 2 (Ready), confidence 0.31, status pending-review
-rationale: Level 2 (Ready). Supported by [E551]. Next level needs: q_exec_owner. Confidence 0.31.
-  [x] q_project_sponsors           sample-answers   E551
-  [~] q_exec_owner                 sample-answers   E541
+rationale: Level 2 (Ready). Supported by [E600]. Next level needs: q_exec_owner. Confidence 0.31.
+  [x] q_project_sponsors           sample-answers   E600
+  [~] q_exec_owner                 sample-answers   E590
   [ ] q_leadership_objectives      sample-answers   
-  E551 questionnaire:q_project_sponsors (answer yes: the maintainer sponsors every repository)
+  E600 questionnaire:q_project_sponsors (answer yes: the maintainer sponsors every repository)
 needs review: confidence 0.31 below 0.6; level rests on sample answers: q_project_sponsors
 ```
 <!-- /output -->

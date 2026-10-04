@@ -207,23 +207,23 @@ The tooling available across the AI lifecycle, from preparing data to deploying 
 <!-- output: explain --org portfolio --category 3.2 -->
 ```text
 3.2 Cloud & Compute Infrastructure: level 4 (Advanced), confidence 0.75, status pending-review
-rationale: Level 4 (Advanced). Supported by [E377], [E378], [E379], [E380]. Confidence 0.75.
-  [x] iac_any                      artifact         E377, E378, E379
-  [x] iac_tests                    artifact         E413, E414, E415
-  [x] cost_guard                   artifact         E173, E174, E175
-  [x] managed_identity             artifact         E455, E456, E457
-  [x] key_vault                    artifact         E423, E424, E425
-  [x] autoscale                    artifact         E063, E064, E065
-  [x] iac_scan                     artifact         E398, E399, E400
-  [~] q_cost_optimisation_cadence  sample-answers   E533
-  E377 agentic-ai-model-risk:infra/bicep/main.bicep (file present)
-  E378 agentic-ai-model-risk:infra/bicep/modules/policies.bicep (file present)
-  E379 agentic-ai-model-risk:infra/bicep/modules/registry.bicep (file present)
-  E380 agentic-ai-portfolio:infra/bicep/main.bicep (file present)
-  E381 agentic-ai-portfolio:infra/terraform/backend.tf (file present)
-  E382 agentic-ai-portfolio:infra/terraform/locals.tf (file present)
-  E383 azure-agent-labs:infra/terraform/modules/cognitive/main.tf (file present)
-  E384 azure-agent-labs:infra/terraform/modules/cognitive/outputs.tf (file present)
+rationale: Level 4 (Advanced). Supported by [E420], [E421], [E422], [E423]. Confidence 0.75.
+  [x] iac_any                      artifact         E420, E421, E422
+  [x] iac_tests                    artifact         E456, E457, E458
+  [x] cost_guard                   artifact         E201, E202, E203
+  [x] managed_identity             artifact         E499, E500, E501
+  [x] key_vault                    artifact         E466, E467, E468
+  [x] autoscale                    artifact         E082, E083, E084
+  [x] iac_scan                     artifact         E441, E442, E443
+  [~] q_cost_optimisation_cadence  sample-answers   E582
+  E420 agentic-ai-model-risk:infra/bicep/main.bicep (file present)
+  E421 agentic-ai-model-risk:infra/bicep/modules/policies.bicep (file present)
+  E422 agentic-ai-model-risk:infra/bicep/modules/registry.bicep (file present)
+  E423 agentic-ai-portfolio:infra/bicep/main.bicep (file present)
+  E424 agentic-ai-portfolio:infra/terraform/backend.tf (file present)
+  E425 agentic-ai-portfolio:infra/terraform/locals.tf (file present)
+  E426 azure-agent-labs:infra/terraform/modules/cognitive/main.tf (file present)
+  E427 azure-agent-labs:infra/terraform/modules/cognitive/outputs.tf (file present)
 needs review: level rests on sample answers: q_cost_optimisation_cadence
 ```
 <!-- /output -->
@@ -271,7 +271,7 @@ Each assessment run writes a `summary.json` per organisation (scheduled job) wit
 
 ## 16. Interview talking points
 
-* "The portfolio is strongest here (level 4), and the evidence shows why: tests, IaC tests, cost guards, MCP and A2A across eight repositories."
+* "The portfolio is strongest here (level 4), and the evidence shows why: tests, IaC tests, cost guards, MCP and A2A across eight project repositories."
 * "Strong technology with weak people and governance is the classic imbalance; the pillar cap stops the overall level hiding it."
 
 ## 17. Adopt this

@@ -11,7 +11,7 @@ answers:
   q_roadmap_refresh: no
   q_intangible_value: no
   q_pilot_scaling: {answer: partial, note: labs graduate into platform repositories}
-  q_ai_roles_defined: {answer: partial, note: one maintainer covers all roles}
+  q_ai_roles_defined: {answer: partial, note: one maintainer covers all roles; self-assessed skills matrix in the profile repository}
   q_training_paths: {answer: partial, note: ai-learning-lab is a personal learning path}
   q_hr_integration: no
   q_coordinator: {answer: yes, note: single maintainer coordinates all AI work}
@@ -35,15 +35,15 @@ answers:
   q_ecosystem_lead: no
   q_reuse_measured: no
   q_review_board: no
-  q_ethics_principles: {answer: partial, note: responsible AI notes in the model risk repository}
+  q_ethics_principles: {answer: yes, note: written AI principles in the profile repository docs/ai-principles.md; each is linked to its enforcement}
   q_affected_people: no
   q_erm_integration: no
   q_reg_watch: no
   q_audience_explanations: no
   q_data_sharing_agreements: no
   q_dq_monitoring: no
-  q_access_process: {answer: partial, note: role-based access documented in IaC}
+  q_access_process: {answer: partial, note: process published in the profile repository docs/data-access-process.md; never run with real data}
   q_self_service_data: no
   q_synthetic_strategy: {answer: partial, note: all repositories use synthetic data by policy}
-  q_domain_experts: no
+  q_domain_experts: {answer: no, note: intended process written in docs/domain-expert-involvement.md; no expert sessions held yet}
   q_embedded_smes: no
