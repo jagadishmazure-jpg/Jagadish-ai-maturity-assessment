@@ -100,3 +100,11 @@ def test_links_fail_when_unsatisfied(capsys, org_copy):
 def test_table_helper():
     out = table([{"a": 1, "b": "xy"}], ["a", "b"])
     assert out.splitlines()[0].split() == ["a", "b"]
+
+
+def test_scheduled_run_writes_reports(tmp_path, monkeypatch):
+    from aimaturity.scheduled import main as scheduled_main
+
+    monkeypatch.delenv("EVIDENCE_STORAGE_ACCOUNT", raising=False)
+    assert scheduled_main(["--out", str(tmp_path), "--org", "kestrel-bay-bank"]) == 0
+    assert {p.name for p in (tmp_path / "kestrel-bay-bank").iterdir()} == {"report.md", "report.html", "radar.svg", "summary.json"}

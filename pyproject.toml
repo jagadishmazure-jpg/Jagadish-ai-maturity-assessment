@@ -15,9 +15,11 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest==9.1.1", "pytest-asyncio==1.4.0", "ruff==0.16.9"]
+azure = ["azure-identity==1.26.0", "azure-storage-blob==12.31.0"] # only the scheduled job uploads
 
 [project.scripts]
 aimaturity = "aimaturity.cli:main"
+aimaturity-scheduled = "aimaturity.scheduled:main"
 
 [build-system]
 requires = ["hatchling"]
