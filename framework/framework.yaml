@@ -1,0 +1,412 @@
+# AI maturity framework model: six pillars, 29 categories, four levels.
+# Structure adapted from UNESCO, "AI Maturity Framework" (subtitle: "A self-positioning guide for
+# public administrations"), authored by Stratejai for UNESCO, licensed CC BY-SA 3.0 IGO. The summaries,
+# level descriptors and advancement actions below are rewritten in this repository's own words.
+# This file, like everything in framework/, is shared under CC BY-SA 3.0 IGO (see framework/LICENSE.md).
+levels:
+  1: {name: Basic, gist: Ad hoc and person-dependent; little shared understanding of AI.}
+  2: {name: Ready, gist: Written down and repeated within projects or teams; intent is clear.}
+  3: {name: Dynamic, gist: Standard across the organisation, measured and managed ahead of problems.}
+  4: {name: Advanced, gist: Continuously tuned from data and feedback; a strategic strength.}
+pillars:
+  - id: P1
+    name: Strategy & Value
+    focus: Why the organisation uses AI, where it pays off and how it plans the journey.
+    categories:
+      - id: "1.1"
+        name: AI Vision & Ambition
+        summary: Whether there is a stated purpose for AI that tells teams what it is for and what it should change.
+        why: Without a purpose, projects scatter and nobody can say whether AI is helping the mission.
+        descriptors:
+          1: AI comes up in conversation but nobody has written down what it is meant to achieve.
+          2: A short written purpose exists and the people who matter know it, though it is not yet tied to goals.
+          3: The purpose is published widely, tied to measurable targets and backed by department heads.
+          4: The purpose is part of the core strategy, revisited on results, and steers budgets and priorities.
+        actions:
+          2: Write a one-page AI purpose statement with three concrete outcomes and circulate it to leaders.
+          3: Attach measurable targets to each outcome and publish them with an owner per target.
+          4: Review the purpose on a fixed cadence against results and use it in budget decisions.
+      - id: "1.2"
+        name: Strategic Alignment
+        summary: Whether AI work is chosen because it serves organisational goals rather than because the technology is available.
+        why: Work that is not tied to goals tends to stay a pilot and loses funding at the first squeeze.
+        descriptors:
+          1: Projects start because a tool looks interesting; links to goals are missing.
+          2: Some proposals are checked against goals, but not every time and not the same way.
+          3: Every significant AI proposal goes through a business case that names the goal it serves.
+          4: AI capability feeds back into strategy, opening goals that were not possible before.
+        actions:
+          2: Add a "goal served" field to every AI proposal template.
+          3: Make a business case with goal linkage mandatory before funding any AI build.
+          4: Run a yearly strategy session where AI capability proposals can change the goals themselves.
+      - id: "1.3"
+        name: Roadmap & Planning
+        summary: Whether a sequenced, resourced plan for AI adoption exists and is kept current.
+        why: A plan turns ambition into funded steps and exposes dependencies before they block delivery.
+        descriptors:
+          1: Planning happens project by project; there is no multi-step view.
+          2: A first roadmap lists milestones, though resourcing and detail are thin.
+          3: A detailed roadmap with owners and budget is managed alongside normal planning cycles.
+          4: The roadmap is refreshed from delivery data, changing priorities and horizon scanning.
+        actions:
+          2: Draft a twelve-month roadmap with milestones per quarter.
+          3: Add owners, budget and dependencies to each milestone and review it monthly.
+          4: Feed delivery metrics and horizon scanning into a rolling roadmap refresh.
+      - id: "1.4"
+        name: Value Identification & Measurement
+        summary: How use cases are picked for impact and how their benefits and costs are tracked afterwards.
+        why: Measured value is what justifies scaling, and stopping, AI investments.
+        descriptors:
+          1: Benefits are assumed or told as stories; costs are not tracked per use case.
+          2: A use-case intake exists and simple metrics such as hours or money saved are defined, unevenly applied.
+          3: Every use case is scored for feasibility and impact up front and its realised value is reported.
+          4: Value tracking includes strategic and intangible benefits and drives portfolio decisions.
+        actions:
+          2: Define two or three value metrics and a use-case intake form.
+          3: Track realised value and run cost per use case and report it every month.
+          4: Add strategic and intangible measures and rebalance the portfolio on the results.
+      - id: "1.5"
+        name: Innovation & Experimentation
+        summary: The room, money and habits for trying new AI ideas safely and learning from them.
+        why: Experiments reveal what works locally before large sums are committed.
+        descriptors:
+          1: Almost no experimentation; new ideas wait for proof that nobody can produce.
+          2: Pilots happen here and there and lessons travel by word of mouth.
+          3: A sandbox and a light funding route exist; results are written up and shared.
+          4: New techniques are scouted on purpose and promising experiments are scaled quickly.
+        actions:
+          2: Run a first time-boxed pilot with an agreed success measure.
+          3: Provide a sandbox, a small pilot fund and a standard write-up template.
+          4: Assign scouting time and a fast path from successful pilot to funded product.
+  - id: P2
+    name: People & Culture
+    focus: Skills, structures, leadership and adoption habits that let AI take root.
+    categories:
+      - id: "2.1"
+        name: Talent & Skills
+        summary: Whether AI roles are defined and people with the needed skills are hired, trained and kept.
+        why: Tools do nothing without people who can build, run and question them.
+        descriptors:
+          1: Skills are rare and roles undefined; the organisation leans on consultants or a few enthusiasts.
+          2: Key roles are named and first hiring or training efforts have started.
+          3: Workforce planning covers AI roles, with formal training and career paths.
+          4: Skill growth is built into HR processes, with cross-skilling and internal mobility.
+        actions:
+          2: Name the AI roles needed and write a skills matrix.
+          3: Fund a training path per role and add AI roles to workforce planning.
+          4: Build AI skills into performance and mobility processes.
+      - id: "2.2"
+        name: Organizational Structure
+        summary: How AI work is organised, who is responsible for what and how teams are arranged.
+        why: Clear structure stops duplicated effort and makes accountability visible.
+        descriptors:
+          1: AI work sits inside existing departments with no clear owner.
+          2: An informal working group or a named coordinator exists.
+          3: A formal AI team or centre of excellence has a mandate and a reporting line.
+          4: The operating model (hub and spoke, federated) is tuned to need and reviewed.
+        actions:
+          2: Name an AI coordinator and start a cross-team working group.
+          3: Charter a centre of excellence with mandate, budget and reporting line.
+          4: Review the operating model yearly and adjust between central and embedded roles.
+      - id: "2.3"
+        name: Leadership & Sponsorship
+        summary: How visibly and actively senior leaders back AI work.
+        why: Sponsorship unlocks money, removes blockers and signals that AI matters.
+        descriptors:
+          1: Leaders treat AI as an IT topic and nobody sponsors it.
+          2: A few leaders sponsor individual projects when asked.
+          3: An executive sponsor owns the AI agenda and talks about it openly.
+          4: Leaders drive the AI agenda, fund it strategically and hold teams to account.
+        actions:
+          2: Secure a named sponsor for each live AI project.
+          3: Appoint an executive owner of the AI agenda with regular updates to the board.
+          4: Put AI outcomes into leadership objectives and resourcing reviews.
+      - id: "2.4"
+        name: Change Management & Adoption
+        summary: How the human side of AI rollouts is planned so people actually use and trust the systems.
+        why: Unused systems deliver nothing; adoption is planned, not hoped for.
+        descriptors:
+          1: Rollouts focus on the technology; users find out late.
+          2: Deployments come with some communication and training.
+          3: A change method with stakeholder mapping, communication and support is applied to AI rollouts.
+          4: User feedback is gathered continuously and changes both the systems and how they are introduced.
+        actions:
+          2: Add a communication and training checklist to every AI rollout.
+          3: Adopt a change method with stakeholder analysis and adoption metrics.
+          4: Collect user feedback continuously and feed it into the product backlog.
+      - id: "2.5"
+        name: AI Literacy & Awareness
+        summary: How well the wider workforce understands what AI can and cannot do, including its ethical limits.
+        why: Literate staff spot good uses, avoid misuse and challenge poor outputs.
+        descriptors:
+          1: Most staff know little about AI and misconceptions are common.
+          2: Awareness material exists and some sessions run now and then.
+          3: Role-based literacy programmes run across the organisation, including ethics.
+          4: Learning is continuous and AI literacy shows up in everyday decisions.
+        actions:
+          2: Publish an introductory AI guide and run open sessions.
+          3: Launch role-based literacy tracks with completion tracking.
+          4: Make literacy refreshers continuous and embed AI topics in team routines.
+  - id: P3
+    name: Technology & Infrastructure
+    focus: Platforms, compute, architecture and working environments for AI.
+    categories:
+      - id: "3.1"
+        name: AI Development Platforms & Tools
+        summary: The tooling available across the AI lifecycle, from preparing data to deploying models.
+        why: Shared tooling raises productivity and makes work repeatable and governable.
+        descriptors:
+          1: Everyone uses their own tools; there is no common platform.
+          2: Common libraries are in use and cloud AI services are being explored.
+          3: A supported standard platform covers data preparation, modelling and deployment.
+          4: An integrated platform covers the full lifecycle and is optimised for collaboration.
+        actions:
+          2: Agree a shortlist of supported libraries and a cloud AI service to pilot.
+          3: Standardise on a supported platform with templates for new projects.
+          4: Integrate the platform end to end and measure developer productivity.
+      - id: "3.2"
+        name: Cloud & Compute Infrastructure
+        summary: Access to enough elastic compute, storage and networking for AI workloads, and control of its cost.
+        why: Compute limits stall experiments, while uncontrolled compute burns budget.
+        descriptors:
+          1: Work runs on laptops or fixed servers that limit experimentation.
+          2: Basic cloud services are used and scaling is manual.
+          3: Cloud capacity configured for AI is available on demand, provisioned as code.
+          4: Provisioning is automated and elastic, with cost and performance actively optimised.
+        actions:
+          2: Provide a governed cloud subscription for AI work.
+          3: Provision AI infrastructure as code with tagging and budgets.
+          4: Automate scaling and run continuous cost and performance optimisation.
+      - id: "3.3"
+        name: AI-Specific Architectures
+        summary: Whether systems are designed so AI components can be plugged in through clean interfaces.
+        why: Open, modular architecture makes AI cheaper to integrate and safer to change.
+        descriptors:
+          1: Monolithic systems make AI integration slow and bespoke.
+          2: Some systems expose APIs and new designs start to consider AI.
+          3: Patterns such as APIs, events and microservices are standard for AI integration.
+          4: The architecture is built for AI, with reusable AI services across the estate.
+        actions:
+          2: Expose key data and functions through documented APIs.
+          3: Adopt standard integration patterns and record them in architecture decisions.
+          4: Offer AI capabilities as reusable services with published contracts.
+      - id: "3.4"
+        name: Data Science Environment
+        summary: Secure, shared environments where AI teams can build, track and reproduce work.
+        why: Good environments cut setup time and make results reproducible.
+        descriptors:
+          1: People work on isolated desktops; sharing results is hard.
+          2: Shared storage and basic collaboration tools exist.
+          3: A secure shared workbench supports version control, experiment tracking and collaboration.
+          4: A self-service platform integrates data, tracking and deployment pipelines.
+        actions:
+          2: Put all AI code under version control with shared storage.
+          3: Provide a reproducible workbench with pinned dependencies and experiment tracking.
+          4: Offer self-service environments wired into data and deployment pipelines.
+  - id: P4
+    name: AI Operations & Ecosystem
+    focus: Running AI in production and working with others.
+    categories:
+      - id: "4.1"
+        name: Model Deployment & Management (MLOps)
+        summary: How reliably models and agents move into production, are versioned and are rolled back or retrained.
+        why: Operational discipline is what lets AI scale beyond pilots without breaking.
+        descriptors:
+          1: Deployment is manual and rare, without versioning or tests.
+          2: Scripts handle some deployments and some versioning exists.
+          3: Automated pipelines test, deploy and roll back models, with versioning.
+          4: The full lifecycle is automated, including retraining, staged rollout and retirement.
+        actions:
+          2: Script deployments and version every model artefact.
+          3: Build CI/CD with tests, evaluation gates, approvals and rollback.
+          4: Automate retraining triggers, staged rollout and retirement.
+      - id: "4.2"
+        name: Performance Monitoring & Optimization
+        summary: How the behaviour of running AI systems (quality, drift, fairness, latency, cost) is watched and improved.
+        why: Models decay as the world changes; monitoring catches it before users do.
+        descriptors:
+          1: Nothing is monitored; problems surface through complaints.
+          2: Uptime and errors are watched; quality is checked by hand now and then.
+          3: Quality, drift and fairness metrics are monitored with thresholds and alerts.
+          4: Monitoring links model behaviour to business impact and triggers improvement automatically.
+        actions:
+          2: Add uptime and error monitoring to every AI service.
+          3: Define quality, drift and fairness thresholds with alerts and reports.
+          4: Connect monitoring to business metrics and automated improvement loops.
+      - id: "4.3"
+        name: Integration & Interoperability
+        summary: How AI systems exchange data and fit into existing applications and processes.
+        why: Value appears only when AI outputs reach the processes that use them.
+        descriptors:
+          1: AI runs in isolation and results are moved by hand.
+          2: Point-to-point integrations exist for specific systems.
+          3: Standard APIs and integration patterns connect AI to business systems.
+          4: AI services are discoverable and composable through gateways, events and open protocols.
+        actions:
+          2: Replace manual hand-offs with a first API integration.
+          3: Standardise integration through an API gateway and documented contracts.
+          4: Publish AI services through discoverable, open protocols such as MCP and A2A.
+      - id: "4.4"
+        name: External Collaboration & Partnerships
+        summary: How the organisation learns from and works with universities, peers, vendors and communities.
+        why: Partners bring skills, data and lessons that are expensive to build alone.
+        descriptors:
+          1: The organisation works alone.
+          2: Contacts are informal and collaborations occasional.
+          3: Strategic partnerships exist for specific AI projects or knowledge sharing.
+          4: The organisation helps lead its AI ecosystem and manages partnerships systematically.
+        actions:
+          2: Join one relevant community or peer network.
+          3: Formalise two partnerships with clear goals.
+          4: Run a partnership portfolio and contribute back to shared assets.
+      - id: "4.5"
+        name: Reusability & Shared Components
+        summary: Whether models, pipelines, tools and data are built once and reused across projects.
+        why: Reuse cuts cost and spreads good practice.
+        descriptors:
+          1: Every project starts from nothing.
+          2: People share snippets informally.
+          3: A shared catalogue and processes for reusing components exist.
+          4: Reusable assets are curated and promoted as an organisation-wide strategy.
+        actions:
+          2: Collect reusable components in a shared repository.
+          3: Publish a catalogue with ownership, versioning and adoption guides.
+          4: Fund curation and measure reuse across the organisation.
+  - id: P5
+    name: AI Governance, Ethics & Risk
+    focus: Rules, ethics, risk, law and transparency for AI.
+    categories:
+      - id: "5.1"
+        name: AI Governance Framework
+        summary: The policies, decision rights, roles and accountability that apply specifically to AI.
+        why: Governance makes AI decisions traceable and keeps risk proportionate.
+        descriptors:
+          1: General IT rules are assumed to cover AI.
+          2: First AI policies are drafted and roles are set per project.
+          3: A formal framework with policies, a review body and clear accountability is in force.
+          4: Governance spans the lifecycle, adherence is monitored and the framework is improved.
+        actions:
+          2: Draft an AI policy and assign roles for each project.
+          3: Set up a review body, lifecycle approval gates and an AI inventory.
+          4: Monitor adherence automatically and review the framework on a cadence.
+      - id: "5.2"
+        name: Ethical Principles & Guidelines
+        summary: How ethical commitments such as fairness, human oversight and transparency are defined and put into practice.
+        why: Public trust depends on AI that treats people fairly and keeps humans in charge.
+        descriptors:
+          1: Ethics is rarely discussed and people affected by AI are not the starting point.
+          2: General principles are acknowledged and discussed for risky projects.
+          3: A principles framework is part of standard review, with practical checks.
+          4: Ethics is embedded across culture, strategy and every lifecycle stage.
+        actions:
+          2: Adopt a short set of principles and discuss them for high-risk projects.
+          3: Add ethics checks such as fairness tests and human oversight to standard review.
+          4: Track ethics outcomes and involve affected people in design.
+      - id: "5.3"
+        name: Risk Assessment & Mitigation
+        summary: How AI-specific risks such as bias, security, privacy and misuse are identified, scored and treated.
+        why: Unmanaged AI risk turns into harm, incidents and lost trust.
+        descriptors:
+          1: AI risk is not considered separately.
+          2: Some projects identify risks, often after the fact.
+          3: A standard AI risk process with scoring and controls is applied to every system.
+          4: AI risk is managed continuously and quantitatively as part of enterprise risk.
+        actions:
+          2: Run a risk review for each AI project before launch.
+          3: Standardise risk cards with scoring, controls, owners and scenario tests.
+          4: Feed monitoring and scenarios into continuous, quantitative risk management.
+      - id: "5.4"
+        name: Compliance & Legal
+        summary: How compliance with AI-relevant law (for example the EU AI Act and data protection) is ensured and shown.
+        why: Non-compliance brings legal exposure and can force systems offline.
+        descriptors:
+          1: Compliance is assumed from general rules.
+          2: Specific obligations are known and checked by hand for key projects.
+          3: Compliance processes are documented and connected to delivery.
+          4: Regulation is watched proactively and checks are automated in pipelines.
+        actions:
+          2: Map the obligations that apply to each AI system.
+          3: Document compliance evidence per system and tie it to release approval.
+          4: Automate compliance checks in pipelines and track regulatory change.
+      - id: "5.5"
+        name: Transparency & Explainability
+        summary: How AI decisions are made understandable to developers, users, auditors and the public.
+        why: People need to understand and contest decisions that affect them.
+        descriptors:
+          1: Models are black boxes and documentation is thin.
+          2: Basic model documentation exists.
+          3: Explanation techniques and documentation standards are applied where they matter.
+          4: Explanations are tailored to each audience and transparency is routine.
+        actions:
+          2: Write a model card for every system in use.
+          3: Add explanations (key factors, cited evidence) to outputs and standardise documentation.
+          4: Tailor explanations per audience and publish transparency notes.
+  - id: P6
+    name: Data (AI-Specific Focus)
+    focus: Finding, preparing, accessing, synthesising and understanding data for AI.
+    categories:
+      - id: "6.1"
+        name: AI Use Case Data Identification
+        summary: How the data a use case needs is found, judged and obtained.
+        why: Missing or wrong data is the most common reason AI projects stall.
+        descriptors:
+          1: Finding data is slow and manual; sources are often unknown.
+          2: Data needs are listed per project, though sourcing is ad hoc.
+          3: A systematic process, often with a catalogue, identifies and sources data for planned use cases.
+          4: Strategic data assets are identified ahead of need and sharing agreements are in place.
+        actions:
+          2: List data needs for each use case at intake.
+          3: Catalogue data assets and link them to use cases.
+          4: Plan strategic data acquisition and sharing agreements ahead of need.
+      - id: "6.2"
+        name: Data Readiness for AI
+        summary: How data is checked and prepared for AI, including quality, labelling and feature work.
+        why: Model quality cannot exceed the quality of the data behind it.
+        descriptors:
+          1: Data is used as found; quality problems appear late.
+          2: Basic cleaning is done per project and some practices repeat.
+          3: Standard preparation pipelines include quality checks and contracts.
+          4: Preparation is automated and reusable, with quality monitored continuously.
+        actions:
+          2: Write down cleaning steps per dataset.
+          3: Introduce data contracts and automated quality tests in pipelines.
+          4: Reuse preparation pipelines and monitor data quality continuously.
+      - id: "6.3"
+        name: Data Access for AI Teams
+        summary: How quickly, safely and lawfully AI teams and systems can reach the data they need.
+        why: Slow access kills momentum; loose access creates breaches.
+        descriptors:
+          1: Access is slow and bureaucratic, often by custom extract.
+          2: An access request process exists; teams get copies.
+          3: Policy-compliant access through a data platform with role-based controls.
+          4: Self-service access within policy, with fine-grained control and automated auditing.
+        actions:
+          2: Publish a data access request process.
+          3: Serve data through a governed platform with role-based access and managed identities.
+          4: Offer self-service access with fine-grained policies and automated audit.
+      - id: "6.4"
+        name: Synthetic Data Generation & Use
+        summary: The ability to create and validate artificial data for building and testing AI.
+        why: Synthetic data unlocks testing when real data is scarce or sensitive.
+        descriptors:
+          1: Only real data is used.
+          2: First experiments with synthetic data for specific problems.
+          3: Synthetic data is generated and validated for defined use cases.
+          4: Synthetic data is part of the data strategy, with strong validation.
+        actions:
+          2: Try a synthetic dataset for one test or privacy problem.
+          3: Build seeded generators with validation tests for each use case.
+          4: Make synthetic data a standard option in the data strategy with fidelity and privacy checks.
+      - id: "6.5"
+        name: Domain-Specific Data Understanding
+        summary: Whether the people building AI understand what the data means in its business setting.
+        why: Misread data produces confident but wrong models.
+        descriptors:
+          1: Technical teams work apart from domain experts.
+          2: Domain experts are consulted now and then.
+          3: Domain experts work with AI teams throughout and data documentation carries business meaning.
+          4: Domain knowledge is embedded in teams and captured systematically.
+        actions:
+          2: Invite a domain expert into each AI project.
+          3: Add business definitions to data documentation (data sheets, glossaries, semantic models).
+          4: Embed domain experts in AI teams and maintain a shared knowledge base.
