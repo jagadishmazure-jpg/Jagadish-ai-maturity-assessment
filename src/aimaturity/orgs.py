@@ -103,7 +103,10 @@ def scan(sources: list) -> list[Evidence]:
 
 
 def write_snapshot(org: Org, items: list[Evidence]) -> Path:
-    rows = sorted(({k: v for k, v in e.as_dict().items() if k not in {"id", "strength", "origin"}} for e in items), key=lambda r: (r["source"], r["path"], r["signal"]))
+    rows = sorted(
+        ({k: v for k, v in e.as_dict().items() if k not in {"id", "strength", "origin"}} for e in items),
+        key=lambda r: (r["source"], r["path"], r["signal"]),
+    )
     path = org.dir / org.config["snapshot"]
     path.write_text(json.dumps({"repos": org.repo_names(), "evidence": rows}, indent=1) + "\n")
     return path

@@ -1,7 +1,7 @@
 """Eval gates: scoring stability, evidence-citation completeness and calibration against labels.
 
-    aimaturity evals          # table, exit 1 when a gate fails
-    aimaturity evals --json   # machine-readable
+aimaturity evals          # table, exit 1 when a gate fails
+aimaturity evals --json   # machine-readable
 """
 
 from __future__ import annotations
@@ -56,9 +56,22 @@ def stability(t: dict[str, Any]) -> dict[str, Any]:
             max_cats = max(max_cats, len(diffs))
             max_change = max([max_change, *diffs])
     mean = round(moves / runs, 3)
-    ok = (identical or not t["identical_required"]) and nonlocal_moves == 0 and max_cats <= t["dropout_max_categories"] and mean <= t["dropout_mean_categories"]
-    return {"gate": "stability", "ok": ok, "shuffle_identical": identical, "dropout_runs": runs, "nonlocal_moves": nonlocal_moves,
-            "max_categories_moved": max_cats, "mean_categories_moved": mean, "max_level_change_info": max_change}
+    ok = (
+        (identical or not t["identical_required"])
+        and nonlocal_moves == 0
+        and max_cats <= t["dropout_max_categories"]
+        and mean <= t["dropout_mean_categories"]
+    )
+    return {
+        "gate": "stability",
+        "ok": ok,
+        "shuffle_identical": identical,
+        "dropout_runs": runs,
+        "nonlocal_moves": nonlocal_moves,
+        "max_categories_moved": max_cats,
+        "mean_categories_moved": mean,
+        "max_level_change_info": max_change,
+    }
 
 
 def citations(t: dict[str, Any]) -> dict[str, Any]:
@@ -83,8 +96,15 @@ def citations(t: dict[str, Any]) -> dict[str, Any]:
             assert all(claimed_level(bad["rationales"][c]) == r.level for c, r in bad["results"].items())
     comp, valid, catch = have / need, cited_valid / max(cited_total, 1), caught / injected
     ok = comp >= t["completeness_min"] and valid >= t["valid_ids_min"] and catch >= t["verifier_catch_min"]
-    return {"gate": "citations", "ok": ok, "completeness": round(comp, 3), "valid_ids": round(valid, 3), "verifier_catch": round(catch, 3),
-            "categories_checked": need, "injected": injected}
+    return {
+        "gate": "citations",
+        "ok": ok,
+        "completeness": round(comp, 3),
+        "valid_ids": round(valid, 3),
+        "verifier_catch": round(catch, 3),
+        "categories_checked": need,
+        "injected": injected,
+    }
 
 
 def synthetic_org(rng: random.Random, n: int) -> tuple[list[Evidence], dict[str, int]]:
@@ -139,8 +159,17 @@ def calibration(t: dict[str, Any]) -> dict[str, Any]:
     by_source = {}
     for _, _, _, src in rows:
         by_source[src] = by_source.get(src, 0) + 1
-    return {"gate": "calibration", "ok": ok, "items": len(rows), "exact": round(exact, 3), "within_one": round(within, 3),
-            "high_conf_accuracy": round(hi_acc, 3), "low_conf_accuracy": round(lo_acc, 3), "high_conf_items": len(hi), "by_source": by_source}
+    return {
+        "gate": "calibration",
+        "ok": ok,
+        "items": len(rows),
+        "exact": round(exact, 3),
+        "within_one": round(within, 3),
+        "high_conf_accuracy": round(hi_acc, 3),
+        "low_conf_accuracy": round(lo_acc, 3),
+        "high_conf_items": len(hi),
+        "by_source": by_source,
+    }
 
 
 def run_all() -> list[dict[str, Any]]:

@@ -27,7 +27,16 @@ def test_report_is_deterministic(states, org):
 @pytest.mark.parametrize("org", ORGS)
 def test_markdown_sections(states, org):
     md = render(states[org])["report.md"]
-    for h in ["Executive summary", "Pillars", "Categories", "Human review", "Gap analysis", "Roadmap (Month 1-12)", "Evidence", "Method and attribution"]:
+    for h in [
+        "Executive summary",
+        "Pillars",
+        "Categories",
+        "Human review",
+        "Gap analysis",
+        "Roadmap (Month 1-12)",
+        "Evidence",
+        "Method and attribution",
+    ]:
         assert f"## {h}" in md
     assert "radar.svg" in md
 

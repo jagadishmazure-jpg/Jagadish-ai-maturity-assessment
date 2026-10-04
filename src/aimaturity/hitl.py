@@ -86,9 +86,13 @@ def record_review(
     validate_review(review, assessor, results)
     res = results[review["category"]]
     stored = {
-        "category": review["category"], "reviewer": review["reviewer"], "decision": review["decision"],
-        "level": review["level"] if review["decision"] == "override" else res.level, "computed_level": res.level,
-        "comment": review["comment"].strip(), "evidence_digest": category_digest(res, evidence),
+        "category": review["category"],
+        "reviewer": review["reviewer"],
+        "decision": review["decision"],
+        "level": review["level"] if review["decision"] == "override" else res.level,
+        "computed_level": res.level,
+        "comment": review["comment"].strip(),
+        "evidence_digest": category_digest(res, evidence),
     }
     log = read_log(log_path)
     entry = {"seq": len(log) + 1, "action": "review", **stored, "prev": log[-1]["hash"] if log else GENESIS}
@@ -96,7 +100,7 @@ def record_review(
     stored["audit_hash"] = entry["hash"]
     with log_path.open("a") as f:
         f.write(json.dumps(entry, sort_keys=True) + "\n")
-    reviews = read_reviews(reviews_path) + [stored]
+    reviews = [*read_reviews(reviews_path), stored]
     reviews_path.write_text(yaml.safe_dump({"reviews": reviews}, sort_keys=False, width=120))
     return stored
 

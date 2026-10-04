@@ -8,6 +8,7 @@ gaps -> roadmap. Every node is deterministic; the only "model" is ``MockLLM``.
 
 from __future__ import annotations
 
+import itertools
 from pathlib import Path
 from typing import Any
 
@@ -97,7 +98,7 @@ def build_graph():
     g = StateGraph()
     for name, fn in zip(NODES, [_load, _collect, _score, _explain, _verify, _review, _rollup, _gaps, _roadmap], strict=True):
         g.add_node(name, fn)
-    for a, b in zip(NODES, NODES[1:], strict=False):
+    for a, b in itertools.pairwise(NODES):
         g.add_edge(a, b)
     g.add_edge("roadmap", END)
     return g.compile(entry="load", max_steps=len(NODES) + 2)
@@ -117,15 +118,33 @@ def summary(state: dict[str, Any]) -> dict[str, Any]:
         st = state["statuses"][cid]
         cats.append(
             {
-                "id": cid, "name": r.name, "pillar": r.pillar, "critical": r.critical, "computed_level": r.level, "level": st["final_level"],
-                "confidence": r.confidence, "status": st["status"], "evidence": r.evidence, "rationale": state["rationales"][cid],
-                "next_missing": r.next_missing, "target": org.target(cid),
+                "id": cid,
+                "name": r.name,
+                "pillar": r.pillar,
+                "critical": r.critical,
+                "computed_level": r.level,
+                "level": st["final_level"],
+                "confidence": r.confidence,
+                "status": st["status"],
+                "evidence": r.evidence,
+                "rationale": state["rationales"][cid],
+                "next_missing": r.next_missing,
+                "target": org.target(cid),
             }
         )
     return {
-        "org": org.id, "name": org.name, "kind": org.config.get("kind", ""), "assessor": org.assessor,
-        "overall": state["overall"], "pillars": state["pillars"], "categories": cats,
-        "review_queue": state["review_queue"], "final": state["final"], "audit_problems": state["audit_problems"],
-        "verification_issues": state["verification_issues"], "evidence_count": len(state["evidence"]),
-        "sources": org.repo_names(), "questionnaire_label": (org.answers() or {}).get("label"),
+        "org": org.id,
+        "name": org.name,
+        "kind": org.config.get("kind", ""),
+        "assessor": org.assessor,
+        "overall": state["overall"],
+        "pillars": state["pillars"],
+        "categories": cats,
+        "review_queue": state["review_queue"],
+        "final": state["final"],
+        "audit_problems": state["audit_problems"],
+        "verification_issues": state["verification_issues"],
+        "evidence_count": len(state["evidence"]),
+        "sources": org.repo_names(),
+        "questionnaire_label": (org.answers() or {}).get("label"),
     }

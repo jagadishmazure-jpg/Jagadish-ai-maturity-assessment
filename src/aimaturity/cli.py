@@ -37,7 +37,13 @@ def cmd_framework(a) -> int:
 
     if not a.pillar:
         _p("Levels: " + ", ".join(f"{k} {v}" for k, v in LEVEL_NAMES.items()))
-        _p(table([{"id": p["id"], "name": p["name"], "n": len(p["categories"])} for p in pillars()], ["id", "name", "n"], ["pillar", "name", "categories"]))
+        _p(
+            table(
+                [{"id": p["id"], "name": p["name"], "n": len(p["categories"])} for p in pillars()],
+                ["id", "name", "n"],
+                ["pillar", "name", "categories"],
+            )
+        )
         _p(f"\n{len(categories())} categories; critical by default: {', '.join(c for c, v in categories().items() if v['critical'])}")
         return 0
     rows = [{"id": c["id"], "name": c["name"], "critical": "yes" if c["critical"] else ""} for c in categories().values() if c["pillar"] == a.pillar]
@@ -112,10 +118,21 @@ def cmd_assess(a) -> int:
         _p(json.dumps(s, indent=1))
         return 0
     _p(f"{s['name']}: overall Level {s['overall']['level']} ({s['overall']['level_name']}), mean {s['overall']['mean']}")
-    _p(table([{**p, "capped_by": ",".join(p["capped_by"]) or "-"} for p in s["pillars"]], ["id", "name", "level", "level_name", "mean", "capped_by"],
-             ["pillar", "name", "level", "", "mean", "capped by"]))
+    _p(
+        table(
+            [{**p, "capped_by": ",".join(p["capped_by"]) or "-"} for p in s["pillars"]],
+            ["id", "name", "level", "level_name", "mean", "capped_by"],
+            ["pillar", "name", "level", "", "mean", "capped by"],
+        )
+    )
     _p("")
-    _p(table(s["categories"], ["id", "level", "computed_level", "confidence", "status", "target"], ["cat", "level", "computed", "conf", "status", "target"]))
+    _p(
+        table(
+            s["categories"],
+            ["id", "level", "computed_level", "confidence", "status", "target"],
+            ["cat", "level", "computed", "conf", "status", "target"],
+        )
+    )
     _p(f"\nreview queue: {', '.join(s['review_queue']) or 'empty'}; final: {s['final']}")
     return 0
 
@@ -148,8 +165,13 @@ def cmd_roadmap(a) -> int:
 
     st = _state(a)
     sch = st["schedule"]
-    _p(table([{**p, "months": f"{p['start']}-{p['end']}", "deps": ",".join(p["depends_on"]) or "-"} for p in sch["plan"]],
-             ["id", "kind", "months", "effort", "priority", "deps"], ["step", "kind", "months", "effort", "priority", "waits on"]))
+    _p(
+        table(
+            [{**p, "months": f"{p['start']}-{p['end']}", "deps": ",".join(p["depends_on"]) or "-"} for p in sch["plan"]],
+            ["id", "kind", "months", "effort", "priority", "deps"],
+            ["step", "kind", "months", "effort", "priority", "waits on"],
+        )
+    )
     view = months_view(sch)
     _p("")
     for m, ids in view.items():
@@ -168,7 +190,10 @@ def cmd_links(a) -> int:
 
 def cmd_queue(a) -> int:
     st = _state(a)
-    rows = [{"category": c, "name": st["results"][c].name, "why": "; ".join(st["results"][c].review_reasons) or "evidence changed since review"} for c in st["review_queue"]]
+    rows = [
+        {"category": c, "name": st["results"][c].name, "why": "; ".join(st["results"][c].review_reasons) or "evidence changed since review"}
+        for c in st["review_queue"]
+    ]
     _p(table(rows, ["category", "name", "why"]) if rows else "review queue is empty")
     return 0
 
@@ -179,8 +204,18 @@ def cmd_review(a) -> int:
     st = _state(a)
     org = st["org"]
     try:
-        r = record_review(org.dir / "reviews.yaml", org.dir / "audit-log.jsonl", org.assessor, st["results"], st["evidence_by_id"],
-                          category=a.category, reviewer=a.reviewer, decision=a.decision, level=a.level, comment=a.comment)
+        r = record_review(
+            org.dir / "reviews.yaml",
+            org.dir / "audit-log.jsonl",
+            org.assessor,
+            st["results"],
+            st["evidence_by_id"],
+            category=a.category,
+            reviewer=a.reviewer,
+            decision=a.decision,
+            level=a.level,
+            comment=a.comment,
+        )
     except ReviewError as e:
         _p(f"rejected: {e}")
         return 1

@@ -11,7 +11,27 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 SKIP = {".git", ".venv", "venv", "node_modules", ".terraform", "__pycache__", ".pytest_cache", ".ruff_cache", "dist", "build"}
-TEXT = {".md", ".py", ".yml", ".yaml", ".json", ".jsonl", ".tf", ".bicep", ".hcl", ".toml", ".txt", ".lock", ".kql", ".cs", ".ts", ".sh", ".tmdl", ".ipynb", ""}
+TEXT = {
+    ".md",
+    ".py",
+    ".yml",
+    ".yaml",
+    ".json",
+    ".jsonl",
+    ".tf",
+    ".bicep",
+    ".hcl",
+    ".toml",
+    ".txt",
+    ".lock",
+    ".kql",
+    ".cs",
+    ".ts",
+    ".sh",
+    ".tmdl",
+    ".ipynb",
+    "",
+}
 MAX_BYTES = 400_000
 
 

@@ -42,7 +42,13 @@ def categories() -> dict[str, dict[str, Any]]:
     r = rubric()
     for p in pillars():
         for c in p["categories"]:
-            out[c["id"]] = {**c, "pillar": p["id"], "pillar_name": p["name"], "rubric": r["categories"][c["id"]], "critical": c["id"] in r["critical"]}
+            out[c["id"]] = {
+                **c,
+                "pillar": p["id"],
+                "pillar_name": p["name"],
+                "rubric": r["categories"][c["id"]],
+                "critical": c["id"] in r["critical"],
+            }
     return out
 
 

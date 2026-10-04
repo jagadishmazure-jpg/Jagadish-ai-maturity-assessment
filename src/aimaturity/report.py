@@ -20,7 +20,7 @@ from aimaturity.roadmap import MONTHS, months_view
 
 ATTRIBUTION = (
     "Framework structure (six pillars, 29 categories, four levels) adapted from UNESCO, *AI Maturity Framework* "
-    "(subtitle: \"A self-positioning guide for public administrations\"), developed by Stratejai for UNESCO, "
+    '(subtitle: "A self-positioning guide for public administrations"), developed by Stratejai for UNESCO, '
     "under CC BY-SA 3.0 IGO (https://creativecommons.org/licenses/by-sa/3.0/igo/). Descriptors, rubric, scoring "
     "and wording are this project's own; UNESCO does not endorse this tool or its results."
 )
@@ -82,7 +82,9 @@ def build_content(state: dict[str, Any]) -> dict[str, Any]:
     label = s["questionnaire_label"]
     notes = []
     if label == "sample-answers":
-        notes.append("People, culture and partnership answers are SAMPLE ANSWERS (illustrative inputs, not survey results). Categories that rest on them wait for human review.")
+        notes.append(
+            "People, culture and partnership answers are SAMPLE ANSWERS (illustrative inputs, not survey results). Categories that rest on them wait for human review."
+        )
     if org.config.get("manifest"):
         notes.append("This organisation is fictional; its repositories are synthetic manifests.")
     pending = s["review_queue"]
@@ -99,7 +101,9 @@ def build_content(state: dict[str, Any]) -> dict[str, Any]:
                 f"Strongest pillar: {best['id']} {best['name']} (mean {best['mean']}). Weakest: {worst['id']} {worst['name']} (mean {worst['mean']}).",
                 f"Evidence: {s['evidence_count']} items from {len(s['sources'])} repositories and the questionnaire. Roadmap: {len(state['items'])} steps, "
                 f"{len(quick)} quick wins in Months 1-3, {len(sched['backlog'])} beyond Month 12.",
-                "Top priorities: " + "; ".join(f"{i['id']} {i['name']} (priority {i['priority']})" for i in top) + "." if top else "No gaps against target.",
+                "Top priorities: " + "; ".join(f"{i['id']} {i['name']} (priority {i['priority']})" for i in top) + "."
+                if top
+                else "No gaps against target.",
                 *notes,
             ],
             "radar": True,
@@ -110,7 +114,10 @@ def build_content(state: dict[str, Any]) -> dict[str, Any]:
             "title": "Pillars",
             "table": (
                 ["Pillar", "Level", "Category mean", "Target (mean)", "Capped by critical"],
-                [[f"{p['id']} {p['name']}", f"{p['level']} {p['level_name']}", p["mean"], t, ", ".join(p["capped_by"]) or "-"] for p, t in zip(s["pillars"], pill_targets, strict=True)],
+                [
+                    [f"{p['id']} {p['name']}", f"{p['level']} {p['level_name']}", p["mean"], t, ", ".join(p["capped_by"]) or "-"]
+                    for p, t in zip(s["pillars"], pill_targets, strict=True)
+                ],
             ),
         }
     )
@@ -120,41 +127,105 @@ def build_content(state: dict[str, Any]) -> dict[str, Any]:
             "table": (
                 ["Category", "Level", "Target", "Confidence", "Status", "Evidence"],
                 [
-                    [f"{c['id']} {c['name']}" + (" (critical)" if c["critical"] else ""), f"{c['level']}" + (f" (computed {c['computed_level']})" if c["level"] != c["computed_level"] else ""),
-                     c["target"], f"{c['confidence']:.2f}", c["status"], len(c["evidence"])]
+                    [
+                        f"{c['id']} {c['name']}" + (" (critical)" if c["critical"] else ""),
+                        f"{c['level']}" + (f" (computed {c['computed_level']})" if c["level"] != c["computed_level"] else ""),
+                        c["target"],
+                        f"{c['confidence']:.2f}",
+                        c["status"],
+                        len(c["evidence"]),
+                    ]
                     for c in s["categories"]
                 ],
             ),
         }
     )
     rq = [[cid, state["results"][cid].name, "; ".join(state["results"][cid].review_reasons) or "evidence changed since review"] for cid in pending]
-    reviewed = [[cid, st["review"]["reviewer"], st["status"], st["review"]["comment"]] for cid, st in state["statuses"].items() if st["status"] in {"confirmed", "overridden"}]
-    sections.append({"title": "Human review", "paras": [f"{len(pending)} pending, {len(reviewed)} signed off. Audit log chain: {'intact' if not s['audit_problems'] else 'BROKEN'}."],
-                     "table": (["Category", "Name", "Why it needs a human"], rq) if rq else None, "table2": (["Category", "Reviewer", "Outcome", "Comment"], reviewed) if reviewed else None})
-    gap_rows = [[f"{g['category']} {g['name']}", g["current"], g["target"], g["gap"], g["steps"][0]["action"]]
-                for g in sorted(state["gaps"], key=lambda g: (-g["gap"], g["category"])) if g["gap"] > 0]
-    sections.append({"title": "Gap analysis", "paras": [f"{len(gap_rows)} of 29 categories are below target."], "table": (["Category", "Now", "Target", "Gap", "First action"], gap_rows)})
+    reviewed = [
+        [cid, st["review"]["reviewer"], st["status"], st["review"]["comment"]]
+        for cid, st in state["statuses"].items()
+        if st["status"] in {"confirmed", "overridden"}
+    ]
+    sections.append(
+        {
+            "title": "Human review",
+            "paras": [f"{len(pending)} pending, {len(reviewed)} signed off. Audit log chain: {'intact' if not s['audit_problems'] else 'BROKEN'}."],
+            "table": (["Category", "Name", "Why it needs a human"], rq) if rq else None,
+            "table2": (["Category", "Reviewer", "Outcome", "Comment"], reviewed) if reviewed else None,
+        }
+    )
+    gap_rows = [
+        [f"{g['category']} {g['name']}", g["current"], g["target"], g["gap"], g["steps"][0]["action"]]
+        for g in sorted(state["gaps"], key=lambda g: (-g["gap"], g["category"]))
+        if g["gap"] > 0
+    ]
+    sections.append(
+        {
+            "title": "Gap analysis",
+            "paras": [f"{len(gap_rows)} of 29 categories are below target."],
+            "table": (["Category", "Now", "Target", "Gap", "First action"], gap_rows),
+        }
+    )
     view = months_view(sched)
     sections.append(
         {
             "title": "Roadmap (Month 1-12)",
-            "paras": [f"Capacity {sched['capacity']} items in flight. Milestones: " + "; ".join(f"Month {m['month']}: {m['what']}" for m in sched["milestones"]) + "."],
-            "table": (["Step", "Kind", "Months", "Effort", "Priority", "Waits on"],
-                      [[f"{p['id']} {p['name']}", p["kind"], f"{p['start']}-{p['end']}" if p["end"] > p["start"] else str(p["start"]), p["effort"], p["priority"], ", ".join(p["depends_on"]) or "-"] for p in sched["plan"]]),
+            "paras": [
+                f"Capacity {sched['capacity']} items in flight. Milestones: "
+                + "; ".join(f"Month {m['month']}: {m['what']}" for m in sched["milestones"])
+                + "."
+            ],
+            "table": (
+                ["Step", "Kind", "Months", "Effort", "Priority", "Waits on"],
+                [
+                    [
+                        f"{p['id']} {p['name']}",
+                        p["kind"],
+                        f"{p['start']}-{p['end']}" if p["end"] > p["start"] else str(p["start"]),
+                        p["effort"],
+                        p["priority"],
+                        ", ".join(p["depends_on"]) or "-",
+                    ]
+                    for p in sched["plan"]
+                ],
+            ),
             "table2": (["Month", "In flight"], [[m, ", ".join(view[m]) or "-"] for m in range(1, MONTHS + 1)]),
             "after": [f"Backlog beyond Month 12: {', '.join(sched['backlog'])}." if sched["backlog"] else "Everything fits in the twelve months."],
         }
     )
     links = check_links(state)
     if links:
-        sections.append({"title": "Cross-repository evidence", "table": (["Repository", "Category", "Cited files", "Examples"], [[r["repo"], r["category"], r["cited"], ", ".join(r["examples"])] for r in links])})
+        sections.append(
+            {
+                "title": "Cross-repository evidence",
+                "table": (
+                    ["Repository", "Category", "Cited files", "Examples"],
+                    [[r["repo"], r["category"], r["cited"], ", ".join(r["examples"])] for r in links],
+                ),
+            }
+        )
     by_col = Counter(e.collector for e in state["evidence"])
     by_src = Counter(e.source for e in state["evidence"])
-    sections.append({"title": "Evidence", "table": (["Collector", "Items"], sorted(by_col.items())), "table2": (["Source", "Items"], sorted(by_src.items()))})
-    sections.append({"title": "Method and attribution", "paras": [
-        "Levels come from evidence signals per category (rubric/categories.yaml); a level needs two thirds of its signals and the level below. "
-        "Confidence blends source trust and decision margin; pillars use the median of categories capped by critical categories.", ATTRIBUTION]})
-    return {"title": f"AI maturity report: {s['name']}", "subtitle": s["kind"], "sections": sections, "pillars": s["pillars"], "targets": pill_targets}
+    sections.append(
+        {"title": "Evidence", "table": (["Collector", "Items"], sorted(by_col.items())), "table2": (["Source", "Items"], sorted(by_src.items()))}
+    )
+    sections.append(
+        {
+            "title": "Method and attribution",
+            "paras": [
+                "Levels come from evidence signals per category (rubric/categories.yaml); a level needs two thirds of its signals and the level below. "
+                "Confidence blends source trust and decision margin; pillars use the median of categories capped by critical categories.",
+                ATTRIBUTION,
+            ],
+        }
+    )
+    return {
+        "title": f"AI maturity report: {s['name']}",
+        "subtitle": s["kind"],
+        "sections": sections,
+        "pillars": s["pillars"],
+        "targets": pill_targets,
+    }
 
 
 def _md_table(t) -> list[str]:
@@ -189,16 +260,24 @@ def _inline(text: str) -> str:
 
 
 def to_html(content: dict[str, Any], svg: str) -> str:
-    css = ("body{font-family:system-ui,sans-serif;max-width:980px;margin:2rem auto;padding:0 1rem;color:#1f2328}"
-           "table{border-collapse:collapse;margin:.5rem 0 1rem}td,th{border:1px solid #d0d7de;padding:4px 8px;font-size:13px;text-align:left}"
-           "th{background:#f6f8fa}h2{border-bottom:1px solid #d0d7de;padding-bottom:4px}.radar svg{max-width:640px;height:auto}")
-    out = ["<!doctype html>", '<html lang="en"><head><meta charset="utf-8">', f"<title>{html.escape(content['title'])}</title>", f"<style>{css}</style></head><body>",
-           f"<h1>{html.escape(content['title'])}</h1>", f"<p><em>{html.escape(content['subtitle'])}</em></p>"]
+    css = (
+        "body{font-family:system-ui,sans-serif;max-width:980px;margin:2rem auto;padding:0 1rem;color:#1f2328}"
+        "table{border-collapse:collapse;margin:.5rem 0 1rem}td,th{border:1px solid #d0d7de;padding:4px 8px;font-size:13px;text-align:left}"
+        "th{background:#f6f8fa}h2{border-bottom:1px solid #d0d7de;padding-bottom:4px}.radar svg{max-width:640px;height:auto}"
+    )
+    out = [
+        "<!doctype html>",
+        '<html lang="en"><head><meta charset="utf-8">',
+        f"<title>{html.escape(content['title'])}</title>",
+        f"<style>{css}</style></head><body>",
+        f"<h1>{html.escape(content['title'])}</h1>",
+        f"<p><em>{html.escape(content['subtitle'])}</em></p>",
+    ]
     for sec in content["sections"]:
         out.append(f"<h2>{html.escape(sec['title'])}</h2>")
         out += [f"<p>{_inline(p)}</p>" for p in sec.get("paras", [])]
         if sec.get("radar"):
-            out.append('<div class="radar">' + svg[svg.index("<svg"):] + "</div>")
+            out.append('<div class="radar">' + svg[svg.index("<svg") :] + "</div>")
         for key in ("table", "table2"):
             if sec.get(key):
                 head, rows = sec[key]

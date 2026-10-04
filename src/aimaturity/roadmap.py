@@ -31,9 +31,19 @@ def work_items(gaps: list[dict[str, Any]]) -> list[dict[str, Any]]:
             for d in cats[g["category"]]["rubric"]["depends_on"]:
                 deps += [f"{d}->{s['to_level']}" for s in by_cat[d]["steps"] if s["to_level"] <= step["to_level"] - 1]
             items[iid] = {
-                "id": iid, "category": g["category"], "name": g["name"], "pillar": g["pillar"], "to_level": step["to_level"],
-                "effort": step["effort"], "months": DURATION[step["effort"]], "depends_on": deps, "critical": g["critical"],
-                "gap": g["gap"], "confidence": g["confidence"], "action": step["action"], "missing": step["missing"],
+                "id": iid,
+                "category": g["category"],
+                "name": g["name"],
+                "pillar": g["pillar"],
+                "to_level": step["to_level"],
+                "effort": step["effort"],
+                "months": DURATION[step["effort"]],
+                "depends_on": deps,
+                "critical": g["critical"],
+                "gap": g["gap"],
+                "confidence": g["confidence"],
+                "action": step["action"],
+                "missing": step["missing"],
             }
     for it in items.values():
         it["unblocks"] = sorted(o["id"] for o in items.values() if it["id"] in o["depends_on"])
@@ -66,8 +76,13 @@ def schedule(items: list[dict[str, Any]], capacity: int = 4) -> dict[str, Any]:
             pending.remove(it)
     plan.sort(key=lambda p: (p["start"], -p["priority"], p["id"]))
     return {
-        "capacity": capacity, "plan": plan, "backlog": sorted((p["id"] for p in pending), key=lambda i: [float(x) for x in i.replace("->", ".").split(".")]),
-        "milestones": [{"month": 6, "what": "Re-assess all categories and refresh the plan"}, {"month": 12, "what": "Full re-assessment and target reset"}],
+        "capacity": capacity,
+        "plan": plan,
+        "backlog": sorted((p["id"] for p in pending), key=lambda i: [float(x) for x in i.replace("->", ".").split(".")]),
+        "milestones": [
+            {"month": 6, "what": "Re-assess all categories and refresh the plan"},
+            {"month": 12, "what": "Full re-assessment and target reset"},
+        ],
     }
 
 

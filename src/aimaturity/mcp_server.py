@@ -45,7 +45,11 @@ def build_server() -> MCPServer:
         """One category: summary, level descriptors 1-4, the evidence each level needs, critical flag."""
         c = categories()[category_id]
         return {
-            "id": c["id"], "name": c["name"], "pillar": c["pillar"], "summary": c["summary"], "critical": c["critical"],
+            "id": c["id"],
+            "name": c["name"],
+            "pillar": c["pillar"],
+            "summary": c["summary"],
+            "critical": c["critical"],
             "descriptors": {f"{k} {LEVEL_NAMES[k]}": v for k, v in c["descriptors"].items()},
             "evidence_needed": {str(lvl): [{"signal": s, "means": describe(s)} for s in ids] for lvl, ids in c["rubric"]["levels"].items()},
         }

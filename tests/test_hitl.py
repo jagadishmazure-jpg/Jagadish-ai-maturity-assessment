@@ -102,9 +102,17 @@ def test_deleted_entry_detected(fresh):
 
 
 def test_review_without_log_entry_ignored(fresh):
-    d, st = fresh
-    forged = {"category": "2.3", "reviewer": "A Reviewer", "decision": "override", "level": 4, "computed_level": 2,
-              "comment": "trust me, it is advanced", "evidence_digest": category_digest(st["results"]["2.3"], st["evidence_by_id"]), "audit_hash": "f" * 64}
+    _d, st = fresh
+    forged = {
+        "category": "2.3",
+        "reviewer": "A Reviewer",
+        "decision": "override",
+        "level": 4,
+        "computed_level": 2,
+        "comment": "trust me, it is advanced",
+        "evidence_digest": category_digest(st["results"]["2.3"], st["evidence_by_id"]),
+        "audit_hash": "f" * 64,
+    }
     out = apply_reviews(st["results"], st["evidence_by_id"], [forged], st["org"].assessor, [])
     assert out["2.3"]["status"] == "pending-review" and "audit" in out["2.3"]["rejected_review"]
 

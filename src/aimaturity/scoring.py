@@ -107,8 +107,19 @@ def score_category(category_id: str, evidence: list[Evidence], scanned_repos: bo
     if sample:
         reasons.append("level rests on sample answers: " + ", ".join(sample))
     return CategoryResult(
-        category_id, cat["name"], cat["pillar"], cat["critical"], level, LEVEL_NAMES[level], confidence, ratios, states, cited, missing,
-        bool(reasons), reasons,
+        category_id,
+        cat["name"],
+        cat["pillar"],
+        cat["critical"],
+        level,
+        LEVEL_NAMES[level],
+        confidence,
+        ratios,
+        states,
+        cited,
+        missing,
+        bool(reasons),
+        reasons,
     )
 
 

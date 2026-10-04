@@ -27,8 +27,13 @@ def pillar_rollup(levels: dict[str, int], critical: list[str]) -> list[dict[str,
         lvl = min(median_level, cap)
         out.append(
             {
-                "id": p["id"], "name": p["name"], "level": lvl, "level_name": LEVEL_NAMES[lvl], "mean": round(statistics.mean(vals), 2),
-                "median": statistics.median(vals), "capped_by": [i for i in ids if i in critical and levels[i] < median_level],
+                "id": p["id"],
+                "name": p["name"],
+                "level": lvl,
+                "level_name": LEVEL_NAMES[lvl],
+                "mean": round(statistics.mean(vals), 2),
+                "median": statistics.median(vals),
+                "capped_by": [i for i in ids if i in critical and levels[i] < median_level],
             }
         )
     return out

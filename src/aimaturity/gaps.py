@@ -28,14 +28,26 @@ def gap_analysis(results, statuses, target_of) -> list[dict[str, Any]]:
             missing = [s for s in need if res.signals[s].present < 1]
             steps.append(
                 {
-                    "to_level": lvl, "level_name": LEVEL_NAMES[lvl], "missing": missing, "missing_text": [describe(s) for s in missing],
-                    "action": cats[cid]["actions"].get(lvl, ""), "effort": cats[cid]["rubric"]["effort"][lvl],
+                    "to_level": lvl,
+                    "level_name": LEVEL_NAMES[lvl],
+                    "missing": missing,
+                    "missing_text": [describe(s) for s in missing],
+                    "action": cats[cid]["actions"].get(lvl, ""),
+                    "effort": cats[cid]["rubric"]["effort"][lvl],
                 }
             )
         rows.append(
             {
-                "category": cid, "name": res.name, "pillar": res.pillar, "critical": res.critical, "current": current, "target": target,
-                "gap": max(0, target - current), "confidence": res.confidence, "status": statuses[cid]["status"], "steps": steps,
+                "category": cid,
+                "name": res.name,
+                "pillar": res.pillar,
+                "critical": res.critical,
+                "current": current,
+                "target": target,
+                "gap": max(0, target - current),
+                "confidence": res.confidence,
+                "status": statuses[cid]["status"],
+                "steps": steps,
             }
         )
     return rows
