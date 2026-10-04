@@ -1,7 +1,7 @@
 """``aimaturity`` command line. Everything is offline; only ``review``, ``report`` and
 ``collect --write`` write files, and only inside this repository.
 
-aimaturity framework [--pillar P1] | category ID | orgs | validate
+aimaturity framework [--pillar P1] | category ID | orgs | summary | validate
 aimaturity collect --org ORG [--live] [--write] | assess --org ORG [--json] [--live]
 aimaturity explain --org ORG --category ID | gaps --org ORG | roadmap --org ORG | links --org ORG
 aimaturity queue --org ORG | review --org ORG --category ID --reviewer NAME --decision confirm|override [--level N] --comment TEXT
@@ -134,6 +134,23 @@ def cmd_assess(a) -> int:
         )
     )
     _p(f"\nreview queue: {', '.join(s['review_queue']) or 'empty'}; final: {s['final']}")
+    return 0
+
+
+def cmd_summary(a) -> int:
+    from aimaturity.agents.assessor import assess, summary
+    from aimaturity.orgs import list_orgs
+
+    rows = []
+    for o in list_orgs():
+        s = summary(assess(o))
+        row = {"org": s["name"], "overall": f"{s['overall']['level']} {s['overall']['level_name']}"}
+        row.update({p["id"]: p["level"] for p in s["pillars"]})
+        row["queue"] = len(s["review_queue"])
+        row["status"] = "final" if s["final"] else "provisional"
+        rows.append(row)
+    keys = ["org", "overall", "P1", "P2", "P3", "P4", "P5", "P6", "queue", "status"]
+    _p(table(rows, keys, ["organisation", "overall", "P1", "P2", "P3", "P4", "P5", "P6", "review queue", "status"]))
     return 0
 
 
@@ -301,6 +318,7 @@ def parser() -> argparse.ArgumentParser:
     p.add_argument("category_id")
     p.set_defaults(fn=cmd_category)
     sub.add_parser("orgs").set_defaults(fn=cmd_orgs)
+    sub.add_parser("summary").set_defaults(fn=cmd_summary)
     sub.add_parser("validate").set_defaults(fn=cmd_validate)
     p = org(sub.add_parser("collect"))
     p.add_argument("--live", action="store_true")

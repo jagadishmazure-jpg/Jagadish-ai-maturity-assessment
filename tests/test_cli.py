@@ -10,6 +10,7 @@ from aimaturity.cli import main, table
     [
         ["framework"],
         ["framework", "--pillar", "P5"],
+        ["summary"],
         ["category", "6.2"],
         ["orgs"],
         ["validate"],
