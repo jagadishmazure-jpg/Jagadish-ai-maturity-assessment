@@ -32,6 +32,9 @@ TEXT_SUFFIXES = {
     ".sql",
     ".sh",
     ".ps1",
+    ".tf",
+    ".hcl",
+    ".html",
     "",
 }
 

@@ -189,7 +189,7 @@ def gap_analysis(results, statuses, target_of) -> list[dict[str, Any]]:
 ```bash
 aimaturity framework --pillar P1
 aimaturity category 1.1
-aimaturity explain --org portfolio --category 1.4
+aimaturity explain --org portfolio --category 1.3
 aimaturity gaps --org kestrel-bay-bank
 ```
 
@@ -221,23 +221,16 @@ Whether there is a stated purpose for AI that tells teams what it is for and wha
 ```
 <!-- /output -->
 
-<!-- output: explain --org portfolio --category 1.4 -->
+<!-- output: explain --org portfolio --category 1.3 -->
 ```text
-1.4 Value Identification & Measurement: level 3 (Dynamic), confidence 0.62, status auto
-rationale: Level 3 (Dynamic). Supported by [E689], [E690], [E691], [E692]. Next level needs: q_intangible_value. Confidence 0.62.
-  [x] value_metrics                artifact         E689, E690, E691
-  [x] value_tracking_code          artifact         E697, E698, E699
-  [x] business_case                artifact         E075, E076, E077
-  [ ] q_intangible_value           sample-answers   
-  [x] business_metric_link         artifact         E081, E082, E083
-  E689 agentic-ai-model-risk:docs/scenarios/cost-spike.md (matched 'cost per task')
-  E690 agentic-ai-portfolio:projects/01-policy-qa-rag/DOCTRINE.md (matched 'ROI')
-  E691 agentic-ai-portfolio:projects/02-ticket-triage/DOCTRINE.md (matched 'ROI')
-  E692 agentic-ai-portfolio:projects/03-refund-agent/DOCTRINE.md (matched 'ROI')
-  E693 ai-learning-lab:topics/2026-09-jev-system1-classifier/README.md (matched 'savings')
-  E694 azure-finops:CHANGELOG.md (matched 'ROI')
-  E695 azure-finops:README.md (matched 'savings')
-  E696 azure-finops:data/pricing/README.md (matched 'savings')
+1.3 Roadmap & Planning: level 1 (Basic), confidence 0.64, status auto
+rationale: Level 1 (Basic). No artifact or answer supports a level above Basic. Next level needs: roadmap_doc. Confidence 0.64.
+  [ ] roadmap_doc                  absent-scanned   
+  [x] changelog                    artifact         E106, E107, E108
+  [ ] roadmap_owned                absent-scanned   
+  [x] adr                          artifact         E002, E003, E004
+  [x] doc_drift_check              artifact         E250, E251
+  [ ] q_roadmap_refresh            sample-answers   
 ```
 <!-- /output -->
 
