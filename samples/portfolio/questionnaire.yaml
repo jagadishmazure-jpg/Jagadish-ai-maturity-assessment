@@ -1,0 +1,49 @@
+# SAMPLE ANSWERS. These are illustrative inputs for a one-person portfolio, not a survey of a real
+# organisation. They are weighted 0.35 in confidence, so every category that depends on them is
+# queued for a human reviewer.
+label: sample-answers
+answers:
+  q_vision_published: {answer: partial, note: profile README states the focus; no measurable targets for staff}
+  q_vision_in_budget: no
+  q_goal_field: {answer: partial, note: each repository README states the problem it solves}
+  q_business_case_mandatory: no
+  q_strategy_session: no
+  q_roadmap_refresh: no
+  q_intangible_value: no
+  q_pilot_scaling: {answer: partial, note: labs graduate into platform repositories}
+  q_ai_roles_defined: {answer: partial, note: one maintainer covers all roles}
+  q_training_paths: {answer: partial, note: ai-learning-lab is a personal learning path}
+  q_hr_integration: no
+  q_coordinator: {answer: yes, note: single maintainer coordinates all AI work}
+  q_coe: no
+  q_operating_model_review: no
+  q_project_sponsors: {answer: yes, note: the maintainer sponsors every repository}
+  q_exec_owner: {answer: partial, note: owner and sponsor are the same person}
+  q_leadership_objectives: no
+  q_rollout_comms: {answer: partial, note: READMEs and changelogs announce changes}
+  q_change_method: no
+  q_feedback_loop: no
+  q_awareness_material: {answer: yes, note: interview and implementation guides}
+  q_role_literacy: no
+  q_continuous_learning: {answer: partial, note: ongoing learning lab}
+  q_cost_optimisation_cadence: {answer: partial, note: FinOps repository has budgets and reports}
+  q_self_service_env: no
+  q_auto_retrain: no
+  q_auto_improve: no
+  q_partnership_informal: {answer: partial, note: public repositories}
+  q_partnership_formal: no
+  q_ecosystem_lead: no
+  q_reuse_measured: no
+  q_review_board: no
+  q_ethics_principles: {answer: partial, note: responsible AI notes in the model risk repository}
+  q_affected_people: no
+  q_erm_integration: no
+  q_reg_watch: no
+  q_audience_explanations: no
+  q_data_sharing_agreements: no
+  q_dq_monitoring: no
+  q_access_process: {answer: partial, note: role-based access documented in IaC}
+  q_self_service_data: no
+  q_synthetic_strategy: {answer: partial, note: all repositories use synthetic data by policy}
+  q_domain_experts: no
+  q_embedded_smes: no

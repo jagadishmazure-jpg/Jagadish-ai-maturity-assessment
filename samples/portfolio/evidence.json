@@ -1,0 +1,4683 @@
+{
+ "repos": [
+  "agentic-ai-portfolio",
+  "azure-agent-platform",
+  "azure-ai-integration-platform",
+  "azure-agent-labs",
+  "ai-learning-lab",
+  "fabric-enterprise-bi",
+  "azure-finops",
+  "agentic-ai-model-risk"
+ ],
+ "evidence": [
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "agentic-ai-model-risk",
+   "path": ".checkov.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "ci_lint",
+   "collector": "ci",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'ruff'"
+  },
+  {
+   "signal": "ci_tests",
+   "collector": "ci",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'pytest'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'risk gate'"
+  },
+  {
+   "signal": "doc_drift_check",
+   "collector": "ci",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'render_docs'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'gate'"
+  },
+  {
+   "signal": "env_approval",
+   "collector": "ci",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'environment: prod'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'checkov'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "teardown",
+   "collector": "ci",
+   "source": "agentic-ai-model-risk",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'teardown'"
+  },
+  {
+   "signal": "changelog",
+   "collector": "docs",
+   "source": "agentic-ai-model-risk",
+   "path": "CHANGELOG.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "reg_mapping",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "CHANGELOG.md",
+   "detail": "matched 'EU AI Act'"
+  },
+  {
+   "signal": "contributing_guide",
+   "collector": "people",
+   "source": "agentic-ai-model-risk",
+   "path": "CONTRIBUTING.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "README.md",
+   "detail": "matched 'Purview'"
+  },
+  {
+   "signal": "reg_mapping",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "README.md",
+   "detail": "matched 'EU AI Act'"
+  },
+  {
+   "signal": "vision_statement",
+   "collector": "docs",
+   "source": "agentic-ai-model-risk",
+   "path": "README.md",
+   "detail": "matched '## At a glance'"
+  },
+  {
+   "signal": "security_policy",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "SECURITY.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "reg_mapping",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/README.md",
+   "detail": "matched 'NIST AI RMF'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/adr/0001-four-pillars-as-schemas.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/adr/0002-executable-pillar-links.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/adr/0003-mock-llm-and-synthetic-data.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/architecture.md",
+   "detail": "matched 'Purview'"
+  },
+  {
+   "signal": "ai_policy_doc",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/best-practices.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/components/agent-runtime.md",
+   "detail": "matched 'Purview'"
+  },
+  {
+   "signal": "domain_docs",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/domains/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "domain_docs",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/domains/banking-fraud-triage.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "domain_docs",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/domains/healthcare-prior-auth.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "onboarding_guide",
+   "collector": "people",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/implementation-guide.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_sheets",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/pillars/data-sheets.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "model_cards",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/pillars/model-cards.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "agentic-ai-model-risk",
+   "path": "docs/scenarios/cost-spike.md",
+   "detail": "matched 'cost per task'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/bicep/main.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/bicep/modules/policies.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "policy_as_code",
+   "collector": "iac",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/bicep/modules/policies.bicep",
+   "detail": "matched 'Microsoft.Authorization/policyDefinition'"
+  },
+  {
+   "signal": "alert_rules",
+   "collector": "ops",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/bicep/modules/registry.bicep",
+   "detail": "matched 'actionGroups'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/bicep/modules/registry.bicep",
+   "detail": "matched 'dailyQuotaGb'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/bicep/modules/registry.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "policy_as_code",
+   "collector": "iac",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/bicep/modules/registry.bicep",
+   "detail": "matched 'policyAssignments'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/bicep/modules/registry.bicep",
+   "detail": "matched 'Microsoft.Insights/components'"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/terraform/.tflint.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "alert_rules",
+   "collector": "ops",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'action_group'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'daily_quota_gb'"
+  },
+  {
+   "signal": "policy_as_code",
+   "collector": "iac",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'azurerm_policy_definition'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'application_insights'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/terraform/outputs.tf",
+   "detail": "matched 'APPLICATIONINSIGHTS'"
+  },
+  {
+   "signal": "iac_tests",
+   "collector": "iac",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/terraform/tests/plan.tftest.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "agentic-ai-model-risk",
+   "path": "infra/terraform/variables.tf",
+   "detail": "matched 'daily_quota_gb'"
+  },
+  {
+   "signal": "dependency_pinning",
+   "collector": "ci",
+   "source": "agentic-ai-model-risk",
+   "path": "pyproject.toml",
+   "detail": "matched 'version = \"0'"
+  },
+  {
+   "signal": "data_sheets",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "registry/bramblewood-claims-triage/data-sheet.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "model_cards",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "registry/bramblewood-claims-triage/model-card.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "risk_cards",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "registry/bramblewood-claims-triage/risk-cards.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "registry/bramblewood-claims-triage/scenarios.yaml",
+   "detail": "matched 'prompt-injection'"
+  },
+  {
+   "signal": "data_sheets",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "registry/cedarhollow-underwriting-assistant/data-sheet.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "model_cards",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "registry/cedarhollow-underwriting-assistant/model-card.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "risk_cards",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "registry/cedarhollow-underwriting-assistant/risk-cards.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "registry/cedarhollow-underwriting-assistant/scenarios.yaml",
+   "detail": "matched 'prompt-injection'"
+  },
+  {
+   "signal": "risk_cards",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "registry/halcyon-fraud-triage/risk-cards.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "registry/halcyon-fraud-triage/scenarios.yaml",
+   "detail": "matched 'prompt-injection'"
+  },
+  {
+   "signal": "inventory",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "registry/inventory.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_contracts",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "schemas/approvals.schema.json",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_contracts",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "schemas/data-sheet.schema.json",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_contracts",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "schemas/inventory.schema.json",
+   "detail": "file present"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "scripts/overlap_check.py",
+   "detail": "matched 'citation'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "agentic-ai-model-risk",
+   "path": "scripts/render_docs.py",
+   "detail": "matched 'drift'"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "scripts/seed_signoffs.py",
+   "detail": "matched 'audit log'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "scripts/seed_signoffs.py",
+   "detail": "matched 'sign-off'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "scripts/seed_signoffs.py",
+   "detail": "matched 'lifecycle'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/agents/banking.py",
+   "detail": "matched 'rationale'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/agents/banking.py",
+   "detail": "matched 'needs_approval'"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/agents/banking.py",
+   "detail": "matched 'Synthetic'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/agents/base.py",
+   "detail": "matched 'key_factors'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/agents/base.py",
+   "detail": "matched 'HITL'"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/agents/base.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/agents/healthcare.py",
+   "detail": "matched 'Synthetic'"
+  },
+  {
+   "signal": "fairness_tests",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/agents/mortgage.py",
+   "detail": "matched 'adverse impact'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/cli.py",
+   "detail": "matched 'lifecycle'"
+  },
+  {
+   "signal": "risk_scoring",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/cli.py",
+   "detail": "matched 'likelihood\", \"impact'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/combine.py",
+   "detail": "matched 'drift'"
+  },
+  {
+   "signal": "fairness_tests",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/combine.py",
+   "detail": "matched 'fairness'"
+  },
+  {
+   "signal": "risk_scoring",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/combine.py",
+   "detail": "matched 'residual risk'"
+  },
+  {
+   "signal": "fairness_tests",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/evaluation.py",
+   "detail": "matched 'adverse_impact'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/gate.py",
+   "detail": "matched 'lifecycle'"
+  },
+  {
+   "signal": "risk_scoring",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/gate.py",
+   "detail": "matched 'residual risk'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/lifecycle.py",
+   "detail": "matched 'psi'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/mcp_server.py",
+   "detail": "matched 'mcp.server'"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/signoff.py",
+   "detail": "matched 'hash-chain'"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "src/modelrisk/telemetry.py",
+   "detail": "matched 'audit-log'"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "tests/conftest.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "agentic-ai-model-risk",
+   "path": "tests/test_agents.py",
+   "detail": "matched 'deterministic'"
+  },
+  {
+   "signal": "secret_hygiene",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "tests/test_iac.py",
+   "detail": "matched 'secret'"
+  },
+  {
+   "signal": "secret_hygiene",
+   "collector": "governance",
+   "source": "agentic-ai-model-risk",
+   "path": "tests/test_repo_hygiene.py",
+   "detail": "matched 'secret'"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": ".checkov.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "ci_lint",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'Ruff'"
+  },
+  {
+   "signal": "ci_tests",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'Pytest'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'gate'"
+  },
+  {
+   "signal": "eval_gate_ci",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'Eval'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'gate'"
+  },
+  {
+   "signal": "env_approval",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'environment: prod'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'checkov'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "teardown",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'teardown'"
+  },
+  {
+   "signal": "changelog",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "CHANGELOG.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "contributing_guide",
+   "collector": "people",
+   "source": "agentic-ai-portfolio",
+   "path": "CONTRIBUTING.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "container_build",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": "Dockerfile",
+   "detail": "file present"
+  },
+  {
+   "signal": "vision_statement",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "README.md",
+   "detail": "matched '## At a glance'"
+  },
+  {
+   "signal": "security_policy",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "SECURITY.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "conftest.py",
+   "detail": "matched 'jailbreak'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "docs/adr/0001-bicep-and-terraform.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "docs/adr/0002-offline-mocks-by-default.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "docs/adr/0003-oidc-and-managed-identity.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "ai_policy_doc",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "docs/best-practices.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": "evals/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": "evals/__init__.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "business_metric_link",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "evals/__main__.py",
+   "detail": "matched 'cost_per_task'"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": "evals/__main__.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "autoscale",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/bicep/main.bicep",
+   "detail": "matched 'minReplicas'"
+  },
+  {
+   "signal": "cloud_ai_service",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/bicep/main.bicep",
+   "detail": "matched 'Microsoft.CognitiveServices'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/bicep/main.bicep",
+   "detail": "matched 'dailyQuotaGb'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/bicep/main.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/bicep/main.bicep",
+   "detail": "matched 'Microsoft.KeyVault/vaults'"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/bicep/main.bicep",
+   "detail": "matched 'ManagedIdentit'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/bicep/main.bicep",
+   "detail": "matched 'Microsoft.Insights/components'"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/.tflint.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/backend.tf",
+   "detail": "file present"
+  },
+  {
+   "signal": "autoscale",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/locals.tf",
+   "detail": "matched 'min_replicas'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/locals.tf",
+   "detail": "file present"
+  },
+  {
+   "signal": "autoscale",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'min_replicas'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'daily_quota_gb'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'APPLICATIONINSIGHTS'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/modules/containerapp/main.tf",
+   "detail": "matched 'servicebus'"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/modules/containerapp/main.tf",
+   "detail": "matched 'UserAssigned'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/modules/containerapp/variables.tf",
+   "detail": "matched 'service_bus'"
+  },
+  {
+   "signal": "cloud_ai_service",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/modules/foundry/main.tf",
+   "detail": "matched 'azurerm_cognitive_account'"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/modules/foundry/main.tf",
+   "detail": "matched 'SystemAssigned'"
+  },
+  {
+   "signal": "cloud_ai_service",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/modules/foundry/outputs.tf",
+   "detail": "matched 'azurerm_cognitive_account'"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/modules/keyvault/main.tf",
+   "detail": "matched 'azurerm_key_vault'"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/modules/keyvault/main.tf",
+   "detail": "matched 'Key Vault Secrets User'"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/modules/keyvault/outputs.tf",
+   "detail": "matched 'azurerm_key_vault'"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/modules/keyvault/variables.tf",
+   "detail": "matched 'Key Vault Secrets User'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/modules/monitoring/main.tf",
+   "detail": "matched 'daily_quota_gb'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/modules/monitoring/main.tf",
+   "detail": "matched 'application_insights'"
+  },
+  {
+   "signal": "iac_tests",
+   "collector": "iac",
+   "source": "agentic-ai-portfolio",
+   "path": "infra/terraform/tests/plan.tftest.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/01-policy-qa-rag/DOCTRINE.md",
+   "detail": "matched 'lakehouse'"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/01-policy-qa-rag/DOCTRINE.md",
+   "detail": "matched 'ROI'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/01-policy-qa-rag/policy_qa/__init__.py",
+   "detail": "matched 'citations'"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/01-policy-qa-rag/policy_qa/corpus.py",
+   "detail": "matched 'prompt-injection'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/01-policy-qa-rag/policy_qa/demo.py",
+   "detail": "matched 'citations'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/01-policy-qa-rag/policy_qa/eval_suite.py",
+   "detail": "matched 'citations'"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/01-policy-qa-rag/policy_qa/eval_suite.py",
+   "detail": "matched 'JAILBREAK'"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/02-ticket-triage/DOCTRINE.md",
+   "detail": "matched 'ROI'"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/03-refund-agent/DOCTRINE.md",
+   "detail": "matched 'ROI'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/03-refund-agent/refund_agent/__init__.py",
+   "detail": "matched 'human-in-the-loop'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/03-refund-agent/refund_agent/demo.py",
+   "detail": "matched 'human-in-the-loop'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/03-refund-agent/refund_agent/graph.py",
+   "detail": "matched 'HITL'"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/03-refund-agent/refund_agent/services.py",
+   "detail": "matched 'AuditLog'"
+  },
+  {
+   "signal": "reg_mapping",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/07-rfp-response/README.md",
+   "detail": "matched 'GDPR'"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/07-rfp-response/tests/test_rfp_agent.py",
+   "detail": "matched 'deterministic'"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/09-collections-agent/collections_agent/__init__.py",
+   "detail": "matched 'hash-chain'"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/09-collections-agent/collections_agent/audit.py",
+   "detail": "matched 'audit log'"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/10-supply-chain-multi-agent/DOCTRINE.md",
+   "detail": "matched 'lakehouse'"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/10-supply-chain-multi-agent/README.md",
+   "detail": "matched 'Databricks'"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/10-supply-chain-multi-agent/tests/conftest.py",
+   "detail": "matched 'deterministic'"
+  },
+  {
+   "signal": "container_build",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/11-customer-care-e2e/Dockerfile",
+   "detail": "file present"
+  },
+  {
+   "signal": "api_contract",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/11-customer-care-e2e/care_e2e/bff.py",
+   "detail": "matched 'FastAPI('"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/11-customer-care-e2e/care_e2e/mcp_main.py",
+   "detail": "matched 'mcp.server'"
+  },
+  {
+   "signal": "api_gateway",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/11-customer-care-e2e/deploy/azure/main.bicep",
+   "detail": "matched 'Microsoft.ApiManagement'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/11-customer-care-e2e/deploy/azure/main.bicep",
+   "detail": "matched 'ServiceBus'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/11-customer-care-e2e/tests/test_http_topology.py",
+   "detail": "matched 'mcp.server'"
+  },
+  {
+   "signal": "api_contract",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/12-agent-control-plane/control_plane/api.py",
+   "detail": "matched 'FastAPI('"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/12-agent-control-plane/control_plane/demo.py",
+   "detail": "matched 'promotion gate'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/12-agent-control-plane/control_plane/registry.py",
+   "detail": "matched 'promotion gate'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/12-agent-control-plane/tests/test_journey.py",
+   "detail": "matched 'drift'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/12-agent-control-plane/tests/test_plane.py",
+   "detail": "matched 'promotion gate'"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/15-banking-credit-memo/DOCTRINE.md",
+   "detail": "matched 'lineage'"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/15-banking-credit-memo/README.md",
+   "detail": "matched 'lineage'"
+  },
+  {
+   "signal": "data_quality_tests",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/16-telecom-outage-care/outage_care/graph.py",
+   "detail": "matched 'freshness'"
+  },
+  {
+   "signal": "data_quality_tests",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/16-telecom-outage-care/tests/test_outage_care.py",
+   "detail": "matched 'freshness'"
+  },
+  {
+   "signal": "data_quality_tests",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/18-logistics-exception-agent/exception_agent/graph.py",
+   "detail": "matched 'freshness'"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/19-finetune-vs-prompting/finetune_lab/corpus.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/19-finetune-vs-prompting/finetune_lab/demo.py",
+   "detail": "matched 'drift'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/19-finetune-vs-prompting/tests/test_training_and_gate.py",
+   "detail": "matched 'drift'"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/19-finetune-vs-prompting/tests/test_training_and_gate.py",
+   "detail": "matched 'deterministic'"
+  },
+  {
+   "signal": "business_case",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/21-multi-agent-orchestration-patterns/README.md",
+   "detail": "matched 'Business case'"
+  },
+  {
+   "signal": "business_case",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/21-multi-agent-orchestration-patterns/evals/README.md",
+   "detail": "matched 'business case'"
+  },
+  {
+   "signal": "business_case",
+   "collector": "docs",
+   "source": "agentic-ai-portfolio",
+   "path": "projects/21-multi-agent-orchestration-patterns/orchestration_lab/compare.py",
+   "detail": "matched 'business case'"
+  },
+  {
+   "signal": "dependency_pinning",
+   "collector": "ci",
+   "source": "agentic-ai-portfolio",
+   "path": "pyproject.toml",
+   "detail": "matched 'version = \"0'"
+  },
+  {
+   "signal": "shared_library",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "shared/__init__.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "shared_library",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "shared/a2a/__init__.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "shared_library",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "shared/a2a/client.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "api_contract",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "shared/a2a/server.py",
+   "detail": "matched 'FastAPI('"
+  },
+  {
+   "signal": "business_metric_link",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "shared/doctrine/card.py",
+   "detail": "matched 'cost_per_task'"
+  },
+  {
+   "signal": "business_metric_link",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "shared/evals/harness.py",
+   "detail": "matched 'cost_per_task'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "agentic-ai-portfolio",
+   "path": "shared/mcp_servers/__init__.py",
+   "detail": "matched 'FastMCP'"
+  },
+  {
+   "signal": "ci_lint",
+   "collector": "ci",
+   "source": "ai-learning-lab",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'ruff'"
+  },
+  {
+   "signal": "ci_tests",
+   "collector": "ci",
+   "source": "ai-learning-lab",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'pytest'"
+  },
+  {
+   "signal": "changelog",
+   "collector": "docs",
+   "source": "ai-learning-lab",
+   "path": "CHANGELOG.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "contributing_guide",
+   "collector": "people",
+   "source": "ai-learning-lab",
+   "path": "CONTRIBUTING.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "vision_statement",
+   "collector": "docs",
+   "source": "ai-learning-lab",
+   "path": "README.md",
+   "detail": "matched '## At a glance'"
+  },
+  {
+   "signal": "security_policy",
+   "collector": "governance",
+   "source": "ai-learning-lab",
+   "path": "SECURITY.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "learning_material",
+   "collector": "people",
+   "source": "ai-learning-lab",
+   "path": "TEMPLATE/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "learning_material",
+   "collector": "people",
+   "source": "ai-learning-lab",
+   "path": "TEMPLATE/spike.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "ai-learning-lab",
+   "path": "TEMPLATE/spike.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "learning_material",
+   "collector": "people",
+   "source": "ai-learning-lab",
+   "path": "TEMPLATE/tests/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "ai-learning-lab",
+   "path": "TEMPLATE/tests/test_spike.py",
+   "detail": "matched 'deterministic'"
+  },
+  {
+   "signal": "dependency_pinning",
+   "collector": "ci",
+   "source": "ai-learning-lab",
+   "path": "pyproject.toml",
+   "detail": "matched 'version = \"0'"
+  },
+  {
+   "signal": "dependency_pinning",
+   "collector": "ci",
+   "source": "ai-learning-lab",
+   "path": "requirements.txt",
+   "detail": "matched '==0'"
+  },
+  {
+   "signal": "experiment_writeups",
+   "collector": "docs",
+   "source": "ai-learning-lab",
+   "path": "topics/2026-09-five-agent-architectures/README.md",
+   "detail": "matched 'lesson'"
+  },
+  {
+   "signal": "experiments",
+   "collector": "docs",
+   "source": "ai-learning-lab",
+   "path": "topics/2026-09-five-agent-architectures/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "experiments",
+   "collector": "docs",
+   "source": "ai-learning-lab",
+   "path": "topics/2026-09-five-agent-architectures/layers_snapshot.json",
+   "detail": "file present"
+  },
+  {
+   "signal": "experiments",
+   "collector": "docs",
+   "source": "ai-learning-lab",
+   "path": "topics/2026-09-five-agent-architectures/spike.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "experiment_writeups",
+   "collector": "docs",
+   "source": "ai-learning-lab",
+   "path": "topics/2026-09-graphrag-hybrid-retrieval/README.md",
+   "detail": "matched 'Result'"
+  },
+  {
+   "signal": "experiment_writeups",
+   "collector": "docs",
+   "source": "ai-learning-lab",
+   "path": "topics/2026-09-jev-system1-classifier/README.md",
+   "detail": "matched 'Result'"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "ai-learning-lab",
+   "path": "topics/2026-09-jev-system1-classifier/README.md",
+   "detail": "matched 'savings'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "ai-learning-lab",
+   "path": "topics/2026-09-jev-system1-classifier/spike.py",
+   "detail": "matched 'shap'"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "ai-learning-lab",
+   "path": "topics/2026-09-jev-system1-classifier/spike.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "ai-learning-lab",
+   "path": "topics/2026-09-jev-system1-classifier/tests/test_spike.py",
+   "detail": "matched 'deterministic'"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "ai-learning-lab",
+   "path": "topics/2026-09-nvidia-open-agent-safety/spike.py",
+   "detail": "matched 'hash-chain'"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "ai-learning-lab",
+   "path": "topics/2026-09-nvidia-open-agent-safety/spike.py",
+   "detail": "matched 'prompt_injection'"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": ".checkov.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "ci_lint",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'Ruff'"
+  },
+  {
+   "signal": "ci_tests",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'pytest'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'compliance'"
+  },
+  {
+   "signal": "eval_gate_ci",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'Eval'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'gate'"
+  },
+  {
+   "signal": "env_approval",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'environment: prod'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'checkov'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "teardown",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'teardown'"
+  },
+  {
+   "signal": "changelog",
+   "collector": "docs",
+   "source": "azure-agent-labs",
+   "path": "CHANGELOG.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "contributing_guide",
+   "collector": "people",
+   "source": "azure-agent-labs",
+   "path": "CONTRIBUTING.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "dev_environment",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": "Makefile",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "azure-agent-labs",
+   "path": "README.md",
+   "detail": "matched 'Data Lake'"
+  },
+  {
+   "signal": "vision_statement",
+   "collector": "docs",
+   "source": "azure-agent-labs",
+   "path": "README.md",
+   "detail": "matched '## At a glance'"
+  },
+  {
+   "signal": "security_policy",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "SECURITY.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "azure-agent-labs",
+   "path": "docs/adr/0001-bicep-and-terraform.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "azure-agent-labs",
+   "path": "docs/adr/0002-offline-mocks-by-default.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "azure-agent-labs",
+   "path": "docs/adr/0003-oidc-and-managed-identity.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "ai_policy_doc",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "docs/best-practices.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/.tflint.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "cloud_ai_service",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/cognitive/main.tf",
+   "detail": "matched 'azurerm_cognitive_account'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/cognitive/main.tf",
+   "detail": "file present"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/cognitive/main.tf",
+   "detail": "matched 'UserAssigned'"
+  },
+  {
+   "signal": "cloud_ai_service",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/cognitive/outputs.tf",
+   "detail": "matched 'azurerm_cognitive_account'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/cognitive/outputs.tf",
+   "detail": "file present"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/cognitive/variables.tf",
+   "detail": "file present"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/cosmos/main.tf",
+   "detail": "matched 'Data Contributor'"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/cosmos/variables.tf",
+   "detail": "matched 'data contributor'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/eventhubs/main.tf",
+   "detail": "matched 'eventhub'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/eventhubs/outputs.tf",
+   "detail": "matched 'eventhub'"
+  },
+  {
+   "signal": "cloud_ai_service",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/foundry-account/main.tf",
+   "detail": "matched 'azurerm_cognitive_account'"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/foundry-account/main.tf",
+   "detail": "matched 'UserAssigned'"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/function-consumption/main.tf",
+   "detail": "matched 'managedidentit'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/function-consumption/main.tf",
+   "detail": "matched 'APPLICATIONINSIGHTS'"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/keyvault/main.tf",
+   "detail": "matched 'azurerm_key_vault'"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/keyvault/main.tf",
+   "detail": "matched 'Key Vault Secrets User'"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/keyvault/outputs.tf",
+   "detail": "matched 'azurerm_key_vault'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/lab-foundation/main.tf",
+   "detail": "matched 'daily_quota_gb'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/lab-foundation/main.tf",
+   "detail": "matched 'application_insights'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/lab-foundation/outputs.tf",
+   "detail": "matched 'application_insights'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "infra/terraform/modules/lab-foundation/variables.tf",
+   "detail": "matched 'daily_quota_gb'"
+  },
+  {
+   "signal": "experiment_writeups",
+   "collector": "docs",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/README.md",
+   "detail": "matched 'finding'"
+  },
+  {
+   "signal": "experiments",
+   "collector": "docs",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "experiments",
+   "collector": "docs",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/data/gen_fixtures.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/data/gen_fixtures.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "experiments",
+   "collector": "docs",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/data/history_archive.jsonl",
+   "detail": "file present"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/evals/gold/replay.jsonl",
+   "detail": "file present"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/evals/gold/signal_usage.jsonl",
+   "detail": "file present"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/evals/run_eval.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/evals/run_eval.py",
+   "detail": "matched 'hitl'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/infra/main.bicep",
+   "detail": "matched 'eventHub'"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/infra/terraform/.tflint.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/infra/terraform/main.tf",
+   "detail": "matched 'daily_quota_gb'"
+  },
+  {
+   "signal": "iac_tests",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/infra/terraform/tests/plan.tftest.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/src/signal_fusion/card.py",
+   "detail": "matched 'hitl'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "labs/disaster-signal-fusion/src/signal_fusion/service.py",
+   "detail": "matched 'hitl'"
+  },
+  {
+   "signal": "experiment_writeups",
+   "collector": "docs",
+   "source": "azure-agent-labs",
+   "path": "labs/legal-document-compliance/README.md",
+   "detail": "matched 'result'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "labs/legal-document-compliance/data/gen_fixtures.py",
+   "detail": "matched 'shap'"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "azure-agent-labs",
+   "path": "labs/legal-document-compliance/data/gen_fixtures.py",
+   "detail": "matched 'Synthetic'"
+  },
+  {
+   "signal": "iac_tests",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "labs/legal-document-compliance/infra/terraform/tests/plan.tftest.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "labs/legal-document-compliance/src/legalcomp/classify.py",
+   "detail": "matched 'rationale'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "labs/legal-document-compliance/src/legalcomp/mcp_servers.py",
+   "detail": "matched 'mcp.server'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "labs/legal-document-compliance/src/legalcomp/model_selection.py",
+   "detail": "matched 'shap'"
+  },
+  {
+   "signal": "experiment_writeups",
+   "collector": "docs",
+   "source": "azure-agent-labs",
+   "path": "labs/medical-eye-scan-multimodal/README.md",
+   "detail": "matched 'result'"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "azure-agent-labs",
+   "path": "labs/medical-eye-scan-multimodal/data/gen_fixtures.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "iac_tests",
+   "collector": "iac",
+   "source": "azure-agent-labs",
+   "path": "labs/medical-eye-scan-multimodal/infra/terraform/tests/plan.tftest.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "azure-agent-labs",
+   "path": "labs/medical-eye-scan-multimodal/tests/test_eye_components.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "data_needs",
+   "collector": "data",
+   "source": "azure-agent-labs",
+   "path": "labs/road-network-maintenance-graph/README.md",
+   "detail": "matched '## Data sources'"
+  },
+  {
+   "signal": "data_quality_tests",
+   "collector": "data",
+   "source": "azure-agent-labs",
+   "path": "labs/road-network-maintenance-graph/data/gen_fixtures.py",
+   "detail": "matched 'expectation'"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "labs/road-network-maintenance-graph/src/roadgraph/models.py",
+   "detail": "matched 'what_if'"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "labs/road-network-maintenance-graph/src/roadgraph/service.py",
+   "detail": "matched 'what_if'"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "labs/road-network-maintenance-graph/src/roadgraph/workflow.py",
+   "detail": "matched 'what_if'"
+  },
+  {
+   "signal": "data_needs",
+   "collector": "data",
+   "source": "azure-agent-labs",
+   "path": "labs/wind-turbine-continual-learning/README.md",
+   "detail": "matched '## Data sources'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "labs/wind-turbine-continual-learning/data/gen_fixtures.py",
+   "detail": "matched 'promotion gate'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "labs/wind-turbine-continual-learning/evals/run_eval.py",
+   "detail": "matched 'drift'"
+  },
+  {
+   "signal": "risk_scoring",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "labs/wind-turbine-continual-learning/src/turbine_cl/features.py",
+   "detail": "matched 'def residual'"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "azure-agent-labs",
+   "path": "labs/wind-turbine-continual-learning/src/turbine_cl/promotion.py",
+   "detail": "matched 'audit log'"
+  },
+  {
+   "signal": "dependency_pinning",
+   "collector": "ci",
+   "source": "azure-agent-labs",
+   "path": "pyproject.toml",
+   "detail": "matched 'version = \"0'"
+  },
+  {
+   "signal": "shared_library",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "shared/labcore/__init__.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "shared_library",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "shared/labcore/cards.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "shared_library",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "shared/labcore/config.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "shared/labcore/mcp_gateway.py",
+   "detail": "matched 'McpServer'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "azure-agent-labs",
+   "path": "shared/tests/test_labcore.py",
+   "detail": "matched 'mcp.server'"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": ".checkov.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "ci_lint",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'ruff'"
+  },
+  {
+   "signal": "ci_tests",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'pytest'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'gate'"
+  },
+  {
+   "signal": "eval_gate_ci",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'Eval'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'gate'"
+  },
+  {
+   "signal": "env_approval",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'environment: prod'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'checkov'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "teardown",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'teardown'"
+  },
+  {
+   "signal": "changelog",
+   "collector": "docs",
+   "source": "azure-agent-platform",
+   "path": "CHANGELOG.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "contributing_guide",
+   "collector": "people",
+   "source": "azure-agent-platform",
+   "path": "CONTRIBUTING.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "dev_environment",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": "Makefile",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "azure-agent-platform",
+   "path": "README.md",
+   "detail": "matched 'Microsoft Fabric'"
+  },
+  {
+   "signal": "vision_statement",
+   "collector": "docs",
+   "source": "azure-agent-platform",
+   "path": "README.md",
+   "detail": "matched '## At a glance'"
+  },
+  {
+   "signal": "security_policy",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "SECURITY.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "container_build",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": "docker-compose.yml",
+   "detail": "file present"
+  },
+  {
+   "signal": "dev_environment",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": "docker-compose.yml",
+   "detail": "file present"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "azure-agent-platform",
+   "path": "docs/adr/0001-bicep-and-terraform.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "azure-agent-platform",
+   "path": "docs/adr/0002-offline-mocks-by-default.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "azure-agent-platform",
+   "path": "docs/adr/0003-oidc-and-managed-identity.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "ai_policy_doc",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "docs/best-practices.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "autoscale",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/main.bicep",
+   "detail": "matched 'minReplicas'"
+  },
+  {
+   "signal": "cloud_ai_service",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/main.bicep",
+   "detail": "matched 'Microsoft.CognitiveServices'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/main.bicep",
+   "detail": "matched 'dailyQuotaGb'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "infra/main.bicep",
+   "detail": "matched 'serviceBus'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/main.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/main.bicep",
+   "detail": "matched 'Microsoft.KeyVault/vaults'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "infra/main.bicep",
+   "detail": "matched 'APPLICATIONINSIGHTS'"
+  },
+  {
+   "signal": "api_gateway",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/apim.bicep",
+   "detail": "matched 'Microsoft.ApiManagement'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/apim.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/apim.bicep",
+   "detail": "matched 'SystemAssigned'"
+  },
+  {
+   "signal": "cloud_ai_service",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/cognitive.bicep",
+   "detail": "matched 'Microsoft.CognitiveServices'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/cognitive.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "autoscale",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/containerapp.bicep",
+   "detail": "matched 'minReplicas'"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/containerapp.bicep",
+   "detail": "matched 'UserAssigned'"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/cosmos.bicep",
+   "detail": "matched 'Data Contributor'"
+  },
+  {
+   "signal": "cloud_ai_service",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/foundry.bicep",
+   "detail": "matched 'Microsoft.CognitiveServices'"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/foundry.bicep",
+   "detail": "matched 'SystemAssigned'"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/keyvault.bicep",
+   "detail": "matched 'Microsoft.KeyVault/vaults'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/monitoring.bicep",
+   "detail": "matched 'dailyQuotaGb'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/monitoring.bicep",
+   "detail": "matched 'OpenTelemetry'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/network.bicep",
+   "detail": "matched 'servicebus'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/roles.bicep",
+   "detail": "matched 'serviceBus'"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/modules/roles.bicep",
+   "detail": "matched 'Microsoft.KeyVault/vaults'"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/terraform/.tflint.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "autoscale",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/terraform/locals.tf",
+   "detail": "matched 'min_replicas'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'daily_quota_gb'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'APPLICATIONINSIGHTS'"
+  },
+  {
+   "signal": "api_gateway",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "infra/terraform/modules/apim/main.tf",
+   "detail": "matched 'azurerm_api_management'"
+  },
+  {
+   "signal": "api_gateway",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "infra/terraform/modules/apim/outputs.tf",
+   "detail": "matched 'azurerm_api_management'"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/terraform/modules/cosmos/main.tf",
+   "detail": "matched 'Data Contributor'"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/terraform/modules/cosmos/variables.tf",
+   "detail": "matched 'data contributor'"
+  },
+  {
+   "signal": "iac_tests",
+   "collector": "iac",
+   "source": "azure-agent-platform",
+   "path": "infra/terraform/tests/plan.tftest.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "dependency_pinning",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": "pyproject.toml",
+   "detail": "matched 'version = \"0'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "scripts/demo.py",
+   "detail": "matched 'HITL'"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "azure-agent-platform",
+   "path": "scripts/demo.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "scripts/foundry_register.py",
+   "detail": "matched 'approval gate'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "scripts/orchestrations_demo.py",
+   "detail": "matched 'hitl'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "scripts/render_docs.py",
+   "detail": "matched 'HITL'"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "scripts/render_docs.py",
+   "detail": "matched 'prompt injection'"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "azure-agent-platform",
+   "path": "scripts/seed_search_index.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "container_build",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": "services/a2a/Dockerfile",
+   "detail": "file present"
+  },
+  {
+   "signal": "container_build",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": "services/bff/Dockerfile",
+   "detail": "file present"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/a2a/catalog.py",
+   "detail": "matched 'shap'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/a2a/client.py",
+   "detail": "matched 'shap'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/a2a/registry.py",
+   "detail": "matched 'shap'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/a2a/registry.py",
+   "detail": "matched 'promotion gate'"
+  },
+  {
+   "signal": "api_contract",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/a2a/server.py",
+   "detail": "matched 'FastAPI('"
+  },
+  {
+   "signal": "api_contract",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/bff.py",
+   "detail": "matched 'FastAPI('"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/evals/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/evals/__init__.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/evals/evaluators.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/knowledge/graph.py",
+   "detail": "matched 'Synthetic'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/mcp_servers/credit_bureau.py",
+   "detail": "matched 'mcp.server'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/mcp_servers/los.py",
+   "detail": "matched 'mcp.server'"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/safety/content_safety.py",
+   "detail": "matched 'prompt injection'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "src/agentplatform/single/it_agent.py",
+   "detail": "matched 'approval-gate'"
+  },
+  {
+   "signal": "secret_hygiene",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "tests/test_evals.py",
+   "detail": "matched 'azure_'"
+  },
+  {
+   "signal": "secret_hygiene",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "tests/test_infra.py",
+   "detail": "matched 'azure_'"
+  },
+  {
+   "signal": "secret_hygiene",
+   "collector": "governance",
+   "source": "azure-agent-platform",
+   "path": "tests/test_knowledge.py",
+   "detail": "matched 'azure_'"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "azure-agent-platform",
+   "path": "tests/test_mortgage_workflow.py",
+   "detail": "matched 'deterministic'"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "azure-agent-platform",
+   "path": "tests/test_orchestrations.py",
+   "detail": "matched 'deterministic'"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": ".checkov.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "ci_lint",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'ruff'"
+  },
+  {
+   "signal": "ci_tests",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'pytest'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'gate'"
+  },
+  {
+   "signal": "eval_gate_ci",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'Eval'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'gate'"
+  },
+  {
+   "signal": "env_approval",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'environment: prod'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'checkov'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "teardown",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'teardown'"
+  },
+  {
+   "signal": "changelog",
+   "collector": "docs",
+   "source": "azure-ai-integration-platform",
+   "path": "CHANGELOG.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "contributing_guide",
+   "collector": "people",
+   "source": "azure-ai-integration-platform",
+   "path": "CONTRIBUTING.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "container_build",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": "Dockerfile",
+   "detail": "file present"
+  },
+  {
+   "signal": "vision_statement",
+   "collector": "docs",
+   "source": "azure-ai-integration-platform",
+   "path": "README.md",
+   "detail": "matched '## At a glance'"
+  },
+  {
+   "signal": "security_policy",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "SECURITY.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "azure-ai-integration-platform",
+   "path": "docs/adr/0001-bicep-and-terraform.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "azure-ai-integration-platform",
+   "path": "docs/adr/0002-offline-mocks-by-default.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "azure-ai-integration-platform",
+   "path": "docs/adr/0003-oidc-and-managed-identity.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "ai_policy_doc",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "docs/best-practices.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": "evals/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": "evals/golden/ap-invoice-agent.jsonl",
+   "detail": "file present"
+  },
+  {
+   "signal": "experiment_tracking",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": "evals/golden/ap-invoice-agent.jsonl",
+   "detail": "file present"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": "evals/golden/care-planner.jsonl",
+   "detail": "file present"
+  },
+  {
+   "signal": "experiment_tracking",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": "evals/golden/care-planner.jsonl",
+   "detail": "file present"
+  },
+  {
+   "signal": "experiment_tracking",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": "evals/golden/crm-agent.jsonl",
+   "detail": "file present"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "functions/function_app.py",
+   "detail": "matched 'approver'"
+  },
+  {
+   "signal": "autoscale",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/main.bicep",
+   "detail": "matched 'minReplicas'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/main.bicep",
+   "detail": "matched 'DailyQuotaGb'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/main.bicep",
+   "detail": "matched 'serviceBus'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/main.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/main.bicep",
+   "detail": "matched 'APPLICATIONINSIGHTS'"
+  },
+  {
+   "signal": "autoscale",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/aks.bicep",
+   "detail": "matched 'AutoScale'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/aks.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/aks.bicep",
+   "detail": "matched 'SystemAssigned'"
+  },
+  {
+   "signal": "api_gateway",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/apim.bicep",
+   "detail": "matched 'Microsoft.ApiManagement'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/apim.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/apim.bicep",
+   "detail": "matched 'SystemAssigned'"
+  },
+  {
+   "signal": "autoscale",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/containerapp.bicep",
+   "detail": "matched 'minReplicas'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/containerapp.bicep",
+   "detail": "matched 'serviceBus'"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/containerapp.bicep",
+   "detail": "matched 'UserAssigned'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/eventgrid.bicep",
+   "detail": "matched 'EventGrid'"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/functions.bicep",
+   "detail": "matched 'Storage Blob Data Owner'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/functions.bicep",
+   "detail": "matched 'APPLICATIONINSIGHTS'"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/keyvault.bicep",
+   "detail": "matched 'Microsoft.KeyVault/vaults'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/monitoring.bicep",
+   "detail": "matched 'dailyQuotaGb'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/modules/monitoring.bicep",
+   "detail": "matched 'Microsoft.Insights/components'"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/terraform/.tflint.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'daily_quota_gb'"
+  },
+  {
+   "signal": "api_gateway",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/terraform/modules/apim/main.tf",
+   "detail": "matched 'azurerm_api_management'"
+  },
+  {
+   "signal": "api_gateway",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/terraform/modules/apim/outputs.tf",
+   "detail": "matched 'azurerm_api_management'"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/terraform/modules/functions/main.tf",
+   "detail": "matched 'Storage Blob Data Owner'"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/terraform/modules/keyvault/main.tf",
+   "detail": "matched 'azurerm_key_vault'"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/terraform/modules/keyvault/main.tf",
+   "detail": "matched 'Key Vault Secrets User'"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/terraform/modules/keyvault/outputs.tf",
+   "detail": "matched 'azurerm_key_vault'"
+  },
+  {
+   "signal": "iac_tests",
+   "collector": "iac",
+   "source": "azure-ai-integration-platform",
+   "path": "infra/terraform/tests/plan.tftest.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "dependency_pinning",
+   "collector": "ci",
+   "source": "azure-ai-integration-platform",
+   "path": "pyproject.toml",
+   "detail": "matched 'version = \"0'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/a2a/cards.py",
+   "detail": "matched 'hitl'"
+  },
+  {
+   "signal": "api_contract",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/a2a/gateway.py",
+   "detail": "matched 'FastAPI('"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/a2a/gateway.py",
+   "detail": "matched 'AuditLog'"
+  },
+  {
+   "signal": "api_contract",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/a2a/server.py",
+   "detail": "matched 'fastapi('"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/a2a/specs.py",
+   "detail": "matched 'databricks'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/a2a/specs.py",
+   "detail": "matched 'shap'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/a2a/specs.py",
+   "detail": "matched 'hitl'"
+  },
+  {
+   "signal": "api_contract",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/bpm/host.py",
+   "detail": "matched 'FastAPI('"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/bpm/host.py",
+   "detail": "matched 'shap'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/config.py",
+   "detail": "matched 'shap'"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/demo.py",
+   "detail": "matched 'hash chain'"
+  },
+  {
+   "signal": "data_quality_tests",
+   "collector": "data",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/demo.py",
+   "detail": "matched 'expectation'"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/events/gateway.py",
+   "detail": "matched 'AuditLog'"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/fakesaas/README.md",
+   "detail": "matched 'Databricks'"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/fakesaas/__init__.py",
+   "detail": "matched 'Databricks'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/identity/registrations.py",
+   "detail": "matched 'McpServer'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/mcp_servers/_common.py",
+   "detail": "matched 'McpServer'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/mcp_servers/sap_orders.py",
+   "detail": "matched 'mcp.server'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/safety/monitor.py",
+   "detail": "matched 'drift'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/safety/monitor.py",
+   "detail": "matched 'lifecycle'"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/safety/monitor.py",
+   "detail": "matched 'prompt_injection'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "src/aiip/safety/supervisor.py",
+   "detail": "matched 'lifecycle'"
+  },
+  {
+   "signal": "secret_hygiene",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "tests/conftest.py",
+   "detail": "matched 'secret'"
+  },
+  {
+   "signal": "secret_hygiene",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "tests/test_27_integration_plane.py",
+   "detail": "matched 'secret'"
+  },
+  {
+   "signal": "secret_hygiene",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "tests/test_28_tool_gateway.py",
+   "detail": "matched 'secret'"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "tests/test_29_mcp_gateway.py",
+   "detail": "matched 'prompt_injection'"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "azure-ai-integration-platform",
+   "path": "tests/test_37_runtime_safety.py",
+   "detail": "matched 'deterministic'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "azure-ai-integration-platform",
+   "path": "tests/test_38_out_of_band_monitor.py",
+   "detail": "matched 'drift'"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "azure-ai-integration-platform",
+   "path": "tests/test_38_out_of_band_monitor.py",
+   "detail": "matched 'prompt_injection'"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": ".checkov.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "ci_lint",
+   "collector": "ci",
+   "source": "azure-finops",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'ruff'"
+  },
+  {
+   "signal": "ci_tests",
+   "collector": "ci",
+   "source": "azure-finops",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'pytest'"
+  },
+  {
+   "signal": "doc_drift_check",
+   "collector": "ci",
+   "source": "azure-finops",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'render_docs'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "azure-finops",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'gate'"
+  },
+  {
+   "signal": "env_approval",
+   "collector": "ci",
+   "source": "azure-finops",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'environment: prod'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "azure-finops",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "azure-finops",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'checkov'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "azure-finops",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "azure-finops",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "azure-finops",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "teardown",
+   "collector": "ci",
+   "source": "azure-finops",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'teardown'"
+  },
+  {
+   "signal": "business_case",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "CHANGELOG.md",
+   "detail": "matched 'ROI per use case'"
+  },
+  {
+   "signal": "changelog",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "CHANGELOG.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "CHANGELOG.md",
+   "detail": "matched 'ROI'"
+  },
+  {
+   "signal": "contributing_guide",
+   "collector": "people",
+   "source": "azure-finops",
+   "path": "CONTRIBUTING.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "README.md",
+   "detail": "matched 'savings'"
+  },
+  {
+   "signal": "vision_statement",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "README.md",
+   "detail": "matched '## At a glance'"
+  },
+  {
+   "signal": "security_policy",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "SECURITY.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "business_case",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "data/README.md",
+   "detail": "matched 'use-case value'"
+  },
+  {
+   "signal": "value_metrics",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "data/pricing/README.md",
+   "detail": "matched 'savings'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "docs/adr/0001-terraform-and-bicep.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "docs/adr/0002-list-price-snapshot.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "docs/adr/0003-synthetic-deterministic-data.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "business_case",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "docs/ai-finops.md",
+   "detail": "matched 'ROI per use case'"
+  },
+  {
+   "signal": "ai_policy_doc",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "docs/best-practices.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "onboarding_guide",
+   "collector": "people",
+   "source": "azure-finops",
+   "path": "docs/implementation-guide.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_needs",
+   "collector": "data",
+   "source": "azure-finops",
+   "path": "docs/patterns/01-rightsize.md",
+   "detail": "matched '## 2. Signals and data sources'"
+  },
+  {
+   "signal": "data_needs",
+   "collector": "data",
+   "source": "azure-finops",
+   "path": "docs/patterns/02-autoscale.md",
+   "detail": "matched '## 2. Signals and data sources'"
+  },
+  {
+   "signal": "vision_targets",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "docs/patterns/02-autoscale.md",
+   "detail": "matched 'target leaves 30%'"
+  },
+  {
+   "signal": "data_needs",
+   "collector": "data",
+   "source": "azure-finops",
+   "path": "docs/patterns/03-commitments.md",
+   "detail": "matched '## 2. Signals and data sources'"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "azure-finops",
+   "path": "docs/patterns/05-storage-tiering.md",
+   "detail": "matched 'Data lake'"
+  },
+  {
+   "signal": "autoscale",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/bicep/main.bicep",
+   "detail": "matched 'autoscale'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/bicep/main.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "alert_rules",
+   "collector": "ops",
+   "source": "azure-finops",
+   "path": "infra/bicep/modules/guardrails.bicep",
+   "detail": "matched 'actionGroups'"
+  },
+  {
+   "signal": "autoscale",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/bicep/modules/guardrails.bicep",
+   "detail": "matched 'autoscale'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/bicep/modules/guardrails.bicep",
+   "detail": "matched 'Microsoft.Consumption/budgets'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/bicep/modules/guardrails.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "policy_as_code",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/bicep/modules/guardrails.bicep",
+   "detail": "matched 'policyAssignments'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/bicep/modules/policies.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "policy_as_code",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/bicep/modules/policies.bicep",
+   "detail": "matched 'Microsoft.Authorization/policyDefinition'"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/terraform/.tflint.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "alert_rules",
+   "collector": "ops",
+   "source": "azure-finops",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'action_group'"
+  },
+  {
+   "signal": "autoscale",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'autoscale'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'consumption_budget'"
+  },
+  {
+   "signal": "policy_as_code",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'azurerm_policy_definition'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/terraform/outputs.tf",
+   "detail": "matched 'consumption_budget'"
+  },
+  {
+   "signal": "iac_tests",
+   "collector": "iac",
+   "source": "azure-finops",
+   "path": "infra/terraform/tests/plan.tftest.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "dependency_pinning",
+   "collector": "ci",
+   "source": "azure-finops",
+   "path": "pyproject.toml",
+   "detail": "matched 'version = \"0'"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "azure-finops",
+   "path": "scripts/generate_data.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "azure-finops",
+   "path": "scripts/render_docs.py",
+   "detail": "matched 'drift'"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "src/finops/agent/approval.py",
+   "detail": "matched 'hash-chain'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "src/finops/agent/approval.py",
+   "detail": "matched 'approver'"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "src/finops/agent/demo.py",
+   "detail": "matched 'audit log'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "src/finops/agent/demo.py",
+   "detail": "matched 'approver'"
+  },
+  {
+   "signal": "audit_log",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "src/finops/agent/mcp_server.py",
+   "detail": "matched 'AuditLog'"
+  },
+  {
+   "signal": "hitl_approval",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "src/finops/agent/mcp_server.py",
+   "detail": "matched 'approver'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "azure-finops",
+   "path": "src/finops/agent/mcp_server.py",
+   "detail": "matched 'mcp.server'"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "azure-finops",
+   "path": "src/finops/agent/mcp_server.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "src/finops/agent/plan.py",
+   "detail": "matched 'lifecycle'"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "azure-finops",
+   "path": "src/finops/ai/eval_gate.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "azure-finops",
+   "path": "src/finops/ai/report.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "business_metric_link",
+   "collector": "ops",
+   "source": "azure-finops",
+   "path": "src/finops/ai/roi.py",
+   "detail": "matched 'cost_per_task'"
+  },
+  {
+   "signal": "value_tracking_code",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "src/finops/ai/roi.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "value_tracking_code",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "src/finops/ai/token_cost.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "src/finops/casestudy.py",
+   "detail": "matched 'shap'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "src/finops/costing.py",
+   "detail": "matched 'SHAP'"
+  },
+  {
+   "signal": "value_tracking_code",
+   "collector": "docs",
+   "source": "azure-finops",
+   "path": "src/finops/costing.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "src/finops/patterns/p01_rightsize.py",
+   "detail": "matched 'SHAP'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "azure-finops",
+   "path": "src/finops/patterns/p02_autoscale.py",
+   "detail": "matched 'servicebus'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "src/finops/patterns/p05_storage_tiering.py",
+   "detail": "matched 'lifecycle'"
+  },
+  {
+   "signal": "lifecycle_gates",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "src/finops/patterns/p08_idle_cleanup.py",
+   "detail": "matched 'approval gate'"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "azure-finops",
+   "path": "src/finops/synth.py",
+   "detail": "matched 'data lake'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "azure-finops",
+   "path": "src/finops/synth.py",
+   "detail": "matched 'drift'"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "azure-finops",
+   "path": "tests/test_ai_finops.py",
+   "detail": "matched 'deterministic'"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "azure-finops",
+   "path": "tests/test_data.py",
+   "detail": "matched 'Synthetic'"
+  },
+  {
+   "signal": "secret_hygiene",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "tests/test_iac.py",
+   "detail": "matched 'secret'"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "azure-finops",
+   "path": "tests/test_iac.py",
+   "detail": "matched 'generate_data'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "azure-finops",
+   "path": "tests/test_p02_autoscale.py",
+   "detail": "matched 'servicebus'"
+  },
+  {
+   "signal": "secret_hygiene",
+   "collector": "governance",
+   "source": "azure-finops",
+   "path": "tests/test_repo_hygiene.py",
+   "detail": "matched 'secret'"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": ".checkov.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "ci_lint",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'Ruff'"
+  },
+  {
+   "signal": "ci_tests",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'pytest'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'gate'"
+  },
+  {
+   "signal": "eval_gate_ci",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/ci.yml",
+   "detail": "matched 'Eval'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'gate'"
+  },
+  {
+   "signal": "env_approval",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'environment: prod'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/deploy.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "compliance_in_pipeline",
+   "collector": "governance",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'checkov'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/infra.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "cd_pipeline",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'azure/login'"
+  },
+  {
+   "signal": "oidc",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'id-token: write'"
+  },
+  {
+   "signal": "teardown",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": ".github/workflows/teardown.yml",
+   "detail": "matched 'teardown'"
+  },
+  {
+   "signal": "changelog",
+   "collector": "docs",
+   "source": "fabric-enterprise-bi",
+   "path": "CHANGELOG.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "CHANGELOG.md",
+   "detail": "matched 'Purview'"
+  },
+  {
+   "signal": "contributing_guide",
+   "collector": "people",
+   "source": "fabric-enterprise-bi",
+   "path": "CONTRIBUTING.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "CONTRIBUTING.md",
+   "detail": "matched 'lineage'"
+  },
+  {
+   "signal": "dev_environment",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": "Makefile",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "README.md",
+   "detail": "matched 'Microsoft Fabric'"
+  },
+  {
+   "signal": "data_catalog",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "README.md",
+   "detail": "matched 'Purview'"
+  },
+  {
+   "signal": "vision_statement",
+   "collector": "docs",
+   "source": "fabric-enterprise-bi",
+   "path": "README.md",
+   "detail": "matched '## At a glance'"
+  },
+  {
+   "signal": "security_policy",
+   "collector": "governance",
+   "source": "fabric-enterprise-bi",
+   "path": "SECURITY.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_contracts",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "contracts/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_contracts",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "contracts/products/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_contracts",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "contracts/products/customer-care-insights.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "a2a_card",
+   "collector": "ops",
+   "source": "fabric-enterprise-bi",
+   "path": "control-plane/agent-card.json",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "docs/README.md",
+   "detail": "matched 'OneLake'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "fabric-enterprise-bi",
+   "path": "docs/adr/0001-bicep-and-terraform.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "fabric-enterprise-bi",
+   "path": "docs/adr/0002-local-lakehouse-stand-in.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "data_access_platform",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "docs/adr/0002-local-lakehouse-stand-in.md",
+   "detail": "matched 'OneLake'"
+  },
+  {
+   "signal": "adr",
+   "collector": "docs",
+   "source": "fabric-enterprise-bi",
+   "path": "docs/adr/0003-oidc-and-managed-identity.md",
+   "detail": "matched 'Status'"
+  },
+  {
+   "signal": "ai_policy_doc",
+   "collector": "governance",
+   "source": "fabric-enterprise-bi",
+   "path": "docs/best-practices.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "onboarding_guide",
+   "collector": "people",
+   "source": "fabric-enterprise-bi",
+   "path": "docs/implementation-guide.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "model_cards",
+   "collector": "governance",
+   "source": "fabric-enterprise-bi",
+   "path": "docs/model-card-demand-forecast.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "vision_targets",
+   "collector": "docs",
+   "source": "fabric-enterprise-bi",
+   "path": "docs/observability.md",
+   "detail": "matched 'target | 99%'"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": "evals/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": "evals/baseline.json",
+   "detail": "file present"
+  },
+  {
+   "signal": "experiment_tracking",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": "evals/baseline.json",
+   "detail": "file present"
+  },
+  {
+   "signal": "eval_suite",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": "evals/gold/README.md",
+   "detail": "file present"
+  },
+  {
+   "signal": "experiment_tracking",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": "evals/gold/guardrails.jsonl",
+   "detail": "file present"
+  },
+  {
+   "signal": "experiment_tracking",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": "evals/gold/nl2sql.jsonl",
+   "detail": "file present"
+  },
+  {
+   "signal": "domain_docs",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "fabric/workspace/sm_retail_sales.SemanticModel/definition/model.tmdl",
+   "detail": "file present"
+  },
+  {
+   "signal": "domain_docs",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "fabric/workspace/sm_retail_sales.SemanticModel/definition/relationships.tmdl",
+   "detail": "file present"
+  },
+  {
+   "signal": "domain_docs",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "fabric/workspace/sm_retail_sales.SemanticModel/definition/tables/dim_customer.tmdl",
+   "detail": "file present"
+  },
+  {
+   "signal": "reuse_catalog",
+   "collector": "ops",
+   "source": "fabric-enterprise-bi",
+   "path": "governance/catalog.yaml",
+   "detail": "file present"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/main.bicep",
+   "detail": "matched 'DailyQuotaGb'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/main.bicep",
+   "detail": "matched 'eventHub'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/main.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/main.bicep",
+   "detail": "matched 'ManagedIdentit'"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/modules/fabric.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "iac_any",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/modules/keyvault.bicep",
+   "detail": "file present"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/modules/keyvault.bicep",
+   "detail": "matched 'Microsoft.KeyVault/vaults'"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/modules/monitoring.bicep",
+   "detail": "matched 'dailyQuotaGb'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/modules/monitoring.bicep",
+   "detail": "matched 'Microsoft.Insights/components'"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/modules/purview.bicep",
+   "detail": "matched 'SystemAssigned'"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/modules/storage.bicep",
+   "detail": "matched 'Storage Blob Data Reader'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/modules/streaming.bicep",
+   "detail": "matched 'eventHub'"
+  },
+  {
+   "signal": "iac_scan",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/terraform/.tflint.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "cost_guard",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'daily_quota_gb'"
+  },
+  {
+   "signal": "event_driven",
+   "collector": "ops",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'eventhub'"
+  },
+  {
+   "signal": "managed_identity",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/terraform/main.tf",
+   "detail": "matched 'user_assigned_identity'"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/terraform/modules/keyvault/main.tf",
+   "detail": "matched 'azurerm_key_vault'"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/terraform/modules/keyvault/main.tf",
+   "detail": "matched 'Key Vault Secrets User'"
+  },
+  {
+   "signal": "key_vault",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/terraform/modules/keyvault/outputs.tf",
+   "detail": "matched 'azurerm_key_vault'"
+  },
+  {
+   "signal": "rbac_data",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/terraform/modules/keyvault/variables.tf",
+   "detail": "matched 'Key Vault Secrets User'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/terraform/modules/monitoring/main.tf",
+   "detail": "matched 'application_insights'"
+  },
+  {
+   "signal": "telemetry",
+   "collector": "ops",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/terraform/modules/monitoring/outputs.tf",
+   "detail": "matched 'application_insights'"
+  },
+  {
+   "signal": "iac_tests",
+   "collector": "iac",
+   "source": "fabric-enterprise-bi",
+   "path": "infra/terraform/tests/plan.tftest.hcl",
+   "detail": "file present"
+  },
+  {
+   "signal": "dependency_pinning",
+   "collector": "ci",
+   "source": "fabric-enterprise-bi",
+   "path": "pyproject.toml",
+   "detail": "matched 'version = \"0'"
+  },
+  {
+   "signal": "value_tracking_code",
+   "collector": "docs",
+   "source": "fabric-enterprise-bi",
+   "path": "scripts/cost_report.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "data_quality_tests",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "scripts/demo.py",
+   "detail": "matched 'freshness'"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "scripts/demo.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "fabric-enterprise-bi",
+   "path": "scripts/model_card.py",
+   "detail": "matched 'drift'"
+  },
+  {
+   "signal": "model_cards",
+   "collector": "governance",
+   "source": "fabric-enterprise-bi",
+   "path": "scripts/model_card.py",
+   "detail": "file present"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "scripts/model_card.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "synthetic_generator",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "scripts/run_evals.py",
+   "detail": "matched 'synthetic'"
+  },
+  {
+   "signal": "data_quality_tests",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "src/fabricbi/coldpath/lakehouse.py",
+   "detail": "matched 'freshness'"
+  },
+  {
+   "signal": "data_quality_tests",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "src/fabricbi/coldpath/quality.py",
+   "detail": "matched 'data quality'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "fabric-enterprise-bi",
+   "path": "src/fabricbi/enrich/foundry_mock.py",
+   "detail": "matched 'shap'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "fabric-enterprise-bi",
+   "path": "src/fabricbi/enrich/tickets.py",
+   "detail": "matched 'rationale'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "fabric-enterprise-bi",
+   "path": "src/fabricbi/examples.py",
+   "detail": "matched 'McpServer'"
+  },
+  {
+   "signal": "drift_monitoring",
+   "collector": "ops",
+   "source": "fabric-enterprise-bi",
+   "path": "src/fabricbi/hotpath/windows.py",
+   "detail": "matched 'drift'"
+  },
+  {
+   "signal": "explainability",
+   "collector": "governance",
+   "source": "fabric-enterprise-bi",
+   "path": "src/fabricbi/observability/telemetry.py",
+   "detail": "matched 'shap'"
+  },
+  {
+   "signal": "scenario_tests",
+   "collector": "governance",
+   "source": "fabric-enterprise-bi",
+   "path": "src/fabricbi/serve/guardrails.py",
+   "detail": "matched 'prompt-injection'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "fabric-enterprise-bi",
+   "path": "src/fabricbi/serve/mcp_server.py",
+   "detail": "matched 'McpServer'"
+  },
+  {
+   "signal": "synthetic_validation",
+   "collector": "data",
+   "source": "fabric-enterprise-bi",
+   "path": "tests/test_01_synth.py",
+   "detail": "matched 'deterministic'"
+  },
+  {
+   "signal": "mcp_server",
+   "collector": "ops",
+   "source": "fabric-enterprise-bi",
+   "path": "tests/test_08_mcp_a2a.py",
+   "detail": "matched 'McpServer'"
+  },
+  {
+   "signal": "secret_hygiene",
+   "collector": "governance",
+   "source": "fabric-enterprise-bi",
+   "path": "tests/test_10_repo.py",
+   "detail": "matched 'secret'"
+  }
+ ]
+}
