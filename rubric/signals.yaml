@@ -1,0 +1,441 @@
+# Evidence signals: what a collector looks for in an organisation's artifacts.
+# A file-based signal is present when at least one tracked file matches one of `paths` (glob, ** allowed)
+# and, if `contains` is set, the file text matches that regular expression (case-insensitive, multiline).
+# Questionnaire signals are answered in the org's questionnaire file (yes / partial / no).
+# `example` is a minimal artifact that satisfies the rule; the calibration generator and tests use it.
+signals:
+  # ---- docs and strategy -------------------------------------------------------------
+  - id: vision_statement
+    collector: docs
+    description: A README or vision doc states what AI is for (purpose, vision or at-a-glance section)
+    paths: ["README.md", "docs/vision*.md"]
+    contains: '^#+ .*(vision|purpose|why|at a glance)'
+    example: {path: README.md, content: "# Service\n\n## Purpose\n\nAI triage reduces wait times.\n"}
+  - id: vision_targets
+    collector: docs
+    description: Measurable AI targets (OKRs or KPIs with numbers) are written down
+    paths: ["**/*.md"]
+    contains: '\b(okr|kpi|target)s?\b[^\n]{0,80}\d+\s?%'
+    example: {path: docs/vision.md, content: "# Vision\n\nKPI: cut handling time by 20 % in a year.\n"}
+  - id: strategy_review
+    collector: docs
+    description: A record of periodic strategy reviews that include AI results
+    paths: ["docs/strategy*.md", "**/strategy-review*.md"]
+    example: {path: docs/strategy-review.md, content: "# Strategy review\n\nAI results reviewed against targets.\n"}
+  - id: business_case
+    collector: docs
+    description: Use cases carry a business case or value estimate
+    paths: ["**/*.md", "**/*.py", "**/*.yaml", "**/*.json"]
+    contains: '(business case|roi per use case|use[- ]case value|value per use case)'
+    example: {path: docs/use-cases.md, content: "# Use cases\n\nEach entry has a business case with ROI per use case.\n"}
+  - id: roadmap_doc
+    collector: docs
+    description: A roadmap document exists
+    paths: ["ROADMAP.md", "**/roadmap*.md", "**/*-roadmap.md"]
+    example: {path: ROADMAP.md, content: "# Roadmap\n\n- Pilot\n- Scale\n"}
+  - id: roadmap_owned
+    collector: docs
+    description: The roadmap names owners and phases or months
+    paths: ["ROADMAP.md", "**/roadmap*.md", "**/*-roadmap.md"]
+    contains: 'owner[\s\S]{0,400}(month|quarter|phase)|(month|quarter|phase)[\s\S]{0,400}owner'
+    example: {path: ROADMAP.md, content: "# Roadmap\n\n| Phase | Owner |\n|---|---|\n| Month 1 pilot | Data lead |\n"}
+  - id: changelog
+    collector: docs
+    description: Changes are recorded in a changelog
+    paths: ["CHANGELOG.md"]
+    example: {path: CHANGELOG.md, content: "# Changelog\n\n## Unreleased\n"}
+  - id: adr
+    collector: docs
+    description: Architecture decision records with a status
+    paths: ["**/adr/*.md", "**/decisions/*.md"]
+    contains: 'status'
+    example: {path: docs/adr/0001-use-apis.md, content: "# ADR 0001\n\n**Status:** Accepted\n"}
+  - id: value_metrics
+    collector: docs
+    description: Value or cost metrics (ROI, savings, cost per task) are reported
+    paths: ["**/*.md", "**/*.py"]
+    contains: '\b(roi|savings|cost per (task|request|call|use case))\b'
+    example: {path: docs/value.md, content: "# Value\n\nSavings and cost per task are reported monthly.\n"}
+  - id: value_tracking_code
+    collector: docs
+    description: Value or cost is computed in code with tests, not only described
+    paths: ["**/*roi*.py", "**/*value*.py", "**/*savings*.py", "**/*cost*.py"]
+    example: {path: src/value/roi.py, content: "def roi(benefit, cost):\n    return (benefit - cost) / cost\n"}
+  - id: experiments
+    collector: docs
+    description: A place for experiments (labs, notebooks, sandboxes, learning topics)
+    paths: ["labs/**", "experiments/**", "notebooks/**", "**/*.ipynb", "topics/**", "sandbox/**"]
+    example: {path: labs/01-rag/README.md, content: "# Lab 1\n"}
+  - id: experiment_writeups
+    collector: docs
+    description: Experiments are written up with results or lessons
+    paths: ["labs/**/*.md", "experiments/**/*.md", "topics/**/*.md", "sandbox/**/*.md"]
+    contains: '(result|finding|lesson|takeaway)'
+    example: {path: labs/01-rag/README.md, content: "# Lab 1\n\n## Results\n\nRecall improved.\n"}
+  - id: scouting
+    collector: docs
+    description: Technology scouting (a tech radar or horizon scan) is kept
+    paths: ["**/*radar*.md", "**/*horizon*.md"]
+    example: {path: docs/tech-radar.md, content: "# Tech radar\n\nAdopt: retrieval evaluation.\n"}
+  # ---- people --------------------------------------------------------------------------
+  - id: contributing_guide
+    collector: people
+    description: A contribution guide sets shared working rules
+    paths: ["CONTRIBUTING.md"]
+    example: {path: CONTRIBUTING.md, content: "# Contributing\n\nRun the tests before a pull request.\n"}
+  - id: codeowners
+    collector: people
+    description: Ownership of code areas is declared (CODEOWNERS)
+    paths: [".github/CODEOWNERS", "CODEOWNERS", "docs/CODEOWNERS"]
+    example: {path: .github/CODEOWNERS, content: "* @ai-team\n"}
+  - id: learning_material
+    collector: people
+    description: Learning or training material about AI is maintained
+    paths: ["topics/**/*.md", "**/training/**/*.md", "**/learning*/**/*.md", "docs/*learning*.md", "TEMPLATE/**"]
+    example: {path: training/intro-to-ai.md, content: "# Introduction to AI\n\nWhat models can and cannot do.\n"}
+  - id: onboarding_guide
+    collector: people
+    description: An onboarding or implementation guide helps new people adopt the work
+    paths: ["docs/onboarding*.md", "docs/implementation-guide.md", "docs/getting-started*.md"]
+    example: {path: docs/onboarding.md, content: "# Onboarding\n\nSteps for new team members.\n"}
+  # ---- infrastructure as code ----------------------------------------------------------
+  - id: iac_any
+    collector: iac
+    description: Infrastructure is defined as code (Terraform or Bicep)
+    paths: ["**/*.tf", "**/*.bicep"]
+    example: {path: infra/main.tf, content: "resource \"azurerm_resource_group\" \"rg\" {}\n"}
+  - id: iac_tests
+    collector: iac
+    description: Infrastructure code has automated tests
+    paths: ["**/*.tftest.hcl"]
+    example: {path: infra/tests/plan.tftest.hcl, content: "run \"plan\" {\n  command = plan\n}\n"}
+  - id: iac_scan
+    collector: iac
+    description: Infrastructure code is scanned (checkov or tflint configuration)
+    paths: [".checkov.yaml", "**/.tflint.hcl", ".checkov.yml"]
+    example: {path: .checkov.yaml, content: "framework:\n  - terraform\n"}
+  - id: cloud_ai_service
+    collector: iac
+    description: Managed AI services are provisioned as code
+    paths: ["**/*.tf", "**/*.bicep"]
+    contains: '(azurerm_cognitive_account|Microsoft\.CognitiveServices|azurerm_ai_foundry|azurerm_machine_learning_workspace|Microsoft\.MachineLearningServices)'
+    example: {path: infra/ai.tf, content: "resource \"azurerm_cognitive_account\" \"ai\" {}\n"}
+  - id: cost_guard
+    collector: iac
+    description: Cost guards (budgets or ingestion caps) are provisioned as code
+    paths: ["**/*.tf", "**/*.bicep"]
+    contains: '(consumption_budget|Microsoft\.Consumption/budgets|daily_quota_gb|dailyQuotaGb)'
+    example: {path: infra/budget.tf, content: "resource \"azurerm_consumption_budget_resource_group\" \"b\" {}\n"}
+  - id: autoscale
+    collector: iac
+    description: Elastic scaling is configured
+    paths: ["**/*.tf", "**/*.bicep"]
+    contains: '(min_replicas|minReplicas|max_replicas|maxReplicas|autoscale)'
+    example: {path: infra/app.tf, content: "template {\n  min_replicas = 0\n  max_replicas = 3\n}\n"}
+  - id: managed_identity
+    collector: iac
+    description: Workloads use managed identities instead of keys
+    paths: ["**/*.tf", "**/*.bicep"]
+    contains: '(user_assigned_identity|UserAssigned|SystemAssigned|managedIdentit)'
+    example: {path: infra/id.tf, content: "resource \"azurerm_user_assigned_identity\" \"job\" {}\n"}
+  - id: rbac_data
+    collector: iac
+    description: Data access is granted through data-plane roles
+    paths: ["**/*.tf", "**/*.bicep"]
+    contains: '(Storage Blob Data (Reader|Contributor|Owner)|Key Vault Secrets User|Data Reader|Data Contributor)'
+    example: {path: infra/rbac.tf, content: "role_definition_name = \"Storage Blob Data Reader\"\n"}
+  - id: policy_as_code
+    collector: iac
+    description: Azure Policy definitions or assignments are code
+    paths: ["**/*.tf", "**/*.bicep"]
+    contains: '(azurerm_policy_definition|Microsoft\.Authorization/policyDefinitions|policy_assignment|policyAssignments)'
+    example: {path: infra/policy.tf, content: "resource \"azurerm_policy_definition\" \"tags\" {}\n"}
+  - id: key_vault
+    collector: iac
+    description: Secrets are held in Key Vault
+    paths: ["**/*.tf", "**/*.bicep"]
+    contains: '(azurerm_key_vault\b|Microsoft\.KeyVault/vaults)'
+    example: {path: infra/kv.tf, content: "resource \"azurerm_key_vault\" \"kv\" {}\n"}
+  # ---- CI/CD ---------------------------------------------------------------------------
+  - id: ci_tests
+    collector: ci
+    description: CI runs automated tests
+    paths: [".github/workflows/*.yml", ".github/workflows/*.yaml", "azure-pipelines.yml", ".gitlab-ci.yml"]
+    contains: '(pytest|npm test|dotnet test|go test|mvn test)'
+    example: {path: .github/workflows/ci.yml, content: "jobs:\n  test:\n    steps:\n      - run: pytest -q\n"}
+  - id: ci_lint
+    collector: ci
+    description: CI runs a linter
+    paths: [".github/workflows/*.yml", ".github/workflows/*.yaml", "azure-pipelines.yml"]
+    contains: '(ruff|flake8|eslint|pylint|black --check)'
+    example: {path: .github/workflows/lint.yml, content: "jobs:\n  lint:\n    steps:\n      - run: ruff check .\n"}
+  - id: cd_pipeline
+    collector: ci
+    description: A deployment pipeline exists
+    paths: [".github/workflows/*.yml", ".github/workflows/*.yaml", "azure-pipelines.yml"]
+    contains: '(azure/login|az deployment|terraform apply|azd deploy|kubectl apply)'
+    example: {path: .github/workflows/deploy.yml, content: "steps:\n  - uses: azure/login@v2\n  - run: terraform apply -auto-approve\n"}
+  - id: oidc
+    collector: ci
+    description: Pipelines authenticate with OIDC federation (no stored cloud secret)
+    paths: [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+    contains: 'id-token:\s*write'
+    example: {path: .github/workflows/deploy.yml, content: "permissions:\n  id-token: write\n"}
+  - id: env_approval
+    collector: ci
+    description: Production deployment waits for an environment approval
+    paths: [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+    contains: 'environment:\s*(prod|production)\b'
+    example: {path: .github/workflows/deploy.yml, content: "jobs:\n  prod:\n    environment: prod\n"}
+  - id: teardown
+    collector: ci
+    description: Environments can be torn down by pipeline
+    paths: [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+    contains: '(terraform destroy|az group delete|azd down|teardown)'
+    example: {path: .github/workflows/teardown.yml, content: "steps:\n  - run: terraform destroy -auto-approve\n"}
+  - id: eval_suite
+    collector: ci
+    description: An evaluation suite for AI behaviour exists
+    paths: ["evals/**", "**/evals/**", "**/eval_*.py", "**/*_eval.py"]
+    example: {path: evals/groundedness.py, content: "def test_grounded():\n    assert True\n"}
+  - id: eval_gate_ci
+    collector: ci
+    description: CI blocks merges on evaluation results
+    paths: [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+    contains: '\beval'
+    example: {path: .github/workflows/ci.yml, content: "steps:\n  - name: eval gate\n    run: python -m evals.gate\n"}
+  - id: dependency_pinning
+    collector: ci
+    description: Dependencies are pinned for reproducible environments
+    paths: ["uv.lock", "requirements*.txt", "poetry.lock", "package-lock.json", "pyproject.toml"]
+    contains: '(==\d|version = "\d|"version": "\d)'
+    example: {path: requirements.txt, content: "pyyaml==6.0.3\n"}
+  - id: container_build
+    collector: ci
+    description: Workloads are packaged as containers
+    paths: ["Dockerfile", "**/Dockerfile", "docker-compose.yml"]
+    example: {path: Dockerfile, content: "FROM python:3.13-slim\n"}
+  - id: dev_environment
+    collector: ci
+    description: A reproducible developer environment (devcontainer, compose or Makefile)
+    paths: [".devcontainer/**", "docker-compose.yml", "Makefile"]
+    example: {path: Makefile, content: "test:\n\tpytest -q\n"}
+  - id: experiment_tracking
+    collector: ci
+    description: Experiment or evaluation results are tracked as files or in a tracking tool
+    paths: ["evals/**/*.json", "evals/**/*.jsonl", "**/results/*.json", "**/mlruns/**", "**/baseline*.json"]
+    example: {path: evals/results/baseline.json, content: "{\"groundedness\": 0.93}\n"}
+  - id: doc_drift_check
+    collector: ci
+    description: Documentation is regenerated and drift-checked in CI
+    paths: [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+    contains: '(render_docs|docs.*--check|mkdocs build --strict)'
+    example: {path: .github/workflows/ci.yml, content: "steps:\n  - run: python scripts/render_docs.py --check\n"}
+  # ---- operations ------------------------------------------------------------------------
+  - id: telemetry
+    collector: ops
+    description: Services emit telemetry (OpenTelemetry or Application Insights)
+    paths: ["**/*.py", "**/*.tf", "**/*.bicep", "**/*.cs", "**/*.ts"]
+    contains: '(opentelemetry|applicationinsights|azure_monitor|application_insights|Microsoft\.Insights/components)'
+    example: {path: src/app/telemetry.py, content: "from opentelemetry import trace\n"}
+  - id: alert_rules
+    collector: ops
+    description: Alert rules and action groups are defined
+    paths: ["**/*.tf", "**/*.bicep", "**/*.json"]
+    contains: '(scheduled_query_rules|metric_alert|scheduledQueryRules|metricAlerts|action_group|actionGroups)'
+    example: {path: infra/alerts.tf, content: "resource \"azurerm_monitor_metric_alert\" \"errors\" {}\n"}
+  - id: drift_monitoring
+    collector: ops
+    description: Model or data drift is measured in code
+    paths: ["**/*.py"]
+    contains: '\b(psi|drift|population stability)\b'
+    example: {path: src/monitor/drift.py, content: "def psi(ref, cur):\n    return 0.0  # population stability index\n"}
+  - id: business_metric_link
+    collector: ops
+    description: Monitoring links model behaviour to business or cost metrics
+    paths: ["**/*.py", "**/*.kql"]
+    contains: '(cost_per_(task|request|call)|cost per (task|request)|value_realised|business_metric)'
+    example: {path: src/monitor/kpis.py, content: "cost_per_task = total_cost / tasks\n"}
+  - id: api_contract
+    collector: ops
+    description: Services expose documented APIs
+    paths: ["**/openapi*.json", "**/openapi*.yaml", "**/openapi*.yml", "**/*.py"]
+    contains: '(openapi|FastAPI\(|APIRouter|@app\.(get|post)\()'
+    example: {path: src/api/main.py, content: "from fastapi import FastAPI\napp = FastAPI()\n"}
+  - id: api_gateway
+    collector: ops
+    description: An API gateway fronts AI services
+    paths: ["**/*.tf", "**/*.bicep"]
+    contains: '(azurerm_api_management|Microsoft\.ApiManagement)'
+    example: {path: infra/apim.tf, content: "resource \"azurerm_api_management\" \"gw\" {}\n"}
+  - id: event_driven
+    collector: ops
+    description: Event or message infrastructure connects systems
+    paths: ["**/*.tf", "**/*.bicep", "**/*.py"]
+    contains: '(servicebus|service_bus|eventgrid|event_grid|eventhub|event_hub)'
+    example: {path: infra/bus.tf, content: "resource \"azurerm_servicebus_namespace\" \"bus\" {}\n"}
+  - id: mcp_server
+    collector: ops
+    description: Tools are exposed over the Model Context Protocol
+    paths: ["**/*.py", "**/*.ts", "**/*.cs"]
+    contains: '(mcp\.server|FastMCP|MCPServer|McpServer)'
+    example: {path: src/tools/mcp_server.py, content: "from mcp.server.fastmcp import FastMCP\n"}
+  - id: a2a_card
+    collector: ops
+    description: Agents publish an A2A agent card
+    paths: ["**/agent-card.json", "**/agent_card.json", "**/.well-known/agent*.json"]
+    example: {path: a2a/agent-card.json, content: "{\"name\": \"triage-agent\"}\n"}
+  - id: shared_library
+    collector: ops
+    description: Shared code is packaged for reuse across projects
+    paths: ["shared/**/*.py", "packages/**", "libs/**", "common/**/*.py"]
+    example: {path: shared/guardrails/__init__.py, content: "\"\"\"Shared guardrails.\"\"\"\n"}
+  - id: adopt_guide
+    collector: ops
+    description: Docs explain how another team adopts or reuses the work
+    paths: ["**/*.md"]
+    contains: '^#+ .*(adopt this|reuse this|how to adopt|adoption guide)'
+    example: {path: docs/adopt.md, content: "# Adopt this\n\nFork, configure, extend.\n"}
+  - id: reuse_catalog
+    collector: ops
+    description: A catalogue of reusable components is published
+    paths: ["**/catalog*.md", "**/components.md", "**/catalog*.yaml"]
+    example: {path: docs/catalog.md, content: "# Component catalogue\n\n| Component | Owner |\n"}
+  # ---- governance ------------------------------------------------------------------------
+  - id: security_policy
+    collector: governance
+    description: A security policy (SECURITY.md) exists
+    paths: ["SECURITY.md", ".github/SECURITY.md"]
+    example: {path: SECURITY.md, content: "# Security policy\n\nReport issues privately.\n"}
+  - id: secret_hygiene
+    collector: governance
+    description: Secret hygiene is enforced (env example, secret scanning config or secret tests)
+    paths: [".env.example", ".gitleaks.toml", ".pre-commit-config.yaml", "tests/**/*.py"]
+    contains: '(secret|AZURE_|API_KEY|gitleaks|detect-secrets)'
+    example: {path: .env.example, content: "AZURE_OPENAI_ENDPOINT=\n"}
+  - id: ai_policy_doc
+    collector: governance
+    description: Written AI practices or policy (best practices, responsible AI, AI policy)
+    paths: ["docs/*policy*.md", "**/responsible-ai*.md", "docs/best-practices.md", "**/ai-policy*.md"]
+    example: {path: docs/best-practices.md, content: "# Best practices\n\nHuman review for decisions about people.\n"}
+  - id: model_cards
+    collector: governance
+    description: Model cards document AI systems
+    paths: ["**/model-card*.yaml", "**/model-card*.yml", "**/model-card*.md", "**/model_card*"]
+    example: {path: registry/triage/model-card.yaml, content: "id: triage\npurpose: Route requests\n"}
+  - id: risk_cards
+    collector: governance
+    description: Risk cards or a risk register list AI risks
+    paths: ["**/risk-card*.yaml", "**/risk-card*.yml", "**/risk-register*", "**/risk_register*", "**/risks.yaml"]
+    example: {path: registry/triage/risk-cards.yaml, content: "risks:\n  - id: R1\n    title: Biased routing\n"}
+  - id: risk_scoring
+    collector: governance
+    description: Risks are scored (likelihood × impact, residual) in code
+    paths: ["**/*.py"]
+    contains: '(likelihood[\s\S]{0,200}impact|residual risk|def residual)'
+    example: {path: src/risk/score.py, content: "def residual(likelihood, impact, eff):\n    return likelihood * impact * (1 - eff)\n"}
+  - id: scenario_tests
+    collector: governance
+    description: Adversarial or what-if scenarios are tested (injection, red teaming, what-if)
+    paths: ["**/*.py", "**/scenarios*.yaml"]
+    contains: '(prompt.injection|red.?team|what.?if|jailbreak)'
+    example: {path: tests/test_injection.py, content: "def test_prompt_injection_blocked():\n    assert True\n"}
+  - id: hitl_approval
+    collector: governance
+    description: Human-in-the-loop approval or sign-off is implemented
+    paths: ["**/*.py"]
+    contains: '(human.in.the.loop|\bhitl\b|sign.?off|requires?_approval|needs_approval|approver)'
+    example: {path: src/review/hitl.py, content: "def requires_approval(action):\n    return action.high_impact\n"}
+  - id: audit_log
+    collector: governance
+    description: Decisions are written to an audit log (ideally tamper-evident)
+    paths: ["**/*.py"]
+    contains: '(audit.?log|hash.?chain)'
+    example: {path: src/review/audit.py, content: "AUDIT_LOG = 'audit-log.jsonl'  # hash-chained\n"}
+  - id: inventory
+    collector: governance
+    description: An inventory of AI systems is kept
+    paths: ["**/inventory.yaml", "**/inventory.yml", "**/model-inventory*", "**/ai-inventory*"]
+    example: {path: registry/inventory.yaml, content: "models:\n  - triage\n"}
+  - id: lifecycle_gates
+    collector: governance
+    description: Lifecycle stages with approval gates are enforced in code
+    paths: ["**/*.py"]
+    contains: '(lifecycle|stage.?gate|approval.?gate|promotion gate)'
+    example: {path: src/gov/lifecycle.py, content: "STAGES = ['dev', 'validation', 'production']  # lifecycle gates\n"}
+  - id: compliance_in_pipeline
+    collector: governance
+    description: Compliance or governance gates run in the pipeline
+    paths: [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+    contains: '(checkov|policy|governance gate|risk gate|compliance|\bgate\b)'
+    example: {path: .github/workflows/ci.yml, content: "steps:\n  - run: checkov -d infra\n"}
+  - id: reg_mapping
+    collector: governance
+    description: Regulatory obligations are mapped (EU AI Act, NIST AI RMF, ISO/IEC 42001, GDPR)
+    paths: ["**/*.md", "**/*.yaml"]
+    contains: '(EU AI Act|NIST AI RMF|ISO/IEC 42001|GDPR)'
+    example: {path: docs/regulatory.md, content: "# Obligations\n\nEU AI Act risk class per system.\n"}
+  - id: fairness_tests
+    collector: governance
+    description: Fairness is tested (adverse impact, disparate impact, parity)
+    paths: ["**/*.py"]
+    contains: '(adverse.impact|disparate|fairness|demographic.parity|equal.opportunity)'
+    example: {path: tests/test_fairness.py, content: "def test_adverse_impact_ratio():\n    assert 0.9 >= 0.8\n"}
+  - id: explainability
+    collector: governance
+    description: Outputs carry explanations (key factors, rationale, citations)
+    paths: ["**/*.py"]
+    contains: '(key_factors|shap|\blime\b|rationale|citations?\b)'
+    example: {path: src/app/explain.py, content: "def explain(x):\n    return {'key_factors': ['income']}\n"}
+  # ---- data ------------------------------------------------------------------------------
+  - id: data_needs
+    collector: data
+    description: Data needs or sources are listed per use case
+    paths: ["**/*.md"]
+    contains: '^#+ .*(data sources|data needs|input data|data inputs|signals and data)'
+    example: {path: docs/use-case-triage.md, content: "# Triage\n\n## Data sources\n\nTickets, CRM.\n"}
+  - id: data_catalog
+    collector: data
+    description: Data is catalogued with lineage (for example Microsoft Purview)
+    paths: ["**/*.md", "**/*.tf", "**/*.bicep", "**/*.py"]
+    contains: '(purview|data catalog|lineage)'
+    example: {path: docs/data.md, content: "# Data\n\nAssets are registered in Purview with lineage.\n"}
+  - id: data_contracts
+    collector: data
+    description: Data contracts or schemas define datasets
+    paths: ["contracts/**", "**/*contract*.yaml", "**/*contract*.yml", "**/*.schema.json"]
+    example: {path: contracts/claims.yaml, content: "dataset: claims\ncolumns:\n  - name: amount\n"}
+  - id: data_quality_tests
+    collector: data
+    description: Data quality is tested automatically
+    paths: ["**/*.py"]
+    contains: '(great_expectations|data.quality|null.rate|schema.drift|expectation|freshness)'
+    example: {path: tests/test_dq.py, content: "def test_null_rate():\n    assert 0.0 <= 0.01  # data quality\n"}
+  - id: data_access_platform
+    collector: data
+    description: Data is served through a governed data platform
+    paths: ["**/*.tf", "**/*.bicep", "**/*.md", "**/*.py"]
+    contains: '(lakehouse|onelake|data lake|synapse|databricks|microsoft fabric)'
+    example: {path: docs/platform.md, content: "# Platform\n\nCurated data lives in a lakehouse.\n"}
+  - id: synthetic_generator
+    collector: data
+    description: Synthetic data is generated in code
+    paths: ["**/*.py"]
+    contains: 'synthetic'
+    example: {path: scripts/generate_data.py, content: "\"\"\"Seeded synthetic data generator.\"\"\"\n"}
+  - id: synthetic_validation
+    collector: data
+    description: Synthetic data is validated (determinism or property tests)
+    paths: ["tests/**/*.py", "**/tests/**/*.py"]
+    contains: '(synthetic|deterministic|generate_data)'
+    example: {path: tests/test_data.py, content: "def test_synthetic_data_is_deterministic():\n    assert True\n"}
+  - id: data_sheets
+    collector: data
+    description: Data sheets describe datasets and their meaning
+    paths: ["**/data-sheet*", "**/datasheet*", "**/data_sheet*"]
+    example: {path: registry/triage/data-sheet.yaml, content: "inputs:\n  - name: age\n"}
+  - id: domain_docs
+    collector: data
+    description: Domain knowledge is documented (domain docs, glossary, semantic model)
+    paths: ["docs/domains/**", "**/glossary*.md", "semantic-model/**", "**/*.tmdl"]
+    example: {path: docs/glossary.md, content: "# Glossary\n\nClaim: a request for payout.\n"}

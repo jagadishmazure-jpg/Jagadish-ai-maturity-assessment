@@ -1,0 +1,35 @@
+# How evidence signals map to levels for each category (this repository's own rubric, MIT licensed).
+# A category reaches level N when it reached N-1 and at least `threshold` (share) of level N's signals
+# are present. Level 1 needs nothing. Effort per step: S (about a month), M (two), L (three).
+threshold: 0.67
+critical: ["1.1", "2.3", "3.2", "4.1", "5.1", "6.2"]
+categories:
+  "1.1": {levels: {2: [vision_statement], 3: [vision_targets, q_vision_published], 4: [q_vision_in_budget, strategy_review]}, effort: {2: S, 3: M, 4: M}, depends_on: []}
+  "1.2": {levels: {2: [q_goal_field, business_case], 3: [q_business_case_mandatory, business_case], 4: [q_strategy_session]}, effort: {2: S, 3: M, 4: L}, depends_on: ["1.1"]}
+  "1.3": {levels: {2: [roadmap_doc, changelog], 3: [roadmap_owned, adr], 4: [q_roadmap_refresh]}, effort: {2: S, 3: M, 4: M}, depends_on: ["1.1"]}
+  "1.4": {levels: {2: [value_metrics], 3: [value_tracking_code, business_case], 4: [q_intangible_value, business_metric_link]}, effort: {2: S, 3: M, 4: L}, depends_on: ["1.2"]}
+  "1.5": {levels: {2: [experiments], 3: [experiment_writeups, adr], 4: [scouting, q_pilot_scaling]}, effort: {2: S, 3: S, 4: M}, depends_on: []}
+  "2.1": {levels: {2: [q_ai_roles_defined], 3: [q_training_paths, learning_material], 4: [q_hr_integration]}, effort: {2: S, 3: M, 4: L}, depends_on: ["2.3"]}
+  "2.2": {levels: {2: [q_coordinator], 3: [q_coe, codeowners], 4: [q_operating_model_review]}, effort: {2: S, 3: L, 4: M}, depends_on: ["2.3"]}
+  "2.3": {levels: {2: [q_project_sponsors], 3: [q_exec_owner], 4: [q_leadership_objectives]}, effort: {2: S, 3: M, 4: M}, depends_on: []}
+  "2.4": {levels: {2: [q_rollout_comms, onboarding_guide], 3: [q_change_method, contributing_guide], 4: [q_feedback_loop]}, effort: {2: S, 3: M, 4: M}, depends_on: ["2.3"]}
+  "2.5": {levels: {2: [learning_material, q_awareness_material], 3: [q_role_literacy], 4: [q_continuous_learning]}, effort: {2: S, 3: M, 4: M}, depends_on: []}
+  "3.1": {levels: {2: [dependency_pinning, ci_tests], 3: [cloud_ai_service, shared_library, eval_suite], 4: [eval_gate_ci, container_build, telemetry]}, effort: {2: S, 3: M, 4: L}, depends_on: []}
+  "3.2": {levels: {2: [iac_any], 3: [iac_tests, cost_guard, managed_identity], 4: [autoscale, q_cost_optimisation_cadence]}, effort: {2: S, 3: M, 4: M}, depends_on: []}
+  "3.3": {levels: {2: [api_contract], 3: [adr, api_gateway, event_driven], 4: [mcp_server, a2a_card]}, effort: {2: S, 3: L, 4: M}, depends_on: ["3.2"]}
+  "3.4": {levels: {2: [dependency_pinning], 3: [experiment_tracking, dev_environment], 4: [q_self_service_env]}, effort: {2: S, 3: M, 4: L}, depends_on: ["3.1"]}
+  "4.1": {levels: {2: [cd_pipeline], 3: [eval_gate_ci, env_approval, teardown], 4: [q_auto_retrain, lifecycle_gates]}, effort: {2: S, 3: M, 4: L}, depends_on: ["3.1", "3.2"]}
+  "4.2": {levels: {2: [telemetry], 3: [alert_rules, drift_monitoring], 4: [business_metric_link, q_auto_improve]}, effort: {2: S, 3: M, 4: L}, depends_on: ["4.1"]}
+  "4.3": {levels: {2: [api_contract], 3: [api_gateway, event_driven], 4: [mcp_server, a2a_card]}, effort: {2: S, 3: M, 4: M}, depends_on: ["3.3"]}
+  "4.4": {levels: {2: [q_partnership_informal], 3: [q_partnership_formal], 4: [q_ecosystem_lead]}, effort: {2: S, 3: M, 4: L}, depends_on: []}
+  "4.5": {levels: {2: [shared_library], 3: [adopt_guide, reuse_catalog], 4: [q_reuse_measured]}, effort: {2: S, 3: M, 4: M}, depends_on: ["3.1"]}
+  "5.1": {levels: {2: [ai_policy_doc, security_policy], 3: [inventory, lifecycle_gates, q_review_board], 4: [compliance_in_pipeline, audit_log]}, effort: {2: S, 3: M, 4: L}, depends_on: ["2.3"]}
+  "5.2": {levels: {2: [q_ethics_principles], 3: [fairness_tests, hitl_approval], 4: [q_affected_people]}, effort: {2: S, 3: M, 4: L}, depends_on: ["5.1"]}
+  "5.3": {levels: {2: [risk_cards], 3: [risk_scoring, scenario_tests], 4: [drift_monitoring, q_erm_integration]}, effort: {2: S, 3: M, 4: L}, depends_on: ["5.1"]}
+  "5.4": {levels: {2: [reg_mapping], 3: [policy_as_code, compliance_in_pipeline], 4: [q_reg_watch]}, effort: {2: S, 3: M, 4: M}, depends_on: ["5.1"]}
+  "5.5": {levels: {2: [model_cards], 3: [explainability, model_cards], 4: [q_audience_explanations]}, effort: {2: S, 3: M, 4: M}, depends_on: ["5.1"]}
+  "6.1": {levels: {2: [data_needs], 3: [data_catalog], 4: [q_data_sharing_agreements]}, effort: {2: S, 3: M, 4: L}, depends_on: ["1.4"]}
+  "6.2": {levels: {2: [data_contracts], 3: [data_quality_tests], 4: [q_dq_monitoring]}, effort: {2: S, 3: M, 4: M}, depends_on: ["6.1"]}
+  "6.3": {levels: {2: [q_access_process], 3: [rbac_data, data_access_platform], 4: [q_self_service_data]}, effort: {2: S, 3: M, 4: L}, depends_on: ["6.1"]}
+  "6.4": {levels: {2: [synthetic_generator], 3: [synthetic_validation], 4: [q_synthetic_strategy]}, effort: {2: S, 3: S, 4: M}, depends_on: []}
+  "6.5": {levels: {2: [q_domain_experts], 3: [domain_docs, data_sheets], 4: [q_embedded_smes]}, effort: {2: S, 3: M, 4: M}, depends_on: ["6.1"]}
