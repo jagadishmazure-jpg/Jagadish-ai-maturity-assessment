@@ -33,7 +33,7 @@ def work_items(gaps: list[dict[str, Any]]) -> list[dict[str, Any]]:
             items[iid] = {
                 "id": iid, "category": g["category"], "name": g["name"], "pillar": g["pillar"], "to_level": step["to_level"],
                 "effort": step["effort"], "months": DURATION[step["effort"]], "depends_on": deps, "critical": g["critical"],
-                "gap": g["gap"], "confidence": g["confidence"], "actions": step["actions"], "missing": step["missing"],
+                "gap": g["gap"], "confidence": g["confidence"], "action": step["action"], "missing": step["missing"],
             }
     for it in items.values():
         it["unblocks"] = sorted(o["id"] for o in items.values() if it["id"] in o["depends_on"])

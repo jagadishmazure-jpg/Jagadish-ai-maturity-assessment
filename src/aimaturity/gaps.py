@@ -29,7 +29,7 @@ def gap_analysis(results, statuses, target_of) -> list[dict[str, Any]]:
             steps.append(
                 {
                     "to_level": lvl, "level_name": LEVEL_NAMES[lvl], "missing": missing, "missing_text": [describe(s) for s in missing],
-                    "actions": cats[cid]["actions"].get(lvl, []), "effort": cats[cid]["rubric"]["effort"][lvl],
+                    "action": cats[cid]["actions"].get(lvl, ""), "effort": cats[cid]["rubric"]["effort"][lvl],
                 }
             )
         rows.append(
