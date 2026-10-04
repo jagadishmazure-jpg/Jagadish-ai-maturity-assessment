@@ -1,0 +1,22 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "AI Maturity Assessor",
+  "description": "Evidence-based AI maturity assessment over six pillars and 29 categories (framework structure adapted from UNESCO under CC BY-SA 3.0 IGO). Scores categories from repository artifacts and questionnaire answers, with confidence, cited evidence and human review for low-confidence items; produces gaps, a Month 1-12 roadmap and an executive report. Read-only: it never records a review.",
+  "url": "https://ai-maturity.example.invalid/a2a/v1",
+  "preferredTransport": "JSONRPC",
+  "version": "0.1.0",
+  "provider": {"organization": "Jagadish Meduri (portfolio project)", "url": "https://github.com/jagadishmazure-jpg/Jagadish-ai-maturity-assessment"},
+  "documentationUrl": "https://github.com/jagadishmazure-jpg/Jagadish-ai-maturity-assessment/blob/main/docs/components/a2a-agent-card.md",
+  "capabilities": {"streaming": false, "pushNotifications": false, "stateTransitionHistory": false},
+  "securitySchemes": {"entra": {"type": "oauth2", "description": "Microsoft Entra ID client credentials; the caller needs the Assessment.Read app role.", "flows": {"clientCredentials": {"tokenUrl": "https://login.microsoftonline.com/organizations/oauth2/v2.0/token", "scopes": {"api://ai-maturity/.default": "Read assessments"}}}}},
+  "security": [{"entra": ["api://ai-maturity/.default"]}],
+  "defaultInputModes": ["application/json", "text/plain"],
+  "defaultOutputModes": ["application/json", "text/markdown"],
+  "skills": [
+    {"id": "assess-org", "name": "Assess an organisation", "description": "Overall, pillar and category maturity with confidence and review status.", "tags": ["maturity", "assessment", "governance"], "examples": ["Assess valemont-revenue-agency", "What is the overall maturity of kestrel-bay-bank?"], "outputModes": ["application/json"]},
+    {"id": "explain-category", "name": "Explain a category result", "description": "Rationale for one category, with the evidence ids it cites and what the next level needs.", "tags": ["evidence", "explainability"], "examples": ["Why is 5.3 at level 3 for the portfolio?"]},
+    {"id": "gap-analysis", "name": "Gap analysis", "description": "Categories below target and the missing evidence per step.", "tags": ["gaps", "planning"], "examples": ["Which critical categories are below target?"]},
+    {"id": "roadmap", "name": "Month 1-12 roadmap", "description": "Prioritised steps with quick wins, dependencies, start and end months, and a backlog.", "tags": ["roadmap", "planning"], "examples": ["Give me the quick wins for the first three months"], "outputModes": ["application/json", "text/markdown"]},
+    {"id": "review-queue", "name": "Human review queue", "description": "Low-confidence or sample-answer categories that wait for a named reviewer.", "tags": ["hitl", "governance"], "examples": ["What still needs human sign-off?"]}
+  ]
+}
