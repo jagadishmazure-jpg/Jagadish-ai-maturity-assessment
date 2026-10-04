@@ -114,3 +114,13 @@ def test_missing_checkout_is_reported(tmp_path):
 
     with pytest.raises(FileNotFoundError):
         live_sources(load_org("portfolio"), root=tmp_path)
+
+
+def test_aimaturity_home_overrides_the_data_root(tmp_path):
+    import subprocess
+    import sys
+
+    code = "import aimaturity; print(aimaturity.ROOT)"
+    env = {**__import__("os").environ, "AIMATURITY_HOME": str(tmp_path)}
+    out = subprocess.run([sys.executable, "-c", code], env=env, capture_output=True, text=True).stdout.strip()
+    assert out == str(tmp_path)
