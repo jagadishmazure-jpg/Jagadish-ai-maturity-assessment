@@ -3,6 +3,14 @@
 # public administrations"), authored by Stratejai for UNESCO, licensed CC BY-SA 3.0 IGO. The summaries,
 # level descriptors and advancement actions below are rewritten in this repository's own words.
 # This file, like everything in framework/, is shared under CC BY-SA 3.0 IGO (see framework/LICENSE.md).
+source:
+  work: UNESCO, AI Maturity Framework
+  subtitle: A self-positioning guide for public administrations
+  developed_by: Stratejai for UNESCO
+  license: CC BY-SA 3.0 IGO
+  license_url: https://creativecommons.org/licenses/by-sa/3.0/igo/
+  changes: Pillar, category and level structure kept; all summaries, descriptors and actions rewritten; rubric and scoring are new.
+  endorsement: None. UNESCO does not endorse this model, the tool or any assessment result.
 levels:
   1: {name: Basic, gist: Ad hoc and person-dependent; little shared understanding of AI.}
   2: {name: Ready, gist: Written down and repeated within projects or teams; intent is clear.}
@@ -251,7 +259,7 @@ pillars:
         summary: How the organisation learns from and works with universities, peers, vendors and communities.
         why: Partners bring skills, data and lessons that are expensive to build alone.
         descriptors:
-          1: The organisation works alone.
+          1: The organisation builds AI on its own, with no outside partners or peer exchange.
           2: Contacts are informal and collaborations occasional.
           3: Strategic partnerships exist for specific AI projects or knowledge sharing.
           4: The organisation helps lead its AI ecosystem and manages partnerships systematically.
@@ -389,7 +397,7 @@ pillars:
         summary: The ability to create and validate artificial data for building and testing AI.
         why: Synthetic data unlocks testing when real data is scarce or sensitive.
         descriptors:
-          1: Only real data is used.
+          1: Only real data is used; synthetic data has not been tried or considered.
           2: First experiments with synthetic data for specific problems.
           3: Synthetic data is generated and validated for defined use cases.
           4: Synthetic data is part of the data strategy, with strong validation.

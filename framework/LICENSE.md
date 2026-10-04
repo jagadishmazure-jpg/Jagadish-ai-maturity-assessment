@@ -5,7 +5,7 @@ license, not under the repository's MIT license.
 
 - **Source:** UNESCO, *AI Maturity Framework* (subtitle: "A self-positioning guide for public
   administrations"), authored by Stratejai for UNESCO.
-- **Source license:** Creative Commons Attribution-ShareAlike 3.0 IGO (CC BY-SA 3.0 IGO),
+- **Source license:** CC BY-SA 3.0 IGO, the Creative Commons Attribution-ShareAlike licence for intergovernmental organisations,
   <https://creativecommons.org/licenses/by-sa/3.0/igo/>.
 - **What was adapted:** the six pillars, the 29 category names, the four level names and the idea of
   critical categories that cap a pillar. Category summaries, level descriptors, advancement actions and
