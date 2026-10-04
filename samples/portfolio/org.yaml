@@ -24,4 +24,4 @@ repos:
 links:
   agentic-ai-model-risk: ["5.1", "5.3", "5.5"]
   azure-finops: ["1.4", "3.2"]
-  fabric-enterprise-bi: ["6.2", "6.3"]
+  fabric-enterprise-bi: ["6.1", "6.2"]

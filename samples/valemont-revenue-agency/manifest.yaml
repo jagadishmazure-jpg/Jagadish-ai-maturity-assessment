@@ -1,0 +1,37 @@
+repos:
+- name: vra-ai-services
+  signals:
+  - api_contract
+  - cd_pipeline
+  - ci_lint
+  - ci_tests
+  - dependency_pinning
+  - iac_any
+  - policy_as_code
+- name: vra-data-hub
+  signals:
+  - data_contracts
+  - data_needs
+  - data_sheets
+  - domain_docs
+- name: vra-digital-office
+  signals:
+  - ai_policy_doc
+  - business_case
+  - changelog
+  - compliance_in_pipeline
+  - contributing_guide
+  - experiments
+  - explainability
+  - fairness_tests
+  - hitl_approval
+  - inventory
+  - learning_material
+  - lifecycle_gates
+  - model_cards
+  - onboarding_guide
+  - reg_mapping
+  - risk_cards
+  - roadmap_doc
+  - security_policy
+  - vision_statement

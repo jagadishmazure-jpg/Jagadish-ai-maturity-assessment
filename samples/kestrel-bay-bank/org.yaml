@@ -1,0 +1,13 @@
+# Sample org 2 (fictional): a mid-sized retail and business bank with a model risk function.
+# Evidence is a manifest of synthetic repositories; people and culture answers are self-reported.
+name: Kestrel Bay Bank
+kind: Fictional retail and business bank
+assessor: aimaturity-agent
+manifest: manifest.yaml
+questionnaire: questionnaire.yaml
+labels: labels.yaml
+capacity: 4
+targets:
+  default: 3
+  pillars: {"5": 4}
+  categories: {"3.1": 4, "4.1": 4}

@@ -1,0 +1,18 @@
+reviews:
+- category: '4.4'
+  reviewer: Tomas Reyes (Digital Assurance)
+  decision: override
+  level: 3
+  computed_level: 2
+  comment: Signed research agreement with the national university and a peer exchange with two other tax administrations;
+    the partial answer undersold it.
+  evidence_digest: db2612182cc2eda6
+  audit_hash: 09b18fcc764c34a9d5e372684cae7eb5aaacd563d043033aa1f86cfc6e3e2e8a
+- category: '1.2'
+  reviewer: Tomas Reyes (Digital Assurance)
+  decision: confirm
+  level: 2
+  computed_level: 2
+  comment: Project intake form has a goal field; business cases are not yet mandatory, so Ready stands.
+  evidence_digest: 13909c0c80e38bf6
+  audit_hash: 30238fad0ef481b991ab52601a524ff4c4aae5d4b02a057f3ab9d1ea33d5c3b1

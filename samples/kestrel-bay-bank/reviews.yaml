@@ -1,0 +1,9 @@
+reviews:
+- category: '2.1'
+  reviewer: Amara Lindqvist (Model Risk)
+  decision: confirm
+  level: 2
+  computed_level: 2
+  comment: Skills matrix seen in the HR workforce plan; training paths are not funded yet, so Ready is right.
+  evidence_digest: 4c1a84a6326e543b
+  audit_hash: 9242a9a3bab16661e4d40edc83b6e984ebd1200f2549184cd23f095de4e8a88e
