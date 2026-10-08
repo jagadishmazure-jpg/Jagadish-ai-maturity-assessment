@@ -15,7 +15,7 @@ Sections: [1. Purpose](#1-purpose) · [2. Architecture](#2-architecture) · [3. 
 
 ```mermaid
 flowchart LR
-  PR[push / PR] --> CI[ci: tests, evals, drift, bicep, docker, gitleaks]
+  PR[push / PR] --> CI[ci: tests, evals, drift, bicep, docker + Trivy + provenance, SBOM, gitleaks]
   PR --> CQL[codeql: python, actions]
   PR --> INF[infra: fmt, validate, test, tflint, checkov]
   PR --> DEP[deploy: preflight]
@@ -38,7 +38,7 @@ flowchart LR
 
 | File | Role |
 |---|---|
-| `.github/workflows/ci.yml` | Quality gates and gitleaks |
+| `.github/workflows/ci.yml` | Quality gates, gitleaks, source SBOM, and the image job (Trivy scan, image SBOM, keyless provenance on `main`) |
 | `.github/workflows/codeql.yml` | CodeQL code scanning |
 | `.github/dependabot.yml` | Weekly grouped updates for pip, Actions, Docker and Terraform |
 | `.github/workflows/infra.yml` | IaC checks |

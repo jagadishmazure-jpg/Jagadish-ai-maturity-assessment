@@ -51,12 +51,60 @@ jobs:
           if grep -q "Warning" bicep.log; then exit 1; fi
   docker:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # Sigstore keyless signing of the provenance (main pushes only)
+      attestations: write # store the provenance in the repo's attestation store
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - name: Build the scheduled-job image (not pushed)
         run: docker build -t ai-maturity-assessment:ci .
       - name: Run it offline
         run: docker run --rm ai-maturity-assessment:ci --out /tmp/out --org kestrel-bay-bank
+      - name: Trivy image scan, assessment job (fixable HIGH/CRITICAL fail the job)
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          version: v0.70.0
+          image-ref: ai-maturity-assessment:ci
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          exit-code: "1"
+      - name: Image SBOM, assessment job (SPDX)
+        uses: anchore/sbom-action@66cbf4bc1f1c0d2edc94016e65bc221b6bb0ad6c # v0.24.3
+        with:
+          image: ai-maturity-assessment:ci
+          format: spdx-json
+          artifact-name: image-sbom-ai-maturity-assessment.spdx.json
+          upload-release-assets: false
+      - name: Save the image archive, assessment job (main only)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: docker save ai-maturity-assessment:ci -o image-ai-maturity-assessment.tar
+      - name: Build provenance for the image archive, assessment job (keyless, main only)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: image-ai-maturity-assessment.tar
+      - name: Keep the attested archive for verification, assessment job (main only)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: image-ai-maturity-assessment.tar
+          path: image-ai-maturity-assessment.tar
+          retention-days: 5
+
+  sbom:
+    # Software bill of materials for the source tree (lockfiles and manifests), kept as a build
+    # artifact on every run. Image SBOMs, where the repo ships a container, come from the image job.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: Software bill of materials (SPDX)
+        uses: anchore/sbom-action@66cbf4bc1f1c0d2edc94016e65bc221b6bb0ad6c # v0.24.3
+        with:
+          path: .
+          format: spdx-json
+          artifact-name: sbom.spdx.json
+          upload-release-assets: false
 
   secrets:
     # gitleaks over the full git history. Known false positives (public role IDs, synthetic
