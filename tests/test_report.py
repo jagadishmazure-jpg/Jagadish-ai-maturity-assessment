@@ -16,7 +16,8 @@ def states():
 
 @pytest.mark.parametrize("org", ORGS)
 def test_checked_in_report_matches_fresh_render(states, org):
-    assert write(states[org], check=True) == []
+    stale = write(states[org], check=True)
+    assert stale == []
 
 
 @pytest.mark.parametrize("org", ORGS)
@@ -86,5 +87,7 @@ def test_markdown_table_escapes_pipes(states):
 
 
 def test_write_into_tmp(states, tmp_path):
-    assert set(write(states["kestrel-bay-bank"], out_dir=tmp_path)) == {"report.md", "report.html", "radar.svg"}
-    assert write(states["kestrel-bay-bank"], out_dir=tmp_path, check=True) == []
+    written = write(states["kestrel-bay-bank"], out_dir=tmp_path)
+    assert set(written) == {"report.md", "report.html", "radar.svg"}
+    stale = write(states["kestrel-bay-bank"], out_dir=tmp_path, check=True)
+    assert stale == []
