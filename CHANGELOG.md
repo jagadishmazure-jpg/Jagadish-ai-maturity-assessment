@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Supply-chain hardening: every GitHub Action pinned to a commit SHA with a version comment, top-level `permissions` on every workflow, a gitleaks job in CI, a CodeQL workflow, `.github/dependabot.yml` and a guard test (`test_workflows_are_hardened`).
+- GitHub settings: Dependabot alerts and security updates, private vulnerability reporting and a `main` ruleset (no force-push or deletion; CI required on pull requests).
 - Portfolio sample: the profile repository (written AI principles, roadmap, skills matrix) joins the
   scan, the evidence snapshot is refreshed from live checkouts, and reports and docs are re-rendered.
   Questionnaire answers stay labelled sample answers.

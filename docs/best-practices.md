@@ -23,4 +23,5 @@ The rules this repository follows, and what enforces each one.
 | Every full doc has 17 sections, mermaid, output and code | hygiene test |
 | Smallest SKUs and no keys | `tests/test_iac.py`, `terraform test`, checkov with justified skips |
 | Deploy off by default, OIDC only, prod approval | `tests/test_iac.py` on the workflows |
+| Actions pinned to commit SHAs, read-only permissions, gitleaks, CodeQL, Dependabot | `tests/test_iac.py::test_workflows_are_hardened`, `.github/dependabot.yml` |
 | Small, reviewable commits | git history |

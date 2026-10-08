@@ -1,7 +1,7 @@
 # Infrastructure: GitHub Actions workflows
 
-Four workflows: `ci` (lint, schema validation, tests, eval gates, report and doc drift, PDF guard,
-Bicep build, image build), `infra` (Terraform fmt/validate/test, tflint, checkov, optional plan),
+Five workflows: `ci` (lint, schema validation, tests, eval gates, report and doc drift, PDF guard,
+Bicep build, image build, gitleaks), `codeql` (CodeQL for Python and the workflows), `infra` (Terraform fmt/validate/test, tflint, checkov, optional plan),
 `deploy` (image, dev, prod with approval, Terraform or Bicep, OIDC) and `teardown`. Deploy and teardown
 are gated by `DEPLOY_ENABLED`, which is not set.
 
@@ -15,7 +15,8 @@ Sections: [1. Purpose](#1-purpose) · [2. Architecture](#2-architecture) · [3. 
 
 ```mermaid
 flowchart LR
-  PR[push / PR] --> CI[ci: tests, evals, drift, bicep, docker]
+  PR[push / PR] --> CI[ci: tests, evals, drift, bicep, docker, gitleaks]
+  PR --> CQL[codeql: python, actions]
   PR --> INF[infra: fmt, validate, test, tflint, checkov]
   PR --> DEP[deploy: preflight]
   DEP -->|DEPLOY_ENABLED=true| IMG[image to GHCR] --> DEV[deploy-dev, env dev] -->|reviewers| PROD[deploy-prod, env prod]
@@ -29,12 +30,17 @@ flowchart LR
 3. `deploy` always runs `preflight` (reports the gate); other jobs need `DEPLOY_ENABLED == 'true'`. Login is OIDC (`id-token: write`), no client secret.
 4. `deploy-prod` waits for the `prod` environment's reviewers.
 5. `teardown` needs the gate and the environment name typed twice.
+6. The `secrets` job in `ci` runs gitleaks over the full git history (hand-checked false positives are
+   listed in `.gitleaksignore`); `codeql` analyses Python and the workflow files on push, pull request
+   and weekly, and reports to the Security tab without failing the build.
 
 ## 4. Key files
 
 | File | Role |
 |---|---|
-| `.github/workflows/ci.yml` | Quality gates |
+| `.github/workflows/ci.yml` | Quality gates and gitleaks |
+| `.github/workflows/codeql.yml` | CodeQL code scanning |
+| `.github/dependabot.yml` | Weekly grouped updates for pip, Actions, Docker and Terraform |
 | `.github/workflows/infra.yml` | IaC checks |
 | `.github/workflows/deploy.yml` | Gated deployment |
 | `.github/workflows/teardown.yml` | Gated teardown |
@@ -85,15 +91,16 @@ PASS  calibration  items=406, exact=0.84, within_one=0.995, high_conf_accuracy=0
 
 ## 9. Tests and gates
 
-* `tests/test_iac.py`: read-only default permissions, every CI gate present, deploy jobs gated and OIDC, preflight the only ungated job, teardown confirmation, deploy script subcommands.
+* `tests/test_iac.py`: read-only default permissions, every CI gate present, deploy jobs gated and OIDC, preflight the only ungated job, teardown confirmation, deploy script subcommands, and every action pinned to a commit SHA with gitleaks, CodeQL and Dependabot configured (`test_workflows_are_hardened`).
 
 ## 10. Guardrails
 
-* Least-privilege tokens (`contents: read` by default, `id-token: write` only where needed, `packages: write` only for the image job).
+* Least-privilege tokens (`contents: read` by default, `id-token: write` only where needed, `packages: write` only for the image job, `security-events: write` only for CodeQL).
+* Every third-party action is pinned to a full commit SHA with a version comment; `tests/test_iac.py::test_workflows_are_hardened` fails CI if one is left unpinned.
 
 ## 11. Security and governance
 
-No Azure resources exist: nothing is deployed and the deploy workflow is gated by an unset `DEPLOY_ENABLED`.
+No Azure resources exist: nothing is deployed and the deploy workflow is gated by an unset `DEPLOY_ENABLED`. GitHub secret scanning, push protection, Dependabot alerts and security updates, and a `main` ruleset (no force-push or deletion, CI required on pull requests) are switched on in the repository settings.
 
 ## 12. Observability
 

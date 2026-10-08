@@ -19,5 +19,5 @@ pytest suite (offline). `pytest -q`.
 | `test_evals.py` | Eval gates |
 | `test_mcp_a2a.py` | MCP tools and agent card |
 | `test_cli.py` | CLI commands and scheduled run |
-| `test_iac.py` | Terraform, Bicep, workflows |
+| `test_iac.py` | Terraform, Bicep, workflows (including the supply-chain guard: pinned actions, permissions, gitleaks, CodeQL, Dependabot) |
 | `test_repo_hygiene.py` | Docs, dates, attribution, PDF guard, overlap, READMEs |
