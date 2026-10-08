@@ -9,12 +9,12 @@ requires-python = ">=3.13"
 dependencies = [
   "jsonschema==4.26.0", # validates framework, rubric, org and evidence files
   "matplotlib==3.11.2", # radar chart in the executive report
-  "mcp==2.2.0",         # assessment tools exposed as an MCP server
+  "mcp==2.3.0",         # assessment tools exposed as an MCP server
   "pyyaml==6.0.3",      # framework, rubric and org files are YAML
 ]
 
 [project.optional-dependencies]
-dev = ["pytest==9.1.1", "pytest-asyncio==1.4.0", "ruff==0.16.9"]
+dev = ["pytest==9.1.1", "pytest-asyncio==1.4.0", "ruff==0.16.10"]
 azure = ["azure-identity==1.26.0", "azure-storage-blob==12.31.0"] # only the scheduled job uploads
 
 [project.scripts]
