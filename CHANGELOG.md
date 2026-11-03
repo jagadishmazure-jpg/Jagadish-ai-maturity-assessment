@@ -19,6 +19,7 @@
   Scale upwards, default anchors per dimension and a 48-item questionnaire.
 - Collectors for repositories and evidence snapshots; stepwise scoring with confidence and citations.
 - Dimension and weighted overall rollup with anchor caps and a 0-100 Agentic Readiness Index.
+- Standards crosswalk doc (`docs/standards-crosswalk.md`) generated from the model and kept in step by a test; one doc per dimension.
 - HITL review queue with digest-bound sign-off and a hash-chained audit log.
 - Gap analysis, Month 1-12 roadmap with quick wins, strategic items and dependencies.
 - Executive report in Markdown and HTML with a radar chart.
