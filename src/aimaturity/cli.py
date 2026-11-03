@@ -122,7 +122,9 @@ def cmd_assess(a) -> int:
     if a.json:
         _p(json.dumps(s, indent=1))
         return 0
-    _p(f"{s['name']}: overall Level {s['overall']['level']} ({s['overall']['level_name']}), mean {s['overall']['mean']}")
+    _p(
+        f"{s['name']}: overall Level {s['overall']['level']} ({s['overall']['level_name']}), mean {s['overall']['mean']}, Agentic Readiness Index {s['overall']['index']}"
+    )
     _p(
         table(
             [{**p, "capped_by": ",".join(p["capped_by"]) or "-"} for p in s["dimensions"]],
@@ -135,7 +137,7 @@ def cmd_assess(a) -> int:
         table(
             s["capabilities"],
             ["id", "level", "computed_level", "confidence", "status", "target"],
-            ["cat", "level", "computed", "conf", "status", "target"],
+            ["capability", "level", "computed", "conf", "status", "target"],
         )
     )
     _p(f"\nreview queue: {', '.join(s['review_queue']) or 'empty'}; final: {s['final']}")
@@ -180,7 +182,7 @@ def cmd_explain(a) -> int:
 def cmd_gaps(a) -> int:
     st = _state(a)
     rows = [{**g, "first": g["steps"][0]["action"][:70]} for g in sorted(st["gaps"], key=lambda g: (-g["gap"], g["capability"])) if g["gap"]]
-    _p(table(rows, ["capability", "current", "target", "gap", "first"], ["cat", "now", "target", "gap", "first action"]))
+    _p(table(rows, ["capability", "current", "target", "gap", "first"], ["capability", "now", "target", "gap", "first action"]))
     return 0
 
 
