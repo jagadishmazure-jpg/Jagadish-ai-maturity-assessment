@@ -7,7 +7,7 @@ __pycache__/
 *.egg-info/
 build/
 dist/
-# The UNESCO framework PDF is never committed (only our own adapted wording is).
+# Binary documents (PDFs) are never committed; everything in the repository is plain text.
 *.pdf
 refs/
 out/
