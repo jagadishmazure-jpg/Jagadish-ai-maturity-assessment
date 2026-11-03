@@ -1,0 +1,201 @@
+# Evidence rules per capability (this repository's own rubric, MIT licensed).
+#
+# Each level from 2 (Prove) to 5 (Optimise) lists `must` criteria and `support` criteria. A capability
+# reaches level N when it reached level N-1, every `must` criterion is fully present (a partial answer
+# does not satisfy a must) and the present share of `support` criteria is at least `support_share`
+# (a partial answer counts half). Level 1 (Explore) needs nothing.
+#
+# Evidence ceiling: every `must` list at levels 4 and 5 contains at least one artifact signal, so
+# questionnaire answers alone can lift a capability to Operate (3) and no further. The consistency
+# check in src/aimaturity/framework.py enforces this.
+#
+# Effort per step: S (about a month), M (two), L (three). Anchors cap their dimension: a dimension
+# cannot sit more than one level above its weakest anchor capability.
+support_share: 0.5
+ceiling_from: 4
+anchors: [SV-1, DF-2, PL-2, AE-1, SI-1, GR-1, PO-1, FC-1]
+capabilities:
+  SV-1:
+    levels:
+      2: {must: [vision_statement], support: [q_project_sponsors]}
+      3: {must: [vision_targets], support: [q_vision_published, q_exec_owner]}
+      4: {must: [strategy_review], support: [q_vision_in_budget]}
+      5: {must: [strategy_review, scouting], support: [q_strategy_session, q_leadership_objectives]}
+    effort: {2: S, 3: M, 4: M, 5: L}
+    depends_on: []
+  SV-2:
+    levels:
+      2: {must: [business_case], support: [experiments, q_goal_field]}
+      3: {must: [roadmap_doc], support: [q_business_case_mandatory]}
+      4: {must: [roadmap_owned, adr], support: [q_roadmap_refresh]}
+      5: {must: [experiment_writeups], support: [scouting, q_pilot_scaling]}
+    effort: {2: S, 3: S, 4: M, 5: L}
+    depends_on: [SV-1]
+  SV-3:
+    levels:
+      2: {must: [value_metrics], support: [business_case]}
+      3: {must: [value_tracking_code], support: []}
+      4: {must: [business_metric_link], support: [q_intangible_value]}
+      5: {must: [business_metric_link, strategy_review], support: [q_auto_improve]}
+    effort: {2: S, 3: M, 4: L, 5: L}
+    depends_on: [SV-2]
+  DF-1:
+    levels:
+      2: {must: [data_needs], support: [q_domain_experts]}
+      3: {must: [domain_docs], support: [data_sheets]}
+      4: {must: [data_catalog], support: [q_embedded_smes]}
+      5: {must: [data_catalog, domain_docs], support: [q_data_sharing_agreements]}
+    effort: {2: S, 3: M, 4: M, 5: L}
+    depends_on: [SV-2]
+  DF-2:
+    levels:
+      2: {must: [data_contracts], support: []}
+      3: {must: [data_quality_tests], support: [data_sheets]}
+      4: {must: [data_catalog], support: [q_dq_monitoring]}
+      5: {must: [drift_monitoring], support: [q_dq_monitoring]}
+    effort: {2: S, 3: M, 4: M, 5: L}
+    depends_on: [DF-1]
+  DF-3:
+    levels:
+      2: {must: [q_access_process], support: [synthetic_generator]}
+      3: {must: [rbac_data], support: [synthetic_validation, data_access_platform]}
+      4: {must: [data_access_platform], support: [q_self_service_data]}
+      5: {must: [synthetic_validation], support: [q_synthetic_strategy, q_self_service_data]}
+    effort: {2: S, 3: M, 4: L, 5: M}
+    depends_on: [DF-1, SI-1]
+  PL-1:
+    levels:
+      2: {must: [ci_tests], support: [ci_lint, dependency_pinning]}
+      3: {must: [iac_any], support: [cloud_ai_service, dev_environment]}
+      4: {must: [iac_tests, container_build], support: [shared_library, q_self_service_env]}
+      5: {must: [iac_scan], support: [autoscale, reuse_catalog]}
+    effort: {2: S, 3: M, 4: M, 5: L}
+    depends_on: []
+  PL-2:
+    levels:
+      2: {must: [cd_pipeline], support: [changelog]}
+      3: {must: [env_approval], support: [oidc, teardown]}
+      4: {must: [lifecycle_gates], support: [eval_gate_ci]}
+      5: {must: [lifecycle_gates, experiment_tracking], support: [q_auto_retrain]}
+    effort: {2: S, 3: M, 4: M, 5: L}
+    depends_on: [PL-1]
+  PL-3:
+    levels:
+      2: {must: [telemetry], support: []}
+      3: {must: [alert_rules], support: [experiment_tracking]}
+      4: {must: [drift_monitoring], support: [business_metric_link]}
+      5: {must: [business_metric_link], support: [q_auto_improve]}
+    effort: {2: S, 3: S, 4: M, 5: L}
+    depends_on: [PL-2]
+  AE-1:
+    levels:
+      2: {must: [eval_suite], support: []}
+      3: {must: [eval_gate_ci], support: [scenario_tests]}
+      4: {must: [experiment_tracking], support: [doc_drift_check]}
+      5: {must: [eval_gate_ci, drift_monitoring], support: [q_auto_improve]}
+    effort: {2: S, 3: M, 4: M, 5: L}
+    depends_on: [PL-1]
+  AE-2:
+    levels:
+      2: {must: [api_contract], support: []}
+      3: {must: [mcp_server], support: [api_gateway]}
+      4: {must: [a2a_card], support: [event_driven]}
+      5: {must: [reuse_catalog], support: [adopt_guide, q_reuse_measured]}
+    effort: {2: S, 3: M, 4: M, 5: M}
+    depends_on: [PL-1]
+  AE-3:
+    levels:
+      2: {must: [hitl_approval], support: []}
+      3: {must: [audit_log], support: [explainability]}
+      4: {must: [scenario_tests], support: [q_autonomy_tiers]}
+      5: {must: [compliance_in_pipeline], support: [q_affected_people]}
+    effort: {2: S, 3: M, 4: M, 5: L}
+    depends_on: [AE-1, GR-1]
+  SI-1:
+    levels:
+      2: {must: [security_policy], support: [secret_hygiene]}
+      3: {must: [managed_identity], support: [key_vault, oidc]}
+      4: {must: [rbac_data], support: [secret_hygiene]}
+      5: {must: [policy_as_code], support: [q_agent_identity_review]}
+    effort: {2: S, 3: M, 4: M, 5: M}
+    depends_on: [PL-1]
+  SI-2:
+    levels:
+      2: {must: [security_policy], support: []}
+      3: {must: [scenario_tests], support: [api_gateway]}
+      4: {must: [eval_gate_ci, scenario_tests], support: [iac_scan]}
+      5: {must: [telemetry, alert_rules], support: [q_red_team_cadence]}
+    effort: {2: S, 3: M, 4: M, 5: L}
+    depends_on: [AE-1]
+  SI-3:
+    levels:
+      2: {must: [dependency_pinning], support: []}
+      3: {must: [secret_hygiene], support: [ci_lint]}
+      4: {must: [iac_scan], support: [container_build]}
+      5: {must: [policy_as_code], support: [compliance_in_pipeline]}
+    effort: {2: S, 3: S, 4: M, 5: M}
+    depends_on: [PL-1]
+  GR-1:
+    levels:
+      2: {must: [ai_policy_doc], support: [q_ethics_principles]}
+      3: {must: [inventory], support: [q_review_board, codeowners]}
+      4: {must: [lifecycle_gates], support: [model_cards]}
+      5: {must: [compliance_in_pipeline], support: [q_erm_integration]}
+    effort: {2: S, 3: M, 4: L, 5: L}
+    depends_on: [PO-1]
+  GR-2:
+    levels:
+      2: {must: [risk_cards], support: []}
+      3: {must: [risk_scoring], support: [fairness_tests]}
+      4: {must: [scenario_tests], support: [q_erm_integration]}
+      5: {must: [drift_monitoring], support: [q_affected_people]}
+    effort: {2: S, 3: M, 4: M, 5: L}
+    depends_on: [GR-1]
+  GR-3:
+    levels:
+      2: {must: [reg_mapping], support: []}
+      3: {must: [model_cards], support: [explainability]}
+      4: {must: [policy_as_code], support: [audit_log]}
+      5: {must: [compliance_in_pipeline], support: [q_reg_watch, q_audience_explanations]}
+    effort: {2: S, 3: M, 4: M, 5: M}
+    depends_on: [GR-1]
+  PO-1:
+    levels:
+      2: {must: [q_project_sponsors], support: [q_coordinator]}
+      3: {must: [q_exec_owner], support: [q_coe]}
+      4: {must: [codeowners], support: [q_operating_model_review]}
+      5: {must: [strategy_review], support: [q_leadership_objectives]}
+    effort: {2: S, 3: M, 4: M, 5: M}
+    depends_on: []
+  PO-2:
+    levels:
+      2: {must: [q_awareness_material], support: [q_ai_roles_defined]}
+      3: {must: [learning_material], support: [q_role_literacy, q_training_paths]}
+      4: {must: [onboarding_guide], support: [q_hr_integration]}
+      5: {must: [experiment_writeups], support: [q_continuous_learning]}
+    effort: {2: S, 3: M, 4: L, 5: M}
+    depends_on: [PO-1]
+  PO-3:
+    levels:
+      2: {must: [q_rollout_comms], support: [onboarding_guide, q_partnership_informal]}
+      3: {must: [contributing_guide], support: [q_change_method]}
+      4: {must: [adopt_guide], support: [q_feedback_loop]}
+      5: {must: [reuse_catalog], support: [q_partnership_formal, q_ecosystem_lead]}
+    effort: {2: S, 3: M, 4: M, 5: L}
+    depends_on: [PO-2]
+  FC-1:
+    levels:
+      2: {must: [cost_guard], support: []}
+      3: {must: [teardown], support: [iac_any]}
+      4: {must: [autoscale], support: [q_cost_optimisation_cadence]}
+      5: {must: [policy_as_code], support: [q_cost_optimisation_cadence]}
+    effort: {2: S, 3: S, 4: M, 5: M}
+    depends_on: [PL-1]
+  FC-2:
+    levels:
+      2: {must: [value_metrics], support: []}
+      3: {must: [value_tracking_code], support: []}
+      4: {must: [business_metric_link], support: [q_model_routing]}
+      5: {must: [telemetry, business_metric_link], support: [q_model_routing]}
+    effort: {2: S, 3: M, 4: M, 5: L}
+    depends_on: [FC-1, SV-3]

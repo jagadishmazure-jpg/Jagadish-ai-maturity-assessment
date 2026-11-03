@@ -1,8 +1,10 @@
 # framework
 
-The framework model. **Everything in this folder is shared under CC BY-SA 3.0 IGO** (https://creativecommons.org/licenses/by-sa/3.0/igo/). Framework structure adapted from UNESCO, *AI Maturity Framework* (Stratejai for UNESCO), [CC BY-SA 3.0 IGO](https://creativecommons.org/licenses/by-sa/3.0/igo/). Wording is this project's own; UNESCO does not endorse it.
+The Enterprise Agentic AI Maturity Model (EAMM): eight dimensions, 23 capabilities and five levels
+(Explore, Prove, Operate, Scale, Optimise), designed for enterprises that deliver AI agents into
+production. MIT licensed with the rest of the repository. Design rationale:
+[ADR 0007](../docs/adr/0007-original-agentic-maturity-model.md).
 
 | File | What it does |
 |---|---|
-| `framework.yaml` | Six pillars, 29 categories, four levels, summaries, descriptors and actions in this project's words |
-| `LICENSE.md` | Attribution, what was adapted, license |
+| `framework.yaml` | Dimensions with weights, capabilities, level descriptors, advancement actions and the NIST AI RMF, ISO/IEC 42001 and EU AI Act crosswalk |

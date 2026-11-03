@@ -1,420 +1,426 @@
-# AI maturity framework model: six pillars, 29 categories, four levels.
-# Structure adapted from UNESCO, "AI Maturity Framework" (subtitle: "A self-positioning guide for
-# public administrations"), authored by Stratejai for UNESCO, licensed CC BY-SA 3.0 IGO. The summaries,
-# level descriptors and advancement actions below are rewritten in this repository's own words.
-# This file, like everything in framework/, is shared under CC BY-SA 3.0 IGO (see framework/LICENSE.md).
-source:
-  work: UNESCO, AI Maturity Framework
-  subtitle: A self-positioning guide for public administrations
-  developed_by: Stratejai for UNESCO
-  license: CC BY-SA 3.0 IGO
-  license_url: https://creativecommons.org/licenses/by-sa/3.0/igo/
-  changes: Pillar, category and level structure kept; all summaries, descriptors and actions rewritten; rubric and scoring are new.
-  endorsement: None. UNESCO does not endorse this model, the tool or any assessment result.
+# Enterprise Agentic AI Maturity Model (EAMM): eight dimensions, 23 capabilities, five levels.
+# Designed by Jagadish Meduri for organisations that build, run and govern AI agents in production.
+# Design rationale: docs/adr/0007-original-agentic-maturity-model.md. Licensed MIT with the rest of the repository.
+model:
+  name: Enterprise Agentic AI Maturity Model
+  short: EAMM
+  version: "2.0"
+  author: Jagadish Meduri
+  scope: Enterprises that deliver AI agents and LLM applications into production, from first pilots to a governed, multi-team platform.
 levels:
-  1: {name: Basic, gist: Ad hoc and person-dependent; little shared understanding of AI.}
-  2: {name: Ready, gist: Written down and repeated within projects or teams; intent is clear.}
-  3: {name: Dynamic, gist: Standard across the organisation, measured and managed ahead of problems.}
-  4: {name: Advanced, gist: Continuously tuned from data and feedback; a strategic strength.}
-pillars:
-  - id: P1
+  1: {name: Explore, gist: Individuals try AI tools on their own; nothing is repeatable and nobody owns the outcome.}
+  2: {name: Prove, gist: Bounded pilots run with a named owner, written success criteria and basic controls.}
+  3: {name: Operate, gist: Agents run in production on a paved road with release gates, monitoring and accountable owners.}
+  4: {name: Scale, gist: Shared platform, reusable components and federated guardrails serve many teams with measured value.}
+  5: {name: Optimise, gist: Telemetry, evaluation, cost and risk data feed back automatically and steer the portfolio.}
+# Dimension weights sum to 1.0 and drive the 0-100 Agentic Readiness Index. Security, governance and agent
+# engineering weigh most because an agent that acts on systems fails expensively when those are weak.
+dimensions:
+  - id: SV
     name: Strategy & Value
-    focus: Why the organisation uses AI, where it pays off and how it plans the journey.
-    categories:
-      - id: "1.1"
-        name: AI Vision & Ambition
-        summary: Whether there is a stated purpose for AI that tells teams what it is for and what it should change.
-        why: Without a purpose, projects scatter and nobody can say whether AI is helping the mission.
+    weight: 0.12
+    focus: Why the enterprise uses agents, which outcomes it funds and whether the value shows up in the numbers.
+    capabilities:
+      - id: SV-1
+        name: Agentic AI Thesis
+        summary: A written position on what agents are for in this business, which outcomes they must move and who sponsors them.
+        why: Without a thesis every team builds its own chatbot and nobody can say which agent deserves the next dollar.
         descriptors:
-          1: AI comes up in conversation but nobody has written down what it is meant to achieve.
-          2: A short written purpose exists and the people who matter know it, though it is not yet tied to goals.
-          3: The purpose is published widely, tied to measurable targets and backed by department heads.
-          4: The purpose is part of the core strategy, revisited on results, and steers budgets and priorities.
+          1: Agents are discussed as a trend; no document says what the business expects from them.
+          2: A short thesis names target outcomes and a sponsor for each pilot, though targets carry no numbers yet.
+          3: The thesis carries numeric targets, is published to staff and an executive owns delivery against it.
+          4: Strategy reviews compare agent results with the targets and move funding between programmes on the evidence.
+          5: Horizon scanning and measured results reshape the thesis itself, and leaders are scored on agentic outcomes.
         actions:
-          2: Write a one-page AI purpose statement with three concrete outcomes and circulate it to leaders.
-          3: Attach measurable targets to each outcome and publish them with an owner per target.
-          4: Review the purpose on a fixed cadence against results and use it in budget decisions.
-      - id: "1.2"
-        name: Strategic Alignment
-        summary: Whether AI work is chosen because it serves organisational goals rather than because the technology is available.
-        why: Work that is not tied to goals tends to stay a pilot and loses funding at the first squeeze.
+          2: Write a one-page agentic AI thesis with three outcomes and a named sponsor per pilot.
+          3: Put a number on every outcome, publish the thesis and assign one executive owner.
+          4: Hold a quarterly strategy review that reallocates budget using measured agent results.
+          5: Keep a technology radar and let it, plus the review record, rewrite the thesis each year.
+        maps_to: {nist_ai_rmf: [GOVERN 1, MAP 1], iso_42001: ["4.1", "5.2", "6.2"], eu_ai_act: []}
+      - id: SV-2
+        name: Use-Case Portfolio & Prioritisation
+        summary: How candidate agent use cases are captured, scored and sequenced into a roadmap with owners.
+        why: Agent ideas are cheap; a scored, owned pipeline stops the loudest request from winning.
         descriptors:
-          1: Projects start because a tool looks interesting; links to goals are missing.
-          2: Some proposals are checked against goals, but not every time and not the same way.
-          3: Every significant AI proposal goes through a business case that names the goal it serves.
-          4: AI capability feeds back into strategy, opening goals that were not possible before.
+          1: Use cases arrive by email and are built in the order someone asks.
+          2: Each candidate has a business case or value estimate, and experiments are tried in a sandbox.
+          3: A roadmap sequences the funded use cases and every proposal must state the goal it serves.
+          4: The roadmap names owners and phases, decisions are recorded and the plan is refreshed from delivery data.
+          5: Pilot write-ups and scouting feed a fast lane that turns winning experiments into funded products.
         actions:
-          2: Add a "goal served" field to every AI proposal template.
-          3: Make a business case with goal linkage mandatory before funding any AI build.
-          4: Run a yearly strategy session where AI capability proposals can change the goals themselves.
-      - id: "1.3"
-        name: Roadmap & Planning
-        summary: Whether a sequenced, resourced plan for AI adoption exists and is kept current.
-        why: A plan turns ambition into funded steps and exposes dependencies before they block delivery.
+          2: Add a value estimate to every use-case request and give pilots a sandbox.
+          3: Publish a roadmap and make a goal-linked business case mandatory for funding.
+          4: Give each roadmap item an owner and phase, and keep architecture decision records.
+          5: Write up every pilot, scout new patterns and create a funded path from pilot to product.
+        maps_to: {nist_ai_rmf: [MAP 1, MAP 3], iso_42001: ["6.1", "6.2", A.6], eu_ai_act: []}
+      - id: SV-3
+        name: Value Realisation
+        summary: Whether the benefits and costs of each agent are measured after launch and reported in business terms.
+        why: Measured value is what keeps an agent funded, and it is the only honest reason to retire one.
         descriptors:
-          1: Planning happens project by project; there is no multi-step view.
-          2: A first roadmap lists milestones, though resourcing and detail are thin.
-          3: A detailed roadmap with owners and budget is managed alongside normal planning cycles.
-          4: The roadmap is refreshed from delivery data, changing priorities and horizon scanning.
+          1: Benefits are anecdotes; nobody checks whether an agent saved anything.
+          2: Value metrics such as hours saved or cost per task are defined and reported for some agents.
+          3: Value is computed in tested code from real usage rather than estimated in slides.
+          4: Monitoring ties agent behaviour to business and cost metrics, including benefits that are hard to price.
+          5: Value data triggers improvement work automatically and the portfolio is rebalanced on it.
         actions:
-          2: Draft a twelve-month roadmap with milestones per quarter.
-          3: Add owners, budget and dependencies to each milestone and review it monthly.
-          4: Feed delivery metrics and horizon scanning into a rolling roadmap refresh.
-      - id: "1.4"
-        name: Value Identification & Measurement
-        summary: How use cases are picked for impact and how their benefits and costs are tracked afterwards.
-        why: Measured value is what justifies scaling, and stopping, AI investments.
+          2: Define two value metrics per agent and report them monthly.
+          3: Compute value from usage data in code with tests.
+          4: Link production telemetry to business KPIs and track strategic benefits too.
+          5: Let value regressions open improvement work without a meeting.
+        maps_to: {nist_ai_rmf: [MAP 3, MEASURE 1, MANAGE 2], iso_42001: ["9.1"], eu_ai_act: []}
+  - id: DF
+    name: Data Foundation
+    weight: 0.13
+    focus: The knowledge, data contracts, quality and access that agents depend on to give grounded answers.
+    capabilities:
+      - id: DF-1
+        name: Knowledge & Grounding Sources
+        summary: Which documents, tables and domain knowledge each agent is grounded on, and who vouches for them.
+        why: An agent is only as right as the sources it retrieves; unknown sources mean unknowable answers.
         descriptors:
-          1: Benefits are assumed or told as stories; costs are not tracked per use case.
-          2: A use-case intake exists and simple metrics such as hours or money saved are defined, unevenly applied.
-          3: Every use case is scored for feasibility and impact up front and its realised value is reported.
-          4: Value tracking includes strategic and intangible benefits and drives portfolio decisions.
+          1: Agents are pointed at whatever folder is handy; nobody lists the sources.
+          2: Each use case lists the data it needs and a domain expert is attached to the project.
+          3: Domain knowledge is written down as glossaries, semantic models or data sheets the agent can rely on.
+          4: Sources are catalogued with lineage and domain experts sit inside the agent teams.
+          5: Grounding sources are planned ahead of demand, with sharing agreements in place before a use case asks.
         actions:
-          2: Define two or three value metrics and a use-case intake form.
-          3: Track realised value and run cost per use case and report it every month.
-          4: Add strategic and intangible measures and rebalance the portfolio on the results.
-      - id: "1.5"
-        name: Innovation & Experimentation
-        summary: The room, money and habits for trying new AI ideas safely and learning from them.
-        why: Experiments reveal what works locally before large sums are committed.
+          2: List the grounding sources per use case and name a domain expert.
+          3: Write a glossary or semantic model and a data sheet for each source.
+          4: Register sources in a catalogue with lineage and embed experts in agent teams.
+          5: Plan strategic sources and agreements a year ahead of the roadmap.
+        maps_to: {nist_ai_rmf: [MAP 2, MAP 4], iso_42001: [A.7], eu_ai_act: [Art. 10]}
+      - id: DF-2
+        name: Data Quality & Contracts
+        summary: Whether datasets feeding agents have contracts, automated quality checks and continuous monitoring.
+        why: Silent data drift turns a good agent into a confident wrong one.
         descriptors:
-          1: Almost no experimentation; new ideas wait for proof that nobody can produce.
-          2: Pilots happen here and there and lessons travel by word of mouth.
-          3: A sandbox and a light funding route exist; results are written up and shared.
-          4: New techniques are scouted on purpose and promising experiments are scaled quickly.
+          1: Data is used as found; problems surface as user complaints.
+          2: Data contracts or schemas define the datasets agents read.
+          3: Quality rules run automatically and block bad loads, and datasets are described.
+          4: Lineage is catalogued and quality is monitored continuously in production.
+          5: Drift in data and model behaviour is measured and corrected before users notice.
         actions:
-          2: Run a first time-boxed pilot with an agreed success measure.
-          3: Provide a sandbox, a small pilot fund and a standard write-up template.
-          4: Assign scouting time and a fast path from successful pilot to funded product.
-  - id: P2
-    name: People & Culture
-    focus: Skills, structures, leadership and adoption habits that let AI take root.
-    categories:
-      - id: "2.1"
-        name: Talent & Skills
-        summary: Whether AI roles are defined and people with the needed skills are hired, trained and kept.
-        why: Tools do nothing without people who can build, run and question them.
+          2: Write a contract or schema for every dataset an agent reads.
+          3: Automate quality tests in the pipeline and publish data sheets.
+          4: Catalogue lineage and add production quality monitoring.
+          5: Measure drift and wire it to automatic remediation.
+        maps_to: {nist_ai_rmf: [MEASURE 2, MANAGE 4], iso_42001: [A.7], eu_ai_act: [Art. 10]}
+      - id: DF-3
+        name: Governed Access & Synthetic Data
+        summary: How agent teams get policy-compliant access to data, and how synthetic data replaces sensitive data where it can.
+        why: Slow access pushes teams to copy data; uncontrolled access leaks it. Both are failures.
         descriptors:
-          1: Skills are rare and roles undefined; the organisation leans on consultants or a few enthusiasts.
-          2: Key roles are named and first hiring or training efforts have started.
-          3: Workforce planning covers AI roles, with formal training and career paths.
-          4: Skill growth is built into HR processes, with cross-skilling and internal mobility.
+          1: Access is granted by favour and copies of production data sit on laptops.
+          2: A published request process exists and synthetic data is generated for some tests.
+          3: Access is granted through data-plane roles, and synthetic data is validated for fidelity.
+          4: A governed data platform serves agent teams, with self-service access inside policy.
+          5: Synthetic data is a standard option in the data strategy, with privacy and fidelity checks enforced.
         actions:
-          2: Name the AI roles needed and write a skills matrix.
-          3: Fund a training path per role and add AI roles to workforce planning.
-          4: Build AI skills into performance and mobility processes.
-      - id: "2.2"
-        name: Organizational Structure
-        summary: How AI work is organised, who is responsible for what and how teams are arranged.
-        why: Clear structure stops duplicated effort and makes accountability visible.
+          2: Publish an access request process and start generating synthetic test data.
+          3: Move to role-based data-plane access and validate synthetic data in tests.
+          4: Serve data through a governed platform with self-service access.
+          5: Make synthetic data a default in the data strategy with privacy checks.
+        maps_to: {nist_ai_rmf: [GOVERN 1, MANAGE 1], iso_42001: [A.7, A.4], eu_ai_act: [Art. 10]}
+  - id: PL
+    name: Platform & LLMOps
+    weight: 0.13
+    focus: The paved road that builds, ships, observes and retires models and agents without heroics.
+    capabilities:
+      - id: PL-1
+        name: Paved-Road Engineering Platform
+        summary: Shared CI, infrastructure as code and environments that every agent team starts from.
+        why: Teams that each build their own platform spend their budget on plumbing instead of agents.
         descriptors:
-          1: AI work sits inside existing departments with no clear owner.
-          2: An informal working group or a named coordinator exists.
-          3: A formal AI team or centre of excellence has a mandate and a reporting line.
-          4: The operating model (hub and spoke, federated) is tuned to need and reviewed.
+          1: Each team builds from scratch on personal machines.
+          2: Automated tests and linting run in CI and dependencies are pinned.
+          3: Infrastructure, including managed AI services, is defined as code and developer environments are reproducible.
+          4: Infrastructure is tested, workloads ship as containers and teams create governed environments themselves.
+          5: Infrastructure is scanned, scales elastically and a catalogue of platform components is published.
         actions:
-          2: Name an AI coordinator and start a cross-team working group.
-          3: Charter a centre of excellence with mandate, budget and reporting line.
-          4: Review the operating model yearly and adjust between central and embedded roles.
-      - id: "2.3"
-        name: Leadership & Sponsorship
-        summary: How visibly and actively senior leaders back AI work.
-        why: Sponsorship unlocks money, removes blockers and signals that AI matters.
+          2: Run tests and linting in CI and pin dependencies.
+          3: Define infrastructure and AI services as code and provide a reproducible dev environment.
+          4: Test the infrastructure, containerise workloads and offer self-service environments.
+          5: Scan infrastructure code, add autoscaling and publish the component catalogue.
+        maps_to: {nist_ai_rmf: [MANAGE 2], iso_42001: [A.4, A.6], eu_ai_act: [Art. 15]}
+      - id: PL-2
+        name: Release & Lifecycle Automation
+        summary: How agents and prompts move from commit to production through gated, reversible pipelines.
+        why: An agent change is a production change; it needs the same gates as any other release, plus evaluation.
         descriptors:
-          1: Leaders treat AI as an IT topic and nobody sponsors it.
-          2: A few leaders sponsor individual projects when asked.
-          3: An executive sponsor owns the AI agenda and talks about it openly.
-          4: Leaders drive the AI agenda, fund it strategically and hold teams to account.
+          1: Changes are copied to production by hand.
+          2: A deployment pipeline exists and changes are recorded in a changelog.
+          3: Production waits for an approval, pipelines use federated identity and environments can be torn down.
+          4: Lifecycle stages with approval gates are enforced in code and evaluation results block merges.
+          5: Re-evaluation and retraining trigger automatically with staged rollout and tracked experiments.
         actions:
-          2: Secure a named sponsor for each live AI project.
-          3: Appoint an executive owner of the AI agenda with regular updates to the board.
-          4: Put AI outcomes into leadership objectives and resourcing reviews.
-      - id: "2.4"
-        name: Change Management & Adoption
-        summary: How the human side of AI rollouts is planned so people actually use and trust the systems.
-        why: Unused systems deliver nothing; adoption is planned, not hoped for.
+          2: Build a deployment pipeline and keep a changelog.
+          3: Add environment approvals, OIDC federation and pipeline teardown.
+          4: Enforce lifecycle gates in code and block merges on evaluation results.
+          5: Trigger re-evaluation automatically and roll out in stages.
+        maps_to: {nist_ai_rmf: [MANAGE 1, MANAGE 4], iso_42001: ["8.1", A.6], eu_ai_act: [Art. 17]}
+      - id: PL-3
+        name: Observability & Runtime Operations
+        summary: Telemetry, alerts and drift signals for agents in production, tied back to business impact.
+        why: Agents fail quietly; without traces and alerts the first signal is an angry customer.
         descriptors:
-          1: Rollouts focus on the technology; users find out late.
-          2: Deployments come with some communication and training.
-          3: A change method with stakeholder mapping, communication and support is applied to AI rollouts.
-          4: User feedback is gathered continuously and changes both the systems and how they are introduced.
+          1: Nothing is logged beyond what the hosting service keeps by default.
+          2: Services emit telemetry such as traces and metrics.
+          3: Alert rules page an owner and evaluation runs are tracked over time.
+          4: Drift is measured in code and monitoring links behaviour to business or cost metrics.
+          5: Monitoring findings open improvement work automatically.
         actions:
-          2: Add a communication and training checklist to every AI rollout.
-          3: Adopt a change method with stakeholder analysis and adoption metrics.
-          4: Collect user feedback continuously and feed it into the product backlog.
-      - id: "2.5"
-        name: AI Literacy & Awareness
-        summary: How well the wider workforce understands what AI can and cannot do, including its ethical limits.
-        why: Literate staff spot good uses, avoid misuse and challenge poor outputs.
+          2: Instrument agents with OpenTelemetry or Application Insights.
+          3: Define alert rules with owners and keep evaluation history.
+          4: Measure drift and join telemetry to business metrics.
+          5: Turn monitoring findings into backlog items automatically.
+        maps_to: {nist_ai_rmf: [MEASURE 3, MEASURE 4, MANAGE 4], iso_42001: ["9.1", A.6], eu_ai_act: [Art. 12, Art. 72]}
+  - id: AE
+    name: Agent Engineering
+    weight: 0.14
+    focus: How agents are evaluated, how their tools are designed and how much autonomy they are allowed.
+    capabilities:
+      - id: AE-1
+        name: Evaluation & Quality Gates
+        summary: Whether agent behaviour is measured by an evaluation suite and whether those results gate releases.
+        why: Prompt and model changes regress behaviour in ways unit tests never see.
         descriptors:
-          1: Most staff know little about AI and misconceptions are common.
-          2: Awareness material exists and some sessions run now and then.
-          3: Role-based literacy programmes run across the organisation, including ethics.
-          4: Learning is continuous and AI literacy shows up in everyday decisions.
+          1: Quality is judged by trying a few prompts by hand.
+          2: An evaluation suite exists for the main agent behaviours.
+          3: CI blocks merges on evaluation results and adversarial scenarios are part of the suite.
+          4: Evaluation results are tracked as history and documentation is regenerated from real runs.
+          5: Evaluation gates and production drift signals form one loop that drives improvement.
         actions:
-          2: Publish an introductory AI guide and run open sessions.
-          3: Launch role-based literacy tracks with completion tracking.
-          4: Make literacy refreshers continuous and embed AI topics in team routines.
-  - id: P3
-    name: Technology & Infrastructure
-    focus: Platforms, compute, architecture and working environments for AI.
-    categories:
-      - id: "3.1"
-        name: AI Development Platforms & Tools
-        summary: The tooling available across the AI lifecycle, from preparing data to deploying models.
-        why: Shared tooling raises productivity and makes work repeatable and governable.
+          2: Write an evaluation suite for the agent's main tasks.
+          3: Gate merges on evaluation thresholds and add adversarial cases.
+          4: Track evaluation history and regenerate docs from real runs.
+          5: Close the loop between production drift and the evaluation gate.
+        maps_to: {nist_ai_rmf: [MEASURE 1, MEASURE 2], iso_42001: ["9.1", A.6], eu_ai_act: [Art. 15]}
+      - id: AE-2
+        name: Tool & Interoperability Design
+        summary: How agent tools and agent-to-agent interfaces are specified, exposed and reused.
+        why: Tools are where agents touch real systems; loose contracts there become incidents.
         descriptors:
-          1: Everyone uses their own tools; there is no common platform.
-          2: Common libraries are in use and cloud AI services are being explored.
-          3: A supported standard platform covers data preparation, modelling and deployment.
-          4: An integrated platform covers the full lifecycle and is optimised for collaboration.
+          1: Agents call internal systems through ad hoc scripts.
+          2: Services that agents call expose documented API contracts.
+          3: Tools are exposed over the Model Context Protocol and fronted by a gateway.
+          4: Agents publish A2A agent cards and integrate through events as well as calls.
+          5: Tools and agents are listed in a reuse catalogue with adoption guides, and reuse is measured.
         actions:
-          2: Agree a shortlist of supported libraries and a cloud AI service to pilot.
-          3: Standardise on a supported platform with templates for new projects.
-          4: Integrate the platform end to end and measure developer productivity.
-      - id: "3.2"
-        name: Cloud & Compute Infrastructure
-        summary: Access to enough elastic compute, storage and networking for AI workloads, and control of its cost.
-        why: Compute limits stall experiments, while uncontrolled compute burns budget.
+          2: Document an API contract for every system an agent calls.
+          3: Wrap tools in an MCP server behind an API gateway.
+          4: Publish agent cards and add event-driven integration.
+          5: Catalogue tools and agents, write adoption guides and measure reuse.
+        maps_to: {nist_ai_rmf: [MAP 4, GOVERN 6], iso_42001: [A.10, A.6], eu_ai_act: [Art. 15]}
+      - id: AE-3
+        name: Autonomy & Human Oversight
+        summary: Which actions an agent may take alone, where a human must approve, and how decisions are recorded.
+        why: Autonomy without oversight is the shortest path from a wrong answer to a wrong action.
         descriptors:
-          1: Work runs on laptops or fixed servers that limit experimentation.
-          2: Basic cloud services are used and scaling is manual.
-          3: Cloud capacity configured for AI is available on demand, provisioned as code.
-          4: Provisioning is automated and elastic, with cost and performance actively optimised.
+          1: Agents act with whatever permissions they were given and nobody reviews actions.
+          2: Risky actions require a human approval step.
+          3: Agent decisions are written to an audit log and outputs carry their reasons.
+          4: Each agent has an autonomy tier, and scenario tests prove the approval points hold.
+          5: Oversight rules run as pipeline gates and the people affected help set autonomy limits.
         actions:
-          2: Provide a governed cloud subscription for AI work.
-          3: Provision AI infrastructure as code with tagging and budgets.
-          4: Automate scaling and run continuous cost and performance optimisation.
-      - id: "3.3"
-        name: AI-Specific Architectures
-        summary: Whether systems are designed so AI components can be plugged in through clean interfaces.
-        why: Open, modular architecture makes AI cheaper to integrate and safer to change.
+          2: Put a human approval step in front of every risky action.
+          3: Write decisions to a tamper-evident audit log and attach reasons to outputs.
+          4: Assign autonomy tiers and test the approval points with scenarios.
+          5: Enforce oversight in the pipeline and involve affected people in setting limits.
+        maps_to: {nist_ai_rmf: [GOVERN 2, MANAGE 2], iso_42001: [A.9, A.6], eu_ai_act: [Art. 12, Art. 14]}
+  - id: SI
+    name: Security & Identity
+    weight: 0.14
+    focus: Identity, secrets, threat defence and supply chain for systems that act on the enterprise's behalf.
+    capabilities:
+      - id: SI-1
+        name: Agent Identity & Secrets
+        summary: How agents authenticate, where their secrets live and how their permissions are kept minimal.
+        why: An agent with a shared key and broad rights is an insider threat that never sleeps.
         descriptors:
-          1: Monolithic systems make AI integration slow and bespoke.
-          2: Some systems expose APIs and new designs start to consider AI.
-          3: Patterns such as APIs, events and microservices are standard for AI integration.
-          4: The architecture is built for AI, with reusable AI services across the estate.
+          1: Agents use personal or shared keys stored in code or config files.
+          2: A security policy exists and secret hygiene is enforced by scanning.
+          3: Workloads use managed identities, secrets sit in a vault and pipelines use federation.
+          4: Data access is granted through least-privilege data-plane roles.
+          5: Identity rules are enforced as policy and agent permissions are reviewed and pruned on a cadence.
         actions:
-          2: Expose key data and functions through documented APIs.
-          3: Adopt standard integration patterns and record them in architecture decisions.
-          4: Offer AI capabilities as reusable services with published contracts.
-      - id: "3.4"
-        name: Data Science Environment
-        summary: Secure, shared environments where AI teams can build, track and reproduce work.
-        why: Good environments cut setup time and make results reproducible.
+          2: Publish a security policy and turn on secret scanning.
+          3: Move to managed identities, a key vault and OIDC federation.
+          4: Grant data access through narrow data-plane roles.
+          5: Enforce identity rules as policy and review agent permissions regularly.
+        maps_to: {nist_ai_rmf: [GOVERN 1, MANAGE 1], iso_42001: [A.4, A.6], eu_ai_act: [Art. 15]}
+      - id: SI-2
+        name: AI Threat Defence
+        summary: Protection against prompt injection, tool misuse and data exfiltration, tested before and after release.
+        why: Agents read untrusted text and hold real permissions; that combination is the new attack surface.
         descriptors:
-          1: People work on isolated desktops; sharing results is hard.
-          2: Shared storage and basic collaboration tools exist.
-          3: A secure shared workbench supports version control, experiment tracking and collaboration.
-          4: A self-service platform integrates data, tracking and deployment pipelines.
+          1: AI-specific threats are not considered.
+          2: A security policy covers AI systems and how to report issues.
+          3: Adversarial scenarios such as prompt injection are tested and a gateway filters traffic.
+          4: Those scenarios gate releases and infrastructure is scanned for misconfiguration.
+          5: Runtime telemetry and alerts watch for attacks and red-teaming runs on a cadence.
         actions:
-          2: Put all AI code under version control with shared storage.
-          3: Provide a reproducible workbench with pinned dependencies and experiment tracking.
-          4: Offer self-service environments wired into data and deployment pipelines.
-  - id: P4
-    name: AI Operations & Ecosystem
-    focus: Running AI in production and working with others.
-    categories:
-      - id: "4.1"
-        name: Model Deployment & Management (MLOps)
-        summary: How reliably models and agents move into production, are versioned and are rolled back or retrained.
-        why: Operational discipline is what lets AI scale beyond pilots without breaking.
+          2: Extend the security policy to AI systems.
+          3: Test injection and misuse scenarios and front agents with a gateway.
+          4: Make scenario tests a release gate and scan infrastructure code.
+          5: Alert on attack patterns at runtime and red-team on a schedule.
+        maps_to: {nist_ai_rmf: [MEASURE 2, MANAGE 4], iso_42001: ["8.2", A.6], eu_ai_act: [Art. 15]}
+      - id: SI-3
+        name: Supply Chain & Platform Hardening
+        summary: Pinned dependencies, scanned artifacts and policy-enforced platforms under every agent.
+        why: An agent inherits every vulnerability in the packages and images it runs on.
         descriptors:
-          1: Deployment is manual and rare, without versioning or tests.
-          2: Scripts handle some deployments and some versioning exists.
-          3: Automated pipelines test, deploy and roll back models, with versioning.
-          4: The full lifecycle is automated, including retraining, staged rollout and retirement.
+          1: Dependencies float and nobody scans images or infrastructure.
+          2: Dependencies are pinned for reproducible builds.
+          3: Secret hygiene and linting are enforced on every change.
+          4: Infrastructure code is scanned and workloads ship as built containers.
+          5: Platform rules are enforced as policy and compliance gates run in the pipeline.
         actions:
-          2: Script deployments and version every model artefact.
-          3: Build CI/CD with tests, evaluation gates, approvals and rollback.
-          4: Automate retraining triggers, staged rollout and retirement.
-      - id: "4.2"
-        name: Performance Monitoring & Optimization
-        summary: How the behaviour of running AI systems (quality, drift, fairness, latency, cost) is watched and improved.
-        why: Models decay as the world changes; monitoring catches it before users do.
+          2: Pin every dependency.
+          3: Enforce secret hygiene and linting in CI.
+          4: Scan infrastructure code and build containers in CI.
+          5: Enforce platform rules as policy with compliance gates in the pipeline.
+        maps_to: {nist_ai_rmf: [GOVERN 6, MANAGE 3], iso_42001: [A.10, A.6], eu_ai_act: [Art. 15]}
+  - id: GR
+    name: Governance, Risk & Compliance
+    weight: 0.14
+    focus: Policy, accountability, risk treatment and regulatory evidence for every agent in the inventory.
+    capabilities:
+      - id: GR-1
+        name: AI Policy & Accountability
+        summary: The written policy, inventory and decision rights that make each agent somebody's responsibility.
+        why: If nobody owns an agent, nobody switches it off when it misbehaves.
         descriptors:
-          1: Nothing is monitored; problems surface through complaints.
-          2: Uptime and errors are watched; quality is checked by hand now and then.
-          3: Quality, drift and fairness metrics are monitored with thresholds and alerts.
-          4: Monitoring links model behaviour to business impact and triggers improvement automatically.
+          1: General IT policy is assumed to cover AI.
+          2: An AI policy and ethics principles are written down.
+          3: An inventory lists every agent with an owner, and a review body has decision rights.
+          4: Lifecycle gates enforce the policy in code and model cards document each system.
+          5: Compliance gates run in the pipeline and AI risk reports into enterprise risk management.
         actions:
-          2: Add uptime and error monitoring to every AI service.
-          3: Define quality, drift and fairness thresholds with alerts and reports.
-          4: Connect monitoring to business metrics and automated improvement loops.
-      - id: "4.3"
-        name: Integration & Interoperability
-        summary: How AI systems exchange data and fit into existing applications and processes.
-        why: Value appears only when AI outputs reach the processes that use them.
+          2: Write an AI policy and adopt ethics principles.
+          3: Start an agent inventory with owners and charter a review body.
+          4: Enforce lifecycle gates in code and publish model cards.
+          5: Run compliance gates in the pipeline and report AI risk through enterprise risk.
+        maps_to: {nist_ai_rmf: [GOVERN 1, GOVERN 2, GOVERN 4], iso_42001: ["5.2", "5.3", A.2, A.3], eu_ai_act: [Art. 17, Art. 26]}
+      - id: GR-2
+        name: Risk & Impact Management
+        summary: How agent risks such as bias, harm and misuse are recorded, scored, tested and treated.
+        why: Risks that are not scored cannot be compared, and risks that are not tested are only hopes.
         descriptors:
-          1: AI runs in isolation and results are moved by hand.
-          2: Point-to-point integrations exist for specific systems.
-          3: Standard APIs and integration patterns connect AI to business systems.
-          4: AI services are discoverable and composable through gateways, events and open protocols.
+          1: AI risk is not looked at separately from project risk.
+          2: A risk register or risk cards list the risks of each agent.
+          3: Risks are scored for likelihood and impact in code and fairness is tested.
+          4: What-if and adversarial scenarios test the treatments, and AI risk is reported as enterprise risk.
+          5: Drift is monitored as a risk signal and affected people help judge outcomes.
         actions:
-          2: Replace manual hand-offs with a first API integration.
-          3: Standardise integration through an API gateway and documented contracts.
-          4: Publish AI services through discoverable, open protocols such as MCP and A2A.
-      - id: "4.4"
-        name: External Collaboration & Partnerships
-        summary: How the organisation learns from and works with universities, peers, vendors and communities.
-        why: Partners bring skills, data and lessons that are expensive to build alone.
+          2: Start risk cards for every agent.
+          3: Score risks in code and add fairness tests.
+          4: Test treatments with scenarios and report through enterprise risk.
+          5: Treat drift as a live risk signal and involve affected people.
+        maps_to: {nist_ai_rmf: [MAP 5, MEASURE 2, MANAGE 1], iso_42001: ["6.1", "8.2", "8.4", A.5], eu_ai_act: [Art. 9, Art. 27]}
+      - id: GR-3
+        name: Regulatory Compliance & Transparency
+        summary: How obligations under the EU AI Act, NIST AI RMF, ISO/IEC 42001 and privacy law are mapped, evidenced and explained.
+        why: Regulators and customers ask for evidence, not intentions; transparency is part of that evidence.
         descriptors:
-          1: The organisation builds AI on its own, with no outside partners or peer exchange.
-          2: Contacts are informal and collaborations occasional.
-          3: Strategic partnerships exist for specific AI projects or knowledge sharing.
-          4: The organisation helps lead its AI ecosystem and manages partnerships systematically.
+          1: Compliance is assumed rather than mapped.
+          2: Obligations are mapped per system against the relevant regulations and standards.
+          3: Model cards and explanations make each agent understandable to its users.
+          4: Rules are enforced as policy as code and decisions are kept in an audit log.
+          5: Compliance checks run in the pipeline, regulatory change is tracked and explanations are tailored to each audience.
         actions:
-          2: Join one relevant community or peer network.
-          3: Formalise two partnerships with clear goals.
-          4: Run a partnership portfolio and contribute back to shared assets.
-      - id: "4.5"
-        name: Reusability & Shared Components
-        summary: Whether models, pipelines, tools and data are built once and reused across projects.
-        why: Reuse cuts cost and spreads good practice.
+          2: Map each system to its obligations under the EU AI Act, NIST AI RMF, ISO/IEC 42001 and privacy law.
+          3: Publish model cards and attach explanations to outputs.
+          4: Enforce rules as policy as code and keep an audit log.
+          5: Automate compliance checks, watch regulation and tailor explanations per audience.
+        maps_to: {nist_ai_rmf: [GOVERN 1, MEASURE 2], iso_42001: ["4.2", A.8], eu_ai_act: [Art. 11, Art. 13, Art. 50]}
+  - id: PO
+    name: People & Operating Model
+    weight: 0.10
+    focus: Sponsorship, skills and the adoption habits that let agents change how work gets done.
+    capabilities:
+      - id: PO-1
+        name: Sponsorship & Operating Model
+        summary: Who sponsors agent work, how teams are organised around it and how ownership is declared.
+        why: Agent programmes stall without a sponsor and duplicate without a shared operating model.
         descriptors:
-          1: Every project starts from nothing.
-          2: People share snippets informally.
-          3: A shared catalogue and processes for reusing components exist.
-          4: Reusable assets are curated and promoted as an organisation-wide strategy.
+          1: AI is treated as an IT topic and nobody sponsors it.
+          2: Pilots have named sponsors and a coordinator connects them.
+          3: An executive owns the agenda and a central team or centre of excellence has a mandate.
+          4: Code ownership is declared and the operating model is reviewed and adjusted.
+          5: Leaders carry agentic outcomes in their objectives and strategy reviews track them.
         actions:
-          2: Collect reusable components in a shared repository.
-          3: Publish a catalogue with ownership, versioning and adoption guides.
-          4: Fund curation and measure reuse across the organisation.
-  - id: P5
-    name: AI Governance, Ethics & Risk
-    focus: Rules, ethics, risk, law and transparency for AI.
-    categories:
-      - id: "5.1"
-        name: AI Governance Framework
-        summary: The policies, decision rights, roles and accountability that apply specifically to AI.
-        why: Governance makes AI decisions traceable and keeps risk proportionate.
+          2: Name a sponsor per pilot and a coordinator across them.
+          3: Appoint an executive owner and charter a central team.
+          4: Declare code ownership and review the operating model yearly.
+          5: Put agentic outcomes into leadership objectives.
+        maps_to: {nist_ai_rmf: [GOVERN 2, GOVERN 3], iso_42001: ["5.1", "5.3", A.3], eu_ai_act: []}
+      - id: PO-2
+        name: Skills & AI Literacy
+        summary: Whether staff understand agents well enough to use, build and challenge them.
+        why: Literacy is now a legal duty for AI deployers and the first defence against misuse.
         descriptors:
-          1: General IT rules are assumed to cover AI.
-          2: First AI policies are drafted and roles are set per project.
-          3: A formal framework with policies, a review body and clear accountability is in force.
-          4: Governance spans the lifecycle, adherence is monitored and the framework is improved.
+          1: Skills sit with a few enthusiasts.
+          2: Introductory material is available and AI roles are named.
+          3: Learning material is maintained, with role-based tracks and funded training paths.
+          4: Onboarding guides exist and AI skills are part of performance and mobility.
+          5: Teams write up what they learn and learning is part of routine work.
         actions:
-          2: Draft an AI policy and assign roles for each project.
-          3: Set up a review body, lifecycle approval gates and an AI inventory.
-          4: Monitor adherence automatically and review the framework on a cadence.
-      - id: "5.2"
-        name: Ethical Principles & Guidelines
-        summary: How ethical commitments such as fairness, human oversight and transparency are defined and put into practice.
-        why: Public trust depends on AI that treats people fairly and keeps humans in charge.
+          2: Publish introductory material and name the AI roles.
+          3: Maintain role-based learning tracks with funded paths.
+          4: Write onboarding guides and build AI skills into HR processes.
+          5: Make write-ups and continuous learning part of team routines.
+        maps_to: {nist_ai_rmf: [GOVERN 3, GOVERN 4], iso_42001: ["7.2", "7.3"], eu_ai_act: [Art. 4]}
+      - id: PO-3
+        name: Adoption & Change
+        summary: How agents are introduced to the people who use them and how feedback and partners shape them.
+        why: An agent nobody trusts saves nothing.
         descriptors:
-          1: Ethics is rarely discussed and people affected by AI are not the starting point.
-          2: General principles are acknowledged and discussed for risky projects.
-          3: A principles framework is part of standard review, with practical checks.
-          4: Ethics is embedded across culture, strategy and every lifecycle stage.
+          1: Rollouts are technical events and users find out late.
+          2: Rollouts come with communication and an onboarding guide, and the team joins peer communities.
+          3: Shared contribution rules and a change method with adoption metrics are applied.
+          4: Adoption guides let other teams take up the work and user feedback flows into the backlog.
+          5: Reusable assets are catalogued, formal partnerships exist and the enterprise contributes to its ecosystem.
         actions:
-          2: Adopt a short set of principles and discuss them for high-risk projects.
-          3: Add ethics checks such as fairness tests and human oversight to standard review.
-          4: Track ethics outcomes and involve affected people in design.
-      - id: "5.3"
-        name: Risk Assessment & Mitigation
-        summary: How AI-specific risks such as bias, security, privacy and misuse are identified, scored and treated.
-        why: Unmanaged AI risk turns into harm, incidents and lost trust.
+          2: Pair every rollout with communication and an onboarding guide.
+          3: Publish contribution rules and apply a change method with adoption metrics.
+          4: Write adoption guides and collect user feedback continuously.
+          5: Catalogue reusable assets and formalise partnerships.
+        maps_to: {nist_ai_rmf: [GOVERN 5, MEASURE 4], iso_42001: ["7.4", A.8], eu_ai_act: []}
+  - id: FC
+    name: FinOps & Cost
+    weight: 0.10
+    focus: Guardrails and unit economics for token, compute and platform spend.
+    capabilities:
+      - id: FC-1
+        name: Cost Guardrails
+        summary: Budgets, caps, teardown and scaling rules that keep agent spend inside agreed limits.
+        why: Token and GPU bills grow with success; without guardrails a popular agent becomes a budget incident.
         descriptors:
-          1: AI risk is not considered separately.
-          2: Some projects identify risks, often after the fact.
-          3: A standard AI risk process with scoring and controls is applied to every system.
-          4: AI risk is managed continuously and quantitatively as part of enterprise risk.
+          1: Spend is discovered on the monthly invoice.
+          2: Budgets or ingestion caps are provisioned as code.
+          3: Environments are torn down by pipeline and infrastructure is fully codified.
+          4: Workloads scale elastically and spend is reviewed and optimised on a cadence.
+          5: Cost rules are enforced as policy across subscriptions.
         actions:
-          2: Run a risk review for each AI project before launch.
-          3: Standardise risk cards with scoring, controls, owners and scenario tests.
-          4: Feed monitoring and scenarios into continuous, quantitative risk management.
-      - id: "5.4"
-        name: Compliance & Legal
-        summary: How compliance with AI-relevant law (for example the EU AI Act and data protection) is ensured and shown.
-        why: Non-compliance brings legal exposure and can force systems offline.
+          2: Provision budgets and caps as code.
+          3: Tear environments down by pipeline.
+          4: Configure autoscaling and a monthly optimisation review.
+          5: Enforce cost rules as policy.
+        maps_to: {nist_ai_rmf: [MANAGE 2], iso_42001: [A.4], eu_ai_act: []}
+      - id: FC-2
+        name: Unit Economics & Model Routing
+        summary: Cost per task, cost per outcome and the routing of work to the cheapest model that meets quality.
+        why: The same answer can cost ten times more on the wrong model; unit economics make that visible.
         descriptors:
-          1: Compliance is assumed from general rules.
-          2: Specific obligations are known and checked by hand for key projects.
-          3: Compliance processes are documented and connected to delivery.
-          4: Regulation is watched proactively and checks are automated in pipelines.
+          1: Nobody knows what one agent task costs.
+          2: Cost metrics such as cost per task are reported.
+          3: Unit cost is computed in tested code from real usage.
+          4: Cost is joined to business outcomes and model choice is routed by measured cost, latency and quality.
+          5: Unit economics drive routing and capacity decisions continuously from telemetry.
         actions:
-          2: Map the obligations that apply to each AI system.
-          3: Document compliance evidence per system and tie it to release approval.
-          4: Automate compliance checks in pipelines and track regulatory change.
-      - id: "5.5"
-        name: Transparency & Explainability
-        summary: How AI decisions are made understandable to developers, users, auditors and the public.
-        why: People need to understand and contest decisions that affect them.
-        descriptors:
-          1: Models are black boxes and documentation is thin.
-          2: Basic model documentation exists.
-          3: Explanation techniques and documentation standards are applied where they matter.
-          4: Explanations are tailored to each audience and transparency is routine.
-        actions:
-          2: Write a model card for every system in use.
-          3: Add explanations (key factors, cited evidence) to outputs and standardise documentation.
-          4: Tailor explanations per audience and publish transparency notes.
-  - id: P6
-    name: Data (AI-Specific Focus)
-    focus: Finding, preparing, accessing, synthesising and understanding data for AI.
-    categories:
-      - id: "6.1"
-        name: AI Use Case Data Identification
-        summary: How the data a use case needs is found, judged and obtained.
-        why: Missing or wrong data is the most common reason AI projects stall.
-        descriptors:
-          1: Finding data is slow and manual; sources are often unknown.
-          2: Data needs are listed per project, though sourcing is ad hoc.
-          3: A systematic process, often with a catalogue, identifies and sources data for planned use cases.
-          4: Strategic data assets are identified ahead of need and sharing agreements are in place.
-        actions:
-          2: List data needs for each use case at intake.
-          3: Catalogue data assets and link them to use cases.
-          4: Plan strategic data acquisition and sharing agreements ahead of need.
-      - id: "6.2"
-        name: Data Readiness for AI
-        summary: How data is checked and prepared for AI, including quality, labelling and feature work.
-        why: Model quality cannot exceed the quality of the data behind it.
-        descriptors:
-          1: Data is used as found; quality problems appear late.
-          2: Basic cleaning is done per project and some practices repeat.
-          3: Standard preparation pipelines include quality checks and contracts.
-          4: Preparation is automated and reusable, with quality monitored continuously.
-        actions:
-          2: Write down cleaning steps per dataset.
-          3: Introduce data contracts and automated quality tests in pipelines.
-          4: Reuse preparation pipelines and monitor data quality continuously.
-      - id: "6.3"
-        name: Data Access for AI Teams
-        summary: How quickly, safely and lawfully AI teams and systems can reach the data they need.
-        why: Slow access kills momentum; loose access creates breaches.
-        descriptors:
-          1: Access is slow and bureaucratic, often by custom extract.
-          2: An access request process exists; teams get copies.
-          3: Policy-compliant access through a data platform with role-based controls.
-          4: Self-service access within policy, with fine-grained control and automated auditing.
-        actions:
-          2: Publish a data access request process.
-          3: Serve data through a governed platform with role-based access and managed identities.
-          4: Offer self-service access with fine-grained policies and automated audit.
-      - id: "6.4"
-        name: Synthetic Data Generation & Use
-        summary: The ability to create and validate artificial data for building and testing AI.
-        why: Synthetic data unlocks testing when real data is scarce or sensitive.
-        descriptors:
-          1: Only real data is used; synthetic data has not been tried or considered.
-          2: First experiments with synthetic data for specific problems.
-          3: Synthetic data is generated and validated for defined use cases.
-          4: Synthetic data is part of the data strategy, with strong validation.
-        actions:
-          2: Try a synthetic dataset for one test or privacy problem.
-          3: Build seeded generators with validation tests for each use case.
-          4: Make synthetic data a standard option in the data strategy with fidelity and privacy checks.
-      - id: "6.5"
-        name: Domain-Specific Data Understanding
-        summary: Whether the people building AI understand what the data means in its business setting.
-        why: Misread data produces confident but wrong models.
-        descriptors:
-          1: Technical teams work apart from domain experts.
-          2: Domain experts are consulted now and then.
-          3: Domain experts work with AI teams throughout and data documentation carries business meaning.
-          4: Domain knowledge is embedded in teams and captured systematically.
-        actions:
-          2: Invite a domain expert into each AI project.
-          3: Add business definitions to data documentation (data sheets, glossaries, semantic models).
-          4: Embed domain experts in AI teams and maintain a shared knowledge base.
+          2: Report cost per task for each agent.
+          3: Compute unit cost in code with tests.
+          4: Join cost to outcomes and route requests by measured cost and quality.
+          5: Drive routing and capacity from live telemetry.
+        maps_to: {nist_ai_rmf: [MAP 3, MEASURE 1], iso_42001: ["9.1"], eu_ai_act: []}
