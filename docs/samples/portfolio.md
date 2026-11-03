@@ -1,9 +1,9 @@
 # Sample 1: Jagadish Meduri's portfolio as the assessed organisation
 
 The first sample treats the author's eight public project repositories, plus the profile repository with the written AI principles, roadmap and skills matrix, as a small AI organisation and assesses
-them read-only. Artifacts come from a checked-in snapshot of a scan of the sibling checkouts; people,
-culture and partnership items come from questionnaire inputs labelled **sample answers**, so every
-category that rests on them waits for a human reviewer and no review has been recorded.
+them read-only. Artifacts come from a checked-in snapshot of a scan of the sibling checkouts; operating-model,
+people and policy items come from questionnaire inputs labelled **sample answers**, so every
+capability that rests on them waits for a human reviewer and no review has been recorded.
 
 Sections: [1. Purpose](#1-purpose) · [2. Architecture](#2-architecture) · [3. How it works](#3-how-it-works) · [4. Key files](#4-key-files) · [5. Code excerpts](#5-code-excerpts) · [6. Configuration](#6-configuration) · [7. Commands](#7-commands) · [8. Real output](#8-real-output) · [9. Tests and gates](#9-tests-and-gates) · [10. Guardrails](#10-guardrails) · [11. Security and governance](#11-security-and-governance) · [12. Observability](#12-observability) · [13. Failure modes](#13-failure-modes) · [14. Mapping to Azure services](#14-mapping-to-azure-services) · [15. Limitations](#15-limitations) · [16. Interview talking points](#16-interview-talking-points) · [17. Adopt this](#17-adopt-this)
 
@@ -27,11 +27,11 @@ flowchart LR
 
 ## 3. How it works
 
-1. `samples/portfolio/org.yaml` lists the nine repositories (eight project repositories and the profile repository), targets (default 3; P3 and P5 at 4), capacity 3 and cross-links.
+1. `samples/portfolio/org.yaml` lists the nine repositories (eight project repositories and the profile repository), targets (default 3; PL, AE and GR at 4), capacity 3 and cross-links.
 2. `evidence.json` holds the read-only scan; refresh it with `aimaturity collect --org portfolio --live --write`.
-3. `questionnaire.yaml` is labelled `sample-answers` (weight 0.35, forced review).
+3. `questionnaire.yaml` is labelled `sample-answers` (weight 0.3, forced review).
 4. No reviews are seeded: the result stays provisional until a real reviewer signs off.
-5. Technology is the strongest pillar; people and culture is the weakest, as expected for a one-person portfolio.
+5. Agent Engineering and Security & Identity are the strongest dimensions (mean 4.33); People & Operating Model is the weakest (level 1), as expected for a one-person portfolio, and it caps the overall level at Prove even though the weighted mean is above 3.
 
 ## 4. Key files
 
@@ -76,69 +76,65 @@ aimaturity collect --org portfolio --live --write   # needs the checkouts next t
 
 <!-- output: assess --org portfolio -->
 ```text
-Jagadish Meduri portfolio: overall Level 3 (Dynamic), mean 2.79
-pillar  name                          level            mean  capped by
-------  ----------------------------  -----  --------  ----  ---------
-P1      Strategy & Value              3      Dynamic   3     -
-P2      People & Culture              2      Ready     1.8   -
-P3      Technology & Infrastructure   4      Advanced  3.75  -
-P4      AI Operations & Ecosystem     3      Dynamic   2.8   -
-P5      AI Governance, Ethics & Risk  3      Dynamic   3.2   -
-P6      Data (AI-Specific Focus)      3      Dynamic   2.2   -
+Jagadish Meduri portfolio: overall Level 2 (Prove), mean 3.29, Agentic Readiness Index 57.1
+dimension  name                           level           mean  capped by
+---------  -----------------------------  -----  -------  ----  ---------
+SV         Strategy & Value               3      Operate  3     -
+DF         Data Foundation                2      Prove    2     -
+PL         Platform & LLMOps              4      Scale    4     -
+AE         Agent Engineering              4      Scale    4.33  -
+SI         Security & Identity            4      Scale    4.33  -
+GR         Governance, Risk & Compliance  3      Operate  3.33  -
+PO         People & Operating Model       1      Explore  1.67  -
+FC         FinOps & Cost                  3      Operate  3     -
 
-cat  level  computed  conf  status          target
----  -----  --------  ----  --------------  ------
-1.1  3      3         0.53  pending-review  3
-1.2  2      2         0.44  pending-review  3
-1.3  3      3         0.93  auto            3
-1.4  3      3         0.62  auto            3
-1.5  4      4         0.63  pending-review  3
-2.1  1      1         0.31  pending-review  3
-2.2  2      2         0.44  pending-review  3
-2.3  2      2         0.31  pending-review  3
-2.4  2      2         0.5   pending-review  3
-2.5  2      2         0.74  pending-review  3
-3.1  4      4         1.0   auto            4
-3.2  4      4         0.75  pending-review  4
-3.3  4      4         1.0   auto            4
-3.4  3      3         0.9   auto            4
-4.1  3      3         0.64  auto            3
-4.2  3      3         0.62  auto            3
-4.3  4      4         1.0   auto            3
-4.4  1      1         0.31  pending-review  3
-4.5  3      3         0.9   auto            3
-5.1  4      4         0.95  auto            4
-5.2  3      3         0.81  pending-review  4
-5.3  3      3         0.62  auto            4
-5.4  3      3         0.9   auto            4
-5.5  3      3         0.87  auto            4
-6.1  3      3         0.87  auto            3
-6.2  3      3         0.87  auto            3
-6.3  1      1         0.31  pending-review  3
-6.4  3      3         0.57  pending-review  3
-6.5  1      1         0.61  auto            3
+capability  level  computed  conf  status          target
+----------  -----  --------  ----  --------------  ------
+SV-1        3      3         0.41  pending-review  3
+SV-2        2      2         0.71  auto            3
+SV-3        4      4         0.71  auto            3
+DF-1        1      1         0.57  pending-review  3
+DF-2        4      4         0.71  auto            3
+DF-3        1      1         0.3   pending-review  3
+PL-1        4      4         0.76  auto            4
+PL-2        4      4         0.76  auto            4
+PL-3        4      4         0.71  auto            4
+AE-1        5      5         1.0   auto            4
+AE-2        4      4         0.76  auto            4
+AE-3        4      4         0.63  pending-review  4
+SI-1        4      4         0.67  auto            3
+SI-2        4      4         0.64  auto            3
+SI-3        5      5         1.0   auto            3
+GR-1        2      2         0.57  pending-review  4
+GR-2        4      4         0.71  auto            4
+GR-3        4      4         0.68  auto            4
+PO-1        2      2         0.38  pending-review  3
+PO-2        2      2         0.26  pending-review  3
+PO-3        1      1         0.3   pending-review  3
+FC-1        4      4         0.64  auto            3
+FC-2        2      2         0.59  pending-review  3
 
-review queue: 1.1, 1.2, 1.5, 2.1, 2.2, 2.3, 2.4, 2.5, 3.2, 4.4, 5.2, 6.3, 6.4; final: False
+review queue: SV-1, DF-1, DF-3, AE-3, GR-1, PO-1, PO-2, PO-3, FC-2; final: False
 ```
 <!-- /output -->
 
 <!-- output: links --org portfolio -->
 ```text
-repo                   category  cited  ok
----------------------  --------  -----  ----
-agentic-ai-model-risk  5.1       14     True
-agentic-ai-model-risk  5.3       9      True
-agentic-ai-model-risk  5.5       6      True
-azure-finops           1.4       9      True
-azure-finops           3.2       12     True
-fabric-enterprise-bi   6.1       3      True
-fabric-enterprise-bi   6.2       6      True
+repo                   capability  cited  ok
+---------------------  ----------  -----  ----
+agentic-ai-model-risk  GR-1        1      True
+agentic-ai-model-risk  GR-2        9      True
+agentic-ai-model-risk  GR-3        9      True
+azure-finops           SV-3        7      True
+azure-finops           FC-1        6      True
+azure-finops           FC-2        3      True
+fabric-enterprise-bi   DF-2        6      True
 ```
 <!-- /output -->
 
 ## 9. Tests and gates
 
-* `tests/test_samples.py`: labelled answers, people items never auto-accepted, no seeded reviews, nine repositories, cross-links, strongest pillar.
+* `tests/test_samples.py`: labelled answers, people items never auto-accepted, no seeded reviews, nine repositories, cross-links, engineering strongest and people weakest.
 * `tests/test_report.py`: the checked-in report matches a fresh render.
 
 ## 10. Guardrails
@@ -151,7 +147,7 @@ Read-only and offline. Sample organisations other than the portfolio are fiction
 
 ## 12. Observability
 
-The report lists 13 categories waiting for review with reasons.
+The report lists 9 capabilities waiting for review with reasons.
 
 ## 13. Failure modes
 
@@ -174,7 +170,8 @@ The report lists 13 categories waiting for review with reasons.
 
 ## 16. Interview talking points
 
-* "I assessed my own portfolio with the tool: level 4 on technology, 2 on people, and the people items are marked as sample answers waiting for review."
+* "I assessed my own portfolio with the tool: Scale on platform, agent engineering and security, Explore on the operating model, and the people items are marked as sample answers waiting for review."
+* "The overall level is Prove because one dimension is at Explore; the readiness index of 57.1 shows how much engineering sits behind that."
 
 ## 17. Adopt this
 
