@@ -1,7 +1,7 @@
 # Component: gap analysis
 
-For each category, the gap is the target level minus the final level. Every missing level becomes a
-step with the evidence still absent and the framework's suggested action for that level.
+For each capability, the gap is the target level minus the final level. Every missing level becomes a
+step with the evidence still absent and the model's suggested action for that level.
 
 Sections: [1. Purpose](#1-purpose) · [2. Architecture](#2-architecture) · [3. How it works](#3-how-it-works) · [4. Key files](#4-key-files) · [5. Code excerpts](#5-code-excerpts) · [6. Configuration](#6-configuration) · [7. Commands](#7-commands) · [8. Real output](#8-real-output) · [9. Tests and gates](#9-tests-and-gates) · [10. Guardrails](#10-guardrails) · [11. Security and governance](#11-security-and-governance) · [12. Observability](#12-observability) · [13. Failure modes](#13-failure-modes) · [14. Mapping to Azure services](#14-mapping-to-azure-services) · [15. Limitations](#15-limitations) · [16. Interview talking points](#16-interview-talking-points) · [17. Adopt this](#17-adopt-this)
 
@@ -14,7 +14,7 @@ Sections: [1. Purpose](#1-purpose) · [2. Architecture](#2-architecture) · [3. 
 ```mermaid
 flowchart LR
   F[final level] --> G{target - final}
-  T[targets: default 3,<br/>per pillar, per category] --> G
+  T[targets: default 3,<br/>per dimension, per capability] --> G
   G --> S[steps per missing level]
   S --> M[missing signals + plain-language meaning]
   S --> A[suggested action, effort S/M/L]
@@ -22,9 +22,9 @@ flowchart LR
 
 ## 3. How it works
 
-1. `Org.target(category)` reads category, then pillar, then default targets from `org.yaml`.
+1. `Org.target(capability)` reads capability, then dimension, then default targets from `org.yaml`.
 2. For each level from final + 1 to target, the step lists missing signals (with their descriptions) and the action from `framework/framework.yaml`.
-3. Effort comes from `rubric/categories.yaml` per step.
+3. Effort comes from `rubric/capabilities.yaml` per step; must criteria are listed before support criteria, so the first missing item is the one that actually blocks the level.
 
 ## 4. Key files
 
@@ -39,20 +39,21 @@ flowchart LR
 <!-- code: src/aimaturity/gaps.py::gap_analysis -->
 ```python
 def gap_analysis(results, statuses, target_of) -> list[dict[str, Any]]:
-    cats = categories()
+    cats = capabilities()
     rows = []
     for cid, res in results.items():
         current = statuses[cid]["final_level"]
         target = target_of(cid)
         steps = []
         for lvl in range(current + 1, target + 1):
-            need = cats[cid]["rubric"]["levels"][lvl]
-            missing = [s for s in need if res.signals[s].present < 1]
+            missing = [s for s in criteria(cid, lvl) if res.signals[s].present < 1]
+            must = cats[cid]["rubric"]["levels"][lvl]["must"]
             steps.append(
                 {
                     "to_level": lvl,
                     "level_name": LEVEL_NAMES[lvl],
                     "missing": missing,
+                    "missing_must": [s for s in missing if s in must],
                     "missing_text": [describe(s) for s in missing],
                     "action": cats[cid]["actions"].get(lvl, ""),
                     "effort": cats[cid]["rubric"]["effort"][lvl],
@@ -60,10 +61,10 @@ def gap_analysis(results, statuses, target_of) -> list[dict[str, Any]]:
             )
         rows.append(
             {
-                "category": cid,
+                "capability": cid,
                 "name": res.name,
-                "pillar": res.pillar,
-                "critical": res.critical,
+                "dimension": res.dimension,
+                "anchor": res.anchor,
                 "current": current,
                 "target": target,
                 "gap": max(0, target - current),
@@ -80,9 +81,9 @@ def gap_analysis(results, statuses, target_of) -> list[dict[str, Any]]:
 
 | Target setting | Example |
 |---|---|
-| default | 3 (Dynamic) |
-| pillars | `{"5": 4}` raises all of P5 |
-| categories | `{"6.4": 2}` lowers one |
+| default | 3 (Operate) |
+| dimensions | `{GR: 4}` raises all of Governance, Risk & Compliance |
+| capabilities | `{FC-2: 2}` lowers one |
 
 ## 7. Commands
 
@@ -95,30 +96,25 @@ aimaturity gaps --org valemont-revenue-agency
 
 <!-- output: gaps --org valemont-revenue-agency -->
 ```text
-cat  now  target  gap  first action
----  ---  ------  ---  ----------------------------------------------------------------------
-4.2  1    3       2    Add uptime and error monitoring to every AI service.
-4.5  1    3       2    Collect reusable components in a shared repository.
-1.1  2    3       1    Attach measurable targets to each outcome and publish them with an own
-1.2  2    3       1    Make a business case with goal linkage mandatory before funding any AI
-1.3  2    3       1    Add owners, budget and dependencies to each milestone and review it mo
-1.4  2    3       1    Track realised value and run cost per use case and report it every mon
-1.5  2    3       1    Provide a sandbox, a small pilot fund and a standard write-up template
-2.1  2    3       1    Fund a training path per role and add AI roles to workforce planning.
-2.2  2    3       1    Charter a centre of excellence with mandate, budget and reporting line
-3.1  2    3       1    Standardise on a supported platform with templates for new projects.
-3.2  2    3       1    Provision AI infrastructure as code with tagging and budgets.
-3.3  2    3       1    Adopt standard integration patterns and record them in architecture de
-3.4  2    3       1    Provide a reproducible workbench with pinned dependencies and experime
-4.1  2    3       1    Build CI/CD with tests, evaluation gates, approvals and rollback.
-4.3  2    3       1    Standardise integration through an API gateway and documented contract
-5.2  3    4       1    Track ethics outcomes and involve affected people in design.
-5.3  2    3       1    Standardise risk cards with scoring, controls, owners and scenario tes
-5.5  3    4       1    Tailor explanations per audience and publish transparency notes.
-6.1  2    3       1    Catalogue data assets and link them to use cases.
-6.2  2    3       1    Introduce data contracts and automated quality tests in pipelines.
-6.3  2    3       1    Serve data through a governed platform with role-based access and mana
-6.4  1    2       1    Try a synthetic dataset for one test or privacy problem.
+capability  now  target  gap  first action
+----------  ---  ------  ---  ----------------------------------------------------------------------
+AE-1        1    3       2    Write an evaluation suite for the agent's main tasks.
+FC-1        1    3       2    Provision budgets and caps as code.
+GR-2        2    4       2    Score each risk in code with likelihood and impact.
+PL-3        1    3       2    Instrument agents with OpenTelemetry or Application Insights.
+SI-1        1    3       2    Turn on secret scanning and remove keys from code.
+AE-2        2    3       1    Expose agent tools through an MCP server.
+DF-2        2    3       1    Add automated quality tests that fail the load.
+DF-3        2    3       1    Generate synthetic test data in code.
+FC-2        1    2       1    Compute cost per task in code with tests.
+PL-1        2    3       1    Move infrastructure to Bicep or Terraform and add a devcontainer.
+PL-2        2    3       1    Add a protected production environment with required reviewers.
+PO-1        2    3       1    Appoint an executive owner and charter a central team.
+PO-2        2    3       1    Maintain role-based learning tracks with funded paths.
+SI-2        2    3       1    Put an API gateway with content filtering in front of AI endpoints.
+SV-1        2    3       1    Put a number on every outcome and publish the thesis.
+SV-2        2    3       1    Publish a sequenced roadmap and make a business case mandatory for fun
+SV-3        2    3       1    Compute value from usage data in code with tests.
 ```
 <!-- /output -->
 
@@ -136,14 +132,14 @@ Runs offline with no credentials. Reads repositories through `git ls-files` and 
 
 ## 12. Observability
 
-The report's gap table lists every category below target with its first action.
+The report's gap table lists every capability below target with its first action.
 
 ## 13. Failure modes
 
 | Failure | Behaviour |
 |---|---|
 | Target below current level | gap 0, no steps |
-| Unknown category in targets | schema rejects it |
+| Malformed capability or dimension id in targets | schema rejects it |
 
 ## 14. Mapping to Azure services
 

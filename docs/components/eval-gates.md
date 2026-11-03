@@ -1,7 +1,7 @@
 # Component: eval gates (stability, citations, calibration)
 
 Three gates test the assessor itself. Stability: shuffled evidence gives identical results and removing
-one item only moves categories that use it. Citations: every level above Basic cites evidence, every
+one item only moves capabilities that use it. Citations: every level above Explore cites evidence, every
 cited id exists, and every injected bad rationale is caught. Calibration: agreement with labelled levels.
 
 Sections: [1. Purpose](#1-purpose) · [2. Architecture](#2-architecture) · [3. How it works](#3-how-it-works) · [4. Key files](#4-key-files) · [5. Code excerpts](#5-code-excerpts) · [6. Configuration](#6-configuration) · [7. Commands](#7-commands) · [8. Real output](#8-real-output) · [9. Tests and gates](#9-tests-and-gates) · [10. Guardrails](#10-guardrails) · [11. Security and governance](#11-security-and-governance) · [12. Observability](#12-observability) · [13. Failure modes](#13-failure-modes) · [14. Mapping to Azure services](#14-mapping-to-azure-services) · [15. Limitations](#15-limitations) · [16. Interview talking points](#16-interview-talking-points) · [17. Adopt this](#17-adopt-this)
@@ -31,9 +31,9 @@ flowchart LR
 
 ## 3. How it works
 
-1. **Stability**: for each org, evidence order is shuffled five times; levels and confidence must be identical. Then up to about 60 single-item dropouts per org: no category that does not use the removed signal may move; at most two categories may move per dropout and the mean must stay at or below 0.5. The size of a move is reported (stepwise levels mean a missing foundation can drop a category to Basic).
+1. **Stability**: for each org, evidence order is shuffled five times; levels and confidence must be identical. Then up to about 60 single-item dropouts per org: no capability that does not use the removed signal may move; at most two capabilities may move per dropout and the mean must stay at or below 0.5. The size of a move is reported (stepwise levels mean a missing foundation can drop a capability to Explore).
 2. **Citations**: completeness and validity must be 1.0; the mock LLM is run with `hallucinate` and `overclaim` and the verifier must catch every injected fault.
-3. **Calibration**: 12 synthetic organisations with known levels and noise (missed artifacts, stray evidence) plus the 58 expert labels of the bank and agency. Gates: exact >= 0.80, within one >= 0.97, and accuracy where confidence >= 0.6 must be at least the accuracy below it.
+3. **Calibration**: 12 synthetic organisations with known levels and noise (missed artifacts, stray evidence) plus the 46 expert labels of the bank and agency (23 each, judged from the level descriptors). Gates: exact >= 0.80, within one >= 0.97, and accuracy where confidence >= 0.6 must be at least the accuracy below it.
 
 ## 4. Key files
 
@@ -89,20 +89,19 @@ def calibration(t: dict[str, Any]) -> dict[str, Any]:
 ```python
 def synthetic_org(rng: random.Random, n: int) -> tuple[list[Evidence], dict[str, int]]:
     """A synthetic org with known levels: signal examples for every level reached, plus noise."""
-    R = rubric()["categories"]
-    truth = {cid: rng.choice([1, 2, 2, 3, 3, 4]) for cid in categories()}
+    truth = {cid: rng.choice([1, 2, 2, 3, 3, 4, 5]) for cid in capabilities()}
     files: dict[str, dict[str, str]] = {}
     answers: dict[str, str] = {}
     present: set[str] = set()
     for cid, lvl in truth.items():
         for lv in range(2, lvl + 1):
-            present.update(R[cid]["levels"][lv])
+            present.update(criteria(cid, lv))
     noisy = set(present)
     for cid, lvl in truth.items():
         if lvl >= 2 and rng.random() < 0.12:  # an artifact the collectors miss
-            noisy.discard(rng.choice(R[cid]["levels"][lvl]))
-        if lvl < 4 and rng.random() < 0.08:  # stray evidence of the next level
-            noisy.add(rng.choice(R[cid]["levels"][lvl + 1]))
+            noisy.discard(rng.choice(criteria(cid, lvl)))
+        if lvl < TOP and rng.random() < 0.08:  # stray evidence of the next level
+            noisy.add(rng.choice(criteria(cid, lvl + 1)))
     for sid in sorted(noisy):
         if is_question(sid):
             answers[sid] = "yes"
@@ -131,9 +130,9 @@ aimaturity evals --json
 
 <!-- output: evals -->
 ```text
-PASS  stability    shuffle_identical=True, dropout_runs=249, nonlocal_moves=0, max_categories_moved=2, mean_categories_moved=0.402, max_level_change_info=3
-PASS  citations    completeness=1.0, valid_ids=1.0, verifier_catch=1.0, categories_checked=80, injected=165
-PASS  calibration  items=406, exact=0.84, within_one=0.995, high_conf_accuracy=0.861, low_conf_accuracy=0.674, high_conf_items=360
+PASS  stability    shuffle_identical=True, dropout_runs=258, nonlocal_moves=0, max_capabilities_moved=2, mean_capabilities_moved=0.407, max_level_change_info=4
+PASS  citations    completeness=1.0, valid_ids=1.0, verifier_catch=1.0, capabilities_checked=61, injected=132
+PASS  calibration  items=322, exact=0.851, within_one=0.981, high_conf_accuracy=0.857, low_conf_accuracy=0.786, high_conf_items=294
 ```
 <!-- /output -->
 
@@ -179,6 +178,6 @@ The JSON result is uploaded per CI run; trend `exact` and `within_one` over time
 
 ## 17. Adopt this
 
-1. Add your own labelled organisation (`labels.yaml` with 29 levels) and reference it from `org.yaml`; calibration picks it up.
+1. Add your own labelled organisation (`labels.yaml` with 23 levels) and reference it from `org.yaml`; calibration picks it up.
 2. Tighten thresholds in `evals/thresholds.yaml` as your labels grow.
 3. Add a gate as a function returning `{gate, ok, ...}` and append it in `run_all`.

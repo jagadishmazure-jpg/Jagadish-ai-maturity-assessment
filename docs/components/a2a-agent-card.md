@@ -16,7 +16,7 @@ Sections: [1. Purpose](#1-purpose) · [2. Architecture](#2-architecture) · [3. 
 flowchart LR
   O[orchestrator agent] -->|GET agent card| C[a2a/agent-card.json]
   C --> S1[assess-org]
-  C --> S2[explain-category]
+  C --> S2[explain-capability]
   C --> S3[gap-analysis]
   C --> S4[roadmap]
   C --> S5[review-queue]
@@ -25,8 +25,8 @@ flowchart LR
 ## 3. How it works
 
 1. The card follows the A2A shape: protocol version, name, description, url, version, capabilities, security schemes, default modes and skills.
-2. Skills map to MCP tools: assess-org (assess), explain-category (category_result), gap-analysis (gaps), roadmap (roadmap), review-queue (review_queue).
-3. The description carries the CC BY-SA 3.0 IGO attribution for the framework structure.
+2. Skills map to MCP tools: assess-org (assess), explain-capability (capability_result), gap-analysis (gaps), roadmap (roadmap), review-queue (review_queue).
+3. The description names the model it scores against (eight weighted dimensions, 23 capabilities, five levels) and states that the agent is read-only.
 
 ## 4. Key files
 
@@ -41,10 +41,10 @@ flowchart LR
 {
   "protocolVersion": "0.3.0",
   "name": "AI Maturity Assessor",
-  "description": "Evidence-based AI maturity assessment over six pillars and 29 categories (framework structure adapted from UNESCO under CC BY-SA 3.0 IGO). Scores categories from repository artifacts and questionnaire answers, with confidence, cited evidence and human review for low-confidence items; produces gaps, a Month 1-12 roadmap and an executive report. Read-only: it never records a review.",
+  "description": "Evidence-based enterprise agentic AI maturity assessment over eight weighted dimensions, 23 capabilities and five levels (Enterprise Agentic AI Maturity Model). Scores capabilities from repository artifacts and questionnaire answers, with confidence, cited evidence and human review for low-confidence items; produces gaps, a Month 1-12 roadmap and an executive report. Read-only: it never records a review.",
   "url": "https://ai-maturity.example.invalid/a2a/v1",
   "preferredTransport": "JSONRPC",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "provider": {"organization": "Jagadish Meduri (portfolio project)", "url": "https://github.com/jagadishmazure-jpg/Jagadish-ai-maturity-assessment"},
   "documentationUrl": "https://github.com/jagadishmazure-jpg/Jagadish-ai-maturity-assessment/blob/main/docs/components/a2a-agent-card.md",
   "capabilities": {"streaming": false, "pushNotifications": false, "stateTransitionHistory": false},
@@ -53,11 +53,11 @@ flowchart LR
   "defaultInputModes": ["application/json", "text/plain"],
   "defaultOutputModes": ["application/json", "text/markdown"],
   "skills": [
-    {"id": "assess-org", "name": "Assess an organisation", "description": "Overall, pillar and category maturity with confidence and review status.", "tags": ["maturity", "assessment", "governance"], "examples": ["Assess valemont-revenue-agency", "What is the overall maturity of kestrel-bay-bank?"], "outputModes": ["application/json"]},
-    {"id": "explain-category", "name": "Explain a category result", "description": "Rationale for one category, with the evidence ids it cites and what the next level needs.", "tags": ["evidence", "explainability"], "examples": ["Why is 5.3 at level 3 for the portfolio?"]},
-    {"id": "gap-analysis", "name": "Gap analysis", "description": "Categories below target and the missing evidence per step.", "tags": ["gaps", "planning"], "examples": ["Which critical categories are below target?"]},
+    {"id": "assess-org", "name": "Assess an organisation", "description": "Overall level, Agentic Readiness Index, dimension and capability maturity with confidence and review status.", "tags": ["maturity", "assessment", "governance"], "examples": ["Assess valemont-revenue-agency", "What is the overall maturity of kestrel-bay-bank?"], "outputModes": ["application/json"]},
+    {"id": "explain-capability", "name": "Explain a capability result", "description": "Rationale for one capability, with the evidence ids it cites and what the next level needs.", "tags": ["evidence", "explainability"], "examples": ["Why is GR-2 at level 3 for the portfolio?"]},
+    {"id": "gap-analysis", "name": "Gap analysis", "description": "Capabilities below target and the missing evidence per step.", "tags": ["gaps", "planning"], "examples": ["Which anchor capabilities are below target?"]},
     {"id": "roadmap", "name": "Month 1-12 roadmap", "description": "Prioritised steps with quick wins, dependencies, start and end months, and a backlog.", "tags": ["roadmap", "planning"], "examples": ["Give me the quick wins for the first three months"], "outputModes": ["application/json", "text/markdown"]},
-    {"id": "review-queue", "name": "Human review queue", "description": "Low-confidence or sample-answer categories that wait for a named reviewer.", "tags": ["hitl", "governance"], "examples": ["What still needs human sign-off?"]}
+    {"id": "review-queue", "name": "Human review queue", "description": "Low-confidence or sample-answer capabilities that wait for a named reviewer.", "tags": ["hitl", "governance"], "examples": ["What still needs human sign-off?"]}
   ]
 }
 ```
@@ -84,10 +84,10 @@ aimaturity agent-card
 {
   "protocolVersion": "0.3.0",
   "name": "AI Maturity Assessor",
-  "description": "Evidence-based AI maturity assessment over six pillars and 29 categories (framework structure adapted from UNESCO under CC BY-SA 3.0 IGO). Scores categories from repository artifacts and questionnaire answers, with confidence, cited evidence and human review for low-confidence items; produces gaps, a Month 1-12 roadmap and an executive report. Read-only: it never records a review.",
+  "description": "Evidence-based enterprise agentic AI maturity assessment over eight weighted dimensions, 23 capabilities and five levels (Enterprise Agentic AI Maturity Model). Scores capabilities from repository artifacts and questionnaire answers, with confidence, cited evidence and human review for low-confidence items; produces gaps, a Month 1-12 roadmap and an executive report. Read-only: it never records a review.",
   "url": "https://ai-maturity.example.invalid/a2a/v1",
   "preferredTransport": "JSONRPC",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "provider": {"organization": "Jagadish Meduri (portfolio project)", "url": "https://github.com/jagadishmazure-jpg/Jagadish-ai-maturity-assessment"},
   "documentationUrl": "https://github.com/jagadishmazure-jpg/Jagadish-ai-maturity-assessment/blob/main/docs/components/a2a-agent-card.md",
   "capabilities": {"streaming": false, "pushNotifications": false, "stateTransitionHistory": false},
@@ -96,11 +96,11 @@ aimaturity agent-card
   "defaultInputModes": ["application/json", "text/plain"],
   "defaultOutputModes": ["application/json", "text/markdown"],
   "skills": [
-    {"id": "assess-org", "name": "Assess an organisation", "description": "Overall, pillar and category maturity with confidence and review status.", "tags": ["maturity", "assessment", "governance"], "examples": ["Assess valemont-revenue-agency", "What is the overall maturity of kestrel-bay-bank?"], "outputModes": ["application/json"]},
-    {"id": "explain-category", "name": "Explain a category result", "description": "Rationale for one category, with the evidence ids it cites and what the next level needs.", "tags": ["evidence", "explainability"], "examples": ["Why is 5.3 at level 3 for the portfolio?"]},
-    {"id": "gap-analysis", "name": "Gap analysis", "description": "Categories below target and the missing evidence per step.", "tags": ["gaps", "planning"], "examples": ["Which critical categories are below target?"]},
+    {"id": "assess-org", "name": "Assess an organisation", "description": "Overall level, Agentic Readiness Index, dimension and capability maturity with confidence and review status.", "tags": ["maturity", "assessment", "governance"], "examples": ["Assess valemont-revenue-agency", "What is the overall maturity of kestrel-bay-bank?"], "outputModes": ["application/json"]},
+    {"id": "explain-capability", "name": "Explain a capability result", "description": "Rationale for one capability, with the evidence ids it cites and what the next level needs.", "tags": ["evidence", "explainability"], "examples": ["Why is GR-2 at level 3 for the portfolio?"]},
+    {"id": "gap-analysis", "name": "Gap analysis", "description": "Capabilities below target and the missing evidence per step.", "tags": ["gaps", "planning"], "examples": ["Which anchor capabilities are below target?"]},
     {"id": "roadmap", "name": "Month 1-12 roadmap", "description": "Prioritised steps with quick wins, dependencies, start and end months, and a backlog.", "tags": ["roadmap", "planning"], "examples": ["Give me the quick wins for the first three months"], "outputModes": ["application/json", "text/markdown"]},
-    {"id": "review-queue", "name": "Human review queue", "description": "Low-confidence or sample-answer categories that wait for a named reviewer.", "tags": ["hitl", "governance"], "examples": ["What still needs human sign-off?"]}
+    {"id": "review-queue", "name": "Human review queue", "description": "Low-confidence or sample-answer capabilities that wait for a named reviewer.", "tags": ["hitl", "governance"], "examples": ["What still needs human sign-off?"]}
   ]
 }
 ```
@@ -108,7 +108,7 @@ aimaturity agent-card
 
 ## 9. Tests and gates
 
-* `tests/test_mcp_a2a.py`: required fields, unique skills with examples, `.invalid` url, security and attribution present.
+* `tests/test_mcp_a2a.py`: required fields, unique skills with examples, `.invalid` url, security and model description present.
 
 ## 10. Guardrails
 

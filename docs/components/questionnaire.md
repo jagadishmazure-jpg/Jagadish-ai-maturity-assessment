@@ -1,7 +1,7 @@
-# Component: questionnaire for people and culture items
+# Component: questionnaire for operating-model and people items
 
-Some capabilities leave no artifact: sponsorship, change methods, partnerships, review boards. The
-questionnaire asks 44 yes/partial/no questions, and every answer file carries a label that says how
+Some capabilities leave no artifact: sponsorship, skills, change methods, review boards. The
+questionnaire asks 48 yes/partial/no questions, and every answer file carries a label that says how
 far to trust it.
 
 Sections: [1. Purpose](#1-purpose) · [2. Architecture](#2-architecture) · [3. How it works](#3-how-it-works) · [4. Key files](#4-key-files) · [5. Code excerpts](#5-code-excerpts) · [6. Configuration](#6-configuration) · [7. Commands](#7-commands) · [8. Real output](#8-real-output) · [9. Tests and gates](#9-tests-and-gates) · [10. Guardrails](#10-guardrails) · [11. Security and governance](#11-security-and-governance) · [12. Observability](#12-observability) · [13. Failure modes](#13-failure-modes) · [14. Mapping to Azure services](#14-mapping-to-azure-services) · [15. Limitations](#15-limitations) · [16. Interview talking points](#16-interview-talking-points) · [17. Adopt this](#17-adopt-this)
@@ -15,20 +15,20 @@ Sections: [1. Purpose](#1-purpose) · [2. Architecture](#2-architecture) · [3. 
 
 ```mermaid
 flowchart LR
-  Q[rubric/questionnaire.yaml<br/>44 questions] --> A[samples/org/questionnaire.yaml]
-  A -->|label: self-reported| W1[weight 0.6]
-  A -->|label: sample-answers| W2[weight 0.35 + forced review]
+  Q[rubric/questionnaire.yaml<br/>48 questions] --> A[samples/org/questionnaire.yaml]
+  A -->|label: self-reported| W1[weight 0.55]
+  A -->|label: sample-answers| W2[weight 0.3 + forced review]
   W1 --> S[scoring]
   W2 --> S
 ```
 
 ## 3. How it works
 
-1. Each question names the category it serves; the rubric uses its id (`q_...`) as a signal.
+1. Each question names the first capability it serves; the rubric uses its id (`q_...`) as a must or support criterion. Answers can carry Prove and Operate, never Scale or Optimise on their own (evidence ceiling).
 2. Answers are `yes` (1.0), `partial` (0.5) or `no` (0.0), optionally with a note. YAML booleans are accepted.
-3. The file's `label` sets the origin: `self-reported` weighs 0.6 in confidence, `sample-answers` 0.35.
+3. The file's `label` sets the origin: `self-reported` weighs 0.55 in confidence, `sample-answers` 0.3.
 4. Any level that rests on a sample answer is queued for human review, whatever the confidence.
-5. Unanswered questions weigh 0.2, which lowers confidence and usually triggers review.
+5. Unanswered questions weigh 0.15, which lowers confidence and usually triggers review.
 
 ## 4. Key files
 
@@ -61,7 +61,7 @@ def collect_questionnaire(answers: dict[str, Any]) -> list[Evidence]:
 
 <!-- code: src/aimaturity/scoring.py::WEIGHTS -->
 ```python
-WEIGHTS = {"artifact": 1.0, "absent-scanned": 0.8, "absent-unscanned": 0.5, "self-reported": 0.6, "sample-answers": 0.35, "unanswered": 0.2}
+WEIGHTS = {"artifact": 1.0, "absent-scanned": 0.85, "absent-unscanned": 0.5, "self-reported": 0.55, "sample-answers": 0.3, "unanswered": 0.15}
 ```
 <!-- /code -->
 
@@ -69,14 +69,14 @@ WEIGHTS = {"artifact": 1.0, "absent-scanned": 0.8, "absent-unscanned": 0.5, "sel
 
 | Label | Weight | Effect |
 |---|---|---|
-| self-reported | 0.6 | normal scoring |
-| sample-answers | 0.35 | levels resting on it go to review |
-| (unanswered) | 0.2 | counts as absent, lowers confidence |
+| self-reported | 0.55 | normal scoring |
+| sample-answers | 0.3 | levels resting on it go to review |
+| (unanswered) | 0.15 | counts as absent, lowers confidence |
 
 ## 7. Commands
 
 ```bash
-aimaturity category 2.3
+aimaturity capability PO-1
 aimaturity queue --org portfolio
 ```
 
@@ -84,28 +84,24 @@ aimaturity queue --org portfolio
 
 <!-- output: queue --org portfolio -->
 ```text
-category  name                                   why
---------  -------------------------------------  ----------------------------------------------------------------------------
-1.1       AI Vision & Ambition                   confidence 0.53 below 0.6; level rests on sample answers: q_vision_published
-1.2       Strategic Alignment                    confidence 0.44 below 0.6; level rests on sample answers: q_goal_field
-1.5       Innovation & Experimentation           level rests on sample answers: q_pilot_scaling
-2.1       Talent & Skills                        confidence 0.31 below 0.6
-2.2       Organizational Structure               confidence 0.44 below 0.6; level rests on sample answers: q_coordinator
-2.3       Leadership & Sponsorship               confidence 0.31 below 0.6; level rests on sample answers: q_project_sponsors
-2.4       Change Management & Adoption           confidence 0.50 below 0.6; level rests on sample answers: q_rollout_comms
-2.5       AI Literacy & Awareness                level rests on sample answers: q_awareness_material
-3.2       Cloud & Compute Infrastructure         level rests on sample answers: q_cost_optimisation_cadence
-4.4       External Collaboration & Partnerships  confidence 0.31 below 0.6
-5.2       Ethical Principles & Guidelines        level rests on sample answers: q_ethics_principles
-6.3       Data Access for AI Teams               confidence 0.31 below 0.6
-6.4       Synthetic Data Generation & Use        confidence 0.57 below 0.6
+capability  name                              why
+----------  --------------------------------  --------------------------------------------------------------------------------------------------
+SV-1        Agentic AI Thesis                 confidence 0.41 below 0.6; level rests on sample answers: q_goal_field, q_vision_published
+DF-1        Knowledge & Grounding Sources     confidence 0.57 below 0.6
+DF-3        Governed Access & Synthetic Data  confidence 0.30 below 0.6
+AE-3        Autonomy & Human Oversight        level rests on sample answers: q_autonomy_tiers
+GR-1        AI Policy & Accountability        confidence 0.57 below 0.6; level rests on sample answers: q_ethics_principles
+PO-1        Sponsorship & Operating Model     confidence 0.38 below 0.6; level rests on sample answers: q_coordinator, q_project_sponsors
+PO-2        Skills & AI Literacy              confidence 0.26 below 0.6; level rests on sample answers: q_ai_roles_defined, q_awareness_material
+PO-3        Adoption & Change                 confidence 0.30 below 0.6
+FC-2        Unit Economics & Model Routing    confidence 0.59 below 0.6
 ```
 <!-- /output -->
 
 ## 9. Tests and gates
 
 * `tests/test_questionnaire.py`: strengths, labels, notes, unknown questions, booleans.
-* `tests/test_samples.py`: portfolio answers are labelled sample and their categories wait for review.
+* `tests/test_samples.py`: portfolio answers are labelled sample and their capabilities wait for review.
 
 ## 10. Guardrails
 
@@ -149,4 +145,4 @@ The review queue shows the reason (`level rests on sample answers: q_...`).
 
 1. Copy the questions into your survey tool; keep the ids.
 2. Save answers as `samples/<org>/questionnaire.yaml` with `label: self-reported`.
-3. Add or reword questions in `rubric/questionnaire.yaml` and reference them from `rubric/categories.yaml`; `aimaturity validate` checks every id.
+3. Add or reword questions in `rubric/questionnaire.yaml` and reference them from `rubric/capabilities.yaml`; `aimaturity validate` checks every id.

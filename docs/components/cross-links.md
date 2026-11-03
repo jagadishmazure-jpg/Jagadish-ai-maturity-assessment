@@ -1,6 +1,6 @@
 # Component: cross-repository evidence links
 
-For the portfolio, three pillars draw on specific sibling repositories: governance on the model risk
+For the portfolio, three dimensions draw on specific sibling repositories: governance on the model risk
 repository, cost and value on the FinOps repository, data on the Fabric BI repository. `links` in
 `org.yaml` declares these expectations and a check proves the cited evidence really comes from them.
 
@@ -14,16 +14,16 @@ Sections: [1. Purpose](#1-purpose) · [2. Architecture](#2-architecture) · [3. 
 
 ```mermaid
 flowchart LR
-  MR[agentic-ai-model-risk] -->|risk cards, model cards, scenarios| P5[P5 5.1 5.3 5.5]
-  FO[azure-finops] -->|budgets, value metrics| V[1.4 value, 3.2 cost guards]
-  FB[fabric-enterprise-bi] -->|contracts, quality tests| P6[P6 6.1 6.2]
-  P5 & V & P6 --> CL{check_links: cited evidence from that repo?}
+  MR[agentic-ai-model-risk] -->|inventory, risk scoring, model cards| GR[GR-1 GR-2 GR-3]
+  FO[azure-finops] -->|budgets, cost per task, value metrics| FC[SV-3 FC-1 FC-2]
+  FB[fabric-enterprise-bi] -->|contracts, quality tests| DF[DF-2]
+  GR & FC & DF --> CL{check_links: cited evidence from that repo?}
 ```
 
 ## 3. How it works
 
-1. `links: {repo: [categories]}` in `org.yaml`.
-2. `check_links` counts cited evidence items from that repository in each linked category and lists example paths.
+1. `links: {repo: [capabilities]}` in `org.yaml`.
+2. `check_links` counts cited evidence items from that repository in each linked capability and lists example paths.
 3. `aimaturity links --org portfolio` exits 1 if any link is unsatisfied; CI runs it.
 
 ## 4. Key files
@@ -44,7 +44,9 @@ def check_links(state: dict[str, Any]) -> list[dict[str, Any]]:
     for repo, cats in links.items():
         for cid in cats:
             cited = [i for i in state["results"][cid].evidence if ev[i].source == repo]
-            rows.append({"repo": repo, "category": cid, "cited": len(cited), "examples": sorted({ev[i].path for i in cited})[:3], "ok": bool(cited)})
+            rows.append(
+                {"repo": repo, "capability": cid, "cited": len(cited), "examples": sorted({ev[i].path for i in cited})[:3], "ok": bool(cited)}
+            )
     return rows
 ```
 <!-- /code -->
@@ -53,9 +55,9 @@ def check_links(state: dict[str, Any]) -> list[dict[str, Any]]:
 
 ```yaml
 links:
-  agentic-ai-model-risk: ["5.1", "5.3", "5.5"]
-  azure-finops: ["1.4", "3.2"]
-  fabric-enterprise-bi: ["6.1", "6.2"]
+  agentic-ai-model-risk: [GR-1, GR-2, GR-3]
+  azure-finops: [SV-3, FC-1, FC-2]
+  fabric-enterprise-bi: [DF-2]
 ```
 
 ## 7. Commands
@@ -68,15 +70,15 @@ aimaturity links --org portfolio
 
 <!-- output: links --org portfolio -->
 ```text
-repo                   category  cited  ok
----------------------  --------  -----  ----
-agentic-ai-model-risk  5.1       14     True
-agentic-ai-model-risk  5.3       9      True
-agentic-ai-model-risk  5.5       6      True
-azure-finops           1.4       9      True
-azure-finops           3.2       12     True
-fabric-enterprise-bi   6.1       3      True
-fabric-enterprise-bi   6.2       6      True
+repo                   capability  cited  ok
+---------------------  ----------  -----  ----
+agentic-ai-model-risk  GR-1        1      True
+agentic-ai-model-risk  GR-2        9      True
+agentic-ai-model-risk  GR-3        9      True
+azure-finops           SV-3        7      True
+azure-finops           FC-1        6      True
+azure-finops           FC-2        3      True
+fabric-enterprise-bi   DF-2        6      True
 ```
 <!-- /output -->
 
@@ -120,5 +122,5 @@ The report has a cross-repository evidence table with counts and example paths.
 
 ## 17. Adopt this
 
-1. Add `links` to your org config for repositories that own a pillar.
+1. Add `links` to your org config for repositories that own a dimension or capability.
 2. Run `aimaturity links --org <org>` in CI.

@@ -1,6 +1,6 @@
 # Component: MCP server (read-only assessment tools)
 
-Nine read-only MCP tools let an agent ask about the framework, the sample organisations, their
+Nine read-only MCP tools let an agent ask about the maturity model, the sample organisations, their
 results, gaps, roadmap, review queue and evidence. No tool can record a review.
 
 Sections: [1. Purpose](#1-purpose) · [2. Architecture](#2-architecture) · [3. How it works](#3-how-it-works) · [4. Key files](#4-key-files) · [5. Code excerpts](#5-code-excerpts) · [6. Configuration](#6-configuration) · [7. Commands](#7-commands) · [8. Real output](#8-real-output) · [9. Tests and gates](#9-tests-and-gates) · [10. Guardrails](#10-guardrails) · [11. Security and governance](#11-security-and-governance) · [12. Observability](#12-observability) · [13. Failure modes](#13-failure-modes) · [14. Mapping to Azure services](#14-mapping-to-azure-services) · [15. Limitations](#15-limitations) · [16. Interview talking points](#16-interview-talking-points) · [17. Adopt this](#17-adopt-this)
@@ -14,8 +14,8 @@ Sections: [1. Purpose](#1-purpose) · [2. Architecture](#2-architecture) · [3. 
 ```mermaid
 flowchart LR
   A[agent / MCP client] -->|stdio| S[ai-maturity-assessment MCP server]
-  S --> T1[list_pillars / get_category]
-  S --> T2[list_orgs / assess / category_result]
+  S --> T1[list_dimensions / get_capability]
+  S --> T2[list_orgs / assess / capability_result]
   S --> T3[gaps / roadmap / review_queue / evidence]
   T2 --> G[assess graph]
   X[record review] -. not exposed .- S
@@ -37,7 +37,7 @@ flowchart LR
 
 <!-- code: src/aimaturity/mcp_server.py::TOOL_NAMES -->
 ```python
-TOOL_NAMES = ["list_pillars", "get_category", "list_orgs", "assess", "category_result", "gaps", "roadmap", "review_queue", "evidence"]
+TOOL_NAMES = ["list_dimensions", "get_capability", "list_orgs", "assess", "capability_result", "gaps", "roadmap", "review_queue", "evidence"]
 ```
 <!-- /code -->
 
@@ -54,10 +54,10 @@ async def demo() -> list[str]:
         lines.append(f"all read-only: {all(t.annotations and t.annotations.read_only_hint for t in tools.tools)}")
         res = (await client.call_tool("assess", {"org_id": "valemont-revenue-agency"})).structured_content
         lines.append(f"{res['name']}: overall {res['overall']['level']} ({res['overall']['level_name']}); queue {res['review_queue']}")
-        for p in res["pillars"]:
+        for p in res["dimensions"]:
             lines.append(f"  {p['id']} {p['name']:<30} level {p['level']} mean {p['mean']}")
-        cat = (await client.call_tool("category_result", {"org_id": "valemont-revenue-agency", "category_id": "4.4"})).structured_content
-        lines.append(f"4.4: computed {cat['computed_level']}, final {cat['level']} ({cat['status']})")
+        cat = (await client.call_tool("capability_result", {"org_id": "valemont-revenue-agency", "capability_id": "PO-2"})).structured_content
+        lines.append(f"PO-2: computed {cat['computed_level']}, final {cat['level']} ({cat['status']})")
         first = cat["evidence"][0]
         ev = (await client.call_tool("evidence", {"org_id": "valemont-revenue-agency", "evidence_id": first})).structured_content
         lines.append(f"  {first}: {ev['source']} {ev['path']} ({ev['origin']})")
@@ -71,14 +71,14 @@ async def demo() -> list[str]:
 
 | Tool | Returns |
 |---|---|
-| list_pillars | pillars and categories |
-| get_category | descriptors, evidence needed, critical flag |
+| list_dimensions | dimensions, weights and capabilities |
+| get_capability | descriptors, must and support criteria, anchor flag, crosswalk |
 | list_orgs | sample orgs |
-| assess | overall, pillars, queue |
-| category_result | level, confidence, rationale, evidence ids |
-| gaps | categories below target |
+| assess | overall, readiness index, dimensions, queue |
+| capability_result | level, confidence, rationale, evidence ids, what the next level still needs |
+| gaps | capabilities below target |
 | roadmap | plan, backlog, milestones |
-| review_queue | pending categories and reasons |
+| review_queue | pending capabilities and reasons |
 | evidence | one evidence item |
 
 ## 7. Commands
@@ -92,18 +92,20 @@ aimaturity mcp        # for an MCP client config
 
 <!-- output: mcp-demo -->
 ```text
-tools: assess, category_result, evidence, gaps, get_category, list_orgs, list_pillars, review_queue, roadmap
+tools: assess, capability_result, evidence, gaps, get_capability, list_dimensions, list_orgs, review_queue, roadmap
 all read-only: True
-Valemont Revenue Agency: overall 2 (Ready); queue ['2.1']
-  P1 Strategy & Value               level 2 mean 2
-  P2 People & Culture               level 3 mean 2.6
-  P3 Technology & Infrastructure    level 2 mean 2
-  P4 AI Operations & Ecosystem      level 2 mean 1.8
-  P5 AI Governance, Ethics & Risk   level 3 mean 2.8
-  P6 Data (AI-Specific Focus)       level 2 mean 2
-4.4: computed 2, final 3 (overridden)
-  E055: questionnaire q_partnership_informal (self-reported)
-quick wins: 4.2->2, 4.5->2, 6.4->2, 1.5->3
+Valemont Revenue Agency: overall 1 (Explore); queue []
+  SV Strategy & Value               level 2 mean 2
+  DF Data Foundation                level 2 mean 2.33
+  PL Platform & LLMOps              level 1 mean 1.67
+  AE Agent Engineering              level 2 mean 2
+  SI Security & Identity            level 2 mean 2
+  GR Governance, Risk & Compliance  level 3 mean 3.67
+  PO People & Operating Model       level 2 mean 2.33
+  FC FinOps & Cost                  level 1 mean 1
+PO-2: computed 3, final 2 (overridden)
+  E035: questionnaire q_awareness_material (self-reported)
+quick wins: AE-1->2, SI-1->2, FC-1->2, PL-3->2, SV-2->3, FC-2->2
 ```
 <!-- /output -->
 

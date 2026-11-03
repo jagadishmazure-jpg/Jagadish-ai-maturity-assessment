@@ -1,6 +1,6 @@
 # Component: human review (HITL) and audit log
 
-Low-confidence categories, and any level that rests on sample answers, wait for a named reviewer. A
+Low-confidence capabilities, and any level that rests on sample answers, wait for a named reviewer. A
 review confirms or overrides the level with a comment, is bound to a digest of the evidence and is
 appended to a hash-chained audit log.
 
@@ -18,7 +18,7 @@ sequenceDiagram
   participant Q as Review queue
   participant R as Reviewer
   participant L as audit-log.jsonl
-  A->>Q: category below 0.6 or rests on sample answers
+  A->>Q: capability below 0.6 or rests on sample answers
   R->>A: aimaturity review (confirm / override, comment)
   A->>A: refuse self-review, empty comment, bad level
   A->>L: append entry (prev hash, digest)
@@ -30,7 +30,7 @@ sequenceDiagram
 
 1. `apply_reviews` ignores reviews that break a rule or have no matching audit entry.
 2. A valid review whose digest matches the current evidence sets the final level (status `confirmed` or `overridden`).
-3. If the evidence changed since the review, the status is `stale-review` and the category returns to the queue.
+3. If the evidence changed since the review, the status is `stale-review` and the capability returns to the queue.
 4. `record_review` validates, appends the audit entry (sequence, previous hash, own hash) and stores the review with its audit hash.
 5. `verify_audit_log` reports reordered, edited or deleted entries.
 6. The MCP server has no review tool: only a person at the CLI can sign off.
@@ -48,19 +48,19 @@ sequenceDiagram
 <!-- code: src/aimaturity/hitl.py::record_review -->
 ```python
 def record_review(
-    reviews_path: Path, log_path: Path, assessor: str, results: dict[str, CategoryResult], evidence: dict[str, Evidence], **review: Any
+    reviews_path: Path, log_path: Path, assessor: str, results: dict[str, CapabilityResult], evidence: dict[str, Evidence], **review: Any
 ) -> dict[str, Any]:
     """Validate, append to the reviews file and the audit log, return the stored review."""
     validate_review(review, assessor, results)
-    res = results[review["category"]]
+    res = results[review["capability"]]
     stored = {
-        "category": review["category"],
+        "capability": review["capability"],
         "reviewer": review["reviewer"],
         "decision": review["decision"],
         "level": review["level"] if review["decision"] == "override" else res.level,
         "computed_level": res.level,
         "comment": review["comment"].strip(),
-        "evidence_digest": category_digest(res, evidence),
+        "evidence_digest": capability_digest(res, evidence),
     }
     log = read_log(log_path)
     entry = {"seq": len(log) + 1, "action": "review", **stored, "prev": log[-1]["hash"] if log else GENESIS}
@@ -74,10 +74,10 @@ def record_review(
 ```
 <!-- /code -->
 
-<!-- code: src/aimaturity/hitl.py::category_digest -->
+<!-- code: src/aimaturity/hitl.py::capability_digest -->
 ```python
-def category_digest(result: CategoryResult, evidence: dict[str, Evidence]) -> str:
-    """Stable fingerprint of what the category was scored on (paths and answers, not evidence ids)."""
+def capability_digest(result: CapabilityResult, evidence: dict[str, Evidence]) -> str:
+    """Stable fingerprint of what the capability was scored on (paths and answers, not evidence ids)."""
     rows = []
     for sid, st in sorted(result.signals.items()):
         refs = sorted(f"{evidence[i].source}:{evidence[i].path}" for i in st.evidence)
@@ -91,14 +91,14 @@ def category_digest(result: CategoryResult, evidence: dict[str, Evidence]) -> st
 | Rule | Value |
 |---|---|
 | Minimum comment | 10 characters |
-| Decisions | confirm, override (level 1-4) |
+| Decisions | confirm, override (level 1-5) |
 | Reviewer | must differ from `assessor` in org.yaml |
 
 ## 7. Commands
 
 ```bash
 aimaturity queue --org portfolio
-aimaturity review --org kestrel-bay-bank --category 3.1 --reviewer "Platform Lead" --decision confirm --comment "Eval gates run in every pipeline"
+aimaturity review --org kestrel-bay-bank --capability AE-1 --reviewer "Platform Lead" --decision confirm --comment "Eval gates run in every pipeline"
 aimaturity audit --org valemont-revenue-agency
 ```
 
@@ -106,9 +106,10 @@ aimaturity audit --org valemont-revenue-agency
 
 <!-- output: queue --org kestrel-bay-bank -->
 ```text
-category  name                              why
---------  --------------------------------  -------------------------
-3.1       AI Development Platforms & Tools  confidence 0.59 below 0.6
+capability  name                                 why
+----------  -----------------------------------  -------------------------
+SV-2        Use-Case Portfolio & Prioritisation  confidence 0.55 below 0.6
+PO-1        Sponsorship & Operating Model        confidence 0.50 below 0.6
 ```
 <!-- /output -->
 

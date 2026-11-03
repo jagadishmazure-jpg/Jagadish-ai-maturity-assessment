@@ -1,7 +1,7 @@
 # Component: assessor agent (state graph, mock LLM, verifier)
 
 The assessor is a small LangGraph-style state graph. Nine deterministic nodes load an organisation,
-collect evidence, score each category, ask a mock LLM for a rationale, verify the rationale against the
+collect evidence, score each capability, ask a mock LLM for a rationale, verify the rationale against the
 evidence, apply human reviews, roll up, analyse gaps and plan the roadmap. It runs offline in under a
 second per organisation.
 
@@ -26,11 +26,11 @@ flowchart LR
 
 1. **load** reads `samples/<org>/org.yaml`.
 2. **collect** gathers evidence from a live scan, the checked-in snapshot or a manifest, plus questionnaire answers, and numbers it (`E001`...).
-3. **score** computes level, confidence and cited evidence for all 29 categories.
-4. **explain** asks `MockLLM` for a one-paragraph rationale per category that cites evidence ids.
-5. **verify** rejects any rationale that cites an unknown id, cites evidence from another category, or claims a level other than the computed one, and replaces it with a template, recording a verification issue.
+3. **score** computes level, confidence and cited evidence for all 23 capabilities, plus the musts that blocked the next level.
+4. **explain** asks `MockLLM` for a one-paragraph rationale per capability that cites evidence ids.
+5. **verify** rejects any rationale that cites an unknown id, cites evidence from another capability, or claims a level other than the computed one, and replaces it with a template, recording a verification issue.
 6. **review** applies valid human reviews (see the HITL component) and builds the queue.
-7. **rollup**, **gaps** and **roadmap** produce pillar and overall levels, gaps against targets and the Month 1-12 plan.
+7. **rollup**, **gaps** and **roadmap** produce dimension and overall levels, the readiness index, gaps against targets and the Month 1-12 plan.
 8. The run is `final` only when the review queue is empty and the audit log chain is intact.
 
 ## 4. Key files
@@ -46,7 +46,7 @@ flowchart LR
 <!-- code: src/aimaturity/agents/assessor.py::_verify -->
 ```python
 def _verify(s):
-    """Reject rationales that cite unknown evidence, cite evidence outside the category, or claim another level."""
+    """Reject rationales that cite unknown evidence, cite evidence outside the capability, or claim another level."""
     issues, fixed = [], {}
     for cid, text in s["rationales"].items():
         res = s["results"][cid]
@@ -58,11 +58,11 @@ def _verify(s):
         if bad:
             problems.append(f"unknown evidence {bad}")
         if foreign:
-            problems.append(f"evidence not used by this category {foreign}")
+            problems.append(f"evidence not used by this capability {foreign}")
         if lvl != res.level:
             problems.append(f"claims level {lvl}, scored {res.level}")
         if problems:
-            issues.append({"category": cid, "problems": problems})
+            issues.append({"capability": cid, "problems": problems})
             text = template_rationale(_facts(res))
         fixed[cid] = text
     return {**s, "rationales": fixed, "verification_issues": issues}
@@ -79,7 +79,7 @@ class MockLLM:
 
     def rationale(self, facts: dict) -> str:
         self.calls += 1
-        level = min(4, facts["level"] + 1) if self.overclaim else facts["level"]
+        level = min(TOP, facts["level"] + 1) if self.overclaim else facts["level"]
         cites = list(facts["evidence"][:4])
         if self.hallucinate:
             cites.append("E999")
@@ -87,7 +87,7 @@ class MockLLM:
         if cites:
             parts.append("Supported by " + ", ".join(f"[{c}]" for c in cites) + ".")
         else:
-            parts.append("No artifact or answer supports a level above Basic.")
+            parts.append("No artifact or answer supports a level above Explore.")
         if facts["missing"]:
             parts.append(f"Next level needs: {', '.join(facts['missing'])}.")
         parts.append(f"Confidence {facts['confidence']:.2f}.")
@@ -108,7 +108,7 @@ class MockLLM:
 
 ```bash
 aimaturity assess --org valemont-revenue-agency
-aimaturity explain --org kestrel-bay-bank --category 5.1
+aimaturity explain --org kestrel-bay-bank --capability GR-1
 aimaturity assess --org portfolio --live      # scan the sibling checkouts read-only
 ```
 
@@ -116,72 +116,65 @@ aimaturity assess --org portfolio --live      # scan the sibling checkouts read-
 
 <!-- output: assess --org valemont-revenue-agency -->
 ```text
-Valemont Revenue Agency: overall Level 2 (Ready), mean 2.2
-pillar  name                          level           mean  capped by
-------  ----------------------------  -----  -------  ----  ---------
-P1      Strategy & Value              2      Ready    2     -
-P2      People & Culture              3      Dynamic  2.6   -
-P3      Technology & Infrastructure   2      Ready    2     -
-P4      AI Operations & Ecosystem     2      Ready    1.8   -
-P5      AI Governance, Ethics & Risk  3      Dynamic  2.8   -
-P6      Data (AI-Specific Focus)      2      Ready    2     -
+Valemont Revenue Agency: overall Level 1 (Explore), mean 2.17, Agentic Readiness Index 29.2
+dimension  name                           level           mean  capped by
+---------  -----------------------------  -----  -------  ----  ---------
+SV         Strategy & Value               2      Prove    2     -
+DF         Data Foundation                2      Prove    2.33  -
+PL         Platform & LLMOps              1      Explore  1.67  -
+AE         Agent Engineering              2      Prove    2     -
+SI         Security & Identity            2      Prove    2     -
+GR         Governance, Risk & Compliance  3      Operate  3.67  -
+PO         People & Operating Model       2      Prove    2.33  -
+FC         FinOps & Cost                  1      Explore  1     -
 
-cat  level  computed  conf  status          target
----  -----  --------  ----  --------------  ------
-1.1  2      2         0.88  auto            3
-1.2  2      2         0.54  confirmed       3
-1.3  2      2         0.93  auto            3
-1.4  2      2         0.66  auto            3
-1.5  2      2         0.92  auto            3
-2.1  2      2         0.54  pending-review  3
-2.2  2      2         0.8   auto            3
-2.3  3      3         0.76  auto            3
-2.4  3      3         0.86  auto            3
-2.5  3      3         0.82  auto            3
-3.1  2      2         0.94  auto            3
-3.2  2      2         0.9   auto            3
-3.3  2      2         0.91  auto            3
-3.4  2      2         0.92  auto            3
-4.1  2      2         0.9   auto            3
-4.2  1      1         0.88  auto            3
-4.3  2      2         0.92  auto            3
-4.4  3      2         0.46  overridden      3
-4.5  1      1         0.88  auto            3
-5.1  3      3         0.74  auto            3
-5.2  3      3         0.88  auto            4
-5.3  2      2         0.92  auto            3
-5.4  3      3         0.94  auto            3
-5.5  3      3         0.92  auto            4
-6.1  2      2         0.94  auto            3
-6.2  2      2         0.94  auto            3
-6.3  2      2         0.84  auto            3
-6.4  1      1         0.88  auto            2
-6.5  3      3         0.88  auto            3
+capability  level  computed  conf  status      target
+----------  -----  --------  ----  ----------  ------
+SV-1        2      2         0.77  auto        3
+SV-2        2      2         0.74  auto        3
+SV-3        2      2         0.96  auto        3
+DF-1        3      3         0.82  auto        3
+DF-2        2      2         0.96  auto        3
+DF-3        2      2         0.75  auto        3
+PL-1        2      2         0.82  auto        3
+PL-2        2      2         0.98  auto        3
+PL-3        1      1         0.93  auto        3
+AE-1        1      1         0.93  auto        3
+AE-2        2      2         0.96  auto        3
+AE-3        3      3         0.88  auto        3
+SI-1        1      1         0.93  auto        3
+SI-2        2      2         0.96  auto        3
+SI-3        3      3         0.98  auto        3
+GR-1        5      5         0.86  auto        3
+GR-2        2      2         0.96  auto        4
+GR-3        4      4         0.73  auto        4
+PO-1        2      2         0.43  confirmed   3
+PO-2        2      3         0.4   overridden  3
+PO-3        3      3         0.73  auto        3
+FC-1        1      1         0.93  auto        3
+FC-2        1      1         0.93  auto        2
 
-review queue: 2.1; final: False
+review queue: empty; final: True
 ```
 <!-- /output -->
 
-<!-- output: explain --org kestrel-bay-bank --category 5.1 -->
+<!-- output: explain --org kestrel-bay-bank --capability GR-1 -->
 ```text
-5.1 AI Governance Framework: level 4 (Advanced), confidence 0.97, status auto
-rationale: Level 4 (Advanced). Supported by [E002], [E098], [E037], [E040]. Confidence 0.97.
+GR-1 AI Policy & Accountability: level 5 (Optimise), confidence 0.86, status auto
+rationale: Level 5 (Optimise). Supported by [E002], [E067], [E037], [E083]. Confidence 0.86.
   [x] ai_policy_doc                artifact         E002
-  [x] security_policy              artifact         E098
+  [x] q_ethics_principles          self-reported    E067
   [x] inventory                    artifact         E037
+  [x] q_review_board               self-reported    E083
   [x] lifecycle_gates              artifact         E040
-  [x] q_review_board               self-reported    E079
   [x] compliance_in_pipeline       artifact         E014, E015
-  [x] audit_log                    artifact         E006
-  [x] secret_hygiene               artifact         E097
   E002 kb-model-governance:docs/best-practices.md (file present)
-  E098 kb-model-governance:SECURITY.md (file present)
+  E067 questionnaire:q_ethics_principles (answer yes)
   E037 kb-model-governance:registry/inventory.yaml (file present)
+  E083 questionnaire:q_review_board (answer yes)
   E040 kb-model-governance:src/gov/lifecycle.py (matched 'lifecycle')
-  E079 questionnaire:q_review_board (answer yes)
   E014 kb-ai-platform:.github/workflows/ci.yml (matched 'gate')
   E015 kb-model-governance:.github/workflows/ci.yml (matched 'checkov')
-  E006 kb-model-governance:src/review/audit.py (matched 'AUDIT_LOG')
 ```
 <!-- /output -->
 
