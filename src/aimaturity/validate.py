@@ -8,7 +8,7 @@ import jsonschema
 import yaml
 
 from aimaturity import SCHEMAS
-from aimaturity.framework import check_consistency, questions
+from aimaturity.framework import capabilities, check_consistency, questions
 from aimaturity.orgs import list_orgs, load_org
 
 
@@ -33,6 +33,6 @@ def validate_all() -> list[str]:
                 errs.append(f"{org_id}/snapshot: {e.message}")
         if org.config.get("labels"):
             labels = yaml.safe_load((org.dir / org.config["labels"]).read_text())["labels"]
-            if len(labels) != 29:
-                errs.append(f"{org_id}: labels must cover all 29 categories")
+            if set(labels) != set(capabilities()):
+                errs.append(f"{org_id}: labels must cover every capability exactly")
     return errs

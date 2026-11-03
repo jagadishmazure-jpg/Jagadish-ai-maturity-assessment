@@ -1,8 +1,8 @@
 """Read-only MCP server over the framework and the sample assessments.
 
-Tools (all ``readOnlyHint``): list_pillars, get_category, list_orgs, assess, category_result,
+Tools (all ``readOnlyHint``): list_dimensions, get_capability, list_orgs, assess, capability_result,
 gaps, roadmap, review_queue, evidence. There is no tool that records a review: agents can ask
-for an assessment and its evidence, only a named human can sign a category off (``aimaturity review``).
+for an assessment and its evidence, only a named human can sign a capability off (``aimaturity review``).
 
     aimaturity mcp          # stdio transport, for an MCP client
     aimaturity mcp-demo     # scripted in-memory session
@@ -18,13 +18,13 @@ from mcp.types import ToolAnnotations
 
 from aimaturity.agents.assessor import assess as _assess
 from aimaturity.agents.assessor import summary
-from aimaturity.framework import LEVEL_NAMES, categories, pillars
+from aimaturity.framework import LEVEL_NAMES, capabilities, dimensions
 from aimaturity.gaps import describe
 from aimaturity.orgs import list_orgs as _list_orgs
 from aimaturity.orgs import load_org
 
 RO = ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False)
-TOOL_NAMES = ["list_pillars", "get_category", "list_orgs", "assess", "category_result", "gaps", "roadmap", "review_queue", "evidence"]
+TOOL_NAMES = ["list_dimensions", "get_capability", "list_orgs", "assess", "capability_result", "gaps", "roadmap", "review_queue", "evidence"]
 
 
 @cache
@@ -36,22 +36,29 @@ def build_server() -> MCPServer:
     server = MCPServer("ai-maturity-assessment")
 
     @server.tool(annotations=RO)
-    def list_pillars() -> list[dict[str, Any]]:
-        """The six pillars with their category ids and names."""
-        return [{"id": p["id"], "name": p["name"], "categories": [{"id": c["id"], "name": c["name"]} for c in p["categories"]]} for p in pillars()]
+    def list_dimensions() -> list[dict[str, Any]]:
+        """The eight dimensions with their weights, capability ids and names."""
+        return [
+            {"id": p["id"], "name": p["name"], "weight": p["weight"], "capabilities": [{"id": c["id"], "name": c["name"]} for c in p["capabilities"]]}
+            for p in dimensions()
+        ]
 
     @server.tool(annotations=RO)
-    def get_category(category_id: str) -> dict[str, Any]:
-        """One category: summary, level descriptors 1-4, the evidence each level needs, critical flag."""
-        c = categories()[category_id]
+    def get_capability(capability_id: str) -> dict[str, Any]:
+        """One capability: summary, level descriptors 1-5, the evidence each level needs, anchor flag."""
+        c = capabilities()[capability_id]
         return {
             "id": c["id"],
             "name": c["name"],
-            "pillar": c["pillar"],
+            "dimension": c["dimension"],
             "summary": c["summary"],
-            "critical": c["critical"],
+            "anchor": c["anchor"],
             "descriptors": {f"{k} {LEVEL_NAMES[k]}": v for k, v in c["descriptors"].items()},
-            "evidence_needed": {str(lvl): [{"signal": s, "means": describe(s)} for s in ids] for lvl, ids in c["rubric"]["levels"].items()},
+            "evidence_needed": {
+                str(lvl): {kind: [{"signal": s, "means": describe(s)} for s in rule[kind]] for kind in ("must", "support")}
+                for lvl, rule in c["rubric"]["levels"].items()
+            },
+            "maps_to": c["maps_to"],
         }
 
     @server.tool(annotations=RO)
@@ -61,21 +68,21 @@ def build_server() -> MCPServer:
 
     @server.tool(annotations=RO)
     def assess(org_id: str) -> dict[str, Any]:
-        """Overall and pillar levels, review status and evidence count for one organisation."""
+        """Overall and dimension levels, review status and evidence count for one organisation."""
         s = summary(_state(org_id))
-        return {k: s[k] for k in ("org", "name", "overall", "pillars", "review_queue", "final", "evidence_count", "questionnaire_label")}
+        return {k: s[k] for k in ("org", "name", "overall", "dimensions", "review_queue", "final", "evidence_count", "questionnaire_label")}
 
     @server.tool(annotations=RO)
-    def category_result(org_id: str, category_id: str) -> dict[str, Any]:
-        """Level, confidence, status, rationale and cited evidence ids for one category."""
+    def capability_result(org_id: str, capability_id: str) -> dict[str, Any]:
+        """Level, confidence, status, rationale and cited evidence ids for one capability."""
         s = summary(_state(org_id))
-        return next(c for c in s["categories"] if c["id"] == category_id)
+        return next(c for c in s["capabilities"] if c["id"] == capability_id)
 
     @server.tool(annotations=RO)
     def gaps(org_id: str, min_gap: int = 1) -> list[dict[str, Any]]:
-        """Categories below target, largest gap first, with the missing evidence per step."""
+        """Capabilities below target, largest gap first, with the missing evidence per step."""
         rows = [g for g in _state(org_id)["gaps"] if g["gap"] >= min_gap]
-        return sorted(rows, key=lambda g: (-g["gap"], g["category"]))
+        return sorted(rows, key=lambda g: (-g["gap"], g["capability"]))
 
     @server.tool(annotations=RO)
     def roadmap(org_id: str) -> dict[str, Any]:
@@ -86,9 +93,9 @@ def build_server() -> MCPServer:
 
     @server.tool(annotations=RO)
     def review_queue(org_id: str) -> list[dict[str, Any]]:
-        """Categories waiting for a human reviewer and why."""
+        """Capabilities waiting for a human reviewer and why."""
         st = _state(org_id)
-        return [{"category": c, "name": st["results"][c].name, "reasons": st["results"][c].review_reasons} for c in st["review_queue"]]
+        return [{"capability": c, "name": st["results"][c].name, "reasons": st["results"][c].review_reasons} for c in st["review_queue"]]
 
     @server.tool(annotations=RO)
     def evidence(org_id: str, evidence_id: str) -> dict[str, Any]:
@@ -110,10 +117,10 @@ async def demo() -> list[str]:
         lines.append(f"all read-only: {all(t.annotations and t.annotations.read_only_hint for t in tools.tools)}")
         res = (await client.call_tool("assess", {"org_id": "valemont-revenue-agency"})).structured_content
         lines.append(f"{res['name']}: overall {res['overall']['level']} ({res['overall']['level_name']}); queue {res['review_queue']}")
-        for p in res["pillars"]:
+        for p in res["dimensions"]:
             lines.append(f"  {p['id']} {p['name']:<30} level {p['level']} mean {p['mean']}")
-        cat = (await client.call_tool("category_result", {"org_id": "valemont-revenue-agency", "category_id": "4.4"})).structured_content
-        lines.append(f"4.4: computed {cat['computed_level']}, final {cat['level']} ({cat['status']})")
+        cat = (await client.call_tool("capability_result", {"org_id": "valemont-revenue-agency", "capability_id": "PO-2"})).structured_content
+        lines.append(f"PO-2: computed {cat['computed_level']}, final {cat['level']} ({cat['status']})")
         first = cat["evidence"][0]
         ev = (await client.call_tool("evidence", {"org_id": "valemont-revenue-agency", "evidence_id": first})).structured_content
         lines.append(f"  {first}: {ev['source']} {ev['path']} ({ev['origin']})")

@@ -18,7 +18,7 @@ from aimaturity.gaps import gap_analysis
 from aimaturity.hitl import apply_reviews, queue, read_log, read_reviews, verify_audit_log
 from aimaturity.orgs import gather, load_org
 from aimaturity.roadmap import schedule, work_items
-from aimaturity.rollup import overall, pillar_rollup
+from aimaturity.rollup import dimension_rollup, overall
 from aimaturity.scoring import score_all
 
 NODES = ["load", "collect", "score", "explain", "verify", "review", "rollup", "gaps", "roadmap"]
@@ -49,7 +49,7 @@ def _explain(s):
 
 
 def _verify(s):
-    """Reject rationales that cite unknown evidence, cite evidence outside the category, or claim another level."""
+    """Reject rationales that cite unknown evidence, cite evidence outside the capability, or claim another level."""
     issues, fixed = [], {}
     for cid, text in s["rationales"].items():
         res = s["results"][cid]
@@ -61,11 +61,11 @@ def _verify(s):
         if bad:
             problems.append(f"unknown evidence {bad}")
         if foreign:
-            problems.append(f"evidence not used by this category {foreign}")
+            problems.append(f"evidence not used by this capability {foreign}")
         if lvl != res.level:
             problems.append(f"claims level {lvl}, scored {res.level}")
         if problems:
-            issues.append({"category": cid, "problems": problems})
+            issues.append({"capability": cid, "problems": problems})
             text = template_rationale(_facts(res))
         fixed[cid] = text
     return {**s, "rationales": fixed, "verification_issues": issues}
@@ -81,8 +81,8 @@ def _review(s):
 
 def _rollup(s):
     levels = {cid: st["final_level"] for cid, st in s["statuses"].items()}
-    pillars = pillar_rollup(levels, s["org"].critical)
-    return {**s, "pillars": pillars, "overall": overall(pillars)}
+    dimensions = dimension_rollup(levels, s["org"].anchors)
+    return {**s, "dimensions": dimensions, "overall": overall(dimensions)}
 
 
 def _gaps(s):
@@ -120,8 +120,8 @@ def summary(state: dict[str, Any]) -> dict[str, Any]:
             {
                 "id": cid,
                 "name": r.name,
-                "pillar": r.pillar,
-                "critical": r.critical,
+                "dimension": r.dimension,
+                "anchor": r.anchor,
                 "computed_level": r.level,
                 "level": st["final_level"],
                 "confidence": r.confidence,
@@ -138,8 +138,8 @@ def summary(state: dict[str, Any]) -> dict[str, Any]:
         "kind": org.config.get("kind", ""),
         "assessor": org.assessor,
         "overall": state["overall"],
-        "pillars": state["pillars"],
-        "categories": cats,
+        "dimensions": state["dimensions"],
+        "capabilities": cats,
         "review_queue": state["review_queue"],
         "final": state["final"],
         "audit_problems": state["audit_problems"],

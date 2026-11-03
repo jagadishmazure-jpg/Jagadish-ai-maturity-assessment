@@ -39,13 +39,13 @@ class Org:
         return self.config["assessor"]
 
     @property
-    def critical(self) -> list[str]:
-        return self.config.get("critical", rubric()["critical"])
+    def anchors(self) -> list[str]:
+        return self.config.get("anchors", rubric()["anchors"])
 
-    def target(self, category_id: str) -> int:
+    def target(self, capability_id: str) -> int:
         t = self.config.get("targets", {})
-        cats, pills = t.get("categories", {}), t.get("pillars", {})
-        return int(cats.get(category_id, pills.get(category_id.split(".")[0], t.get("default", 3))))
+        cats, pills = t.get("capabilities", {}), t.get("dimensions", {})
+        return int(cats.get(capability_id, pills.get(capability_id.split("-")[0], t.get("default", 3))))
 
     def answers(self) -> dict[str, Any] | None:
         q = self.config.get("questionnaire")

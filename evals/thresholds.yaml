@@ -3,13 +3,13 @@ stability:
   shuffle_runs: 5               # evidence order shuffled this many times per org
   identical_required: true      # every shuffled run must give identical levels and confidence
   # Dropout: remove one evidence item at a time and rescore.
-  # Locality is always enforced: only categories that use the removed item's signal may move.
+  # Locality is always enforced: only capabilities that use the removed item's signal may move.
   # Levels are stepwise (a level needs the one below), so losing a foundation artifact can drop a
-  # category several levels; that size is reported, not gated. What is gated is how often it happens.
-  dropout_max_categories: 2     # one removed item may move at most this many categories
-  dropout_mean_categories: 0.5  # mean categories moved per removed item
+  # capability several levels; that size is reported, not gated. What is gated is how often it happens.
+  dropout_max_capabilities: 2     # one removed item may move at most this many capabilities
+  dropout_mean_capabilities: 0.5  # mean capabilities moved per removed item
 citations:
-  completeness_min: 1.0         # share of level >= 2 categories with cited evidence
+  completeness_min: 1.0         # share of level >= 2 capabilities with cited evidence
   valid_ids_min: 1.0            # share of cited ids that exist
   verifier_catch_min: 1.0       # share of injected bad rationales (hallucinated id, overclaimed level) caught
 calibration:

@@ -1,4 +1,4 @@
-"""Evidence-based AI maturity assessment (framework structure adapted from UNESCO under CC BY-SA 3.0 IGO)."""
+"""Evidence-based enterprise agentic AI maturity assessment (Enterprise Agentic AI Maturity Model)."""
 
 import os
 from pathlib import Path

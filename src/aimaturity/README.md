@@ -10,7 +10,7 @@ The `aimaturity` package.
 | `collectors/` | Evidence collection |
 | `orgs.py` | Org configs and evidence modes |
 | `scoring.py` | Levels and confidence |
-| `rollup.py` | Pillar and overall levels |
+| `rollup.py` | Dimension and overall levels |
 | `hitl.py` | Reviews and audit chain |
 | `gaps.py` | Gap analysis |
 | `roadmap.py` | Work items and scheduler |

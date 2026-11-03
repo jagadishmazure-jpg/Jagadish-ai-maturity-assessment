@@ -15,7 +15,7 @@ from aimaturity import EVALS
 from aimaturity.agents.assessor import assess
 from aimaturity.agents.llm import MockLLM, cited_ids, claimed_level
 from aimaturity.collectors import Evidence, collect_questionnaire, number
-from aimaturity.framework import categories, is_question, rubric, signals
+from aimaturity.framework import TOP, capabilities, criteria, is_question, signals
 from aimaturity.orgs import ManifestSource, list_orgs, load_org, scan
 from aimaturity.scoring import REVIEW_BELOW, score_all
 
@@ -49,7 +49,7 @@ def stability(t: dict[str, Any]) -> dict[str, Any]:
             res = score_all(_renumber(ev[:i] + ev[i + 1 :]), scanned)
             moved = [c for c in base if res[c].level != base[c][0]]
             diffs = [abs(res[c].level - base[c][0]) for c in moved]
-            # locality: only categories that use the removed item's signal may move
+            # locality: only capabilities that use the removed item's signal may move
             nonlocal_moves += sum(ev[i].signal not in state["results"][c].signals for c in moved)
             runs += 1
             moves += len(diffs)
@@ -59,8 +59,8 @@ def stability(t: dict[str, Any]) -> dict[str, Any]:
     ok = (
         (identical or not t["identical_required"])
         and nonlocal_moves == 0
-        and max_cats <= t["dropout_max_categories"]
-        and mean <= t["dropout_mean_categories"]
+        and max_cats <= t["dropout_max_capabilities"]
+        and mean <= t["dropout_mean_capabilities"]
     )
     return {
         "gate": "stability",
@@ -68,8 +68,8 @@ def stability(t: dict[str, Any]) -> dict[str, Any]:
         "shuffle_identical": identical,
         "dropout_runs": runs,
         "nonlocal_moves": nonlocal_moves,
-        "max_categories_moved": max_cats,
-        "mean_categories_moved": mean,
+        "max_capabilities_moved": max_cats,
+        "mean_capabilities_moved": mean,
         "max_level_change_info": max_change,
     }
 
@@ -88,8 +88,8 @@ def citations(t: dict[str, Any]) -> dict[str, Any]:
             cited_valid += sum(c in ids and c in r.evidence for c in cites)
         for knob in ({"hallucinate": True}, {"overclaim": True}):
             bad = assess(org_id, llm=MockLLM(**knob))
-            flagged = {i["category"] for i in bad["verification_issues"]}
-            targets = [c for c, r in bad["results"].items() if knob.get("hallucinate") or r.level < 4]
+            flagged = {i["capability"] for i in bad["verification_issues"]}
+            targets = [c for c, r in bad["results"].items() if knob.get("hallucinate") or r.level < TOP]
             injected += len(targets)
             caught += sum(c in flagged for c in targets)
             # after the verifier, the stored rationale must be clean again
@@ -102,27 +102,26 @@ def citations(t: dict[str, Any]) -> dict[str, Any]:
         "completeness": round(comp, 3),
         "valid_ids": round(valid, 3),
         "verifier_catch": round(catch, 3),
-        "categories_checked": need,
+        "capabilities_checked": need,
         "injected": injected,
     }
 
 
 def synthetic_org(rng: random.Random, n: int) -> tuple[list[Evidence], dict[str, int]]:
     """A synthetic org with known levels: signal examples for every level reached, plus noise."""
-    R = rubric()["categories"]
-    truth = {cid: rng.choice([1, 2, 2, 3, 3, 4]) for cid in categories()}
+    truth = {cid: rng.choice([1, 2, 2, 3, 3, 4, 5]) for cid in capabilities()}
     files: dict[str, dict[str, str]] = {}
     answers: dict[str, str] = {}
     present: set[str] = set()
     for cid, lvl in truth.items():
         for lv in range(2, lvl + 1):
-            present.update(R[cid]["levels"][lv])
+            present.update(criteria(cid, lv))
     noisy = set(present)
     for cid, lvl in truth.items():
         if lvl >= 2 and rng.random() < 0.12:  # an artifact the collectors miss
-            noisy.discard(rng.choice(R[cid]["levels"][lvl]))
-        if lvl < 4 and rng.random() < 0.08:  # stray evidence of the next level
-            noisy.add(rng.choice(R[cid]["levels"][lvl + 1]))
+            noisy.discard(rng.choice(criteria(cid, lvl)))
+        if lvl < TOP and rng.random() < 0.08:  # stray evidence of the next level
+            noisy.add(rng.choice(criteria(cid, lvl + 1)))
     for sid in sorted(noisy):
         if is_question(sid):
             answers[sid] = "yes"

@@ -1,10 +1,11 @@
 """Turn gaps into a prioritised, dependency-aware Month 1-12 plan (no calendar dates).
 
-* One work item per missing level step: ``2.3->3`` means "lift category 2.3 to level 3".
-* Dependencies: the previous step of the same category, and for every category it depends on
-  (rubric ``depends_on``) any step of that category to a level at most one below.
-* Priority = 10 x gap + 6 if critical + 2 x number of items waiting on it + 3 x (1 - confidence).
-* Quick win: the first step of a category, effort S, with nothing it waits on.
+* One work item per missing level step: ``AE-1->3`` means "lift capability AE-1 to level 3".
+* Dependencies: the previous step of the same capability, and for every capability it depends on
+  (rubric ``depends_on``) any step of that capability to a level at most one below.
+* Priority = 10 x gap + 5 if anchor + 2 x number of items waiting on it + 3 x (1 - confidence)
+  + 20 x dimension weight (dimension weights in framework/framework.yaml sum to 1).
+* Quick win: the first step of a capability, effort S, with nothing it waits on.
 * Scheduling: months 1-12, at most ``capacity`` items in flight; quick wins start first and must
   start in Months 1-3. Effort S/M/L lasts 1/2/3 months. What does not fit goes to the backlog.
 * Re-assessment milestones in Month 6 and Month 12.
@@ -14,32 +15,34 @@ from __future__ import annotations
 
 from typing import Any
 
-from aimaturity.framework import categories
+from aimaturity.framework import capabilities, dimension_weights
 
 DURATION = {"S": 1, "M": 2, "L": 3}
 MONTHS = 12
 
 
 def work_items(gaps: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    cats = categories()
+    cats = capabilities()
+    weight = dimension_weights()
     items: dict[str, dict[str, Any]] = {}
-    by_cat = {g["category"]: g for g in gaps}
+    by_cat = {g["capability"]: g for g in gaps}
     for g in gaps:
         for n, step in enumerate(g["steps"]):
-            iid = f"{g['category']}->{step['to_level']}"
-            deps = [f"{g['category']}->{step['to_level'] - 1}"] if n else []
-            for d in cats[g["category"]]["rubric"]["depends_on"]:
+            iid = f"{g['capability']}->{step['to_level']}"
+            deps = [f"{g['capability']}->{step['to_level'] - 1}"] if n else []
+            for d in cats[g["capability"]]["rubric"]["depends_on"]:
                 deps += [f"{d}->{s['to_level']}" for s in by_cat[d]["steps"] if s["to_level"] <= step["to_level"] - 1]
             items[iid] = {
                 "id": iid,
-                "category": g["category"],
+                "capability": g["capability"],
                 "name": g["name"],
-                "pillar": g["pillar"],
+                "dimension": g["dimension"],
                 "to_level": step["to_level"],
                 "effort": step["effort"],
                 "months": DURATION[step["effort"]],
                 "depends_on": deps,
-                "critical": g["critical"],
+                "anchor": g["anchor"],
+                "weight": weight[g["dimension"]],
                 "gap": g["gap"],
                 "confidence": g["confidence"],
                 "action": step["action"],
@@ -47,10 +50,15 @@ def work_items(gaps: list[dict[str, Any]]) -> list[dict[str, Any]]:
             }
     for it in items.values():
         it["unblocks"] = sorted(o["id"] for o in items.values() if it["id"] in o["depends_on"])
-        it["priority"] = round(10 * it["gap"] + 6 * it["critical"] + 2 * len(it["unblocks"]) + 3 * (1 - it["confidence"]), 2)
-        first = not any(d.startswith(it["category"] + "->") for d in it["depends_on"])
+        it["priority"] = round(10 * it["gap"] + 5 * it["anchor"] + 2 * len(it["unblocks"]) + 3 * (1 - it["confidence"]) + 20 * it["weight"], 2)
+        first = not any(d.startswith(it["capability"] + "->") for d in it["depends_on"])
         it["kind"] = "quick-win" if first and it["effort"] == "S" and not it["depends_on"] else "strategic"
     return sorted(items.values(), key=lambda i: (-i["priority"], i["id"]))
+
+
+def _item_order(item_id: str) -> tuple[int, int]:
+    cap, to_level = item_id.split("->")
+    return list(capabilities()).index(cap), int(to_level)
 
 
 def schedule(items: list[dict[str, Any]], capacity: int = 4) -> dict[str, Any]:
@@ -78,9 +86,9 @@ def schedule(items: list[dict[str, Any]], capacity: int = 4) -> dict[str, Any]:
     return {
         "capacity": capacity,
         "plan": plan,
-        "backlog": sorted((p["id"] for p in pending), key=lambda i: [float(x) for x in i.replace("->", ".").split(".")]),
+        "backlog": sorted((p["id"] for p in pending), key=_item_order),
         "milestones": [
-            {"month": 6, "what": "Re-assess all categories and refresh the plan"},
+            {"month": 6, "what": "Re-assess all capabilities and refresh the plan"},
             {"month": 12, "what": "Full re-assessment and target reset"},
         ],
     }

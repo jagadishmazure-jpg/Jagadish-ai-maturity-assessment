@@ -1,9 +1,9 @@
 [project]
 name = "ai-maturity-assessment"
-version = "0.1.0"
-description = "Evidence-based AI maturity assessment: a six-pillar, 29-category framework model (adapted under CC BY-SA 3.0 IGO), collectors over repositories and questionnaires, confidence-scored category levels with HITL review, gap analysis, a Month 1-12 roadmap and executive reports. Offline, mock LLM."
+version = "0.2.0"
+description = "Evidence-based enterprise agentic AI maturity assessment: the Enterprise Agentic AI Maturity Model (8 weighted dimensions, 23 capabilities, 5 levels) mapped to NIST AI RMF, ISO/IEC 42001 and the EU AI Act, collectors over repositories and questionnaires, confidence-scored capability levels with HITL review, gap analysis, a Month 1-12 roadmap and executive reports. Offline, mock LLM."
 readme = "README.md"
-license = { text = "MIT (code); CC BY-SA 3.0 IGO (framework/)" }
+license = { text = "MIT" }
 authors = [{ name = "Jagadish Meduri" }]
 requires-python = ">=3.13"
 dependencies = [

@@ -1,10 +1,10 @@
-"""Human-in-the-loop review of low-confidence categories, with a hash-chained audit log.
+"""Human-in-the-loop review of low-confidence capabilities, with a hash-chained audit log.
 
-* Categories under the confidence bar (0.6) are queued; an assessment is not final while any are pending.
+* Capabilities under the confidence bar (0.6) are queued; an assessment is not final while any are pending.
 * A review confirms the computed level or overrides it, and needs a comment. The reviewer cannot
   be the assessor (separation of duties).
-* Each review is bound to a digest of the category's evidence. When the evidence changes, the review
-  goes stale and the category returns to the queue.
+* Each review is bound to a digest of the capability's evidence. When the evidence changes, the review
+  goes stale and the capability returns to the queue.
 * Every review is appended to ``audit-log.jsonl``; each entry carries the hash of the previous one, so
   edits or deletions break the chain and ``verify_audit_log`` reports them.
 """
@@ -19,18 +19,19 @@ from typing import Any
 import yaml
 
 from aimaturity.collectors import Evidence
-from aimaturity.scoring import CategoryResult
+from aimaturity.framework import LEVELS
+from aimaturity.scoring import CapabilityResult
 
 GENESIS = "0" * 64
 DECISIONS = ("confirm", "override")
 
 
 class ReviewError(ValueError):
-    """A review that breaks a rule (self-review, empty comment, bad level, unknown category)."""
+    """A review that breaks a rule (self-review, empty comment, bad level, unknown capability)."""
 
 
-def category_digest(result: CategoryResult, evidence: dict[str, Evidence]) -> str:
-    """Stable fingerprint of what the category was scored on (paths and answers, not evidence ids)."""
+def capability_digest(result: CapabilityResult, evidence: dict[str, Evidence]) -> str:
+    """Stable fingerprint of what the capability was scored on (paths and answers, not evidence ids)."""
     rows = []
     for sid, st in sorted(result.signals.items()):
         refs = sorted(f"{evidence[i].source}:{evidence[i].path}" for i in st.evidence)
@@ -66,33 +67,33 @@ def read_reviews(path: Path) -> list[dict[str, Any]]:
     return (yaml.safe_load(path.read_text()) or {}).get("reviews", []) if path.is_file() else []
 
 
-def validate_review(review: dict[str, Any], assessor: str, results: dict[str, CategoryResult]) -> None:
-    if review["category"] not in results:
-        raise ReviewError(f"unknown category {review['category']}")
+def validate_review(review: dict[str, Any], assessor: str, results: dict[str, CapabilityResult]) -> None:
+    if review["capability"] not in results:
+        raise ReviewError(f"unknown capability {review['capability']}")
     if review["reviewer"].strip().lower() == assessor.strip().lower():
         raise ReviewError("the assessor cannot review their own assessment")
     if review["decision"] not in DECISIONS:
         raise ReviewError(f"decision must be one of {DECISIONS}")
     if len(review.get("comment", "").strip()) < 10:
         raise ReviewError("a review needs a comment of at least 10 characters")
-    if review["decision"] == "override" and review.get("level") not in (1, 2, 3, 4):
-        raise ReviewError("an override needs a level from 1 to 4")
+    if review["decision"] == "override" and review.get("level") not in LEVELS:
+        raise ReviewError("an override needs a level from 1 to 5")
 
 
 def record_review(
-    reviews_path: Path, log_path: Path, assessor: str, results: dict[str, CategoryResult], evidence: dict[str, Evidence], **review: Any
+    reviews_path: Path, log_path: Path, assessor: str, results: dict[str, CapabilityResult], evidence: dict[str, Evidence], **review: Any
 ) -> dict[str, Any]:
     """Validate, append to the reviews file and the audit log, return the stored review."""
     validate_review(review, assessor, results)
-    res = results[review["category"]]
+    res = results[review["capability"]]
     stored = {
-        "category": review["category"],
+        "capability": review["capability"],
         "reviewer": review["reviewer"],
         "decision": review["decision"],
         "level": review["level"] if review["decision"] == "override" else res.level,
         "computed_level": res.level,
         "comment": review["comment"].strip(),
-        "evidence_digest": category_digest(res, evidence),
+        "evidence_digest": capability_digest(res, evidence),
     }
     log = read_log(log_path)
     entry = {"seq": len(log) + 1, "action": "review", **stored, "prev": log[-1]["hash"] if log else GENESIS}
@@ -106,9 +107,9 @@ def record_review(
 
 
 def apply_reviews(
-    results: dict[str, CategoryResult], evidence: dict[str, Evidence], reviews: list[dict[str, Any]], assessor: str, log: list[dict[str, Any]]
+    results: dict[str, CapabilityResult], evidence: dict[str, Evidence], reviews: list[dict[str, Any]], assessor: str, log: list[dict[str, Any]]
 ) -> dict[str, dict[str, Any]]:
-    """Status and final level per category. The latest valid review for a category wins."""
+    """Status and final level per capability. The latest valid review for a capability wins."""
     logged = {e["hash"] for e in log}
     latest: dict[str, dict[str, Any]] = {}
     rejected: dict[str, str] = {}
@@ -116,16 +117,16 @@ def apply_reviews(
         try:
             validate_review(r, assessor, results)
         except ReviewError as err:
-            rejected[r.get("category", "?")] = str(err)
+            rejected[r.get("capability", "?")] = str(err)
             continue
         if r.get("audit_hash") not in logged:
-            rejected[r["category"]] = "review has no matching audit log entry"
+            rejected[r["capability"]] = "review has no matching audit log entry"
             continue
-        latest[r["category"]] = r
+        latest[r["capability"]] = r
     out = {}
     for cid, res in results.items():
         r = latest.get(cid)
-        if r and r["evidence_digest"] == category_digest(res, evidence):
+        if r and r["evidence_digest"] == capability_digest(res, evidence):
             status = "overridden" if r["decision"] == "override" and r["level"] != res.level else "confirmed"
             out[cid] = {"status": status, "final_level": r["level"], "review": r}
         elif r:

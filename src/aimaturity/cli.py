@@ -1,10 +1,10 @@
 """``aimaturity`` command line. Everything is offline; only ``review``, ``report`` and
 ``collect --write`` write files, and only inside this repository.
 
-aimaturity framework [--pillar P1] | category ID | orgs | summary | validate
+aimaturity framework [--dimension AE] | capability ID | orgs | summary | validate
 aimaturity collect --org ORG [--live] [--write] | assess --org ORG [--json] [--live]
-aimaturity explain --org ORG --category ID | gaps --org ORG | roadmap --org ORG | links --org ORG
-aimaturity queue --org ORG | review --org ORG --category ID --reviewer NAME --decision confirm|override [--level N] --comment TEXT
+aimaturity explain --org ORG --capability ID | gaps --org ORG | roadmap --org ORG | links --org ORG
+aimaturity queue --org ORG | review --org ORG --capability ID --reviewer NAME --decision confirm|override [--level N] --comment TEXT
 aimaturity audit --org ORG | report (--org ORG | --all) [--check] | evals [--json] | agent-card | mcp | mcp-demo
 """
 
@@ -33,35 +33,40 @@ def table(rows: list[dict[str, Any]], keys: list[str], heads: list[str] | None =
 
 
 def cmd_framework(a) -> int:
-    from aimaturity.framework import LEVEL_NAMES, categories, pillars
+    from aimaturity.framework import LEVEL_NAMES, capabilities, dimensions
 
-    if not a.pillar:
+    if not a.dimension:
         _p("Levels: " + ", ".join(f"{k} {v}" for k, v in LEVEL_NAMES.items()))
         _p(
             table(
-                [{"id": p["id"], "name": p["name"], "n": len(p["categories"])} for p in pillars()],
+                [{"id": p["id"], "name": p["name"], "n": len(p["capabilities"])} for p in dimensions()],
                 ["id", "name", "n"],
-                ["pillar", "name", "categories"],
+                ["dimension", "name", "capabilities"],
             )
         )
-        _p(f"\n{len(categories())} categories; critical by default: {', '.join(c for c, v in categories().items() if v['critical'])}")
+        _p(f"\n{len(capabilities())} capabilities; anchor by default: {', '.join(c for c, v in capabilities().items() if v['anchor'])}")
         return 0
-    rows = [{"id": c["id"], "name": c["name"], "critical": "yes" if c["critical"] else ""} for c in categories().values() if c["pillar"] == a.pillar]
-    _p(table(rows, ["id", "name", "critical"], ["category", "name", "critical"]))
+    rows = [
+        {"id": c["id"], "name": c["name"], "anchor": "yes" if c["anchor"] else ""} for c in capabilities().values() if c["dimension"] == a.dimension
+    ]
+    _p(table(rows, ["id", "name", "anchor"], ["capability", "name", "anchor"]))
     return 0
 
 
-def cmd_category(a) -> int:
-    from aimaturity.framework import LEVEL_NAMES, categories
+def cmd_capability(a) -> int:
+    from aimaturity.framework import LEVEL_NAMES, LEVELS, STEPS, capabilities
     from aimaturity.gaps import describe
 
-    c = categories()[a.category_id]
-    _p(f"{c['id']} {c['name']} ({c['pillar']} {c['pillar_name']}){' - critical' if c['critical'] else ''}")
+    c = capabilities()[a.capability_id]
+    _p(f"{c['id']} {c['name']} ({c['dimension']} {c['dimension_name']}){' - anchor' if c['anchor'] else ''}")
     _p(c["summary"])
-    for lvl in (1, 2, 3, 4):
+    for lvl in LEVELS:
         _p(f"  {lvl} {LEVEL_NAMES[lvl]}: {c['descriptors'][lvl]}")
-    for lvl in (2, 3, 4):
-        _p(f"  evidence for {lvl}: " + "; ".join(f"{s} ({describe(s)})" for s in c["rubric"]["levels"][lvl]))
+    for lvl in STEPS:
+        rule = c["rubric"]["levels"][lvl]
+        _p(f"  must for {lvl}: " + "; ".join(f"{s} ({describe(s)})" for s in rule["must"]))
+        if rule["support"]:
+            _p(f"  support for {lvl}: " + "; ".join(f"{s} ({describe(s)})" for s in rule["support"]))
     return 0
 
 
@@ -120,15 +125,15 @@ def cmd_assess(a) -> int:
     _p(f"{s['name']}: overall Level {s['overall']['level']} ({s['overall']['level_name']}), mean {s['overall']['mean']}")
     _p(
         table(
-            [{**p, "capped_by": ",".join(p["capped_by"]) or "-"} for p in s["pillars"]],
+            [{**p, "capped_by": ",".join(p["capped_by"]) or "-"} for p in s["dimensions"]],
             ["id", "name", "level", "level_name", "mean", "capped_by"],
-            ["pillar", "name", "level", "", "mean", "capped by"],
+            ["dimension", "name", "level", "", "mean", "capped by"],
         )
     )
     _p("")
     _p(
         table(
-            s["categories"],
+            s["capabilities"],
             ["id", "level", "computed_level", "confidence", "status", "target"],
             ["cat", "level", "computed", "conf", "status", "target"],
         )
@@ -139,24 +144,26 @@ def cmd_assess(a) -> int:
 
 def cmd_summary(a) -> int:
     from aimaturity.agents.assessor import assess, summary
+    from aimaturity.framework import dimensions
     from aimaturity.orgs import list_orgs
 
     rows = []
     for o in list_orgs():
         s = summary(assess(o))
-        row = {"org": s["name"], "overall": f"{s['overall']['level']} {s['overall']['level_name']}"}
-        row.update({p["id"]: p["level"] for p in s["pillars"]})
+        row = {"org": s["name"], "overall": f"{s['overall']['level']} {s['overall']['level_name']}", "index": s["overall"]["index"]}
+        row.update({p["id"]: p["level"] for p in s["dimensions"]})
         row["queue"] = len(s["review_queue"])
         row["status"] = "final" if s["final"] else "provisional"
         rows.append(row)
-    keys = ["org", "overall", "P1", "P2", "P3", "P4", "P5", "P6", "queue", "status"]
-    _p(table(rows, keys, ["organisation", "overall", "P1", "P2", "P3", "P4", "P5", "P6", "review queue", "status"]))
+    dims = [d["id"] for d in dimensions()]
+    keys = ["org", "overall", "index", *dims, "queue", "status"]
+    _p(table(rows, keys, ["organisation", "overall", "readiness index", *dims, "review queue", "status"]))
     return 0
 
 
 def cmd_explain(a) -> int:
     st = _state(a)
-    r = st["results"][a.category]
+    r = st["results"][a.capability]
     _p(f"{r.id} {r.name}: level {r.level} ({r.level_name}), confidence {r.confidence:.2f}, status {st['statuses'][r.id]['status']}")
     _p(f"rationale: {st['rationales'][r.id]}")
     for sid, ss in r.signals.items():
@@ -172,8 +179,8 @@ def cmd_explain(a) -> int:
 
 def cmd_gaps(a) -> int:
     st = _state(a)
-    rows = [{**g, "first": g["steps"][0]["action"][:70]} for g in sorted(st["gaps"], key=lambda g: (-g["gap"], g["category"])) if g["gap"]]
-    _p(table(rows, ["category", "current", "target", "gap", "first"], ["cat", "now", "target", "gap", "first action"]))
+    rows = [{**g, "first": g["steps"][0]["action"][:70]} for g in sorted(st["gaps"], key=lambda g: (-g["gap"], g["capability"])) if g["gap"]]
+    _p(table(rows, ["capability", "current", "target", "gap", "first"], ["cat", "now", "target", "gap", "first action"]))
     return 0
 
 
@@ -201,17 +208,17 @@ def cmd_links(a) -> int:
     from aimaturity.crosslinks import check_links
 
     rows = check_links(_state(a))
-    _p(table(rows, ["repo", "category", "cited", "ok"]) if rows else "no cross-links configured")
+    _p(table(rows, ["repo", "capability", "cited", "ok"]) if rows else "no cross-links configured")
     return 0 if all(r["ok"] for r in rows) else 1
 
 
 def cmd_queue(a) -> int:
     st = _state(a)
     rows = [
-        {"category": c, "name": st["results"][c].name, "why": "; ".join(st["results"][c].review_reasons) or "evidence changed since review"}
+        {"capability": c, "name": st["results"][c].name, "why": "; ".join(st["results"][c].review_reasons) or "evidence changed since review"}
         for c in st["review_queue"]
     ]
-    _p(table(rows, ["category", "name", "why"]) if rows else "review queue is empty")
+    _p(table(rows, ["capability", "name", "why"]) if rows else "review queue is empty")
     return 0
 
 
@@ -227,7 +234,7 @@ def cmd_review(a) -> int:
             org.assessor,
             st["results"],
             st["evidence_by_id"],
-            category=a.category,
+            capability=a.capability,
             reviewer=a.reviewer,
             decision=a.decision,
             level=a.level,
@@ -236,7 +243,7 @@ def cmd_review(a) -> int:
     except ReviewError as e:
         _p(f"rejected: {e}")
         return 1
-    _p(f"recorded {r['decision']} for {r['category']} at level {r['level']} (audit {r['audit_hash'][:12]})")
+    _p(f"recorded {r['decision']} for {r['capability']} at level {r['level']} (audit {r['audit_hash'][:12]})")
     return 0
 
 
@@ -312,11 +319,11 @@ def parser() -> argparse.ArgumentParser:
         return p
 
     p = sub.add_parser("framework")
-    p.add_argument("--pillar")
+    p.add_argument("--dimension")
     p.set_defaults(fn=cmd_framework)
-    p = sub.add_parser("category")
-    p.add_argument("category_id")
-    p.set_defaults(fn=cmd_category)
+    p = sub.add_parser("capability")
+    p.add_argument("capability_id")
+    p.set_defaults(fn=cmd_capability)
     sub.add_parser("orgs").set_defaults(fn=cmd_orgs)
     sub.add_parser("summary").set_defaults(fn=cmd_summary)
     sub.add_parser("validate").set_defaults(fn=cmd_validate)
@@ -329,12 +336,12 @@ def parser() -> argparse.ArgumentParser:
     p.add_argument("--live", action="store_true")
     p.set_defaults(fn=cmd_assess)
     p = org(sub.add_parser("explain"))
-    p.add_argument("--category", required=True)
+    p.add_argument("--capability", required=True)
     p.set_defaults(fn=cmd_explain)
     for name, fn in [("gaps", cmd_gaps), ("roadmap", cmd_roadmap), ("links", cmd_links), ("queue", cmd_queue), ("audit", cmd_audit)]:
         org(sub.add_parser(name)).set_defaults(fn=fn)
     p = org(sub.add_parser("review"))
-    p.add_argument("--category", required=True)
+    p.add_argument("--capability", required=True)
     p.add_argument("--reviewer", required=True)
     p.add_argument("--decision", choices=["confirm", "override"], required=True)
     p.add_argument("--level", type=int)
