@@ -160,5 +160,5 @@ The report's gap table lists every capability below target with its first action
 ## 17. Adopt this
 
 1. Set `targets` in `org.yaml`.
-2. Rewrite actions for your context in `framework/framework.yaml` (keep the CC BY-SA notice).
+2. Rewrite actions for your context in `framework/framework.yaml`; `aimaturity validate` keeps the model consistent.
 3. Export gaps with `aimaturity assess --json` or the MCP `gaps` tool.
