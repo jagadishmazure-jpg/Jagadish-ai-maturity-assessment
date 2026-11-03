@@ -1,21 +1,24 @@
-# ADR 0001: Keep the framework model and the scoring rubric separate
+# ADR 0001: Keep the maturity model and the scoring rubric separate
 
 **Status:** Accepted
 
 ## Context
 
-The framework structure (pillars, categories, levels) is adapted from a CC BY-SA 3.0 IGO source. The
-mapping from evidence to levels is new work. Mixing them would blur licensing and make it hard to swap
-either one.
+The maturity model says what good looks like: dimensions, capabilities, level descriptors, actions and
+the standards crosswalk. The rubric says how evidence proves a level: signals, questions, must and
+support criteria, effort, dependencies and anchors. They change for different reasons and are read by
+different people: leaders read descriptors, engineers tune evidence rules.
 
 ## Decision
 
-`framework/framework.yaml` holds the adapted structure and own-words descriptors (CC BY-SA 3.0 IGO).
-`rubric/` holds signals, questions and level mappings (MIT). Code reads both and a consistency check
-ties them together.
+`framework/framework.yaml` holds the Enterprise Agentic AI Maturity Model (see ADR 0007).
+`rubric/` holds signals, questions and the per-level evidence rules. Code reads both, and
+`check_consistency()` ties them together: same capabilities, weights that sum to one, an anchor per
+dimension, an artifact in every Scale and Optimise must list, and every signal used.
 
 ## Consequences
 
-* Licensing is clear per folder; the README states it.
-* An organisation can keep the framework and replace the rubric, or the reverse.
-* `aimaturity validate` must pass after every change to either.
+* A descriptor can be reworded without touching scoring, and an evidence rule can be tightened without
+  touching the model; the calibration gate shows whether the two still agree.
+* An organisation can keep the model and replace the rubric with its own evidence, or the reverse.
+* `aimaturity validate` and the consistency test must pass after every change to either.

@@ -182,3 +182,15 @@ def test_readme_has_recruiter_section_and_honest_test_count():
 def test_readme_says_sample_answers_and_nothing_deployed():
     t = (ROOT / "README.md").read_text()
     assert "sample answers" in t.lower() and "DEPLOY_ENABLED" in t
+
+
+def test_standards_crosswalk_doc_matches_the_model():
+    from aimaturity.framework import capabilities
+
+    text = (ROOT / "docs/standards-crosswalk.md").read_text()
+    for c in capabilities().values():
+        m = c["maps_to"]
+        row = next((ln for ln in text.splitlines() if ln.startswith(f"| {c['id']} ")), None)
+        assert row, f"{c['id']} missing from the crosswalk doc"
+        for key in ("nist_ai_rmf", "iso_42001", "eu_ai_act"):
+            assert (", ".join(map(str, m[key])) or "no direct article") in row, (c["id"], key)

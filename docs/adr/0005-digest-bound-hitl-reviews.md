@@ -10,7 +10,7 @@ agent must not approve its own work.
 ## Decision
 
 Reviews confirm or override, need a comment, cannot come from the assessor, and store a digest of the
-category's evidence. Every review is appended to a hash-chained log. A changed digest makes the review
+capability's evidence. Every review is appended to a hash-chained log. A changed digest makes the review
 stale; a broken chain makes the assessment non-final. The MCP server has no review tool.
 
 ## Consequences

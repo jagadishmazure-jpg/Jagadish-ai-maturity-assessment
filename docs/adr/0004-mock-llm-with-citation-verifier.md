@@ -10,7 +10,7 @@ must run offline in CI.
 ## Decision
 
 Scores come from the rubric. `MockLLM` writes rationales with evidence ids; knobs simulate hallucinated
-citations and overclaimed levels. The verifier rejects unknown ids, ids from other categories and level
+citations and overclaimed levels. The verifier rejects unknown ids, ids from other capabilities and level
 mismatches, replacing the text with a template and recording the issue.
 
 ## Consequences

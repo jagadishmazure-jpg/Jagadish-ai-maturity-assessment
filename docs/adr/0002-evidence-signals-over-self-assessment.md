@@ -15,5 +15,5 @@ than answers, and answers labelled as sample answers count least.
 ## Consequences
 
 * Every result cites evidence a reviewer can open.
-* People and culture categories rely on answers and are reviewed more often.
+* People and operating-model capabilities rely on answers and are reviewed more often.
 * Pattern matching can be gamed by documents; review and confidence are the counterweight.
