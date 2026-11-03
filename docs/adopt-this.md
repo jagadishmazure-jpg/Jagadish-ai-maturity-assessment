@@ -1,6 +1,6 @@
 # Adopt this
 
-How another team reuses, configures and extends the assessor. Every component and pillar doc ends with its
+How another team reuses, configures and extends the assessor. Every component and dimension doc ends with its
 own "Adopt this" section; this page is the overview.
 
 ## Reuse as is
@@ -11,7 +11,7 @@ own "Adopt this" section; this page is the overview.
 ```bash
 aimaturity collect --org <org> --live --write
 aimaturity assess --org <org>
-aimaturity review --org <org> --category <id> --reviewer "<name>" --decision confirm --comment "<evidence>"
+aimaturity review --org <org> --capability <id> --reviewer "<name>" --decision confirm --comment "<evidence>"
 aimaturity report --org <org>
 ```
 
@@ -19,25 +19,28 @@ aimaturity report --org <org>
 
 | What | Where |
 |---|---|
-| Targets (default, per pillar, per category) | `samples/<org>/org.yaml` `targets` |
-| Critical categories | `org.yaml` `critical` (defaults in `rubric/categories.yaml`) |
+| Targets (default, per dimension, per capability) | `samples/<org>/org.yaml` `targets` |
+| Anchor capabilities | `org.yaml` `anchors` (defaults in `rubric/capabilities.yaml`) |
+| Dimension weights | `framework/framework.yaml` (change with an ADR) |
 | Roadmap capacity | `org.yaml` `capacity` |
-| Evidence for each level | `rubric/categories.yaml` |
+| Must and support criteria for each level | `rubric/capabilities.yaml` |
 | What a signal looks for | `rubric/signals.yaml` |
 | Questions | `rubric/questionnaire.yaml` |
-| Level threshold and review bar | `rubric/categories.yaml` `threshold`, `scoring.REVIEW_BELOW` |
+| Support share and review bar | `rubric/capabilities.yaml` `support_share`, `scoring.REVIEW_BELOW` |
 | Eval thresholds | `evals/thresholds.yaml` |
 | Schedule and image | `infra/terraform/envs/*.tfvars` or Bicep parameters |
 
 ## Extend
 
-* **New signal**: add it with an example; the tests require the example to match, and `aimaturity validate` requires it to be used by a category.
+* **New signal**: add it with an example; the tests require the example to match, and `aimaturity validate` requires it to be used by a capability.
 * **New source** (wiki export, API): implement `files()` and `read()` like `ManifestSource`.
 * **Hosted LLM**: pass an object with `rationale(facts)` as `llm=`; the verifier stays.
 * **New report section**: add it in `report.build_content`; Markdown and HTML both pick it up.
 * **New MCP tool**: add it in `mcp_server.build_server` with the read-only annotation and a test.
 * **New eval gate**: return `{gate, ok, ...}` from a function and append it in `evals.run_all`.
 
-## Keep the license straight
+## Change the model deliberately
 
-Changes to `framework/` stay under CC BY-SA 3.0 IGO with attribution; code changes stay MIT.
+New dimensions, levels, weights or evidence rules are design changes: record them in an ADR next to
+ADR 0007, run `aimaturity validate` and `aimaturity evals`, and re-render reports and docs. The
+repository is MIT licensed throughout.

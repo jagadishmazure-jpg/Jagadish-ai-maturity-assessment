@@ -83,9 +83,9 @@ gh workflow run teardown.yml -f environment=dev -f confirm=dev
 
 <!-- output: evals -->
 ```text
-PASS  stability    shuffle_identical=True, dropout_runs=249, nonlocal_moves=0, max_categories_moved=2, mean_categories_moved=0.402, max_level_change_info=3
-PASS  citations    completeness=1.0, valid_ids=1.0, verifier_catch=1.0, categories_checked=80, injected=165
-PASS  calibration  items=406, exact=0.84, within_one=0.995, high_conf_accuracy=0.861, low_conf_accuracy=0.674, high_conf_items=360
+PASS  stability    shuffle_identical=True, dropout_runs=258, nonlocal_moves=0, max_capabilities_moved=2, mean_capabilities_moved=0.407, max_level_change_info=4
+PASS  citations    completeness=1.0, valid_ids=1.0, verifier_catch=1.0, capabilities_checked=61, injected=132
+PASS  calibration  items=322, exact=0.851, within_one=0.981, high_conf_accuracy=0.857, low_conf_accuracy=0.786, high_conf_items=294
 ```
 <!-- /output -->
 
