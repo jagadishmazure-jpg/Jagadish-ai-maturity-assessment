@@ -181,9 +181,9 @@ profile-readme                 data           5
 profile-readme                 docs           6
 profile-readme                 governance     3
 profile-readme                 people         1
-questionnaire                  questionnaire  44
+questionnaire                  questionnaire  48
 
-768 evidence items, 119 distinct signals
+772 evidence items, 123 distinct signals
 ```
 <!-- /output -->
 
@@ -199,9 +199,9 @@ kb-ai-strategy       docs           13
 kb-ai-strategy       people         3
 kb-data-products     data           6
 kb-model-governance  governance     15
-questionnaire        questionnaire  44
+questionnaire        questionnaire  48
 
-109 evidence items, 103 distinct signals
+113 evidence items, 107 distinct signals
 ```
 <!-- /output -->
 
@@ -253,6 +253,6 @@ Runs offline with no credentials. Reads repositories through `git ls-files` and 
 
 ## 17. Adopt this
 
-1. Add a signal: id, collector, description, `paths` globs, optional `contains`, and an `example` that satisfies it; then reference it from a level in `rubric/categories.yaml`.
+1. Add a signal: id, collector, description, `paths` globs, optional `contains`, and an `example` that satisfies it; then reference it from a level in `rubric/capabilities.yaml`.
 2. Add a source type by implementing `files()` and `read(path)` (for example, a SharePoint export).
 3. Use a manifest (`samples/<org>/manifest.yaml`) to assess an organisation whose files you cannot check out.

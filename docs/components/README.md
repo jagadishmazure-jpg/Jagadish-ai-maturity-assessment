@@ -8,7 +8,7 @@ One complete doc per component.
 | `collectors.md` | Signals, sources, snapshot |
 | `questionnaire.md` | Questions and answer labels |
 | `scoring-confidence.md` | Levels and confidence |
-| `rollup.md` | Pillar and overall levels, critical caps |
+| `rollup.md` | Dimension and overall levels, anchor caps, readiness index |
 | `hitl-review.md` | Human review and audit log |
 | `gap-analysis.md` | Gaps against targets |
 | `roadmap.md` | Month 1-12 plan |

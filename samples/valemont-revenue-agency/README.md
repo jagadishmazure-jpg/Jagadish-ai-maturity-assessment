@@ -4,7 +4,7 @@ Sample 3 (fictional public agency).
 
 | File | What it does |
 |---|---|
-| `org.yaml` | Config, critical list, targets |
+| `org.yaml` | Config, anchor list, targets |
 | `manifest.yaml` | Synthetic repositories |
 | `questionnaire.yaml` | Self-reported answers |
 | `labels.yaml` | Expert labels |

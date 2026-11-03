@@ -12,11 +12,13 @@
 - Portfolio sample: the profile repository (written AI principles, roadmap, skills matrix) joins the
   scan, the evidence snapshot is refreshed from live checkouts, and reports and docs are re-rendered.
   Questionnaire answers stay labelled sample answers.
-- Machine-readable framework model: 6 pillars, 29 categories and 5 levels with descriptors in
-  original wording (CC BY-SA 3.0 IGO in `framework/`).
-- Rubric of 76 evidence signals, per-level mapping and a 44-item questionnaire.
+- Enterprise Agentic AI Maturity Model (EAMM): eight weighted dimensions, 23 capabilities and five
+  levels (Explore, Prove, Operate, Scale, Optimise), each capability crosswalked to NIST AI RMF,
+  ISO/IEC 42001 and the EU AI Act. Design rationale in ADR 0007.
+- Rubric of 76 evidence signals with must and support criteria per level, an evidence ceiling from
+  Scale upwards, default anchors per dimension and a 48-item questionnaire.
 - Collectors for repositories and evidence snapshots; stepwise scoring with confidence and citations.
-- Pillar and overall rollup with critical-category caps.
+- Dimension and weighted overall rollup with anchor caps and a 0-100 Agentic Readiness Index.
 - HITL review queue with digest-bound sign-off and a hash-chained audit log.
 - Gap analysis, Month 1-12 roadmap with quick wins, strategic items and dependencies.
 - Executive report in Markdown and HTML with a radar chart.

@@ -22,13 +22,13 @@ CI runs the same steps, plus Terraform, Bicep and Docker checks.
 
 ## Rules of the road
 
-- **Changing a score is a rubric change.** Edit `rubric/signals.yaml` or `rubric/categories.yaml`,
+- **Changing a score is a rubric change.** Edit `rubric/signals.yaml` or `rubric/capabilities.yaml`,
   then re-render reports and docs (`aimaturity report --all`, `python scripts/render_docs.py`) and
   commit the outputs together. The calibration gate must still pass.
-- **Wording in `framework/` stays original.** It is adapted under CC BY-SA 3.0 IGO; do not paste
-  text from the source document. Run `python scripts/overlap_check.py <source-text>` locally; it must
-  report zero shared 8-word sequences.
-- **Never commit the source PDF.** `*.pdf` is ignored and a test enforces it.
+- **Changing the model is a design change.** New dimensions, levels, weights or evidence rules in
+  `framework/` or `rubric/` need an ADR next to `docs/adr/0007-original-agentic-maturity-model.md`;
+  `aimaturity validate` and the consistency test must stay clean.
+- **No PDFs.** `*.pdf` is ignored and a test enforces it; everything stays reviewable as text.
 - **Fictional organisations only** in samples, with no real people, emails or identifiers.
 - **No dates in docs.** Plans use Month 1 to Month 12.
 - **Every folder has a README** listing its files, and component docs keep all 17 sections.

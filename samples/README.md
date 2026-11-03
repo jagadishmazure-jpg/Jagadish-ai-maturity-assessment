@@ -6,4 +6,4 @@ Sample organisations. Each has `org.yaml`, evidence (snapshot or manifest), answ
 |---|---|
 | `portfolio/` | Jagadish Meduri's eight project repositories plus the profile repository, scanned read-only; sample answers (labelled) |
 | `kestrel-bay-bank/` | Fictional bank: synthetic manifest, self-reported answers, labels, one review |
-| `valemont-revenue-agency/` | Fictional tax agency: custom critical list, an override, labels |
+| `valemont-revenue-agency/` | Fictional tax agency: custom anchor list, an override, a confirmation, labels |

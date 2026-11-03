@@ -6,4 +6,4 @@ One complete doc per sample assessment.
 |---|---|
 | `portfolio.md` | Jagadish Meduri's eight project repositories plus the profile repository, scanned read-only; sample answers (labelled) |
 | `kestrel-bay-bank.md` | Fictional bank: synthetic manifest, self-reported answers, labels, one review |
-| `valemont-revenue-agency.md` | Fictional tax agency: custom critical list, an override, labels |
+| `valemont-revenue-agency.md` | Fictional tax agency: custom anchor list, an override, a confirmation, labels |

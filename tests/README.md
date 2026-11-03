@@ -9,7 +9,7 @@ pytest suite (offline). `pytest -q`.
 | `test_signals.py` | Every signal matches its example |
 | `test_questionnaire.py` | Answers and labels |
 | `test_scoring.py` | Levels and confidence |
-| `test_rollup.py` | Medians and caps |
+| `test_rollup.py` | Dimension floors, anchor caps, weights, readiness index |
 | `test_hitl.py` | Reviews and audit chain |
 | `test_gaps_roadmap.py` | Gaps and scheduling |
 | `test_agent.py` | Graph and verifier |
@@ -20,4 +20,4 @@ pytest suite (offline). `pytest -q`.
 | `test_mcp_a2a.py` | MCP tools and agent card |
 | `test_cli.py` | CLI commands and scheduled run |
 | `test_iac.py` | Terraform, Bicep, workflows (including the supply-chain guard: pinned actions, permissions, gitleaks, CodeQL, Dependabot) |
-| `test_repo_hygiene.py` | Docs, dates, attribution, PDF guard, overlap, READMEs |
+| `test_repo_hygiene.py` | Docs, dates, licensing, PDF guard, READMEs |
