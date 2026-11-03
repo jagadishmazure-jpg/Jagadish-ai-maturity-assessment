@@ -27,15 +27,15 @@ dimensions:
         why: Without a thesis every team builds its own chatbot and nobody can say which agent deserves the next dollar.
         descriptors:
           1: Agents are discussed as a trend; no document says what the business expects from them.
-          2: A short thesis names target outcomes and a sponsor for each pilot, though targets carry no numbers yet.
-          3: The thesis carries numeric targets, is published to staff and an executive owns delivery against it.
-          4: Strategy reviews compare agent results with the targets and move funding between programmes on the evidence.
-          5: Horizon scanning and measured results reshape the thesis itself, and leaders are scored on agentic outcomes.
+          2: A short written thesis states what agents are for, and every proposal names the goal it serves.
+          3: The thesis carries numeric targets and is published to staff.
+          4: Recorded strategy reviews compare agent results with the targets, and the thesis shows up in the budget.
+          5: A maintained horizon scan and dedicated strategy sessions reshape the thesis from measured results.
         actions:
-          2: Write a one-page agentic AI thesis with three outcomes and a named sponsor per pilot.
-          3: Put a number on every outcome, publish the thesis and assign one executive owner.
-          4: Hold a quarterly strategy review that reallocates budget using measured agent results.
-          5: Keep a technology radar and let it, plus the review record, rewrite the thesis each year.
+          2: Write a one-page agentic AI thesis and add a goal field to every proposal.
+          3: Put a number on every outcome and publish the thesis.
+          4: Hold a recorded quarterly review that reallocates budget on measured agent results.
+          5: Keep a technology radar and run a yearly strategy session that rewrites the thesis.
         maps_to: {nist_ai_rmf: [GOVERN 1, MAP 1], iso_42001: ["4.1", "5.2", "6.2"], eu_ai_act: []}
       - id: SV-2
         name: Use-Case Portfolio & Prioritisation
@@ -44,14 +44,14 @@ dimensions:
         descriptors:
           1: Use cases arrive by email and are built in the order someone asks.
           2: Each candidate has a business case or value estimate, and experiments are tried in a sandbox.
-          3: A roadmap sequences the funded use cases and every proposal must state the goal it serves.
+          3: A roadmap sequences the funded use cases and nothing is funded without a business case.
           4: The roadmap names owners and phases, decisions are recorded and the plan is refreshed from delivery data.
-          5: Pilot write-ups and scouting feed a fast lane that turns winning experiments into funded products.
+          5: Pilot write-ups feed a fast lane that turns winning experiments into funded products.
         actions:
           2: Add a value estimate to every use-case request and give pilots a sandbox.
-          3: Publish a roadmap and make a goal-linked business case mandatory for funding.
+          3: Publish a sequenced roadmap and make a business case mandatory for funding.
           4: Give each roadmap item an owner and phase, and keep architecture decision records.
-          5: Write up every pilot, scout new patterns and create a funded path from pilot to product.
+          5: Write up every pilot and give winners a fast lane to funding.
         maps_to: {nist_ai_rmf: [MAP 1, MAP 3], iso_42001: ["6.1", "6.2", A.6], eu_ai_act: []}
       - id: SV-3
         name: Value Realisation
@@ -61,13 +61,13 @@ dimensions:
           1: Benefits are anecdotes; nobody checks whether an agent saved anything.
           2: Value metrics such as hours saved or cost per task are defined and reported for some agents.
           3: Value is computed in tested code from real usage rather than estimated in slides.
-          4: Monitoring ties agent behaviour to business and cost metrics, including benefits that are hard to price.
-          5: Value data triggers improvement work automatically and the portfolio is rebalanced on it.
+          4: Monitoring ties agent behaviour to business and cost metrics.
+          5: Benefits that are hard to price are measured next to hard value, and the portfolio is rebalanced on the result.
         actions:
           2: Define two value metrics per agent and report them monthly.
           3: Compute value from usage data in code with tests.
-          4: Link production telemetry to business KPIs and track strategic benefits too.
-          5: Let value regressions open improvement work without a meeting.
+          4: Link production telemetry to business KPIs.
+          5: Measure strategic benefits next to hard value and rebalance funding on the result.
         maps_to: {nist_ai_rmf: [MAP 3, MEASURE 1, MANAGE 2], iso_42001: ["9.1"], eu_ai_act: []}
   - id: DF
     name: Data Foundation
@@ -81,12 +81,12 @@ dimensions:
         descriptors:
           1: Agents are pointed at whatever folder is handy; nobody lists the sources.
           2: Each use case lists the data it needs and a domain expert is attached to the project.
-          3: Domain knowledge is written down as glossaries, semantic models or data sheets the agent can rely on.
+          3: Domain knowledge is written down as glossaries or semantic models the agent can rely on.
           4: Sources are catalogued with lineage and domain experts sit inside the agent teams.
           5: Grounding sources are planned ahead of demand, with sharing agreements in place before a use case asks.
         actions:
           2: List the grounding sources per use case and name a domain expert.
-          3: Write a glossary or semantic model and a data sheet for each source.
+          3: Write a glossary or semantic model for each grounding source.
           4: Register sources in a catalogue with lineage and embed experts in agent teams.
           5: Plan strategic sources and agreements a year ahead of the roadmap.
         maps_to: {nist_ai_rmf: [MAP 2, MAP 4], iso_42001: [A.7], eu_ai_act: [Art. 10]}
@@ -97,14 +97,14 @@ dimensions:
         descriptors:
           1: Data is used as found; problems surface as user complaints.
           2: Data contracts or schemas define the datasets agents read.
-          3: Quality rules run automatically and block bad loads, and datasets are described.
-          4: Lineage is catalogued and quality is monitored continuously in production.
-          5: Drift in data and model behaviour is measured and corrected before users notice.
+          3: Quality rules run automatically and block bad loads.
+          4: Every dataset agents read carries a data sheet describing meaning, owner and known limits.
+          5: Quality is monitored continuously in production and issues are fixed before users notice.
         actions:
           2: Write a contract or schema for every dataset an agent reads.
-          3: Automate quality tests in the pipeline and publish data sheets.
-          4: Catalogue lineage and add production quality monitoring.
-          5: Measure drift and wire it to automatic remediation.
+          3: Add automated quality tests that fail the load.
+          4: Write a data sheet for each dataset agents read.
+          5: Monitor quality continuously and route issues to data owners.
         maps_to: {nist_ai_rmf: [MEASURE 2, MANAGE 4], iso_42001: [A.7], eu_ai_act: [Art. 10]}
       - id: DF-3
         name: Governed Access & Synthetic Data
@@ -112,15 +112,15 @@ dimensions:
         why: Slow access pushes teams to copy data; uncontrolled access leaks it. Both are failures.
         descriptors:
           1: Access is granted by favour and copies of production data sit on laptops.
-          2: A published request process exists and synthetic data is generated for some tests.
-          3: Access is granted through data-plane roles, and synthetic data is validated for fidelity.
+          2: A published request process governs which data agents may use.
+          3: Synthetic data is generated in code so agents can be tested without production records.
           4: A governed data platform serves agent teams, with self-service access inside policy.
-          5: Synthetic data is a standard option in the data strategy, with privacy and fidelity checks enforced.
+          5: Synthetic data is validated for fidelity and is a standard option in the data strategy.
         actions:
-          2: Publish an access request process and start generating synthetic test data.
-          3: Move to role-based data-plane access and validate synthetic data in tests.
+          2: Publish the data access request process.
+          3: Generate synthetic test data in code.
           4: Serve data through a governed platform with self-service access.
-          5: Make synthetic data a default in the data strategy with privacy checks.
+          5: Validate synthetic data with property tests and write it into the data strategy.
         maps_to: {nist_ai_rmf: [GOVERN 1, MANAGE 1], iso_42001: [A.7, A.4], eu_ai_act: [Art. 10]}
   - id: PL
     name: Platform & LLMOps
@@ -133,15 +133,15 @@ dimensions:
         why: Teams that each build their own platform spend their budget on plumbing instead of agents.
         descriptors:
           1: Each team builds from scratch on personal machines.
-          2: Automated tests and linting run in CI and dependencies are pinned.
-          3: Infrastructure, including managed AI services, is defined as code and developer environments are reproducible.
-          4: Infrastructure is tested, workloads ship as containers and teams create governed environments themselves.
-          5: Infrastructure is scanned, scales elastically and a catalogue of platform components is published.
+          2: Automated tests run in CI on every change.
+          3: Infrastructure is defined as code and developer environments are reproducible.
+          4: Infrastructure code has automated tests.
+          5: Shared platform libraries are published and teams create governed environments themselves.
         actions:
-          2: Run tests and linting in CI and pin dependencies.
-          3: Define infrastructure and AI services as code and provide a reproducible dev environment.
-          4: Test the infrastructure, containerise workloads and offer self-service environments.
-          5: Scan infrastructure code, add autoscaling and publish the component catalogue.
+          2: Run the test suite in CI on every pull request.
+          3: Move infrastructure to Bicep or Terraform and add a devcontainer.
+          4: Test infrastructure modules in CI.
+          5: Package shared platform code and offer self-service environments.
         maps_to: {nist_ai_rmf: [MANAGE 2], iso_42001: [A.4, A.6], eu_ai_act: [Art. 15]}
       - id: PL-2
         name: Release & Lifecycle Automation
@@ -150,14 +150,14 @@ dimensions:
         descriptors:
           1: Changes are copied to production by hand.
           2: A deployment pipeline exists and changes are recorded in a changelog.
-          3: Production waits for an approval, pipelines use federated identity and environments can be torn down.
-          4: Lifecycle stages with approval gates are enforced in code and evaluation results block merges.
-          5: Re-evaluation and retraining trigger automatically with staged rollout and tracked experiments.
+          3: Production deployments wait for an environment approval.
+          4: Pipelines authenticate to the cloud by federation, with no stored secrets.
+          5: Environments are disposable and torn down by pipeline, and re-evaluation or retraining triggers automatically.
         actions:
           2: Build a deployment pipeline and keep a changelog.
-          3: Add environment approvals, OIDC federation and pipeline teardown.
-          4: Enforce lifecycle gates in code and block merges on evaluation results.
-          5: Trigger re-evaluation automatically and roll out in stages.
+          3: Add a protected production environment with required reviewers.
+          4: Replace stored cloud credentials with OIDC federation.
+          5: Add teardown pipelines and trigger re-evaluation on data or model change.
         maps_to: {nist_ai_rmf: [MANAGE 1, MANAGE 4], iso_42001: ["8.1", A.6], eu_ai_act: [Art. 17]}
       - id: PL-3
         name: Observability & Runtime Operations
@@ -166,14 +166,14 @@ dimensions:
         descriptors:
           1: Nothing is logged beyond what the hosting service keeps by default.
           2: Services emit telemetry such as traces and metrics.
-          3: Alert rules page an owner and evaluation runs are tracked over time.
-          4: Drift is measured in code and monitoring links behaviour to business or cost metrics.
-          5: Monitoring findings open improvement work automatically.
+          3: Alert rules page an owner when an agent misbehaves.
+          4: Drift in inputs and outputs is measured in code.
+          5: User feedback and monitoring findings flow into the backlog continuously.
         actions:
           2: Instrument agents with OpenTelemetry or Application Insights.
-          3: Define alert rules with owners and keep evaluation history.
-          4: Measure drift and join telemetry to business metrics.
-          5: Turn monitoring findings into backlog items automatically.
+          3: Define alert rules with an action group per agent.
+          4: Measure input and output drift on a schedule.
+          5: Route feedback and monitoring findings into the backlog automatically.
         maps_to: {nist_ai_rmf: [MEASURE 3, MEASURE 4, MANAGE 4], iso_42001: ["9.1", A.6], eu_ai_act: [Art. 12, Art. 72]}
   - id: AE
     name: Agent Engineering
@@ -187,14 +187,14 @@ dimensions:
         descriptors:
           1: Quality is judged by trying a few prompts by hand.
           2: An evaluation suite exists for the main agent behaviours.
-          3: CI blocks merges on evaluation results and adversarial scenarios are part of the suite.
-          4: Evaluation results are tracked as history and documentation is regenerated from real runs.
-          5: Evaluation gates and production drift signals form one loop that drives improvement.
+          3: CI blocks merges on evaluation results.
+          4: Evaluation results are tracked as history across runs.
+          5: Documentation and published numbers are regenerated from real evaluation runs and drift-checked in CI.
         actions:
           2: Write an evaluation suite for the agent's main tasks.
-          3: Gate merges on evaluation thresholds and add adversarial cases.
-          4: Track evaluation history and regenerate docs from real runs.
-          5: Close the loop between production drift and the evaluation gate.
+          3: Make the evaluation suite a required CI check.
+          4: Store every evaluation run and compare it with the last.
+          5: Regenerate docs from real runs and fail CI on drift.
         maps_to: {nist_ai_rmf: [MEASURE 1, MEASURE 2], iso_42001: ["9.1", A.6], eu_ai_act: [Art. 15]}
       - id: AE-2
         name: Tool & Interoperability Design
@@ -203,14 +203,14 @@ dimensions:
         descriptors:
           1: Agents call internal systems through ad hoc scripts.
           2: Services that agents call expose documented API contracts.
-          3: Tools are exposed over the Model Context Protocol and fronted by a gateway.
-          4: Agents publish A2A agent cards and integrate through events as well as calls.
-          5: Tools and agents are listed in a reuse catalogue with adoption guides, and reuse is measured.
+          3: Tools are exposed over the Model Context Protocol.
+          4: Agents publish A2A agent cards and can integrate through events as well as calls.
+          5: Tools and agents are listed in a reuse catalogue and reuse is measured.
         actions:
           2: Document an API contract for every system an agent calls.
-          3: Wrap tools in an MCP server behind an API gateway.
-          4: Publish agent cards and add event-driven integration.
-          5: Catalogue tools and agents, write adoption guides and measure reuse.
+          3: Expose agent tools through an MCP server.
+          4: Publish an agent card per agent and add an event channel.
+          5: Publish a component catalogue and count reuse per component.
         maps_to: {nist_ai_rmf: [MAP 4, GOVERN 6], iso_42001: [A.10, A.6], eu_ai_act: [Art. 15]}
       - id: AE-3
         name: Autonomy & Human Oversight
@@ -219,14 +219,14 @@ dimensions:
         descriptors:
           1: Agents act with whatever permissions they were given and nobody reviews actions.
           2: Risky actions require a human approval step.
-          3: Agent decisions are written to an audit log and outputs carry their reasons.
-          4: Each agent has an autonomy tier, and scenario tests prove the approval points hold.
-          5: Oversight rules run as pipeline gates and the people affected help set autonomy limits.
+          3: Agent outputs carry their reasons so a reviewer can follow each decision.
+          4: Each agent has an autonomy tier and every decision is written to an audit log.
+          5: The people affected help set autonomy limits, and every decision stays auditable.
         actions:
           2: Put a human approval step in front of every risky action.
-          3: Write decisions to a tamper-evident audit log and attach reasons to outputs.
-          4: Assign autonomy tiers and test the approval points with scenarios.
-          5: Enforce oversight in the pipeline and involve affected people in setting limits.
+          3: Return key factors or citations with every output.
+          4: Assign autonomy tiers and write decisions to a tamper-evident log.
+          5: Bring affected users into autonomy reviews.
         maps_to: {nist_ai_rmf: [GOVERN 2, MANAGE 2], iso_42001: [A.9, A.6], eu_ai_act: [Art. 12, Art. 14]}
   - id: SI
     name: Security & Identity
@@ -239,15 +239,15 @@ dimensions:
         why: An agent with a shared key and broad rights is an insider threat that never sleeps.
         descriptors:
           1: Agents use personal or shared keys stored in code or config files.
-          2: A security policy exists and secret hygiene is enforced by scanning.
-          3: Workloads use managed identities, secrets sit in a vault and pipelines use federation.
+          2: Secret hygiene is enforced by scanning, with no keys in code.
+          3: Agents and workloads use managed identities instead of keys.
           4: Data access is granted through least-privilege data-plane roles.
-          5: Identity rules are enforced as policy and agent permissions are reviewed and pruned on a cadence.
+          5: Remaining secrets sit in a vault and agent permissions are reviewed and pruned on a cadence.
         actions:
-          2: Publish a security policy and turn on secret scanning.
-          3: Move to managed identities, a key vault and OIDC federation.
-          4: Grant data access through narrow data-plane roles.
-          5: Enforce identity rules as policy and review agent permissions regularly.
+          2: Turn on secret scanning and remove keys from code.
+          3: Move workloads to managed identities.
+          4: Grant data access through data-plane RBAC roles.
+          5: Vault the remaining secrets and review agent grants every quarter.
         maps_to: {nist_ai_rmf: [GOVERN 1, MANAGE 1], iso_42001: [A.4, A.6], eu_ai_act: [Art. 15]}
       - id: SI-2
         name: AI Threat Defence
@@ -256,14 +256,14 @@ dimensions:
         descriptors:
           1: AI-specific threats are not considered.
           2: A security policy covers AI systems and how to report issues.
-          3: Adversarial scenarios such as prompt injection are tested and a gateway filters traffic.
-          4: Those scenarios gate releases and infrastructure is scanned for misconfiguration.
-          5: Runtime telemetry and alerts watch for attacks and red-teaming runs on a cadence.
+          3: A gateway fronts AI services and filters traffic.
+          4: Adversarial scenarios such as prompt injection are tested in code.
+          5: Red-teaming runs on a schedule and findings are tracked to closure.
         actions:
           2: Extend the security policy to AI systems.
-          3: Test injection and misuse scenarios and front agents with a gateway.
-          4: Make scenario tests a release gate and scan infrastructure code.
-          5: Alert on attack patterns at runtime and red-team on a schedule.
+          3: Put an API gateway with content filtering in front of AI endpoints.
+          4: Add prompt-injection and misuse scenarios to the test suite.
+          5: Schedule red-team exercises and track findings to closure.
         maps_to: {nist_ai_rmf: [MEASURE 2, MANAGE 4], iso_42001: ["8.2", A.6], eu_ai_act: [Art. 15]}
       - id: SI-3
         name: Supply Chain & Platform Hardening
@@ -272,14 +272,14 @@ dimensions:
         descriptors:
           1: Dependencies float and nobody scans images or infrastructure.
           2: Dependencies are pinned for reproducible builds.
-          3: Secret hygiene and linting are enforced on every change.
-          4: Infrastructure code is scanned and workloads ship as built containers.
-          5: Platform rules are enforced as policy and compliance gates run in the pipeline.
+          3: Linting runs on every change.
+          4: Infrastructure code is scanned for misconfiguration.
+          5: Workloads ship as built containers.
         actions:
           2: Pin every dependency.
-          3: Enforce secret hygiene and linting in CI.
-          4: Scan infrastructure code and build containers in CI.
-          5: Enforce platform rules as policy with compliance gates in the pipeline.
+          3: Add a linter as a required CI step.
+          4: Add checkov or tflint to CI.
+          5: Ship workloads as containers built in CI.
         maps_to: {nist_ai_rmf: [GOVERN 6, MANAGE 3], iso_42001: [A.10, A.6], eu_ai_act: [Art. 15]}
   - id: GR
     name: Governance, Risk & Compliance
@@ -294,13 +294,13 @@ dimensions:
           1: General IT policy is assumed to cover AI.
           2: An AI policy and ethics principles are written down.
           3: An inventory lists every agent with an owner, and a review body has decision rights.
-          4: Lifecycle gates enforce the policy in code and model cards document each system.
-          5: Compliance gates run in the pipeline and AI risk reports into enterprise risk management.
+          4: Lifecycle stages with approval gates enforce the policy in code.
+          5: Governance gates run in the delivery pipeline on every change.
         actions:
           2: Write an AI policy and adopt ethics principles.
           3: Start an agent inventory with owners and charter a review body.
-          4: Enforce lifecycle gates in code and publish model cards.
-          5: Run compliance gates in the pipeline and report AI risk through enterprise risk.
+          4: Encode lifecycle stages and approvals in code.
+          5: Add governance gates to the delivery pipeline.
         maps_to: {nist_ai_rmf: [GOVERN 1, GOVERN 2, GOVERN 4], iso_42001: ["5.2", "5.3", A.2, A.3], eu_ai_act: [Art. 17, Art. 26]}
       - id: GR-2
         name: Risk & Impact Management
@@ -309,14 +309,14 @@ dimensions:
         descriptors:
           1: AI risk is not looked at separately from project risk.
           2: A risk register or risk cards list the risks of each agent.
-          3: Risks are scored for likelihood and impact in code and fairness is tested.
-          4: What-if and adversarial scenarios test the treatments, and AI risk is reported as enterprise risk.
-          5: Drift is monitored as a risk signal and affected people help judge outcomes.
+          3: Risks are scored for likelihood and impact in code.
+          4: Fairness is tested in code for every agent that affects people.
+          5: AI risk is reported through enterprise risk management with quantitative measures.
         actions:
           2: Start risk cards for every agent.
-          3: Score risks in code and add fairness tests.
-          4: Test treatments with scenarios and report through enterprise risk.
-          5: Treat drift as a live risk signal and involve affected people.
+          3: Score each risk in code with likelihood and impact.
+          4: Add adverse-impact tests for agents that affect people.
+          5: Report AI risk into enterprise risk management with numbers.
         maps_to: {nist_ai_rmf: [MAP 5, MEASURE 2, MANAGE 1], iso_42001: ["6.1", "8.2", "8.4", A.5], eu_ai_act: [Art. 9, Art. 27]}
       - id: GR-3
         name: Regulatory Compliance & Transparency
@@ -325,14 +325,14 @@ dimensions:
         descriptors:
           1: Compliance is assumed rather than mapped.
           2: Obligations are mapped per system against the relevant regulations and standards.
-          3: Model cards and explanations make each agent understandable to its users.
-          4: Rules are enforced as policy as code and decisions are kept in an audit log.
-          5: Compliance checks run in the pipeline, regulatory change is tracked and explanations are tailored to each audience.
+          3: Model cards make each agent understandable to its users and reviewers.
+          4: Rules are enforced as policy as code.
+          5: Regulatory change is tracked and fed into the policy rules, with explanations tailored to each audience.
         actions:
           2: Map each system to its obligations under the EU AI Act, NIST AI RMF, ISO/IEC 42001 and privacy law.
-          3: Publish model cards and attach explanations to outputs.
-          4: Enforce rules as policy as code and keep an audit log.
-          5: Automate compliance checks, watch regulation and tailor explanations per audience.
+          3: Publish a model card per agent.
+          4: Express guardrails as Azure Policy definitions.
+          5: Track regulatory change and tailor explanations per audience.
         maps_to: {nist_ai_rmf: [GOVERN 1, MEASURE 2], iso_42001: ["4.2", A.8], eu_ai_act: [Art. 11, Art. 13, Art. 50]}
   - id: PO
     name: People & Operating Model
@@ -348,7 +348,7 @@ dimensions:
           2: Pilots have named sponsors and a coordinator connects them.
           3: An executive owns the agenda and a central team or centre of excellence has a mandate.
           4: Code ownership is declared and the operating model is reviewed and adjusted.
-          5: Leaders carry agentic outcomes in their objectives and strategy reviews track them.
+          5: Leaders carry agentic outcomes in their objectives.
         actions:
           2: Name a sponsor per pilot and a coordinator across them.
           3: Appoint an executive owner and charter a central team.
@@ -364,12 +364,12 @@ dimensions:
           2: Introductory material is available and AI roles are named.
           3: Learning material is maintained, with role-based tracks and funded training paths.
           4: Onboarding guides exist and AI skills are part of performance and mobility.
-          5: Teams write up what they learn and learning is part of routine work.
+          5: Learning is part of routine work and onboarding keeps pace with the platform.
         actions:
           2: Publish introductory material and name the AI roles.
           3: Maintain role-based learning tracks with funded paths.
           4: Write onboarding guides and build AI skills into HR processes.
-          5: Make write-ups and continuous learning part of team routines.
+          5: Make learning time part of every sprint.
         maps_to: {nist_ai_rmf: [GOVERN 3, GOVERN 4], iso_42001: ["7.2", "7.3"], eu_ai_act: [Art. 4]}
       - id: PO-3
         name: Adoption & Change
@@ -377,15 +377,15 @@ dimensions:
         why: An agent nobody trusts saves nothing.
         descriptors:
           1: Rollouts are technical events and users find out late.
-          2: Rollouts come with communication and an onboarding guide, and the team joins peer communities.
-          3: Shared contribution rules and a change method with adoption metrics are applied.
-          4: Adoption guides let other teams take up the work and user feedback flows into the backlog.
-          5: Reusable assets are catalogued, formal partnerships exist and the enterprise contributes to its ecosystem.
+          2: Rollouts come with communication and the team joins peer communities.
+          3: Shared contribution rules and a change method are applied.
+          4: Adoption guides let other teams take up the work.
+          5: Formal partnerships exist and the enterprise contributes to its ecosystem.
         actions:
-          2: Pair every rollout with communication and an onboarding guide.
-          3: Publish contribution rules and apply a change method with adoption metrics.
-          4: Write adoption guides and collect user feedback continuously.
-          5: Catalogue reusable assets and formalise partnerships.
+          2: Announce each rollout and join a peer community.
+          3: Publish contribution rules and adopt a change method.
+          4: Write an adoption guide per reusable asset.
+          5: Sign formal partnerships and contribute back to the ecosystem.
         maps_to: {nist_ai_rmf: [GOVERN 5, MEASURE 4], iso_42001: ["7.4", A.8], eu_ai_act: []}
   - id: FC
     name: FinOps & Cost
@@ -399,14 +399,14 @@ dimensions:
         descriptors:
           1: Spend is discovered on the monthly invoice.
           2: Budgets or ingestion caps are provisioned as code.
-          3: Environments are torn down by pipeline and infrastructure is fully codified.
-          4: Workloads scale elastically and spend is reviewed and optimised on a cadence.
-          5: Cost rules are enforced as policy across subscriptions.
+          3: Managed AI services are provisioned as code, so every model deployment has a known owner and cost.
+          4: Workloads scale elastically with demand.
+          5: Spend is reviewed and optimised on a cadence across elastic workloads.
         actions:
           2: Provision budgets and caps as code.
-          3: Tear environments down by pipeline.
-          4: Configure autoscaling and a monthly optimisation review.
-          5: Enforce cost rules as policy.
+          3: Provision model deployments through IaC with owner and cost tags.
+          4: Configure autoscale rules for agent workloads.
+          5: Run a monthly cost optimisation review.
         maps_to: {nist_ai_rmf: [MANAGE 2], iso_42001: [A.4], eu_ai_act: []}
       - id: FC-2
         name: Unit Economics & Model Routing
@@ -414,13 +414,13 @@ dimensions:
         why: The same answer can cost ten times more on the wrong model; unit economics make that visible.
         descriptors:
           1: Nobody knows what one agent task costs.
-          2: Cost metrics such as cost per task are reported.
-          3: Unit cost is computed in tested code from real usage.
-          4: Cost is joined to business outcomes and model choice is routed by measured cost, latency and quality.
-          5: Unit economics drive routing and capacity decisions continuously from telemetry.
+          2: Unit cost per task is computed in tested code from real usage.
+          3: Requests are routed between models by measured cost, latency and quality.
+          4: Unit cost is joined to business outcomes in monitoring.
+          5: Cost and quality regressions open improvement work automatically.
         actions:
-          2: Report cost per task for each agent.
-          3: Compute unit cost in code with tests.
-          4: Join cost to outcomes and route requests by measured cost and quality.
-          5: Drive routing and capacity from live telemetry.
+          2: Compute cost per task in code with tests.
+          3: Route requests by measured cost and quality per task.
+          4: Join unit cost to business KPIs in monitoring.
+          5: Let unit-cost regressions raise work items automatically.
         maps_to: {nist_ai_rmf: [MAP 3, MEASURE 1], iso_42001: ["9.1"], eu_ai_act: []}
