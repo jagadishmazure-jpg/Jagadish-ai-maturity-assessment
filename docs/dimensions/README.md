@@ -1,12 +1,14 @@
-# pillars
+# dimensions
 
-One complete doc per pillar. Framework structure adapted from UNESCO, *AI Maturity Framework* (Stratejai for UNESCO), [CC BY-SA 3.0 IGO](https://creativecommons.org/licenses/by-sa/3.0/igo/). Wording is this project's own; UNESCO does not endorse it. The framework-derived tables here are shared under the same license.
+One complete doc per dimension of the Enterprise Agentic AI Maturity Model: weight, capabilities, level descriptors, must and support criteria, standards crosswalk and real output.
 
 | File | What it does |
 |---|---|
-| `p1-strategy-and-value.md` | Pillar 1 |
-| `p2-people-and-culture.md` | Pillar 2 |
-| `p3-technology-and-infrastructure.md` | Pillar 3 |
-| `p4-ai-operations-and-ecosystem.md` | Pillar 4 |
-| `p5-governance-ethics-and-risk.md` | Pillar 5 |
-| `p6-data-for-ai.md` | Pillar 6 |
+| `sv-strategy-and-value.md` | SV Strategy & Value (weight 0.12) |
+| `df-data-foundation.md` | DF Data Foundation (weight 0.13) |
+| `pl-platform-and-llmops.md` | PL Platform & LLMOps (weight 0.13) |
+| `ae-agent-engineering.md` | AE Agent Engineering (weight 0.14) |
+| `si-security-and-identity.md` | SI Security & Identity (weight 0.14) |
+| `gr-governance-risk-and-compliance.md` | GR Governance, Risk & Compliance (weight 0.14) |
+| `po-people-and-operating-model.md` | PO People & Operating Model (weight 0.10) |
+| `fc-finops-and-cost.md` | FC FinOps & Cost (weight 0.10) |
