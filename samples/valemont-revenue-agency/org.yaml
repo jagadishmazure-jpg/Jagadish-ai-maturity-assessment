@@ -1,6 +1,6 @@
 # Sample org 3 (fictional): a national tax and revenue administration early in its AI journey.
-# Evidence is a manifest of synthetic repositories; people and culture answers are self-reported.
-# Critical categories follow the agency's own choice (public trust first), not the defaults.
+# Evidence is a manifest of synthetic repositories; operating-model and people answers are self-reported.
+# Anchor capabilities follow the agency's own choice (public trust first), not the defaults.
 name: Valemont Revenue Agency
 kind: Fictional public administration (tax and revenue)
 assessor: aimaturity-agent
@@ -8,7 +8,7 @@ manifest: manifest.yaml
 questionnaire: questionnaire.yaml
 labels: labels.yaml
 capacity: 3
-critical: ["1.1", "2.3", "5.1", "5.2", "6.2"]
+anchors: [SV-1, DF-3, PL-1, AE-3, SI-1, GR-2, GR-3, PO-1, FC-1]
 targets:
   default: 3
-  categories: {"5.2": 4, "5.5": 4, "6.4": 2}
+  capabilities: {GR-2: 4, GR-3: 4, FC-2: 2}

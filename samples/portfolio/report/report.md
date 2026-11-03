@@ -1,159 +1,140 @@
-# AI maturity report: Jagadish Meduri portfolio
+# Agentic AI maturity report: Jagadish Meduri portfolio
 
 _Engineering portfolio (one maintainer, eight project repositories plus a profile repository)_
 
 ## Executive summary
 
-Overall maturity: **Level 3 (Dynamic)**, category mean 2.79 of 4. Assessment status: provisional: 13 categories wait for human review.
+Overall maturity: **Level 2 (Prove)**, weighted capability mean 3.29 of 5, Agentic Readiness Index **57.1 / 100**. Assessment status: provisional: 9 capabilities wait for human review.
 
-Strongest pillar: P3 Technology & Infrastructure (mean 3.75). Weakest: P2 People & Culture (mean 1.8).
+Strongest dimension: SI Security & Identity (mean 4.33). Weakest: PO People & Operating Model (mean 1.67).
 
-Evidence: 768 items from 9 repositories and the questionnaire. Roadmap: 18 steps, 4 quick wins in Months 1-3, 1 beyond Month 12.
+Evidence: 772 items from 9 repositories and the questionnaire. Roadmap: 12 steps, 4 quick wins in Months 1-3, 0 beyond Month 12.
 
-Top priorities: 2.1->2 Talent & Skills (priority 24.07); 4.4->2 External Collaboration & Partnerships (priority 24.07); 6.3->2 Data Access for AI Teams (priority 24.07).
+Top priorities: GR-1->3 AI Policy & Accountability (priority 31.09); GR-1->4 AI Policy & Accountability (priority 29.09); DF-1->2 Knowledge & Grounding Sources (priority 27.89).
 
-People, culture and partnership answers are SAMPLE ANSWERS (illustrative inputs, not survey results). Categories that rest on them wait for human review.
+Operating-model, people and policy answers are SAMPLE ANSWERS (illustrative inputs, not survey results). Capabilities that rest on them wait for human review.
 
-![Pillar radar: level, category mean and target](radar.svg)
+![Dimension radar: level, capability mean and target](radar.svg)
 
-## Pillars
+## Dimensions
 
-| Pillar | Level | Category mean | Target (mean) | Capped by critical |
-|---|---|---|---|---|
-| P1 Strategy & Value | 3 Dynamic | 3 | 3.0 | - |
-| P2 People & Culture | 2 Ready | 1.8 | 3.0 | - |
-| P3 Technology & Infrastructure | 4 Advanced | 3.75 | 4.0 | - |
-| P4 AI Operations & Ecosystem | 3 Dynamic | 2.8 | 3.0 | - |
-| P5 AI Governance, Ethics & Risk | 3 Dynamic | 3.2 | 4.0 | - |
-| P6 Data (AI-Specific Focus) | 3 Dynamic | 2.2 | 3.0 | - |
-
-## Categories
-
-| Category | Level | Target | Confidence | Status | Evidence |
+| Dimension | Weight | Level | Capability mean | Target (mean) | Capped by anchor |
 |---|---|---|---|---|---|
-| 1.1 AI Vision & Ambition (critical) | 3 | 3 | 0.53 | pending-review | 11 |
-| 1.2 Strategic Alignment | 2 | 3 | 0.44 | pending-review | 8 |
-| 1.3 Roadmap & Planning | 3 | 3 | 0.93 | auto | 38 |
-| 1.4 Value Identification & Measurement | 3 | 3 | 0.62 | auto | 22 |
-| 1.5 Innovation & Experimentation | 4 | 3 | 0.63 | pending-review | 38 |
-| 2.1 Talent & Skills | 1 | 3 | 0.31 | pending-review | 0 |
-| 2.2 Organizational Structure | 2 | 3 | 0.44 | pending-review | 1 |
-| 2.3 Leadership & Sponsorship (critical) | 2 | 3 | 0.31 | pending-review | 1 |
-| 2.4 Change Management & Adoption | 2 | 3 | 0.50 | pending-review | 9 |
-| 2.5 AI Literacy & Awareness | 2 | 3 | 0.74 | pending-review | 5 |
-| 3.1 AI Development Platforms & Tools | 4 | 4 | 1.00 | auto | 85 |
-| 3.2 Cloud & Compute Infrastructure (critical) | 4 | 4 | 0.75 | pending-review | 108 |
-| 3.3 AI-Specific Architectures | 4 | 4 | 1.00 | auto | 73 |
-| 3.4 Data Science Environment | 3 | 4 | 0.90 | auto | 19 |
-| 4.1 Model Deployment & Management (MLOps) (critical) | 3 | 3 | 0.64 | auto | 61 |
-| 4.2 Performance Monitoring & Optimization | 3 | 3 | 0.62 | auto | 39 |
-| 4.3 Integration & Interoperability | 4 | 3 | 1.00 | auto | 49 |
-| 4.4 External Collaboration & Partnerships | 1 | 3 | 0.31 | pending-review | 0 |
-| 4.5 Reusability & Shared Components | 3 | 3 | 0.90 | auto | 22 |
-| 5.1 AI Governance Framework (critical) | 4 | 4 | 0.95 | auto | 77 |
-| 5.2 Ethical Principles & Guidelines | 3 | 4 | 0.81 | pending-review | 22 |
-| 5.3 Risk Assessment & Mitigation | 3 | 4 | 0.62 | auto | 22 |
-| 5.4 Compliance & Legal | 3 | 4 | 0.90 | auto | 33 |
-| 5.5 Transparency & Explainability | 3 | 4 | 0.87 | auto | 27 |
-| 6.1 AI Use Case Data Identification | 3 | 3 | 0.87 | auto | 17 |
-| 6.2 Data Readiness for AI (critical) | 3 | 3 | 0.87 | auto | 14 |
-| 6.3 Data Access for AI Teams | 1 | 3 | 0.31 | pending-review | 0 |
-| 6.4 Synthetic Data Generation & Use | 3 | 3 | 0.57 | pending-review | 33 |
-| 6.5 Domain-Specific Data Understanding | 1 | 3 | 0.61 | auto | 0 |
+| SV Strategy & Value | 0.12 | 3 Operate | 3 | 3.0 | - |
+| DF Data Foundation | 0.13 | 2 Prove | 2 | 3.0 | - |
+| PL Platform & LLMOps | 0.13 | 4 Scale | 4 | 4.0 | - |
+| AE Agent Engineering | 0.14 | 4 Scale | 4.33 | 4.0 | - |
+| SI Security & Identity | 0.14 | 4 Scale | 4.33 | 3.0 | - |
+| GR Governance, Risk & Compliance | 0.14 | 3 Operate | 3.33 | 4.0 | - |
+| PO People & Operating Model | 0.10 | 1 Explore | 1.67 | 3.0 | - |
+| FC FinOps & Cost | 0.10 | 3 Operate | 3 | 3.0 | - |
+
+## Capabilities
+
+| Capability | Level | Target | Confidence | Status | Evidence |
+|---|---|---|---|---|---|
+| SV-1 Agentic AI Thesis (anchor) | 3 | 3 | 0.41 | pending-review | 12 |
+| SV-2 Use-Case Portfolio & Prioritisation | 2 | 3 | 0.71 | auto | 13 |
+| SV-3 Value Realisation | 4 | 3 | 0.71 | auto | 19 |
+| DF-1 Knowledge & Grounding Sources | 1 | 3 | 0.57 | pending-review | 0 |
+| DF-2 Data Quality & Contracts (anchor) | 4 | 3 | 0.71 | auto | 17 |
+| DF-3 Governed Access & Synthetic Data | 1 | 3 | 0.30 | pending-review | 0 |
+| PL-1 Paved-Road Engineering Platform | 4 | 4 | 0.76 | auto | 42 |
+| PL-2 Release & Lifecycle Automation (anchor) | 4 | 4 | 0.76 | auto | 57 |
+| PL-3 Observability & Runtime Operations | 4 | 4 | 0.71 | auto | 39 |
+| AE-1 Evaluation & Quality Gates (anchor) | 5 | 4 | 1.00 | auto | 31 |
+| AE-2 Tool & Interoperability Design | 4 | 4 | 0.76 | auto | 42 |
+| AE-3 Autonomy & Human Oversight | 4 | 4 | 0.63 | pending-review | 55 |
+| SI-1 Agent Identity & Secrets (anchor) | 4 | 3 | 0.67 | auto | 40 |
+| SI-2 AI Threat Defence | 4 | 3 | 0.64 | auto | 31 |
+| SI-3 Supply Chain & Platform Hardening | 5 | 3 | 1.00 | auto | 38 |
+| GR-1 AI Policy & Accountability (anchor) | 2 | 4 | 0.57 | pending-review | 9 |
+| GR-2 Risk & Impact Management | 4 | 4 | 0.71 | auto | 9 |
+| GR-3 Regulatory Compliance & Transparency | 4 | 4 | 0.68 | auto | 18 |
+| PO-1 Sponsorship & Operating Model (anchor) | 2 | 3 | 0.38 | pending-review | 2 |
+| PO-2 Skills & AI Literacy | 2 | 3 | 0.26 | pending-review | 2 |
+| PO-3 Adoption & Change | 1 | 3 | 0.30 | pending-review | 0 |
+| FC-1 Cost Guardrails (anchor) | 4 | 3 | 0.64 | auto | 42 |
+| FC-2 Unit Economics & Model Routing | 2 | 3 | 0.59 | pending-review | 4 |
 
 ## Human review
 
-13 pending, 0 signed off. Audit log chain: intact.
+9 pending, 0 signed off. Audit log chain: intact.
 
-| Category | Name | Why it needs a human |
+| Capability | Name | Why it needs a human |
 |---|---|---|
-| 1.1 | AI Vision & Ambition | confidence 0.53 below 0.6; level rests on sample answers: q_vision_published |
-| 1.2 | Strategic Alignment | confidence 0.44 below 0.6; level rests on sample answers: q_goal_field |
-| 1.5 | Innovation & Experimentation | level rests on sample answers: q_pilot_scaling |
-| 2.1 | Talent & Skills | confidence 0.31 below 0.6 |
-| 2.2 | Organizational Structure | confidence 0.44 below 0.6; level rests on sample answers: q_coordinator |
-| 2.3 | Leadership & Sponsorship | confidence 0.31 below 0.6; level rests on sample answers: q_project_sponsors |
-| 2.4 | Change Management & Adoption | confidence 0.50 below 0.6; level rests on sample answers: q_rollout_comms |
-| 2.5 | AI Literacy & Awareness | level rests on sample answers: q_awareness_material |
-| 3.2 | Cloud & Compute Infrastructure | level rests on sample answers: q_cost_optimisation_cadence |
-| 4.4 | External Collaboration & Partnerships | confidence 0.31 below 0.6 |
-| 5.2 | Ethical Principles & Guidelines | level rests on sample answers: q_ethics_principles |
-| 6.3 | Data Access for AI Teams | confidence 0.31 below 0.6 |
-| 6.4 | Synthetic Data Generation & Use | confidence 0.57 below 0.6 |
+| SV-1 | Agentic AI Thesis | confidence 0.41 below 0.6; level rests on sample answers: q_goal_field, q_vision_published |
+| DF-1 | Knowledge & Grounding Sources | confidence 0.57 below 0.6 |
+| DF-3 | Governed Access & Synthetic Data | confidence 0.30 below 0.6 |
+| AE-3 | Autonomy & Human Oversight | level rests on sample answers: q_autonomy_tiers |
+| GR-1 | AI Policy & Accountability | confidence 0.57 below 0.6; level rests on sample answers: q_ethics_principles |
+| PO-1 | Sponsorship & Operating Model | confidence 0.38 below 0.6; level rests on sample answers: q_coordinator, q_project_sponsors |
+| PO-2 | Skills & AI Literacy | confidence 0.26 below 0.6; level rests on sample answers: q_ai_roles_defined, q_awareness_material |
+| PO-3 | Adoption & Change | confidence 0.30 below 0.6 |
+| FC-2 | Unit Economics & Model Routing | confidence 0.59 below 0.6 |
 
 ## Gap analysis
 
-14 of 29 categories are below target.
+8 of 23 capabilities are below target.
 
-| Category | Now | Target | Gap | First action |
+| Capability | Now | Target | Gap | First action |
 |---|---|---|---|---|
-| 2.1 Talent & Skills | 1 | 3 | 2 | Name the AI roles needed and write a skills matrix. |
-| 4.4 External Collaboration & Partnerships | 1 | 3 | 2 | Join one relevant community or peer network. |
-| 6.3 Data Access for AI Teams | 1 | 3 | 2 | Publish a data access request process. |
-| 6.5 Domain-Specific Data Understanding | 1 | 3 | 2 | Invite a domain expert into each AI project. |
-| 1.2 Strategic Alignment | 2 | 3 | 1 | Make a business case with goal linkage mandatory before funding any AI build. |
-| 2.2 Organizational Structure | 2 | 3 | 1 | Charter a centre of excellence with mandate, budget and reporting line. |
-| 2.3 Leadership & Sponsorship | 2 | 3 | 1 | Appoint an executive owner of the AI agenda with regular updates to the board. |
-| 2.4 Change Management & Adoption | 2 | 3 | 1 | Adopt a change method with stakeholder analysis and adoption metrics. |
-| 2.5 AI Literacy & Awareness | 2 | 3 | 1 | Launch role-based literacy tracks with completion tracking. |
-| 3.4 Data Science Environment | 3 | 4 | 1 | Offer self-service environments wired into data and deployment pipelines. |
-| 5.2 Ethical Principles & Guidelines | 3 | 4 | 1 | Track ethics outcomes and involve affected people in design. |
-| 5.3 Risk Assessment & Mitigation | 3 | 4 | 1 | Feed monitoring and scenarios into continuous, quantitative risk management. |
-| 5.4 Compliance & Legal | 3 | 4 | 1 | Automate compliance checks in pipelines and track regulatory change. |
-| 5.5 Transparency & Explainability | 3 | 4 | 1 | Tailor explanations per audience and publish transparency notes. |
+| DF-1 Knowledge & Grounding Sources | 1 | 3 | 2 | List the grounding sources per use case and name a domain expert. |
+| DF-3 Governed Access & Synthetic Data | 1 | 3 | 2 | Publish the data access request process. |
+| GR-1 AI Policy & Accountability | 2 | 4 | 2 | Start an agent inventory with owners and charter a review body. |
+| PO-3 Adoption & Change | 1 | 3 | 2 | Announce each rollout and join a peer community. |
+| FC-2 Unit Economics & Model Routing | 2 | 3 | 1 | Route requests by measured cost and quality per task. |
+| PO-1 Sponsorship & Operating Model | 2 | 3 | 1 | Appoint an executive owner and charter a central team. |
+| PO-2 Skills & AI Literacy | 2 | 3 | 1 | Maintain role-based learning tracks with funded paths. |
+| SV-2 Use-Case Portfolio & Prioritisation | 2 | 3 | 1 | Publish a sequenced roadmap and make a business case mandatory for funding. |
 
 ## Roadmap (Month 1-12)
 
-Capacity 3 items in flight. Milestones: Month 6: Re-assess all categories and refresh the plan; Month 12: Full re-assessment and target reset.
+Capacity 3 items in flight. Milestones: Month 6: Re-assess all capabilities and refresh the plan; Month 12: Full re-assessment and target reset.
 
 | Step | Kind | Months | Effort | Priority | Waits on |
 |---|---|---|---|---|---|
-| 2.1->2 Talent & Skills | quick-win | 1 | S | 24.07 | - |
-| 4.4->2 External Collaboration & Partnerships | quick-win | 1 | S | 24.07 | - |
-| 6.3->2 Data Access for AI Teams | quick-win | 1 | S | 24.07 | - |
-| 6.5->2 Domain-Specific Data Understanding | quick-win | 2 | S | 23.17 | - |
-| 2.1->3 Talent & Skills | strategic | 2-3 | M | 22.07 | 2.1->2 |
-| 4.4->3 External Collaboration & Partnerships | strategic | 2-3 | M | 22.07 | 4.4->2 |
-| 6.3->3 Data Access for AI Teams | strategic | 3-4 | M | 22.07 | 6.3->2 |
-| 6.5->3 Domain-Specific Data Understanding | strategic | 4-5 | M | 21.17 | 6.5->2 |
-| 2.3->3 Leadership & Sponsorship | strategic | 4-5 | M | 18.07 | - |
-| 1.2->3 Strategic Alignment | strategic | 5-6 | M | 11.68 | - |
-| 2.2->3 Organizational Structure | strategic | 6-8 | L | 11.68 | - |
-| 2.4->3 Change Management & Adoption | strategic | 6-7 | M | 11.5 | - |
-| 5.3->4 Risk Assessment & Mitigation | strategic | 7-9 | L | 11.14 | - |
-| 2.5->3 AI Literacy & Awareness | strategic | 8-9 | M | 10.78 | - |
-| 5.2->4 Ethical Principles & Guidelines | strategic | 9-11 | L | 10.57 | - |
-| 5.5->4 Transparency & Explainability | strategic | 10-11 | M | 10.39 | - |
-| 3.4->4 Data Science Environment | strategic | 10-12 | L | 10.3 | - |
+| DF-1->2 Knowledge & Grounding Sources | quick-win | 1 | S | 27.89 | - |
+| DF-3->2 Governed Access & Synthetic Data | quick-win | 1 | S | 26.7 | - |
+| PO-3->2 Adoption & Change | quick-win | 1 | S | 26.1 | - |
+| GR-1->3 AI Policy & Accountability | strategic | 2-3 | M | 31.09 | - |
+| DF-3->3 Governed Access & Synthetic Data | strategic | 2-3 | M | 24.7 | DF-3->2, DF-1->2 |
+| SV-2->3 Use-Case Portfolio & Prioritisation | quick-win | 2 | S | 13.27 | - |
+| PO-3->3 Adoption & Change | strategic | 3-4 | M | 24.1 | PO-3->2 |
+| DF-1->3 Knowledge & Grounding Sources | strategic | 4-5 | M | 23.89 | DF-1->2 |
+| PO-1->3 Sponsorship & Operating Model | strategic | 4-5 | M | 20.86 | - |
+| PO-2->3 Skills & AI Literacy | strategic | 5-6 | M | 14.22 | - |
+| GR-1->4 AI Policy & Accountability | strategic | 6-8 | L | 29.09 | GR-1->3, PO-1->3 |
+| FC-2->3 Unit Economics & Model Routing | strategic | 6-7 | M | 13.23 | - |
 
 | Month | In flight |
 |---|---|
-| 1 | 2.1->2, 4.4->2, 6.3->2 |
-| 2 | 6.5->2, 2.1->3, 4.4->3 |
-| 3 | 2.1->3, 4.4->3, 6.3->3 |
-| 4 | 6.3->3, 6.5->3, 2.3->3 |
-| 5 | 6.5->3, 2.3->3, 1.2->3 |
-| 6 | 1.2->3, 2.2->3, 2.4->3 |
-| 7 | 2.2->3, 2.4->3, 5.3->4 |
-| 8 | 2.2->3, 5.3->4, 2.5->3 |
-| 9 | 5.3->4, 2.5->3, 5.2->4 |
-| 10 | 5.2->4, 5.5->4, 3.4->4 |
-| 11 | 5.2->4, 5.5->4, 3.4->4 |
-| 12 | 3.4->4 |
+| 1 | DF-1->2, DF-3->2, PO-3->2 |
+| 2 | GR-1->3, DF-3->3, SV-2->3 |
+| 3 | GR-1->3, DF-3->3, PO-3->3 |
+| 4 | PO-3->3, DF-1->3, PO-1->3 |
+| 5 | DF-1->3, PO-1->3, PO-2->3 |
+| 6 | PO-2->3, GR-1->4, FC-2->3 |
+| 7 | GR-1->4, FC-2->3 |
+| 8 | GR-1->4 |
+| 9 | - |
+| 10 | - |
+| 11 | - |
+| 12 | - |
 
-Backlog beyond Month 12: 5.4->4.
+Everything fits in the twelve months.
 
 ## Cross-repository evidence
 
-| Repository | Category | Cited files | Examples |
+| Repository | Capability | Cited files | Examples |
 |---|---|---|---|
-| agentic-ai-model-risk | 5.1 | 14 | .github/workflows/ci.yml, .github/workflows/deploy.yml, .github/workflows/infra.yml |
-| agentic-ai-model-risk | 5.3 | 9 | registry/bramblewood-claims-triage/risk-cards.yaml, registry/bramblewood-claims-triage/scenarios.yaml, registry/cedarhollow-underwriting-assistant/risk-cards.yaml |
-| agentic-ai-model-risk | 5.5 | 6 | docs/pillars/model-cards.md, registry/bramblewood-claims-triage/model-card.yaml, registry/cedarhollow-underwriting-assistant/model-card.yaml |
-| azure-finops | 1.4 | 9 | CHANGELOG.md, README.md, data/README.md |
-| azure-finops | 3.2 | 12 | .checkov.yaml, infra/bicep/main.bicep, infra/bicep/modules/guardrails.bicep |
-| fabric-enterprise-bi | 6.1 | 3 | CHANGELOG.md, CONTRIBUTING.md, README.md |
-| fabric-enterprise-bi | 6.2 | 6 | contracts/README.md, contracts/products/README.md, contracts/products/customer-care-insights.yaml |
+| agentic-ai-model-risk | GR-1 | 1 | docs/best-practices.md |
+| agentic-ai-model-risk | GR-2 | 9 | registry/bramblewood-claims-triage/risk-cards.yaml, registry/cedarhollow-underwriting-assistant/risk-cards.yaml, registry/halcyon-fraud-triage/risk-cards.yaml |
+| agentic-ai-model-risk | GR-3 | 9 | CHANGELOG.md, README.md, docs/README.md |
+| azure-finops | SV-3 | 7 | CHANGELOG.md, README.md, data/pricing/README.md |
+| azure-finops | FC-1 | 6 | infra/bicep/main.bicep, infra/bicep/modules/guardrails.bicep, infra/terraform/main.tf |
+| azure-finops | FC-2 | 3 | src/finops/ai/roi.py, src/finops/ai/token_cost.py, src/finops/costing.py |
+| fabric-enterprise-bi | DF-2 | 6 | contracts/README.md, contracts/products/README.md, contracts/products/customer-care-insights.yaml |
 
 ## Evidence
 
@@ -166,7 +147,7 @@ Backlog beyond Month 12: 5.4->4.
 | iac | 136 |
 | ops | 114 |
 | people | 28 |
-| questionnaire | 44 |
+| questionnaire | 48 |
 
 | Source | Items |
 |---|---|
@@ -179,10 +160,8 @@ Backlog beyond Month 12: 5.4->4.
 | azure-finops | 83 |
 | fabric-enterprise-bi | 91 |
 | profile-readme | 15 |
-| questionnaire | 44 |
+| questionnaire | 48 |
 
-## Method and attribution
+## Method
 
-Levels come from evidence signals per category (rubric/categories.yaml); a level needs two thirds of its signals and the level below. Confidence blends source trust and decision margin; pillars use the median of categories capped by critical categories.
-
-Framework structure (six pillars, 29 categories, four levels) adapted from UNESCO, *AI Maturity Framework* (subtitle: "A self-positioning guide for public administrations"), developed by Stratejai for UNESCO, under CC BY-SA 3.0 IGO (https://creativecommons.org/licenses/by-sa/3.0/igo/). Descriptors, rubric, scoring and wording are this project's own; UNESCO does not endorse this tool or its results.
+Model: Enterprise Agentic AI Maturity Model (framework/framework.yaml), eight weighted dimensions, 23 capabilities, five levels from Explore to Optimise. A capability reaches a level when the level below is reached, every must criterion is present and at least half of the support criteria are present (rubric/capabilities.yaml). From Scale upwards every level needs a file-based artifact, so answers alone stop at Operate. Confidence = 0.5 x evidence trust + 0.3 x decision margin + 0.2 x verifiability. A dimension is the floor of its capability mean, capped one level above its weakest anchor; the overall level is the floor of the weighted dimension mean, capped one level above the weakest dimension. The Agentic Readiness Index (0-100) is the weighted capability mean rescaled from levels 1-5.

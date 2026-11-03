@@ -1,12 +1,14 @@
-# Self-reported answers from the organisation's AI lead (fictional). Weighted 0.6 in confidence.
+# Self-reported answers from the organisation's AI lead (fictional). Weighted 0.55 in confidence.
 label: self-reported
 answers:
   q_access_process: 'yes'
   q_affected_people: 'no'
+  q_agent_identity_review: 'yes'
   q_ai_roles_defined: 'yes'
   q_audience_explanations: 'no'
   q_auto_improve: 'no'
   q_auto_retrain: 'no'
+  q_autonomy_tiers: 'yes'
   q_awareness_material: 'yes'
   q_business_case_mandatory: 'yes'
   q_change_method: 'no'
@@ -27,11 +29,13 @@ answers:
   q_hr_integration: partial
   q_intangible_value: 'no'
   q_leadership_objectives: 'no'
+  q_model_routing: 'no'
   q_operating_model_review: 'no'
   q_partnership_formal: 'no'
   q_partnership_informal: 'yes'
   q_pilot_scaling: 'no'
   q_project_sponsors: 'yes'
+  q_red_team_cadence: 'partial'
   q_reg_watch: partial
   q_reuse_measured: 'no'
   q_review_board: 'yes'

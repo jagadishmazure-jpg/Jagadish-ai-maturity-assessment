@@ -1,8 +1,8 @@
 # Sample org 1: Jagadish Meduri's public portfolio, treated as a small AI organisation.
 # Artifacts come from a read-only scan of nine sibling checkouts: eight project repositories plus the profile
 # repository, which holds the written AI principles, roadmap and skills matrix (snapshot below keeps CI independent of them).
-# People, culture and partnership items cannot be read from code: they come from questionnaire.yaml,
-# which is labelled sample-answers, so those categories score low confidence and wait for a human reviewer.
+# Operating-model, people and policy items cannot be read from code: they come from questionnaire.yaml,
+# which is labelled sample-answers, so capabilities whose level rests on them wait for a human reviewer.
 name: Jagadish Meduri portfolio
 kind: Engineering portfolio (one maintainer, eight project repositories plus a profile repository)
 assessor: aimaturity-agent
@@ -11,7 +11,7 @@ questionnaire: questionnaire.yaml
 capacity: 3
 targets:
   default: 3
-  pillars: {"3": 4, "5": 4}
+  dimensions: {PL: 4, AE: 4, GR: 4}
 repos:
   - {name: agentic-ai-portfolio}
   - {name: azure-agent-platform}
@@ -22,8 +22,8 @@ repos:
   - {name: azure-finops}
   - {name: agentic-ai-model-risk}
   - {name: profile-readme}
-# Cross-links: which repository is expected to supply evidence for which categories (checked by tests).
+# Cross-links: which repository is expected to supply evidence for which capabilities (checked by tests).
 links:
-  agentic-ai-model-risk: ["5.1", "5.3", "5.5"]
-  azure-finops: ["1.4", "3.2"]
-  fabric-enterprise-bi: ["6.1", "6.2"]
+  agentic-ai-model-risk: [GR-1, GR-2, GR-3]
+  azure-finops: [SV-3, FC-1, FC-2]
+  fabric-enterprise-bi: [DF-2]
