@@ -1,6 +1,5 @@
-"""Repository hygiene: complete docs, current outputs, no dates, attribution, no PDF, own wording."""
+"""Repository hygiene: complete docs, current outputs, no dates, licensing, no PDF."""
 
-import os
 import re
 import subprocess
 import sys
@@ -16,12 +15,11 @@ SECTIONS = [
     "Real output", "Tests and gates", "Guardrails", "Security and governance", "Observability",
     "Failure modes", "Mapping to Azure services", "Limitations", "Interview talking points", "Adopt this",
 ]  # fmt: skip
-FULL_DIRS = {"pillars": 6, "components": 13, "samples": 3, "infra": 4}
+FULL_DIRS = {"dimensions": 8, "components": 13, "samples": 3, "infra": 4}
 FULL_DOCS = sorted(p for d in FULL_DIRS for p in (ROOT / "docs" / d).glob("*.md") if p.name != "README.md")
 MONTHS = r"\b(January|February|March|April|June|July|August|September|October|November|December)\b"
 SUFFIXES = {".md", ".py", ".json", ".yml", ".yaml", ".tf", ".bicep", ".hcl", ".sh", ".toml", ".jsonl", ".tfvars", ".html"}
 TEXT_FILES = [p for p in ROOT.rglob("*") if p.is_file() and not SKIP_PARTS & set(p.parts) and p.suffix in SUFFIXES and ".egg-info" not in str(p)]
-LICENSE_URL = "https://creativecommons.org/licenses/by-sa/3.0/igo/"
 # Built-in Azure role definition ids (public, identical in every tenant) used by the Bicep job module.
 BUILTIN_ROLE_IDS = {"ba92f5b4-2d11-453d-a403-e96b0029c9fe", "4633458b-17de-408a-b874-0445c86b69e6"}
 
@@ -91,17 +89,26 @@ def test_full_doc_has_all_sections_in_order(doc):
     assert len(adopt) > 80, "Adopt this section is too thin"
 
 
-@pytest.mark.parametrize("pillar", sorted((ROOT / "docs/pillars").glob("p*.md")), ids=lambda p: p.stem)
-def test_pillar_docs_cover_their_rubric_and_attribution(pillar):
-    from aimaturity.framework import categories, category_signals
+DIMENSION_DOCS = sorted(p for p in (ROOT / "docs/dimensions").glob("*.md") if p.name != "README.md")
 
-    t = pillar.read_text()
-    pid = "P" + pillar.stem[1]
-    assert LICENSE_URL in t and "UNESCO" in t
-    for cid, c in categories().items():
-        if c["pillar"] == pid:
+
+def test_one_dimension_doc_per_dimension():
+    from aimaturity.framework import dimensions
+
+    assert sorted(p.stem.split("-")[0].upper() for p in DIMENSION_DOCS) == sorted(d["id"] for d in dimensions())
+
+
+@pytest.mark.parametrize("dimension", DIMENSION_DOCS, ids=lambda p: p.stem)
+def test_dimension_docs_cover_their_rubric(dimension):
+    from aimaturity.framework import capabilities, capability_signals, dimension_weights
+
+    t = dimension.read_text()
+    did = dimension.stem.split("-")[0].upper()
+    assert f"weight {dimension_weights()[did]:.2f}" in t
+    for cid, c in capabilities().items():
+        if c["dimension"] == did:
             assert f"**{cid} " in t
-            for s in category_signals(cid):
+            for s in capability_signals(cid):
                 assert f"`{s}`" in t, f"{cid} {s}"
 
 
@@ -123,44 +130,24 @@ def test_no_secrets_or_real_identifiers():
             assert not b.search(t), f"{b.pattern} in {p}"
 
 
-def test_source_pdf_is_never_committed():
+def test_no_pdf_is_committed():
     tracked = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True).stdout.split()
     assert not [f for f in tracked if f.lower().endswith(".pdf")]
     assert "*.pdf" in (ROOT / ".gitignore").read_text().splitlines()
-    ignored = subprocess.run(["git", "check-ignore", "-q", "framework/source.pdf"], cwd=ROOT)
-    assert ignored.returncode == 0, "a PDF under framework/ would not be ignored"
     assert "*.pdf" in (ROOT / ".dockerignore").read_text()
 
 
-def test_readme_attribution_and_license_split():
-    t = (ROOT / "README.md").read_text()
-    for s in ("UNESCO", "Stratejai", "CC BY-SA 3.0 IGO", LICENSE_URL, "`framework/`", "MIT"):
+def test_whole_repository_is_mit_licensed():
+    assert (ROOT / "LICENSE").read_text().startswith("MIT License")
+    assert not (ROOT / "framework/LICENSE.md").exists()
+    assert "MIT" in (ROOT / "README.md").read_text()
+    assert "MIT" in (ROOT / "framework/framework.yaml").read_text().split("model:")[0]
+
+
+def test_framework_design_is_documented_in_an_adr():
+    t = (ROOT / "docs/adr/0007-original-agentic-maturity-model.md").read_text()
+    for s in ("Explore", "Prove", "Operate", "Scale", "Optimise", "must", "support", "anchor", "Readiness Index"):
         assert s in t, s
-    assert "adapted under CC BY-SA 3.0 IGO" in t
-    assert "same license" in t
-
-
-def test_framework_folder_carries_its_license():
-    assert LICENSE_URL in (ROOT / "framework/LICENSE.md").read_text()
-    assert "CC BY-SA 3.0 IGO" in (ROOT / "framework/framework.yaml").read_text().split("pillars:")[0]
-    assert "CC BY-SA 3.0 IGO" in (ROOT / "framework/README.md").read_text()
-
-
-def test_overlap_script_detects_copies(tmp_path):
-    sys.path.insert(0, str(ROOT / "scripts"))
-    from overlap_check import shingles, words
-
-    a = shingles(words("one two three four five six seven eight nine https://example.org/x"), 8)
-    assert ("one", "two", "three", "four", "five", "six", "seven", "eight") in a
-    assert not any("example" in w for sh in a for w in sh)
-
-
-def test_no_eight_word_overlap_with_source_text():
-    src = Path(os.environ.get("AIMATURITY_SOURCE_TEXT", "/tmp/unesco-aimf.txt"))
-    if not src.is_file():
-        pytest.skip("source text not present (the PDF is never committed); run scripts/overlap_check.py locally")
-    r = subprocess.run([sys.executable, "scripts/overlap_check.py", str(src)], cwd=ROOT, capture_output=True, text=True)
-    assert r.returncode == 0, r.stdout[-2000:]
 
 
 def test_companies_are_fictional():
@@ -172,9 +159,9 @@ def test_changelog_has_only_unreleased():
     assert re.findall(r"^## (.+)$", (ROOT / "CHANGELOG.md").read_text(), re.M) == ["Unreleased"]
 
 
-def test_six_adrs_without_date_lines():
+def test_seven_adrs_without_date_lines():
     adrs = sorted((ROOT / "docs/adr").glob("0*.md"))
-    assert len(adrs) == 6
+    assert len(adrs) == 7
     for a in adrs:
         t = a.read_text()
         assert "**Status:**" in t and "Date" not in t

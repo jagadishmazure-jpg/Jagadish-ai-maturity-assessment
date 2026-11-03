@@ -9,15 +9,15 @@ from aimaturity.cli import main, table
     "argv",
     [
         ["framework"],
-        ["framework", "--pillar", "P5"],
+        ["framework", "--dimension", "GR"],
         ["summary"],
-        ["category", "6.2"],
+        ["capability", "GR-2"],
         ["orgs"],
         ["validate"],
         ["collect", "--org", "kestrel-bay-bank"],
         ["collect", "--org", "portfolio"],
         ["assess", "--org", "portfolio"],
-        ["explain", "--org", "portfolio", "--category", "5.3"],
+        ["explain", "--org", "portfolio", "--capability", "GR-2"],
         ["gaps", "--org", "valemont-revenue-agency"],
         ["roadmap", "--org", "kestrel-bay-bank"],
         ["links", "--org", "portfolio"],
@@ -54,8 +54,8 @@ def test_self_review_rejected_without_writing(capsys, org_copy):
             "review",
             "--org",
             "portfolio",
-            "--category",
-            "2.3",
+            "--capability",
+            "PO-1",
             "--reviewer",
             "aimaturity-agent",
             "--decision",
@@ -75,8 +75,8 @@ def test_review_records(capsys, org_copy):
             "review",
             "--org",
             "portfolio",
-            "--category",
-            "2.3",
+            "--capability",
+            "PO-1",
             "--reviewer",
             "Example Reviewer",
             "--decision",
@@ -93,7 +93,7 @@ def test_links_fail_when_unsatisfied(capsys, org_copy):
 
     d = org_copy("portfolio")
     cfg = yaml.safe_load((d / "org.yaml").read_text())
-    cfg["links"] = {"ai-learning-lab": ["5.4"]}
+    cfg["links"] = {"ai-learning-lab": ["DF-3"]}
     (d / "org.yaml").write_text(yaml.safe_dump(cfg))
     assert main(["links", "--org", "portfolio"]) == 1
 

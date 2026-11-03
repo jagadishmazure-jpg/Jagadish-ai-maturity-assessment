@@ -5,7 +5,7 @@ import yaml
 from aimaturity.agents.assessor import summary
 from aimaturity.crosslinks import check_links
 
-PEOPLE = ["2.1", "2.2", "2.3", "2.4", "2.5"]
+PEOPLE = ["PO-1", "PO-2", "PO-3"]
 
 
 def test_portfolio_questionnaire_is_labelled_sample(portfolio):
@@ -37,27 +37,28 @@ def test_cross_links_satisfied(portfolio):
     assert {r["repo"] for r in rows} == {"agentic-ai-model-risk", "azure-finops", "fabric-enterprise-bi"}
 
 
-def test_governance_pillar_draws_on_model_risk_repo(portfolio):
+def test_governance_dimension_draws_on_model_risk_repo(portfolio):
     ev = portfolio["evidence_by_id"]
-    for cid in ("5.3", "5.5"):
+    for cid in ("GR-1", "GR-2", "GR-3"):
         assert any(ev[i].source == "agentic-ai-model-risk" for i in portfolio["results"][cid].evidence)
 
 
 def test_cost_and_value_draw_on_finops_repo(portfolio):
     ev = portfolio["evidence_by_id"]
-    for cid in ("1.4", "3.2"):
+    for cid in ("SV-3", "FC-1", "FC-2"):
         assert any(ev[i].source == "azure-finops" for i in portfolio["results"][cid].evidence)
 
 
-def test_data_pillar_draws_on_fabric_repo(portfolio):
+def test_data_dimension_draws_on_fabric_repo(portfolio):
     ev = portfolio["evidence_by_id"]
-    assert any(ev[i].source == "fabric-enterprise-bi" for i in portfolio["results"]["6.2"].evidence)
+    assert any(ev[i].source == "fabric-enterprise-bi" for i in portfolio["results"]["DF-2"].evidence)
 
 
-def test_portfolio_strongest_pillar_is_technology(portfolio):
+def test_portfolio_engineering_strong_people_weak(portfolio):
     s = summary(portfolio)
-    best = max(s["pillars"], key=lambda p: p["mean"])
-    assert best["id"] == "P3"
+    means = {d["id"]: d["mean"] for d in s["dimensions"]}
+    assert max(means, key=means.get) in {"AE", "SI"}
+    assert min(means, key=means.get) == "PO"
 
 
 def test_fictional_orgs_use_self_reported_answers(bank, agency):
@@ -67,24 +68,26 @@ def test_fictional_orgs_use_self_reported_answers(bank, agency):
 
 
 def test_bank_and_agency_results(bank, agency):
-    assert summary(bank)["overall"]["level"] == 3
-    assert summary(agency)["overall"]["level"] == 2
+    b, a = summary(bank)["overall"], summary(agency)["overall"]
+    assert (b["level"], a["level"]) == (2, 1)
+    assert b["index"] > a["index"]
 
 
-def test_agency_uses_its_own_critical_list(agency):
-    assert agency["org"].critical == ["1.1", "2.3", "5.1", "5.2", "6.2"]
+def test_agency_uses_its_own_anchor_list(agency):
+    assert agency["org"].anchors == ["SV-1", "DF-3", "PL-1", "AE-3", "SI-1", "GR-2", "GR-3", "PO-1", "FC-1"]
 
 
 def test_seeded_reviews_apply(bank, agency):
-    assert bank["statuses"]["2.1"]["status"] == "confirmed"
-    assert agency["statuses"]["4.4"]["status"] == "overridden" and agency["statuses"]["4.4"]["final_level"] == 3
-    assert agency["statuses"]["1.2"]["status"] == "confirmed"
+    assert bank["statuses"]["PO-2"]["status"] == "confirmed"
+    assert agency["statuses"]["PO-2"]["status"] == "overridden" and agency["statuses"]["PO-2"]["final_level"] == 2
+    assert agency["statuses"]["PO-1"]["status"] == "confirmed"
 
 
 def test_labels_mostly_agree(bank, agency):
     for st in (bank, agency):
         labels = yaml.safe_load((st["org"].dir / "labels.yaml").read_text())["labels"]
-        agree = sum(st["results"][c].level == labels[c] for c in labels) / 29
+        assert set(labels) == set(st["results"])
+        agree = sum(st["results"][c].level == labels[c] for c in labels) / len(labels)
         assert agree >= 0.85
 
 

@@ -1,20 +1,29 @@
 import pytest
 
 from aimaturity.collectors import collect_questionnaire
-from aimaturity.framework import categories, questions
+from aimaturity.framework import capabilities, capability_signals, criteria, questions
 
 
-def test_question_categories_exist():
-    assert all(q["category"] in categories() for q in questions().values())
+def test_question_capabilities_exist():
+    assert all(q["capability"] in capabilities() for q in questions().values())
 
 
 def test_question_ids_prefixed():
     assert all(q.startswith("q_") for q in questions())
 
 
-def test_people_and_culture_rely_on_questions():
-    for cid in ("2.1", "2.3", "2.4", "2.5"):
-        assert any(s.startswith("q_") for s in categories()[cid]["rubric"]["levels"][2] + categories()[cid]["rubric"]["levels"][3])
+def test_people_capabilities_rely_on_questions():
+    for cid in ("PO-1", "PO-2", "PO-3"):
+        assert any(s.startswith("q_") for s in criteria(cid, 2) + criteria(cid, 3))
+
+
+def test_question_capability_is_where_it_is_first_used():
+    for qid, q in questions().items():
+        assert qid in capability_signals(q["capability"]), qid
+
+
+def test_questionnaire_has_48_questions():
+    assert len(questions()) == 48
 
 
 @pytest.mark.parametrize(("raw", "strength"), [("yes", 1.0), ("partial", 0.5), ("no", 0.0), (True, 1.0), (False, 0.0)])

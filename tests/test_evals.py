@@ -39,8 +39,8 @@ def test_calibration_thresholds(results):
 
 
 def test_calibration_uses_labelled_samples(results):
-    assert results["calibration"]["by_source"]["kestrel-bay-bank"] == 29
-    assert results["calibration"]["by_source"]["valemont-revenue-agency"] == 29
+    assert results["calibration"]["by_source"]["kestrel-bay-bank"] == 23
+    assert results["calibration"]["by_source"]["valemont-revenue-agency"] == 23
 
 
 def test_synthetic_org_is_deterministic():
@@ -53,4 +53,4 @@ def test_gates_fail_when_thresholds_impossible():
     t = thresholds()
     assert not calibration({**t["calibration"], "exact_min": 1.01})["ok"]
     assert not citations({**t["citations"], "verifier_catch_min": 1.01})["ok"]
-    assert not stability({**t["stability"], "dropout_mean_categories": -1})["ok"]
+    assert not stability({**t["stability"], "dropout_mean_capabilities": -1})["ok"]

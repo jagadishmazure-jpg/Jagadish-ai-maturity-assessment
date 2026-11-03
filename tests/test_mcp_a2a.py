@@ -24,14 +24,17 @@ def test_no_tool_can_write():
     assert not [n for n in TOOL_NAMES if n.startswith(verbs)]
 
 
-async def test_list_pillars():
-    res = await _call("list_pillars", {})
-    assert len(res["result"]) == 6
+async def test_list_dimensions():
+    res = await _call("list_dimensions", {})
+    assert len(res["result"]) == 8
+    assert abs(sum(d["weight"] for d in res["result"]) - 1.0) < 1e-9
 
 
-async def test_get_category():
-    res = await _call("get_category", {"category_id": "5.1"})
-    assert res["critical"] and set(res["evidence_needed"]) == {"2", "3", "4"}
+async def test_get_capability():
+    res = await _call("get_capability", {"capability_id": "GR-1"})
+    assert res["anchor"] and set(res["evidence_needed"]) == {"2", "3", "4", "5"}
+    assert all(set(v) == {"must", "support"} for v in res["evidence_needed"].values())
+    assert set(res["maps_to"]) == {"nist_ai_rmf", "iso_42001", "eu_ai_act"}
 
 
 async def test_list_orgs():
@@ -41,11 +44,12 @@ async def test_list_orgs():
 
 async def test_assess():
     res = await _call("assess", {"org_id": "kestrel-bay-bank"})
-    assert res["overall"]["level"] == 3 and len(res["pillars"]) == 6
+    assert res["overall"]["level"] == 2 and len(res["dimensions"]) == 8
+    assert 0 <= res["overall"]["index"] <= 100
 
 
-async def test_category_result():
-    res = await _call("category_result", {"org_id": "valemont-revenue-agency", "category_id": "4.4"})
+async def test_capability_result():
+    res = await _call("capability_result", {"org_id": "valemont-revenue-agency", "capability_id": "PO-2"})
     assert res["status"] == "overridden"
 
 
@@ -58,7 +62,7 @@ async def test_gaps_and_roadmap():
 
 async def test_review_queue():
     res = await _call("review_queue", {"org_id": "portfolio"})
-    assert any(r["category"] == "2.3" for r in res["result"])
+    assert any(r["capability"] == "PO-1" for r in res["result"])
 
 
 async def test_evidence_lookup():
@@ -93,5 +97,5 @@ def test_card_url_is_not_a_live_endpoint(card):
     assert card["url"].startswith("https://") and ".invalid/" in card["url"]
 
 
-def test_card_declares_auth_and_attribution(card):
-    assert card["security"] and "CC BY-SA 3.0 IGO" in card["description"]
+def test_card_declares_auth_and_model(card):
+    assert card["security"] and "Enterprise Agentic AI Maturity Model" in card["description"]

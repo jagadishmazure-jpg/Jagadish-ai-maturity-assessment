@@ -13,7 +13,7 @@ def test_clean_run_has_no_verification_issues(portfolio, bank, agency):
     assert portfolio["verification_issues"] == bank["verification_issues"] == agency["verification_issues"] == []
 
 
-def test_rationales_cite_only_category_evidence(portfolio):
+def test_rationales_cite_only_capability_evidence(portfolio):
     for cid, text in portfolio["rationales"].items():
         assert set(cited_ids(text)) <= set(portfolio["results"][cid].evidence)
         assert claimed_level(text) == portfolio["results"][cid].level
@@ -35,12 +35,12 @@ def test_mock_llm_is_deterministic():
 def test_mock_llm_counts_calls(portfolio):
     llm = MockLLM()
     assess("valemont-revenue-agency", llm=llm)
-    assert llm.calls == 29
+    assert llm.calls == 23
 
 
 def test_basic_rationale_without_evidence():
     text = MockLLM().rationale({"level": 1, "evidence": [], "missing": ["x"], "confidence": 0.3})
-    assert "Basic" in text and cited_ids(text) == []
+    assert "Explore" in text and cited_ids(text) == []
 
 
 def test_graph_compile_rejects_unknown_nodes():
@@ -67,7 +67,7 @@ def test_build_graph_has_all_nodes():
 
 def test_summary_shape(bank):
     s = summary(bank)
-    assert len(s["categories"]) == 29 and len(s["pillars"]) == 6
+    assert len(s["capabilities"]) == 23 and len(s["dimensions"]) == 8
     assert {"overall", "review_queue", "final", "evidence_count"} <= set(s)
 
 

@@ -2,7 +2,7 @@ import re
 
 import pytest
 
-from aimaturity.report import ATTRIBUTION, build_content, render, to_markdown, write
+from aimaturity.report import METHOD, build_content, render, to_markdown, write
 
 ORGS = ["portfolio", "kestrel-bay-bank", "valemont-revenue-agency"]
 
@@ -30,22 +30,22 @@ def test_markdown_sections(states, org):
     md = render(states[org])["report.md"]
     for h in [
         "Executive summary",
-        "Pillars",
-        "Categories",
+        "Dimensions",
+        "Capabilities",
         "Human review",
         "Gap analysis",
         "Roadmap (Month 1-12)",
         "Evidence",
-        "Method and attribution",
+        "Method",
     ]:
         assert f"## {h}" in md
     assert "radar.svg" in md
 
 
 @pytest.mark.parametrize("org", ORGS)
-def test_html_embeds_radar_and_attribution(states, org):
+def test_html_embeds_radar_and_method(states, org):
     html = render(states[org])["report.html"]
-    assert "<svg" in html and "creativecommons.org/licenses/by-sa/3.0/igo" in html
+    assert "<svg" in html and "Enterprise Agentic AI Maturity Model" in html
     assert html.startswith("<!doctype html>")
 
 
@@ -76,8 +76,15 @@ def test_portfolio_report_lists_cross_links(states):
     assert "## Cross-repository evidence" in md and "agentic-ai-model-risk" in md
 
 
-def test_attribution_names_license_and_link():
-    assert "CC BY-SA 3.0 IGO" in ATTRIBUTION and "https://creativecommons.org/licenses/by-sa/3.0/igo/" in ATTRIBUTION
+def test_method_states_the_scoring_rules():
+    for phrase in ["eight weighted dimensions", "23 capabilities", "Explore to Optimise", "must", "anchor", "Readiness Index"]:
+        assert phrase in METHOD
+
+
+@pytest.mark.parametrize("org", ORGS)
+def test_executive_summary_reports_readiness_index(states, org):
+    md = render(states[org])["report.md"]
+    assert re.search(r"Agentic Readiness Index \*\*\d+(\.\d)? / 100\*\*", md)
 
 
 def test_markdown_table_escapes_pipes(states):

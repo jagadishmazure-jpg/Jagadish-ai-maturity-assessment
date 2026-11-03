@@ -10,7 +10,7 @@ def st(request, portfolio, bank, agency):
 
 def test_gap_is_target_minus_final_level(st):
     for g in st["gaps"]:
-        assert g["gap"] == max(0, g["target"] - st["statuses"][g["category"]]["final_level"])
+        assert g["gap"] == max(0, g["target"] - st["statuses"][g["capability"]]["final_level"])
         assert len(g["steps"]) == g["gap"]
 
 
@@ -22,8 +22,8 @@ def test_steps_carry_missing_evidence_and_action(st):
 
 
 def test_targets_follow_org_overrides(portfolio, agency):
-    assert portfolio["org"].target("3.1") == 4 and portfolio["org"].target("1.1") == 3
-    assert agency["org"].target("6.4") == 2 and agency["org"].target("5.2") == 4
+    assert portfolio["org"].target("AE-1") == 4 and portfolio["org"].target("SV-1") == 3
+    assert agency["org"].target("FC-2") == 2 and agency["org"].target("GR-2") == 4 and agency["org"].target("SV-1") == 3
 
 
 def test_work_items_one_per_step(st):
@@ -35,12 +35,12 @@ def test_items_sorted_by_priority(st):
     assert pr == sorted(pr, reverse=True)
 
 
-def test_dependencies_exist_and_chain_within_category(st):
+def test_dependencies_exist_and_chain_within_capability(st):
     ids = {i["id"] for i in st["items"]}
     for i in st["items"]:
         assert set(i["depends_on"]) <= ids
-        if i["to_level"] - 1 > st["statuses"][i["category"]]["final_level"]:
-            assert f"{i['category']}->{i['to_level'] - 1}" in i["depends_on"]
+        if i["to_level"] - 1 > st["statuses"][i["capability"]]["final_level"]:
+            assert f"{i['capability']}->{i['to_level'] - 1}" in i["depends_on"]
 
 
 def test_quick_win_definition(st):
@@ -82,14 +82,24 @@ def test_reassessment_milestones(st):
 
 
 def test_capacity_one_serialises():
-    items = [{"id": f"1.{n}->2", "depends_on": [], "kind": "strategic", "priority": 1, "months": 1} for n in range(1, 4)]
+    items = [{"id": f"SV-{n}->2", "depends_on": [], "kind": "strategic", "priority": 1, "months": 1} for n in range(1, 4)]
     sch = schedule(items, capacity=1)
     assert [p["start"] for p in sch["plan"]] == [1, 2, 3]
 
 
 def test_long_item_that_cannot_finish_goes_to_backlog():
-    items = [{"id": "1.1->2", "depends_on": [], "kind": "strategic", "priority": 1, "months": 13}]
-    assert schedule(items)["backlog"] == ["1.1->2"]
+    items = [{"id": "SV-1->2", "depends_on": [], "kind": "strategic", "priority": 1, "months": 13}]
+    assert schedule(items)["backlog"] == ["SV-1->2"]
+
+
+def test_targets_never_exceed_top_level(st):
+    assert all(2 <= g["target"] <= 5 for g in st["gaps"])
+
+
+def test_gap_steps_name_missing_musts(st):
+    for g in st["gaps"]:
+        for s in g["steps"]:
+            assert set(s["missing_must"]) <= set(s["missing"])
 
 
 def test_no_gaps_no_items():
