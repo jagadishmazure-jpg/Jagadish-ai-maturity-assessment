@@ -70,7 +70,8 @@ def radar_svg(dimensions: list[dict[str, Any]], targets: list[float], title: str
     buf = io.StringIO()
     fig.savefig(buf, format="svg", bbox_inches="tight", metadata={"Date": None, "Creator": None})
     plt.close(fig)
-    return buf.getvalue()
+    # Drop matplotlib's RDF metadata block: it carries no information here and keeps the SVG minimal.
+    return re.sub(r"\s*<metadata>.*?</metadata>", "", buf.getvalue(), flags=re.S)
 ```
 <!-- /code -->
 
